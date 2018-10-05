@@ -58,6 +58,7 @@
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />
     <Compile Include="Data\Product\Product.cs" />
+    <Compile Include="Pages\Body\ListGroup\ListGroup.cs" />
     <Compile Include="Pages\Body\LoginPage\LoginPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageDescription.cs" />
