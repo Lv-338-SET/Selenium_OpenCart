@@ -15,7 +15,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return currnetReview.FindElement(By.XPath("/tr///td//strong"));
+                return currnetReview.FindElement(By.XPath("//tr///td//strong"));
             }
         }
 
@@ -48,6 +48,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         public ReviewItem(IWebDriver driver, IWebElement currnetReview) : base(driver)
         {
             this.currnetReview = currnetReview;
+            VerifyPage();
         }
 
         private void VerifyPage()

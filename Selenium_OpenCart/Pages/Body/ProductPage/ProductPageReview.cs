@@ -46,11 +46,15 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
+                List<ReviewItem> tmp = new List<ReviewItem>();
                 foreach (IWebElement currentReview in driver.FindElements(By.XPath(".//div[@id='review']/table//tbody")))
                 {
-                    Reviews.Add(new ReviewItem(driver, currentReview));
+                    tmp.Add(new ReviewItem(driver, currentReview));
                 }
-                return Reviews;
+                return tmp;
+            }
+            private set
+            {
             }
         }
         //
@@ -58,7 +62,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         //
         public ProductPageReview(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
+            this.driver = driver;            
             VerifyPage();
         }
 
