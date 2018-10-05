@@ -8,5 +8,6 @@ namespace Selenium_OpenCart
 {
     class Class1
     {
+        Console.WriteLine(test);
     }
 }
