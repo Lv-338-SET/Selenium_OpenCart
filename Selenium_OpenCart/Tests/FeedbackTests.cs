@@ -41,10 +41,12 @@ namespace Selenium_OpenCart.Tests
             //USE SERGIY SEARCH METHODS
             driver.Navigate().GoToUrl(URL);
             ProductPage page = new ProductPage(driver);
-            Assert.AreEqual(review.GetProductName(), page.GetProductNameText());
+            Assert.AreEqual(review.GetProductName(), page.GetProductNameText(),
+                $"Not {review.GetProductName()} product page");
             ProductPageSuccessfullyAddedReview page2 = page.ClickWriteReviewLink()
                 .InputValidReviewAndClickOnAddReviewButton(review);
-            Assert.True(page2.IsReviewAdded());
+            Assert.True(page2.IsReviewAdded(),
+                "Review not added");
         }
 
         [Test, TestCaseSource("ValidProductReview")]
@@ -53,14 +55,12 @@ namespace Selenium_OpenCart.Tests
             //USE SERGIY SEARCH METHODS
             driver.Navigate().GoToUrl(URL);
             ProductPage page = new ProductPage(driver);
-            Assert.AreEqual(review.GetProductName(), page.GetProductNameText());
+            Assert.AreEqual(review.GetProductName(), page.GetProductNameText(),
+                $"Not {review.GetProductName()} product page");
             List<ReviewItem> myReview = page.ClickReviewsLink().GetReviewsList();
             //AreEqual
-            Assert.NotNull(myReview.FirstOrDefault(x => x.GetProductNameText() == review.GetProductName()
-                && x.GetReviewerNameText() == review.GetReviewerName()
-                && x.GetReviewDate() == review.GetDate()
-                && x.GetReviewText() == review.GetReviewText()
-                && x.GetRaiting() == review.GetRaiting()));
+            CollectionAssert.Contains(myReview, review,
+                "Review not found");
         }
     }
 }

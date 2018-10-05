@@ -47,7 +47,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             get
             {
                 List<ReviewItem> tmp = new List<ReviewItem>();
-                foreach (IWebElement currentReview in driver.FindElements(By.XPath(".//div[@id='review']/table//tbody")))
+                foreach (IWebElement currentReview in driver.FindElements(By.XPath(".//div[@id='review']//table//tbody")))
                 {
                     tmp.Add(new ReviewItem(driver, currentReview));
                 }
