@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace TestSite.Pages
+namespace Selenium_OpenCart.Pages
 {
     class WishListPage 
     {

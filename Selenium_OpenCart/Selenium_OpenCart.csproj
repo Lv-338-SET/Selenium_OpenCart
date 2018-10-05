@@ -64,9 +64,13 @@
     <Compile Include="Pages\Body\ProductPage\ProductPageReview.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageSuccessfullyAddedReview.cs" />
     <Compile Include="Pages\Body\ProductPage\ReviewItem.cs" />
+    <Compile Include="Pages\Body\SearchPage\ProductItem.cs" />
+    <Compile Include="Pages\Body\SearchPage\SearchPage.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListPage.cs" />
+    <Compile Include="Pages\Header\Header.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\FeedbackTests.cs" />
+    <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\WishListTest.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -84,8 +88,6 @@
     <Folder Include="Pages\Body\MenuPage\" />
     <Folder Include="Pages\Body\ProductComparisonPage\" />
     <Folder Include="Pages\Body\RegisterPage\" />
-    <Folder Include="Pages\Body\SearchPage\" />
-    <Folder Include="Pages\Header\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

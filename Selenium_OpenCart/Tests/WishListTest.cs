@@ -2,7 +2,8 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
-using TestSite.Pages;
+using Selenium_OpenCart.Pages;
+using Selenium_OpenCart.Pages.Body;
 
 
 namespace OpenCart
@@ -18,15 +19,11 @@ namespace OpenCart
         [Order(0)]
         public void WishListWorks_AddingIphone_IsAdded(string product)
         {
-            
+
             //PRODUCT SEARCHING
-            driver.FindElement(By.XPath("//input[@type= 'text' and @name= 'search']")).SendKeys(product);
-            driver.FindElement(By.XPath("//*[@id='search']/span/button")).Click();
-            IJavaScriptExecutor js = driver as IJavaScriptExecutor;
-            js.ExecuteScript("window.scrollBy(0,0);");
-            driver.FindElement(By.XPath("//a[text()='" + product + "']/../../../..//i[@class='fa fa-heart']")).Click();
-            WishListPage wishList = new WishListPage(driver);
-            wishList.ClickWishListButton();
+            Header header = new Header(driver);
+            header.Search(product).AddAppropriateItemToWishList(product);
+            header.
             bool result = wishList.IsProductAdded(product);
             Assert.IsTrue(result, "Expected element is added to wishlist");
             
