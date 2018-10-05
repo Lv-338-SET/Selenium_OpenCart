@@ -202,6 +202,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             this.ClickClearAndInputToReviewerNameInput(productReview);
             this.ClickClearAndInputToReviewInput(productReview);
             this.SelectRating(productReview);
+            this.ClickOnAddReviewButton();
             return new ProductPageSuccessfullyAddedReview(driver);
         }
         //

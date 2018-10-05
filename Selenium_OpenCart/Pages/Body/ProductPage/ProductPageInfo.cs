@@ -17,7 +17,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath($".//div[@class='rating']//a[text()='Description']"));
+                return driver.FindElement(By.XPath($".//ul[@class='nav nav-tabs']//a[contains(text(), 'Reviews')]"));
             }
         }
         //

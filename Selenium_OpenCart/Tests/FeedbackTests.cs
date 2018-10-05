@@ -13,7 +13,7 @@ namespace Selenium_OpenCart.Tests
     public class FeedbackTests
     {
         IWebDriver driver;
-        const string URL = "http://192.168.96.124/index.php?route=product/product&product_id=47";
+        const string URL = "http://192.168.1.105/index.php?route=product/product&product_id=47";
 
         [OneTimeSetUp]
         public void BeforeAllTests()
