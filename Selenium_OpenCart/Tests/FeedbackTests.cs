@@ -13,12 +13,14 @@ namespace Selenium_OpenCart.Tests
     public class FeedbackTests
     {
         IWebDriver driver;
-        const string URL = "http://192.168.1.105/index.php?route=product/product&product_id=47";
+        const string URL = "http://set-338.000webhostapp.com/index.php?route=product/product&product_id=47";
 
         [OneTimeSetUp]
         public void BeforeAllTests()
         {
-            driver = new ChromeDriver();
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.AddArguments("--start-maximized");
+            driver = new ChromeDriver(chromeOptions);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
         }
 
@@ -53,6 +55,7 @@ namespace Selenium_OpenCart.Tests
             ProductPage page = new ProductPage(driver);
             Assert.AreEqual(review.GetProductName(), page.GetProductNameText());
             List<ReviewItem> myReview = page.ClickReviewsLink().GetReviewsList();
+            //AreEqual
             Assert.NotNull(myReview.FirstOrDefault(x => x.GetProductNameText() == review.GetProductName()
                 && x.GetReviewerNameText() == review.GetReviewerName()
                 && x.GetReviewDate() == review.GetDate()

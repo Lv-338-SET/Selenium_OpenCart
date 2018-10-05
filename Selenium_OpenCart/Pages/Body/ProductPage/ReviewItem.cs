@@ -15,7 +15,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return currnetReview.FindElement(By.XPath("//tr///td//strong"));
+                return currnetReview.FindElement(By.XPath("//tr//td//strong"));
             }
         }
 

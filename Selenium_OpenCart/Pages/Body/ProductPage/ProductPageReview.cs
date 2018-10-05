@@ -53,9 +53,6 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 }
                 return tmp;
             }
-            private set
-            {
-            }
         }
         //
 
