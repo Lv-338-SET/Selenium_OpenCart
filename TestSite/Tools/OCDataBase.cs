@@ -11,6 +11,11 @@ namespace Selenium_OpenCart.Tools
     {
         private static string DataPath = "Database=id7366104_set_database;Data Source=databases-auth.000webhost.com/index.php;User Id=id7366104_set_base;Password=viktor11";
 
+        
+
+
+        #region AtomicOperations
+
         public static MySqlDataReader SelectQuery(string table, string condition="*", string where="") {
             MySqlConnection conn = new MySqlConnection(DataPath);
 
@@ -24,7 +29,9 @@ namespace Selenium_OpenCart.Tools
                 cmd += where;
             }
             cmd += ";";
+
             conn.Open();
+
             MySqlDataReader reader;
             reader = new MySqlCommand(cmd, conn).
                 ExecuteReader();
@@ -46,6 +53,7 @@ namespace Selenium_OpenCart.Tools
                 .ExecuteNonQuery();
         }
 
+        #endregion
 
     }
 }
