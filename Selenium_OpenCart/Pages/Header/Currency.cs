@@ -14,26 +14,11 @@ namespace Selenium_OpenCart.Pages.Header
         private IWebDriver driver;
 
         public IWebElement Euro
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='Register']"));
-            }
-        }
+        { get { return driver.FindElement(By.XPath("//a[text()='Register']")); } }
         public IWebElement PoundSterling
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='Register']"));
-            }
-        }
+        { get { return driver.FindElement(By.XPath("//a[text()='Register']")); } }
         public IWebElement USDolar
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='Register']"));
-            }
-        }
+        { get { return driver.FindElement(By.XPath("//a[text()='Register']")); } }
 
         public Currency(IWebDriver driver)
         {

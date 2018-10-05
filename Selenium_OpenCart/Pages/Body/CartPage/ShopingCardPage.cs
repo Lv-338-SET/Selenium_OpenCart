@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    class ShopingCardPage
+    public class ShopingCardPage
     {
         private IWebDriver driver;
 

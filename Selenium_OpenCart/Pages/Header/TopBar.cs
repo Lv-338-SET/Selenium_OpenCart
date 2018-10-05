@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using Selenium_OpenCart.Pages.Body.ContactPage;
+﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.CheckoutPage;
+using Selenium_OpenCart.Pages.Body.ContactPage;
 
 namespace Selenium_OpenCart.Pages.Header
 {
-    class TopBar
+    public class TopBar
     {
         private IWebDriver driver;
 

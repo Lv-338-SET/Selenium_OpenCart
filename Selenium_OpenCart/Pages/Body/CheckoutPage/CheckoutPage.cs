@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Selenium_OpenCart.Pages.Body.CheckoutPage
 {
-    class CheckoutPage
+    public class CheckoutPage
     {
         public CheckoutPage(IWebDriver driver)
         {

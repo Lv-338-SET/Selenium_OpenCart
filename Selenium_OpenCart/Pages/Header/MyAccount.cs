@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart.Pages.Body.LoginPage;
+using Selenium_OpenCart.Pages.Body.LogoutPage;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using TestSite.Pages.RegisterPage;
 
 namespace Selenium_OpenCart.Pages.Header
 {
@@ -16,7 +20,7 @@ namespace Selenium_OpenCart.Pages.Header
 
         public static MyAccount MyAccountMenu(IWebDriver driver)
         {
-            if (IsLogined(driver))
+            if (IsLogedIn(driver))
             {
                 Account = new LoginAcountElements(driver);
             }
@@ -27,9 +31,17 @@ namespace Selenium_OpenCart.Pages.Header
             return Account;
         }
 
-        private static bool IsLogined(IWebDriver driver)
+        private static bool IsLogedIn(IWebDriver driver)
         {
-            return driver.FindElement(By.XPath("//a[text()='Register']")).Displayed;
+            try
+            { 
+                driver.FindElement(By.XPath("//a[text()='Register']"));
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
     }
 
@@ -37,25 +49,27 @@ namespace Selenium_OpenCart.Pages.Header
     {
         private IWebDriver driver;
 
-        public IWebElement Register
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='Register']"));
-            }
-        }
+        private IWebElement RegisterButton
+        { get { return driver.FindElement(By.XPath("//a[text()='Register']")); } }
 
-        public IWebElement Login
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='Login']"));
-            }
-        }
+        private IWebElement LoginButton
+        { get { return driver.FindElement(By.XPath("//a[text()='Login']")); } }
 
         public LoginAcountElements(IWebDriver driver)
         {
             this.driver = driver;
+        }
+
+        public RegisterPage RegisterButtonClick()
+        {
+            RegisterButton.Click();
+            return new RegisterPage(driver);
+        }
+
+        public LoginPage LoginButtomClick()
+        {
+            LoginButton.Click();
+            return new LoginPage(driver);
         }
     }
 
@@ -63,45 +77,32 @@ namespace Selenium_OpenCart.Pages.Header
     {
         private IWebDriver driver;
 
-        public IWebElement MyAccount
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='My Account']"));
-            }
-        }
-        public IWebElement OrderHistory
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='Order History']"));
-            }
-        }
-        public IWebElement Transaction
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='Transactions']"));
-            }
-        }
-        public IWebElement Downloads
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='Downloads']"));
-            }
-        }
-        public IWebElement Logout
-        {
-            get
-            {
-                return driver.FindElement(By.XPath("//a[text()='Logout']"));
-            }
-        }
+        private IWebElement MyAccount
+        { get { return driver.FindElement(By.XPath("//a[text()='My Account']")); } }
+        private IWebElement OrderHistory
+        { get { return driver.FindElement(By.XPath("//a[text()='Order History']")); } }
+        private IWebElement Transaction
+        { get { return driver.FindElement(By.XPath("//a[text()='Transactions']")); } }
+        private IWebElement Downloads
+        { get { return driver.FindElement(By.XPath("//a[text()='Downloads']")); } }
+        private IWebElement Logout
+        { get { return driver.FindElement(By.XPath("//a[text()='Logout']")); } }
 
         public NotLoginetAcountElements(IWebDriver driver)
         {
             this.driver = driver;
+        }
+
+        public MyAccountPage MyAccountClick()
+        {
+            MyAccount.Click();
+            return new MyAccountPage(driver);
+        }
+
+        public LogoutPage LogoutClick()
+        {
+            Logout.Click();
+            return new LogoutPage(driver);
         }
     }
 }

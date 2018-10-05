@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 
-namespace Selenium_OpenCart.Pages.Body.ContactPage
+namespace Selenium_OpenCart.Pages.Body.MyAccountPage
 {
-    public class ContactPage
+    public class MyAccountPage
     {
         private IWebDriver driver;
 
-        public ContactPage(IWebDriver driver)
+        public MyAccountPage(IWebDriver driver)
         {
             this.driver = driver;
         }
