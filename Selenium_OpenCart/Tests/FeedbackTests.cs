@@ -13,12 +13,14 @@ namespace Selenium_OpenCart.Tests
     public class FeedbackTests
     {
         IWebDriver driver;
-        const string URL = "http://192.168.96.124/index.php?route=product/product&product_id=47";
+        const string URL = "http://set-338.000webhostapp.com/index.php?route=product/product&product_id=47";
 
         [OneTimeSetUp]
         public void BeforeAllTests()
         {
-            driver = new ChromeDriver();
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.AddArguments("--start-maximized");
+            driver = new ChromeDriver(chromeOptions);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
         }
 
@@ -39,10 +41,12 @@ namespace Selenium_OpenCart.Tests
             //USE SERGIY SEARCH METHODS
             driver.Navigate().GoToUrl(URL);
             ProductPage page = new ProductPage(driver);
-            Assert.AreEqual(review.GetProductName(), page.GetProductNameText());
+            Assert.AreEqual(review.GetProductName(), page.GetProductNameText(),
+                $"Not {review.GetProductName()} product page");
             ProductPageSuccessfullyAddedReview page2 = page.ClickWriteReviewLink()
                 .InputValidReviewAndClickOnAddReviewButton(review);
-            Assert.True(page2.IsReviewAdded());
+            Assert.True(page2.IsReviewAdded(),
+                "Review not added");
         }
 
         [Test, TestCaseSource("ValidProductReview")]
@@ -51,13 +55,12 @@ namespace Selenium_OpenCart.Tests
             //USE SERGIY SEARCH METHODS
             driver.Navigate().GoToUrl(URL);
             ProductPage page = new ProductPage(driver);
-            Assert.AreEqual(review.GetProductName(), page.GetProductNameText());
+            Assert.AreEqual(review.GetProductName(), page.GetProductNameText(),
+                $"Not {review.GetProductName()} product page");
             List<ReviewItem> myReview = page.ClickReviewsLink().GetReviewsList();
-            Assert.NotNull(myReview.FirstOrDefault(x => x.GetProductNameText() == review.GetProductName()
-                && x.GetReviewerNameText() == review.GetReviewerName()
-                && x.GetReviewDate() == review.GetDate()
-                && x.GetReviewText() == review.GetReviewText()
-                && x.GetRaiting() == review.GetRaiting()));
+            //AreEqual
+            CollectionAssert.Contains(myReview, review,
+                "Review not found");
         }
     }
 }
