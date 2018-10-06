@@ -11,26 +11,34 @@ namespace Selenium_OpenCart.Pages.Body.MainPage
     public class HomePage
     {
         private IWebDriver driver;
-        protected IWebElement UpHorizontalCarousel { get; private set; }
-        protected IWebElement DownHorizontalCarousel { get; private set; }
-        protected List<ProductItem> ListProduct { get; private set; }
-
+        protected IWebElement UpHorizontalCarousel { get { return driver.FindElement(By.Id("slideshow0")); } }
+        protected IWebElement DownHorizontalCarousel { get { return driver.FindElement(By.Id("carousel0")); } }
+        protected List<ProductItem> ListProduct { get { return InitializeListProductFromMainPage(driver.FindElements(By.ClassName("product-layout"))); } }
 
         public HomePage(IWebDriver driver)
         {
             this.driver = driver;
-            UpHorizontalCarousel = driver.FindElement(By.Id("slideshow0"));
-
-            ListProduct = new List<ProductItem>();
-            var elements = driver.FindElements(By.ClassName("product-layout"));
-            foreach (var current in elements)
-            {
-                ListProduct.Add(new ProductItem(driver, current));
-            }
-
-            DownHorizontalCarousel = driver.FindElement(By.Id("carousel0"));
 
         }
+        private void Initialize()
+        {
+            IWebElement element = UpHorizontalCarousel;
+            element = DownHorizontalCarousel;
+
+            var listP = ListProduct;
+        }
+
+        public List<ProductItem> InitializeListProductFromMainPage(IReadOnlyCollection<IWebElement> elements)
+        {
+            List<ProductItem> list = new List<ProductItem>();
+
+            foreach (var current in elements)
+            {
+                list.Add(new ProductItem(driver, current));
+            }
+            return list;
+        }
+
         public List<ProductItem> GetListProduct()
         {
             return ListProduct;
