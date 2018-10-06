@@ -18,6 +18,8 @@ namespace Selenium_OpenCart.Pages.Header
         { get { return driver.FindElement(By.XPath(".//div[@id='search']/input")); } }
         protected IWebElement searchButton
         { get { return driver.FindElement(By.XPath(".//div[@id='search']/span")); } }
+        protected IWebElement CartBox
+        { get { return driver.FindElement(By.Id("cart-total")); } }
 
         public Header(IWebDriver driver)
         {
@@ -30,6 +32,7 @@ namespace Selenium_OpenCart.Pages.Header
         {
             IWebElement element = this.searchTextBox;
             element = this.searchButton;
+            element = this.CartBox;
         }
 
         #endregion
@@ -62,6 +65,11 @@ namespace Selenium_OpenCart.Pages.Header
             this.searchButton.Click();
             return new SearchPage(driver);
         }
+        public string CurrentPriceSum()
+        {
+            return CartBox.Text;
+        }
+
         #endregion
 
         #region BusinessLogic

@@ -25,6 +25,7 @@ namespace Selenium_OpenCart
 
         }
 
+
         public List<WishListTableItem> InitializeProductList(IReadOnlyCollection<IWebElement> elements)
         {
             List<WishListTableItem> list = new List<WishListTableItem>();
@@ -36,6 +37,7 @@ namespace Selenium_OpenCart
             return list;
         }
 
+
         public List<WishListTableItem> GetProductList()
         {
             return this.productList;
@@ -45,6 +47,7 @@ namespace Selenium_OpenCart
         {
             ContinueButton.Click();
         }
+
 
         public WishListTableItem GetRequiredProduct(string product)
         {
@@ -57,16 +60,6 @@ namespace Selenium_OpenCart
             }
             return null;
         }
-        public WishListPage RemoveProductFromWishList(string product)
-        {
-            GetRequiredProduct(product).ClickRemoveFromWishListButton();
-            return this;
-        }
-        public WishListPage AddToCartFromWishList(string product)
-        {
-            GetRequiredProduct(product).ClickAddToCartButton();
-            return this;
-        }
 
         public bool ProductExistsInWishList(string product)
         {
@@ -76,6 +69,21 @@ namespace Selenium_OpenCart
             }
             else return true;
         }
+
+        public WishListPage RemoveProductFromWishList(string product)
+        {
+            GetRequiredProduct(product).ClickRemoveFromWishListButton();
+            return this;
+        }
+
+
+        public WishListPage AddToCartFromWishList(string product)
+        {
+            GetRequiredProduct(product).ClickAddToCartButton();
+            return this;
+        }
+
+
         public bool SuccessMessageIsDisplayed()
         {
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
