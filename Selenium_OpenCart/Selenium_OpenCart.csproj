@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Selenium_OpenCart</RootNamespace>
     <AssemblyName>Selenium_OpenCart</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
@@ -21,6 +21,7 @@
     <TestProjectType>UnitTest</TestProjectType>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,13 +58,27 @@
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />
     <Compile Include="Data\Product\Product.cs" />
+    <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
+    <Compile Include="Pages\Body\CartPage\WishListPage.cs" />
+    <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />
+    <Compile Include="Pages\Body\ContactPage\ContactPage.cs" />
+    <Compile Include="Pages\Body\LoginPage\LoginPage.cs" />
+    <Compile Include="Pages\Body\LogoutPage\LogoutPage.cs" />
+    <Compile Include="Pages\Body\MainPage\HomePage.cs" />
+    <Compile Include="Pages\Body\MyAccountPage\MyAccountPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageDescription.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageInfo.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageReview.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageSuccessfullyAddedReview.cs" />
     <Compile Include="Pages\Body\ProductPage\ReviewItem.cs" />
+    <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
+    <Compile Include="Pages\Body\SearchPage\Content.cs" />
+    <Compile Include="Pages\Header\Currency.cs" />
+    <Compile Include="Pages\Header\MyAccount.cs" />
+    <Compile Include="Pages\Header\TopBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\FeedbackTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -74,15 +89,10 @@
     <Folder Include="Data\Application\" />
     <Folder Include="Data\User\" />
     <Folder Include="Pages\Body\AddressBookPage\" />
-    <Folder Include="Pages\Body\CartPage\" />
     <Folder Include="Pages\Body\CurrencyPage\" />
-    <Folder Include="Pages\Body\LoginPage\" />
-    <Folder Include="Pages\Body\MainPage\" />
     <Folder Include="Pages\Body\MenuPage\" />
+    <Folder Include="Pages\Body\OtherPages\" />
     <Folder Include="Pages\Body\ProductComparisonPage\" />
-    <Folder Include="Pages\Body\RegisterPage\" />
-    <Folder Include="Pages\Body\SearchPage\" />
-    <Folder Include="Pages\Header\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
