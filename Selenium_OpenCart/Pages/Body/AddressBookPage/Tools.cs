@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using NUnit.Framework;
 
-namespace OpenCartPageObject
+namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
     public abstract class Tools
     {

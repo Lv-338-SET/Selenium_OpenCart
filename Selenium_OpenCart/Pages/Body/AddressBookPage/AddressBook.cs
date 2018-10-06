@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
 
-namespace OpenCartPageObject
+namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
     class AddressBook : Account
     {

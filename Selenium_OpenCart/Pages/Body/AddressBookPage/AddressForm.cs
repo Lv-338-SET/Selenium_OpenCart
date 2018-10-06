@@ -4,7 +4,7 @@ using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace OpenCartPageObject
+namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
     public sealed class AddressForm
     {

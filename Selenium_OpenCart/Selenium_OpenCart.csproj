@@ -60,6 +60,13 @@
     <Compile Include="Data\Product\Product.cs" />
     <Compile Include="Logic\GlobalVariables.cs" />
     <Compile Include="Logic\SearchMethods.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddAddress.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressBook.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressForm.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressInTable.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\EditAddress.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\Entries.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\Tools.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
     <Compile Include="Pages\Body\CartPage\WishListPage.cs" />
     <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />
@@ -94,7 +101,6 @@
     <Folder Include="AdminPages\" />
     <Folder Include="Data\Application\" />
     <Folder Include="Data\User\" />
-    <Folder Include="Pages\Body\AddressBookPage\" />
     <Folder Include="Pages\Body\CurrencyPage\" />
     <Folder Include="Pages\Body\MenuPage\" />
     <Folder Include="Pages\Body\OtherPages\" />
