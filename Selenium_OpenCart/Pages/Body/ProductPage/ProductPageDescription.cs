@@ -4,7 +4,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
     public sealed class ProductPageDescription : ProductPageInfo
     {
-        //
+        #region Properties
         private IWebElement DescriptionText
         {
             get
@@ -12,9 +12,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return driver.FindElement(By.Id("tab-description"));
             }
         }
-        //
+        #endregion
 
-        //
+        #region Initialization And Verifycation
         public ProductPageDescription(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
@@ -26,6 +26,15 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             IWebElement tmp = DescriptionText;
         }
-        //
+        #endregion
+
+        #region Atomic operations
+        #region Atomic operations for DescriptionText
+        public string GetDescriptionText()
+        {
+            return this.DescriptionText.Text;
+        }
+        #endregion
+        #endregion
     }
 }

@@ -1,12 +1,12 @@
 ﻿using OpenQA.Selenium;
 
+using Selenium_OpenCart.Logic.ProductPageLogic;
+
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
-    //header
-    public class ProductPage
+    public class ProductPage : Header.Header
     {
-        protected IWebDriver driver;
-        //
+        #region Properties
         protected IWebElement ProductNameLablel
         {
             get
@@ -38,10 +38,18 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return driver.FindElement(By.XPath(".//button[contains(@onclick,'compare.add')]"));
             }
         }
-        //
 
-        //
-        public ProductPage(IWebDriver driver)
+        public ProductPageInfo ProductPageInfo
+        {
+            get
+            {
+                return new ProductPageInfo(driver);
+            }
+        }
+        #endregion
+
+        #region Initialization And Verifycation
+        public ProductPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
             VerifyPage();
@@ -54,45 +62,49 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             tmp = ReviewsLink;
             tmp = CompareProductButton;
         }
+        #endregion
 
-        //Atomic operations for ProductNameLabel
+        #region Atomic operations
+        #region Atomic operations for ProductNameLabel
         public string GetProductNameText()
         {
             return this.ProductNameLablel.Text;
         }
-        //
+        #endregion
 
-        //Atomic operations for WriteReviewLink
+        #region Atomic operations for WriteReviewLink
         public string GetWriteReviewLinkText()
         {
             return this.WriteRewiewLink.Text;
         }
 
-        public ProductPageReview ClickWriteReviewLink()
+        public ProductPageReviewLogic ClickWriteReviewLink()
         {
             this.WriteRewiewLink.Click();
-            return new ProductPageReview(driver);
+            return new ProductPageReviewLogic(driver);
         }
-        //
+        #endregion
 
-        //Atomic operations for ReviewsLink
+        #region Atomic operations for ReviewsLink
         public string GetReviewsLinkText()
         {
             return this.ReviewsLink.Text;
         }
 
-        public ProductPageReview ClickReviewsLink()
+        public ProductPageReviewLogic ClickReviewsLink()
         {
             this.ReviewsLink.Click();
-            return new ProductPageReview(driver);
+            return new ProductPageReviewLogic(driver);
         }
-        //
+        #endregion
 
-        //Atomic operations for CpmpareProductButton
+        #region Atomic operations for CpmpareProductButton
         public ProductPageSuccessfullyAddedProductForComparison ClickCompareProductButton()
         {
             this.CompareProductButton.Click();
             return new ProductPageSuccessfullyAddedProductForComparison(driver);
         }
+        #endregion
+        #endregion
     }
 }

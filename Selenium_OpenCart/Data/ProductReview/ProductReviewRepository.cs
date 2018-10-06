@@ -1,5 +1,5 @@
 ﻿using System;
-using Selenium_OpenCart.Data.Raiting;
+using Selenium_OpenCart.Data.Rating;
 
 namespace Selenium_OpenCart.Data.ProductReview
 {
@@ -34,7 +34,7 @@ namespace Selenium_OpenCart.Data.ProductReview
             .SetProductName("HP LP3065")
             .SetReviewerName("Volodymyr Matsko")
             .SetReviewText("Some review to smoke test of reviews")
-            .SetRaiting(1.ToRaiting())
+            .SetRating(1.ToRating())
             .SetDate(DateTime.Now.ToString(@"dd\/MM\/yyyy"))
             .Build();
         }
