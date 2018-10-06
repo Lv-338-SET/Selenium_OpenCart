@@ -205,11 +205,28 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         {
             return this.selectShow.SelectedOption.Text;
         }
+        public ProductItem FindAppropriateProduct(string product)
+        {
+            foreach (var item in listProduct)
+            {
+                if (item.IsAppropriate(product))
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public void AddAppropriateItemToWishList(string product)
+        {
+            FindAppropriateProduct(product).ClickCartfavourite();
+        }
+
         #endregion
 
         #region BussinesLogic
 
-        
+
 
 
         #endregion
