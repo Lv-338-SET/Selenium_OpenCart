@@ -30,6 +30,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return driver.FindElement(By.XPath(".//div[@class='rating']//a[contains(text(),' reviews')]"));
             }
         }
+
+        protected IWebElement CompareProductButoon
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(".//button[contains(@onclick,'compare.add')]"));
+            }
+        }
         //
 
         //
@@ -43,6 +51,8 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             IWebElement tmp = ProductNameLablel;
             tmp = WriteRewiewLink;
+            tmp = ReviewsLink;
+            tmp = CompareProductButoon;
         }
 
         //Atomic operations for ProductNameLabel
@@ -77,5 +87,12 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             return new ProductPageReview(driver);
         }
         //
+
+        //Atomic operations for CpmpareProductButton
+        public ProductPageSuccessfullyAddedProductForComparison ClickCompareProductButton()
+        {
+            this.CompareProductButoon.Click();
+            return new ProductPageSuccessfullyAddedProductForComparison(driver);
+        }
     }
 }

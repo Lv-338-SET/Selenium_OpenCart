@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 
+using Selenium_OpenCart.Data.ProductReview;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
@@ -15,7 +16,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return currnetReview.FindElement(By.XPath("/tr///td//strong"));
+                return currnetReview.FindElement(By.XPath("//tr//td//strong"));
             }
         }
 
@@ -48,6 +49,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         public ReviewItem(IWebDriver driver, IWebElement currnetReview) : base(driver)
         {
             this.currnetReview = currnetReview;
+            VerifyPage();
         }
 
         private void VerifyPage()
@@ -100,5 +102,20 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             return raiting;
         }
         //
+
+        public override bool Equals(object obj)
+        {
+            IProductReview productReview = obj as IProductReview;
+
+            if (productReview == null)
+            {
+                return false;
+            }
+
+            return (this.GetReviewerNameText().Equals(productReview.GetReviewerName())
+                && this.GetReviewDate().Equals(productReview.GetDate())
+                && this.GetReviewText().Equals(productReview.GetReviewText())
+                && this.GetRaiting().Equals(productReview.GetRaiting()));
+        }
     }
 }
