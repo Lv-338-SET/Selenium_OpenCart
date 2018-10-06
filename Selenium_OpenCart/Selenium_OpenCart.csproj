@@ -62,12 +62,15 @@
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />
     <Compile Include="Data\Product\Product.cs" />
+    <Compile Include="Data\Product\ProductRepository.cs" />
     <Compile Include="Logic\AddToCartMetods.cs" />
     <Compile Include="Data\Raiting\RaitingExeptions.cs" />
     <Compile Include="Data\Raiting\RaitingRepository.cs" />
     <Compile Include="Data\User\User.cs" />
     <Compile Include="Data\User\UserRepository.cs" />
     <Compile Include="Logic\GlobalVariables.cs" />
+    <Compile Include="Logic\ProductPageLogic\ProductPageLogic.cs" />
+    <Compile Include="Logic\ProductPageLogic\ProductPageReviewLogic.cs" />
     <Compile Include="Logic\SearchMethods.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddAddress.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddressBook.cs" />

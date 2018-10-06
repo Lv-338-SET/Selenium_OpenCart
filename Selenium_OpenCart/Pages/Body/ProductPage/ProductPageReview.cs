@@ -4,13 +4,14 @@ using System.Linq;
 using OpenQA.Selenium;
 
 using Selenium_OpenCart.Data.ProductReview;
-using Selenium_OpenCart.Data.Raiting;
+using Selenium_OpenCart.Data.Rating;
+using Selenium_OpenCart.Logic.ProductPageLogic;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
     public class ProductPageReview : ProductPageInfo
     {
-        //
+        #region Properties
         protected IWebElement ReviewerNameInput
         {
             get
@@ -55,9 +56,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return tmp;
             }
         }
-        //
+        #endregion
 
-        //
+        #region Initialization And Verifycation
         public ProductPageReview(IWebDriver driver) : base(driver)
         {
             this.driver = driver;            
@@ -71,14 +72,15 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             tmp = AddReviewButton;
             tmp = AddReviewButton;
             List<IWebElement> tmp2 = RatingInputList;
-            if (tmp2.Count != RaitingRepository.ListOfRaiting.Count)
+            if (tmp2.Count != RatingRepository.ListOfRating.Count)
             {
-                throw new CountRaitingExeption("Raiting don't have 5 radio boxes, it has " + tmp2.Count);
+                throw new CountRatingExeption("Rating don't have 5 radio boxes, it has " + tmp2.Count);
             }
         }
-        //
+        #endregion
 
-        //Atomic operations for ReviewerNameInput
+        #region Atomic operations
+        #region Atomic operations for ReviewerNameInput
         public void ClickOnReviewerNameInput()
         {
             this.ReviewerNameInput.Click();
@@ -98,21 +100,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             return this.ReviewerNameInput.Text;
         }
-        //
+        #endregion
 
-        //Functional operations for ReviewerNameInput
-        //Fluent Interface
-        public ProductPageReview ClickClearAndInputToReviewerNameInput(IProductReview productReview)
-        {
-            this.ReviewerNameInput.Click();
-            this.ReviewerNameInput.Clear();
-            this.ReviewerNameInput.SendKeys(productReview.GetReviewerName());
-            return this;
-        }
-        //
-
-
-        //Atomic operations for ReviewInput
+        #region Atomic operations for ReviewTextInput
         public void ClickOnReviewInput()
         {
             this.ReviewTextInput.Click();
@@ -132,57 +122,40 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             return this.ReviewTextInput.Text;
         }
-        //
+        #endregion
 
-        //Functional operations for ReviewerNameInput
-        //Fluent Interface
-        public ProductPageReview ClickClearAndInputToReviewInput(IProductReview productReview)
-        {
-            this.ReviewTextInput.Click();
-            this.ReviewTextInput.Clear();
-            this.ReviewTextInput.SendKeys(productReview.GetReviewText());
-            return this;
-        }
-        //
-
-        //Atomic operations for Raiting
-        public RaitingList GetSelectedRaiting()
+        #region Atomic operations for Rating
+        public RatingList GetSelectedRating()
         {
             if (!int.TryParse(this.RatingInputList.FirstOrDefault(x => x.Selected).GetAttribute("value"), out int selected))
             {
-                return RaitingList.None;
+                return RatingList.None;
             }
-            return selected.ToRaiting();
+            return selected.ToRating();
         }
 
         //Fluent Interface
-        public void SelectRating(IProductReview productReview)
+        public ProductPage SelectRating(IProductReview productReview)
         {
-            this.RatingInputList.FirstOrDefault(x => Convert.ToInt32(x.GetAttribute("value")) == productReview.GetRaiting().ToInt()).Click();
+            this.RatingInputList.FirstOrDefault(x => Convert.ToInt32(x.GetAttribute("value")) == productReview.GetRating().ToInt()).Click();
+            return this;
         }
-        //
+        #endregion
 
-        //Atomic operations for Raiting AddReviewButton
-        public ProductPageReview ClickOnAddReviewButton()
+        #region Atomic operations for AddReviewButton
+        public ProductPageReviewLogic ClickOnAddReviewButton()
         {
             this.AddReviewButton.Click();
-            return new ProductPageReview(driver);
+            return new ProductPageReviewLogic(driver);
         }
-        //
+        #endregion
 
-        //Atomic operations for Reviews
+        #region Atomic operations for Reviews
         public bool AnyReviewExists()
         {
             return this.Reviews.Any();
         }
 
-        public List<ReviewItem> GetReviewsList()
-        {
-            return this.Reviews;
-        }
-        //
-
-        //Functional operations for Reviews
         public List<ReviewItem> GetReviewsListInAnyReviewExist()
         {
             if (AnyReviewExists())
@@ -199,17 +172,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             return this.GetReviewsListInAnyReviewExist().Where(x => x.Equals(productReview)).Any();           
         }
-        //
-
-        //Business logic
-        public ProductPageSuccessfullyAddedReview InputValidReviewAndClickOnAddReviewButton(IProductReview productReview)
-        {
-            this.ClickClearAndInputToReviewerNameInput(productReview);
-            this.ClickClearAndInputToReviewInput(productReview);
-            this.SelectRating(productReview);
-            this.ClickOnAddReviewButton();
-            return new ProductPageSuccessfullyAddedReview(driver);
-        }
-        //
+        #endregion
+        #endregion
     }
 }

@@ -4,6 +4,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
     public sealed class ProductPageSuccessfullyAddedReview : ProductPageReview
     {
+        #region Properties
         private IWebElement SuccessAllert
         {
             get
@@ -11,7 +12,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return driver.FindElement(By.CssSelector("#form-review > div.alert.alert-success"));
             }
         }
+        #endregion
 
+        #region Initialization and Verifycation
         public ProductPageSuccessfullyAddedReview(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
@@ -22,7 +25,10 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             IWebElement tmp = SuccessAllert;
         }
+        #endregion
 
+        #region Atomic operations
+        #region Atomic operations for SuccessAllert
         public bool IsReviewAdded()
         {
             return this.SuccessAllert.Displayed;
@@ -32,5 +38,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             return this.SuccessAllert.Text;
         }
+        #endregion
+        #endregion
     }
 }
