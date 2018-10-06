@@ -20,15 +20,15 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         private const string PAGE_NAME = "Address Book Entries";
         private const string NO_ADDRESSES_MESSAGE = "You have no addresses in your account.";
 
-        public AddressBook(IWebDriver driver) : base(driver)
-        {
-            pageName = driver.FindElement(By.CssSelector("#content + h2"));
+       //// public AddressBook(IWebDriver driver) : base(driver)
+       // {
+       //     pageName = driver.FindElement(By.CssSelector("#content + h2"));
 
-            Tools.VerifyPageName(pageName, PAGE_NAME);
+       //     Tools.VerifyPageName(pageName, PAGE_NAME);
 
-            pageMessages.AddRange(driver.FindElements(By.CssSelector("#content ~ p")));
-            isTable = driver.FindElements(By.CssSelector("#content ~ table")).Count > 0;
-        }
+       //     pageMessages.AddRange(driver.FindElements(By.CssSelector("#content ~ p")));
+       //     isTable = driver.FindElements(By.CssSelector("#content ~ table")).Count > 0;
+       // }
 
         /// <summary>
         /// Verifies if "no addresses" message visible
@@ -38,6 +38,6 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         {
             return Tools.isElementInList(pageMessages, NO_ADDRESSES_MESSAGE);
         }
-        public Entries adresses = new Entries(this);
+        //public Entries adresses = new Entries(this);
     }
 }
