@@ -14,12 +14,10 @@ using Selenium_OpenCart.Data.Rating;
 
 using Selenium_OpenCart.Pages.Body.ProductPage;
 
-namespace Selenium_OpenCart.Logic
+namespace Selenium_OpenCart.Logic.ProductPageLogic
 {
-    public class ProductPageReviewMethods
+    public class ProductPageReviewLogic : ProductPageLogic
     {
-        private IWebDriver driver;
-
         public ProductPageReview ProductPageReview
         {
             get
@@ -31,18 +29,18 @@ namespace Selenium_OpenCart.Logic
             }
         }
 
-        public ProductPageReviewMethods(IWebDriver driver)
+        public ProductPageReviewLogic(IWebDriver driver)
         {
             this.driver = driver;
         }
 
         //Fluent Interface
-        public ProductPageReview ClickClearAndInputToReviewInput(IProductReview productReview)
+        public ProductPageReviewLogic ClickClearAndInputToReviewInput(IProductReview productReview)
         {
             ProductPageReview.ClickOnReviewInput();
             ProductPageReview.ClearReviewInput();
             ProductPageReview.InputTextToReviewInput(productReview);
-            return ProductPageReview;
+            return this;
         }
 
         public ProductPageSuccessfullyAddedReview InputValidReviewAndClickOnAddReviewButton(IProductReview productReview)
@@ -55,12 +53,12 @@ namespace Selenium_OpenCart.Logic
         }
 
         //Fluent Interface
-        public ProductPageReview ClickClearAndInputToReviewerNameInput(IProductReview productReview)
+        public ProductPageReviewLogic ClickClearAndInputToReviewerNameInput(IProductReview productReview)
         {
             ProductPageReview.ClickOnReviewerNameInput();
             ProductPageReview.ClearReviewerNameInput();
             ProductPageReview.InputTextToReviewerNameInput(productReview);
-            return ProductPageReview;
+            return this;
         }
     }
 }

@@ -69,7 +69,8 @@
     <Compile Include="Data\User\User.cs" />
     <Compile Include="Data\User\UserRepository.cs" />
     <Compile Include="Logic\GlobalVariables.cs" />
-    <Compile Include="Logic\ProductPageReviewMethods.cs" />
+    <Compile Include="Logic\ProductPageLogic\ProductPageLogic.cs" />
+    <Compile Include="Logic\ProductPageLogic\ProductPageReviewLogic.cs" />
     <Compile Include="Logic\SearchMethods.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddAddress.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddressBook.cs" />

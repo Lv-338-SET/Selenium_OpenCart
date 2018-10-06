@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using OpenQA.Selenium;
 
@@ -10,7 +9,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
     public sealed class ReviewItem : ProductPageReview
     {
-        //
+        #region Properties
         private IWebElement currnetReview;
 
         private IWebElement ReviewerName
@@ -44,9 +43,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return currnetReview.FindElements(By.XPath(".//tr//td//span")).ToList();
             }
         }
-        //
+        #endregion
 
-        //
+        #region Initialization And Verifycation
         public ReviewItem(IWebDriver driver, IWebElement currnetReview) : base(driver)
         {
             this.currnetReview = currnetReview;
@@ -64,30 +63,31 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 throw new CountRatingExeption("Rating don't have 5 stars, it has " + tmp2.Count);
             }
         }
-        //
+        #endregion
 
-        //Atomic for ReviewerName
+        #region Atomic operations
+        #region Atomic operations for ReviewerName
         public string GetReviewerNameText()
         {
             return this.ReviewerName.Text;
         }
-        //
+        #endregion
 
-        //Atomic for ReviewDate
+        #region Atomic operations for ReviewDate
         public string GetReviewDate()
         {
             return this.ReviewDate.Text;
         }
-        //
+        #endregion
 
-        //Atomic for ReviewText
+        #region Atomic operations for ReviewText
         public string GetReviewText()
         {
             return this.ReviewText.Text;
         }
-        //
+        #endregion
 
-        //Atomic for Rating
+        #region Atomic operations for Rating
         public RatingList GetRating()
         {
             int raiting = 0;
@@ -100,8 +100,10 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             }
             return raiting.ToRating();
         }
-        //
+        #endregion
+        #endregion
 
+        #region overrided Methods and Operators
         public static bool operator ==(ReviewItem first, object second)
         {
             return first.Equals(second);
@@ -141,5 +143,11 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return false;
             }
         }
+
+        public override int GetHashCode()
+        {
+            return  (this.GetReviewerNameText() + " " + this.GetReviewText() + " " + this.GetRating() + " " + this.GetReviewDate()).GetHashCode();
+        }
+        #endregion
     }
 }

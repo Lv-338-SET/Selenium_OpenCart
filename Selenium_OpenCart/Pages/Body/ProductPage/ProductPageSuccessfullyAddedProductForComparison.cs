@@ -1,10 +1,12 @@
 ﻿using OpenQA.Selenium;
 
+using Selenium_OpenCart.Logic.ProductPageLogic;
+
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
     public sealed class ProductPageSuccessfullyAddedProductForComparison : ProductPage
     {
-        //
+        #region Properties
         private IWebElement SuccessAllert
         {
             get
@@ -28,9 +30,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return driver.FindElement(By.XPath(".//div[@class='alert alert-success alert-dismissible']//a[contains(@href,'route=product/compare')]"));
             }
         }
-        //
+        #endregion
 
-        //
+        #region Initialization And Verifycation
         public ProductPageSuccessfullyAddedProductForComparison(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
@@ -43,40 +45,42 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             tmp = this.ProductPageLink;
             tmp = this.CompareProductsPageLink;
         }
-        //
+        #endregion
 
-        //Atomic for SuccessAllert
+        #region Atomic operations
+        #region Atomic operations for SuccessAllert
         public bool IsProductAddedToComparePage()
         {
             return this.SuccessAllert.Displayed;
         }
-        //
+        #endregion
 
-        //Atomic for ProductPageLink
+        #region Atomic operations for ProductPageLink
         public string GetProductPageLinkText()
         {
             return this.ProductPageLink.Text;
         }
 
-        public ProductPage ClickOnProductPageLink()
+        public ProductPageReviewLogic ClickOnProductPageLink()
         {
             this.ProductPageLink.Click();
-            return new ProductPage(driver);
+            return new ProductPageReviewLogic(driver);
         }
-        //
+        #endregion
 
-        //Atomic for CompareProductsPageLink
+        #region Atomic operations for CompareProductsPageLink
         public string GetCompareProductsPageLink()
         {
             return this.CompareProductsPageLink.Text;
         }
 
-        public ProductPage ClickOnCompareProductsPageLink()
+        public ProductPageReviewLogic ClickOnCompareProductsPageLink()
         {
-            //CHANGE TO ANDRIY PAGE!
+            //TODO: CHANGE TO ANDRIY PAGE!
             this.CompareProductsPageLink.Click();
-            return new ProductPage(driver);
+            return new ProductPageReviewLogic(driver);
         }
-        //
+        #endregion
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-using Selenium_OpenCart.Logic;
+using Selenium_OpenCart.Logic.ProductPageLogic;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
@@ -38,6 +38,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return driver.FindElement(By.XPath(".//button[contains(@onclick,'compare.add')]"));
             }
         }
+
+        public ProductPageInfo ProductPageInfo
+        {
+            get
+            {
+                return new ProductPageInfo(driver);
+            }
+        }
         #endregion
 
         #region Initialization And Verifycation
@@ -56,6 +64,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         }
         #endregion
 
+        #region Atomic operations
         #region Atomic operations for ProductNameLabel
         public string GetProductNameText()
         {
@@ -69,10 +78,10 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             return this.WriteRewiewLink.Text;
         }
 
-        public ProductPageReviewMethods ClickWriteReviewLink()
+        public ProductPageReviewLogic ClickWriteReviewLink()
         {
             this.WriteRewiewLink.Click();
-            return new ProductPageReviewMethods(driver);
+            return new ProductPageReviewLogic(driver);
         }
         #endregion
 
@@ -82,10 +91,10 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             return this.ReviewsLink.Text;
         }
 
-        public ProductPageReviewMethods ClickReviewsLink()
+        public ProductPageReviewLogic ClickReviewsLink()
         {
             this.ReviewsLink.Click();
-            return new ProductPageReviewMethods(driver);
+            return new ProductPageReviewLogic(driver);
         }
         #endregion
 
@@ -95,6 +104,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             this.CompareProductButton.Click();
             return new ProductPageSuccessfullyAddedProductForComparison(driver);
         }
+        #endregion
         #endregion
     }
 }

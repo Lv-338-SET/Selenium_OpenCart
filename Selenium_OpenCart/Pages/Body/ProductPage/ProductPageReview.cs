@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Data.Rating;
-using Selenium_OpenCart.Logic;
+using Selenium_OpenCart.Logic.ProductPageLogic;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
@@ -79,6 +79,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         }
         #endregion
 
+        #region Atomic operations
         #region Atomic operations for ReviewerNameInput
         public void ClickOnReviewerNameInput()
         {
@@ -142,10 +143,10 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         #endregion
 
         #region Atomic operations for AddReviewButton
-        public ProductPageReviewMethods ClickOnAddReviewButton()
+        public ProductPageReviewLogic ClickOnAddReviewButton()
         {
             this.AddReviewButton.Click();
-            return new ProductPageReviewMethods(driver);
+            return new ProductPageReviewLogic(driver);
         }
         #endregion
 
@@ -171,6 +172,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             return this.GetReviewsListInAnyReviewExist().Where(x => x.Equals(productReview)).Any();           
         }
+        #endregion
         #endregion
     }
 }

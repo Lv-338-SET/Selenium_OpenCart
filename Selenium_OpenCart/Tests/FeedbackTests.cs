@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
+
 using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Pages.Body.ProductPage;
+using Selenium_OpenCart.Logic.ProductPageLogic;
 
 namespace Selenium_OpenCart.Tests
 {
@@ -41,11 +42,15 @@ namespace Selenium_OpenCart.Tests
         {
             //USE SERGIY SEARCH METHODS
             driver.Navigate().GoToUrl(URL);
-            ProductPage page = new ProductPage(driver);
-            Assert.AreEqual(review.GetProductName(), page.GetProductNameText(),
+
+            ProductPageReviewLogic productPage = new ProductPageReviewLogic(driver);
+            //Assert
+            Assert.AreEqual(review.GetProductName(), productPage.ProductPage.GetProductNameText(),
                 $"Not {review.GetProductName()} product page");
-            ProductPageSuccessfullyAddedReview page2 = page.ClickWriteReviewLink()
+
+            ProductPageSuccessfullyAddedReview page2 = productPage.ProductPage.ClickWriteReviewLink()
                 .InputValidReviewAndClickOnAddReviewButton(review);
+            //Asser
             Assert.True(page2.IsReviewAdded(),
                 "Review not added");
         }
@@ -55,11 +60,13 @@ namespace Selenium_OpenCart.Tests
         {
             //USE SERGIY SEARCH METHODS
             driver.Navigate().GoToUrl(URL);
-            ProductPage page = new ProductPage(driver);
-            Assert.AreEqual(review.GetProductName(), page.GetProductNameText(),
+
+            ProductPageReviewLogic productPage = new ProductPageReviewLogic(driver);
+            //Assert
+            Assert.AreEqual(review.GetProductName(), productPage.ProductPage.GetProductNameText(),
                 $"Not {review.GetProductName()} product page");
-            List<ReviewItem> myReview = page.ClickReviewsLink().GetReviewsList();
-            bool hasReview = page.ClickReviewsLink().ReviewExistInListOfReview(review);
+
+            bool hasReview = productPage.ProductPage.ClickReviewsLink().ProductPageReview.ReviewExistInListOfReview(review);
             Assert.True(hasReview);
         }
     }
