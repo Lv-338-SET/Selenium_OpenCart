@@ -9,6 +9,9 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
     public abstract class AddressForm
     {
         private IWebDriver driver;
+
+        //Searching elements in the form 
+        #region
         private IWebElement AddressFormTag
             { get {return driver.FindElement(By.CssSelector("form[action*='account/address']"));} }
         protected IWebElement FirstNameInput
@@ -29,202 +32,233 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             { get { return driver.FindElement(By.Name("country_id")); } }
         protected IWebElement RegionStateInput
             { get { return driver.FindElement(By.Name("zone_id")); } }
-        protected IWebElement DefaultAddressYesInput
-            { get { return driver.FindElement(By.CssSelector("input[name='default'][value='1']")); } }
-        protected IWebElement DefaultAddressNoInput
-            { get { return driver.FindElement(By.CssSelector("input[name='default'][value='0']")); } }
-          
+        protected IWebElement DefaultAddressYesInputRadio
+        { get { return driver.FindElement(By.CssSelector("input[name='default'][value='1']")); } }
+        protected IWebElement DefaultAddressNoInputRadio
+        { get { return driver.FindElement(By.CssSelector("input[name='default'][value='0']")); } }
+        #endregion
+
         public AddressForm(IWebDriver driver)
         {
             this.driver = driver;
-           
-            //if(AddressFormTag.Enabled);
-            
+
+            if (!AddressFormTag.Enabled)
+            {
+                throw new AddressBookException("The 'Address' form cannot be found");
+            }            
         }
-        
-      //  //FirstNameInput methods
-      //  #region
-      //  public string GetFirstNameInputText()
-      //  {
-      //      return FirstNameInput.Text;
-      //  }
 
-      //  public AddressForm ClearFirstNameInput()
-      //  {
-      //      FirstNameInput.Clear();
-      //      return this;
-      //  }
+        //FirstNameInput methods
+        #region
+        public string GetFirstNameInputText()
+        {
+            return FirstNameInput.Text;
+        }
 
-      //  public AddressForm ClickFirstNameInput()
-      //  {
-      //      FirstNameInput.Click();
-      //      return this;
-      //  }
+        public AddressForm ClearFirstNameInput()
+        {
+            FirstNameInput.Clear();
+            return this;
+        }
 
-      //  public AddressForm TypeInFirstName(string text)
-      //  {
-      //      LastNameInput.SendKeys(text);
-      //      return this;
-      //  }
-      //  #endregion
+        public AddressForm ClickFirstNameInput()
+        {
+            FirstNameInput.Click();
+            return this;
+        }
 
-      //  //LastNameInput methods
-      //  #region
-      //  public string GetLastNameInputText()
-      //  {
-      //      return LastNameInput.Text;
-      //  }
+        public AddressForm TypeInFirstName(string text)
+        {
+            LastNameInput.SendKeys(text);
+            return this;
+        }
+        #endregion
 
-      //  public AddressForm ClearLastNameInput()
-      //  {
-      //      LastNameInput.Clear();
-      //      return this;
-      //  }
+        //LastNameInput methods
+        #region
+        public string GetLastNameInputText()
+        {
+            return LastNameInput.Text;
+        }
 
-      //  public AddressForm ClickLastNameInput()
-      //  {
-      //      LastNameInput.Click();
-      //      return this;
-      //  }
+        public AddressForm ClearLastNameInput()
+        {
+            LastNameInput.Clear();
+            return this;
+        }
 
-      //  public AddressForm TypeInLastNameInput(string text)
-      //  {
-      //      LastNameInput.SendKeys(text);
-      //      return this;
-      //  }
-      //  #endregion
+        public AddressForm ClickLastNameInput()
+        {
+            LastNameInput.Click();
+            return this;
+        }
 
-      //  //Address1Input methods
-      //  #region
-      //  public string GetAddress1InputText()
-      //  {
-      //      return Address1Input.Text;
-      //  }
+        public AddressForm TypeInLastNameInput(string text)
+        {
+            LastNameInput.SendKeys(text);
+            return this;
+        }
+        #endregion
 
-      //  public AddressForm ClearAddress1Input()
-      //  {
-      //      Address1Input.Clear();
-      //      return this;
-      //  }
+        //Address1Input methods
+        #region
+        public string GetAddress1InputText()
+        {
+            return Address1Input.Text;
+        }
 
-      //  public AddressForm ClickAddress1Input()
-      //  {
-      //      Address1Input.Click();
-      //      return this;
-      //  }
+        public AddressForm ClearAddress1Input()
+        {
+            Address1Input.Clear();
+            return this;
+        }
 
-      //  public AddressForm TypeInAddress1Input(string text)
-      //  {
-      //      Address1Input.SendKeys(text);
-      //      return this;
-      //  }
-      //  #endregion
+        public AddressForm ClickAddress1Input()
+        {
+            Address1Input.Click();
+            return this;
+        }
 
-      //  //CityInput methods
-      //  #region
-      //  public string GetCityInputText()
-      //  {
-      //      return CityInput.Text;
-      //  }
+        public AddressForm TypeInAddress1Input(string text)
+        {
+            Address1Input.SendKeys(text);
+            return this;
+        }
+        #endregion
 
-      //  public AddressForm ClearCityInput()
-      //  {
-      //      CityInput.Clear();
-      //      return this;
-      //  }
+        //CityInput methods
+        #region
+        public string GetCityInputText()
+        {
+            return CityInput.Text;
+        }
 
-      //  public AddressForm ClickCityInput()
-      //  {
-      //      CityInput.Click();
-      //      return this;
-      //  }
+        public AddressForm ClearCityInput()
+        {
+            CityInput.Clear();
+            return this;
+        }
 
-      //  public AddressForm TypeInCityInput(string text)
-      //  {
-      //      CityInput.SendKeys(text);
-      //      return this;
-      //  }
-      //  #endregion
+        public AddressForm ClickCityInput()
+        {
+            CityInput.Click();
+            return this;
+        }
 
-      //  //CountryInput methods
-      //  #region
-      //  public string GetCountryInputText()
-      //  {
-      //      return CityInput.Text;
-      //  }        
+        public AddressForm TypeInCityInput(string text)
+        {
+            CityInput.SendKeys(text);
+            return this;
+        }
+        #endregion
 
-      //  public AddressForm ClickCountryInput()
-      //  {
-      //      CountryInput.Click();
-      //      return this;
-      //  }
+        //CountryInput methods
+        #region
+        public string GetCountryInputText()
+        {
+            return CityInput.Text;
+        }
 
-      //  public AddressForm ChooseCountry(string country)
-      //  {
-      //      Tools.SetAddressSelectElement(new SelectElement(CountryInput), country);            
-      //      return this;
-      //  }
-      //  #endregion
+        public AddressForm ClickCountryInput()
+        {
+            CountryInput.Click();
+            return this;
+        }
 
-      //  //RegionStateInput methods
-      //  #region
-      //  public string GetRegionStateInputText()
-      //  {
-      //      return RegionStateInput.Text;
-      //  }
+        public AddressForm ChooseCountry(string country)
+        {
+            SetAddressSelectElement(new SelectElement(CountryInput), country);
+            return this;
+        }
+        #endregion
 
-      //  public AddressForm ClickRegionStateInput()
-      //  {
-      //      RegionStateInput.Click();
-      //      return this;
-      //  }
+        //RegionStateInput methods
+        #region
+        public string GetRegionStateInputText()
+        {
+            return RegionStateInput.Text;
+        }
 
-      //  public AddressForm ChooseRegionState(string region)
-      //  {
-      //      Tools.SetAddressSelectElement(new SelectElement(RegionStateInput), region);
-      //      return this;
-      //  }
-      //  #endregion
+        public AddressForm ClickRegionStateInput()
+        {
+            RegionStateInput.Click();
+            return this;
+        }
 
-      //  //DefaultAddressYesInputRadio methods
-      //  #region
-      //  public string GetDefaultAddressYesInputRadio()
-      //  {
-      //      return DefaultAddressYesInputRadio.Text;
-      //  }
+        public AddressForm ChooseRegionState(string region)
+        {
+            SetAddressSelectElement(new SelectElement(RegionStateInput), region);
+            return this;
+        }
+        #endregion
 
-      //  public AddressForm ClickDefaultAddressYesInputRadio()
-      //  {
-      //      DefaultAddressYesInputRadio.Click();
-      //      return this;
-      //  }
+        //DefaultAddressYesInputRadio methods
+        #region
+        public string GetDefaultAddressYesInputRadio()
+        {
+            return DefaultAddressYesInputRadio.Text;
+        }
 
-      //  public bool isCheckedDefaultAddressYesInputRadio()
-      //  {
-      //      return DefaultAddressYesInputRadio.Selected;
-            
-      //  }
-      //  #endregion
+        public AddressForm ClickDefaultAddressYesInputRadio()
+        {
+            DefaultAddressYesInputRadio.Click();
+            return this;
+        }
 
-      //  //DefaultAddressNoputRadio methods
-      //  #region
-      ////  public string GetDefaultAddressNoInputRadio()
-      //  {
-      //     // return DefaultAddressNoInputRadio.Text;
-      //  }
+        public bool isCheckedDefaultAddressYesInputRadio()
+        {
+            return DefaultAddressYesInputRadio.Selected;
 
-      //  public AddressForm ClickDefaultAddressNoInputRadio()
-      //  {
-      //     // DefaultAddressYesInputRadio.Click();
-      //      return this;
-      //  }
+        }
+        #endregion
 
-      // // public bool isCheckedDefaultAddressNoInputRadio()
-      //  {
-      //     // return DefaultAddressNoInputRadio.Selected;
+        //DefaultAddressNoInputRadio methods
+        #region
+        public string GetDefaultAddressNoInputRadio()
+        {
+           return DefaultAddressNoInputRadio.Text;
+        }
 
-      //  }
-      //  #endregion
+        public AddressForm ClickDefaultAddressNoInputRadio()
+        {
+            DefaultAddressYesInputRadio.Click();
+            return this;
+        }
 
+        public bool isCheckedDefaultAddressNoInputRadio()
+        {
+           return DefaultAddressNoInputRadio.Selected;
+        }
+        #endregion
+
+        //Tools
+        #region
+        public static void SetAddressSelectElement(SelectElement select, string value)
+        {
+            try
+            {
+                select.SelectByText(value);
+            }
+            catch
+            {
+                select.SelectByText(" --- Please Select --- ");
+                Console.WriteLine("Error!Cannot find \"{0}\"!", value);
+
+            }
+        }
+
+        public static void SetSelectElement(SelectElement select, string value, string defaultValue)
+        {
+            try
+            {
+                select.SelectByText(value);
+            }
+            catch (NoSuchElementException)
+            {
+                select.SelectByText(defaultValue);
+                Console.WriteLine("Error!Cannot find \"{0}\"!", value);
+            }
+        }
+        #endregion
     }
 }
