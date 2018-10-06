@@ -47,9 +47,6 @@
     <Reference Include="nunit.framework, Version=3.10.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.10.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework.3.10.1.0.Fakes">
-      <HintPath>FakesAssemblies\nunit.framework.3.10.1.0.Fakes.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -99,6 +96,8 @@
     <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
     <Compile Include="Pages\Body\SearchPage\ProductItem.cs" />
     <Compile Include="Pages\Body\SearchPage\SearchPage.cs" />
+    <Compile Include="Pages\Body\WishListPage\WishListPage.cs" />
+    <Compile Include="Pages\Body\WishListPage\WishListTableItem.cs" />
     <Compile Include="Pages\Header\Currency.cs" />
     <Compile Include="Pages\Header\Header.cs" />
     <Compile Include="Pages\Header\MyAccount.cs" />
@@ -107,6 +106,7 @@
     <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\FeedbackTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
+    <Compile Include="Tests\WishListTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

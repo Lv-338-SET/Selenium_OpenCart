@@ -89,6 +89,10 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             productIconCompare.Click();
             return this;
         }
+        public bool IsAppropriate(string product)
+        {
+            return (product.ToLower() == GetTextFromProductName().ToLower());
+        }
 
         #endregion
     }
