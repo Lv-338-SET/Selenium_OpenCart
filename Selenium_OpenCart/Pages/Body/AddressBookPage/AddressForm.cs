@@ -4,52 +4,38 @@ using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace OpenCartPageObject
+namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    public sealed class AddressForm
+    public abstract class AddressForm
     {
-        //private IWebElement AddressFormTag { get; set; }
-        //protected IWebElement FirstNameInput { get; private set; }//TODO required field
-        //protected IWebElement LastNameInput { get; private set; }//TODO required field
-        //protected IWebElement CompanyInput { get; private set; }
-        //protected IWebElement Address1Input { get; private set; }//TODO required field
-        //protected IWebElement Address2Input { get; private set; }
-        //protected IWebElement CityInput { get; private set; }//TODO required field
-        //protected IWebElement PostCodeInput { get; private set; }
-        //protected IWebElement CountryInput { get; private set; }//TODO required field
-        //protected IWebElement RegionStateInput { get; private set; }//TODO required field
-        //protected IWebElement DefaultAddressYesInput { get; private set; }
-        //protected IWebElement DefaultAddressNoInput { get; private set; }
-
-        private IWebElement AddressFormTag;//TODO
-        private IWebElement FirstNameInput;//Required field
-        private IWebElement LastNameInput;//Required field
-        private IWebElement CompanyInput;//TODO
-        private IWebElement Address1Input;//Required field
-        private IWebElement Address2Input;//TODO
-        private IWebElement CityInput;//Required field
-        private IWebElement PostCodeInput;//TODO
-        private IWebElement CountryInput;//Required field
-        private IWebElement RegionStateInput;//Required field
-        private IWebElement DefaultAddressYesInputRadio;//TODO
-        private IWebElement DefaultAddressNoInputRadio;//TODO
-
+        private IWebElement AddressFormTag
+            { get {return driver.FindElement(By.CssSelector("form[action*='account/address']"));} }
+        protected IWebElement FirstNameInput
+            { get { return driver.FindElement(By.Name("firstname")); } }
+        protected IWebElement LastNameInput
+            { get {return driver.FindElement(By.Name("lastname")); } }
+        protected IWebElement CompanyInput
+            { get { return driver.FindElement(By.Name("company")); } }
+        protected IWebElement Address1Input
+            { get { return driver.FindElement(By.Name("address_1")); } }
+        protected IWebElement Address2Input
+            { get { return driver.FindElement(By.Name("address_2")); } }
+        protected IWebElement CityInput
+            { get { return driver.FindElement(By.Name("city")); } }
+        protected IWebElement PostCodeInput
+            { get { return driver.FindElement(By.Name("postcode")); ; } }
+        protected IWebElement CountryInput
+            { get { return driver.FindElement(By.Name("country_id")); } }
+        protected IWebElement RegionStateInput
+            { get { return driver.FindElement(By.Name("zone_id")); } }
+        protected IWebElement DefaultAddressYesInput
+            { get { return driver.FindElement(By.CssSelector("input[name='default'][value='1']")); } }
+        protected IWebElement DefaultAddressNoInput
+            { get { return driver.FindElement(By.CssSelector("input[name='default'][value='0']")); } }
+          
         public AddressForm(IWebDriver driver)
         {
-            //AddressForm = driver.FindElement(By.CssSelector(".content form"));
-            AddressFormTag = driver.FindElement(By.CssSelector("form[action*='account/address']"));
-
-            FirstNameInput = AddressFormTag.FindElement(By.Name("firstname"));
-            LastNameInput = AddressFormTag.FindElement(By.Name("lastname"));
-            CompanyInput = AddressFormTag.FindElement(By.Name("company"));
-            Address1Input = AddressFormTag.FindElement(By.Name("address_1"));
-            Address2Input = AddressFormTag.FindElement(By.Name("address_2"));
-            CityInput = AddressFormTag.FindElement(By.Name("city"));
-            PostCodeInput = AddressFormTag.FindElement(By.Name("postcode"));
-            CountryInput = AddressFormTag.FindElement(By.Name("country_id"));
-            RegionStateInput = AddressFormTag.FindElement(By.Name("zone_id"));
-            DefaultAddressYesInputRadio = AddressFormTag.FindElement(By.CssSelector("input[name='default'][value='1']"));
-            DefaultAddressNoInputRadio = AddressFormTag.FindElement(By.CssSelector("input[name='default'][value='1']"));           
+            
         }
 
         //FirstNameInput methods
