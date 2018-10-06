@@ -16,14 +16,14 @@ namespace Selenium_OpenCart.Tools
 
         #region AtomicOperations
 
-        public static MySqlDataReader SelectQuery(string table, string condition="*", string where="") {
+        public static string GenerateSelectQuery(string table, string condition="*", string where="") {
             MySqlConnection conn = new MySqlConnection(DataPath);
 
             string cmd = "SELECT " 
                 + condition 
                 + " FROM " 
                 + table;
-
+            
             if (where != "") {
                 cmd += " WHERE ";
                 cmd += where;
@@ -38,7 +38,7 @@ namespace Selenium_OpenCart.Tools
             return reader;
         }
 
-        public static int InsertQuery(string table, string values, string condition = "") {
+        public static int generateInsertQuery(string table, string values, string condition = "") {
             MySqlConnection conn = new MySqlConnection(DataPath);
 
             string cmd = "INSERT INTO " 
