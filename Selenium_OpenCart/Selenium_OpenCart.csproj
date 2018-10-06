@@ -77,7 +77,6 @@
     <Compile Include="Pages\Body\AddressBookPage\Entries.cs" />
     <Compile Include="Pages\Body\AddressBookPage\Tools.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
-    <Compile Include="Pages\Body\CartPage\WishListPage.cs" />
     <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />
     <Compile Include="Pages\Body\ContactPage\ContactPage.cs" />
     <Compile Include="Pages\Body\LoginPage\LoginPage.cs" />

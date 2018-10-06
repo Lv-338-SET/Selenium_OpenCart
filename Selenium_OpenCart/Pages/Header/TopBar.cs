@@ -2,10 +2,11 @@
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.CheckoutPage;
 using Selenium_OpenCart.Pages.Body.ContactPage;
+using Selenium_OpenCart.Pages.Body;
 
 namespace Selenium_OpenCart.Pages.Header
 {
-    public class TopBar
+     class TopBar
     {
         private IWebDriver driver;
 

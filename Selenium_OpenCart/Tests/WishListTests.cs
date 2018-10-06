@@ -7,7 +7,7 @@ using Selenium_OpenCart.Pages.Body;
 using Selenium_OpenCart.Logic;
 
 
-namespace Selenium_OpenCart
+namespace Selenium_OpenCart.Tests
 {
 
     [TestFixture]
@@ -22,28 +22,26 @@ namespace Selenium_OpenCart
         {
             SearchMethods search = new SearchMethods(driver);
             search.Search(product).AddAppropriateItemToWishList(product);
-
-            //use top-bar wishlist button   
-            driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/index.php?route=account/wishlist");
-            WishListPage wishList = new WishListPage(driver);
-            bool result = wishList.ProductExistsInWishList(product);
+            TopBar topBar = new TopBar(driver);
+            bool result = topBar.WishListButtonClick().ProductExistsInWishList(product);
             Assert.IsTrue(result, "Expected element is not added to wishlist");
         }
 
 
-        //[TestCase("iPhone")]
-        //[Order(1)]
+        [TestCase("iPhone")]
+        [Order(1)]
 
-        //public void AddToCartFromWishList_AddIphone_IsAdded(string product)
-        //{
-        //    driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/index.php?route=account/wishlist");
-        //    //WishListPage wishList = new WishListPage(driver);
-        //    //wishList.AddToCartFromWishList(product);
-        //}
+        public void AddToCartFromWishList_AddIphone_IsAdded(string product)
+        {
+            TopBar topbar = new TopBar(driver);
+            topbar.WishListButtonClick();
+            WishListPage wishList = new WishListPage(driver);
+            wishList.AddToCartFromWishList(product);
+        }
 
 
         [TestCase("iPhone")]
-        [Order(1)]
+        [Order(2)]
 
         public void RemoveFromWishList_RemoveIphone_IsRemoved(string product)
         {

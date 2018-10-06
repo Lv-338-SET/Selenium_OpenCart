@@ -62,6 +62,11 @@ namespace Selenium_OpenCart
             GetRequiredProduct(product).ClickRemoveFromWishListButton();
             return this;
         }
+        public WishListPage AddToCartFromWishList(string product)
+        {
+            GetRequiredProduct(product).ClickAddToCartButton();
+            return this;
+        }
 
         public bool ProductExistsInWishList(string product)
         {
