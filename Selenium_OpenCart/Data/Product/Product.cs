@@ -1,11 +1,16 @@
-﻿
+﻿using Selenium_OpenCart.Data.Currency;
+
 namespace Selenium_OpenCart.Data.Product
 {
-    public class Product : IProduct, IProductBuider, ISetName
+    public class Product : IProduct, IProductBuilder, ISetName
     {
         private string name;
         private string description;
         private byte[] image;
+        private char currency;
+        private double price;
+        private double priceExTax;
+        private int quantity;
 
         private Product()
         {
@@ -22,21 +27,45 @@ namespace Selenium_OpenCart.Data.Product
             return new Product();
         }
 
-        public IProductBuider SetName(string name)
+        public IProductBuilder SetName(string name)
         {
             this.name = name;
             return this;
         }
 
-        public IProductBuider SetDescription(string description)
+        public IProductBuilder SetDescription(string description)
         {
             this.description = description;
             return this;
         }
 
-        public IProductBuider SetImage(byte[] image)
+        public IProductBuilder SetImage(byte[] image)
         {
             this.image = image;
+            return this;
+        }
+
+        public IProductBuilder SetCurrency(CurrencyList currency)
+        {
+            this.currency = CurrencyRepository.CurrencyFullTextToSign[currency];
+            return this;
+        }
+
+        public IProductBuilder SetPrice(double price)
+        {
+            this.price = price;
+            return this;
+        }
+
+        public IProductBuilder SetPriceExTax(double priceExTax)
+        {
+            this.priceExTax = priceExTax;
+            return this;
+        }
+
+        public IProductBuilder SetQuantity(int quantity)
+        {
+            this.quantity = quantity;
             return this;
         }
 
@@ -54,6 +83,26 @@ namespace Selenium_OpenCart.Data.Product
         {
             return image;
         }
+
+        public char GetCurrency()
+        {
+            return currency;
+        }
+
+        public double GetPrice()
+        {
+            return price;
+        }
+
+        public double GetPriceExTax()
+        {
+            return priceExTax;
+        }
+
+        public int GetQuantity()
+        {
+            return quantity;
+        }
     }
 
     public interface IProduct
@@ -61,17 +110,25 @@ namespace Selenium_OpenCart.Data.Product
         string GetName();
         string GetDescription();
         byte[] GetImage();
+        char GetCurrency();
+        double GetPrice();
+        double GetPriceExTax();
+        int GetQuantity();
     }
 
-    public interface IProductBuider
+    public interface IProductBuilder
     {
-        IProductBuider SetDescription(string description);
-        IProductBuider SetImage(byte[] image);
+        IProductBuilder SetDescription(string description);
+        IProductBuilder SetImage(byte[] image);
+        IProductBuilder SetCurrency(CurrencyList currency);
+        IProductBuilder SetPrice(double price);
+        IProductBuilder SetPriceExTax(double price);
+        IProductBuilder SetQuantity(int quantity);
         IProduct Build();
     }
 
     public interface ISetName
     {
-        IProductBuider SetName(string name);
+        IProductBuilder SetName(string name);
     }
 }

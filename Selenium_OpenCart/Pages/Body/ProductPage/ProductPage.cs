@@ -31,7 +31,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             }
         }
 
-        protected IWebElement CompareProductButoon
+        protected IWebElement CompareProductButton
         {
             get
             {
@@ -52,7 +52,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             IWebElement tmp = ProductNameLablel;
             tmp = WriteRewiewLink;
             tmp = ReviewsLink;
-            tmp = CompareProductButoon;
+            tmp = CompareProductButton;
         }
 
         //Atomic operations for ProductNameLabel
@@ -91,7 +91,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         //Atomic operations for CpmpareProductButton
         public ProductPageSuccessfullyAddedProductForComparison ClickCompareProductButton()
         {
-            this.CompareProductButoon.Click();
+            this.CompareProductButton.Click();
             return new ProductPageSuccessfullyAddedProductForComparison(driver);
         }
     }

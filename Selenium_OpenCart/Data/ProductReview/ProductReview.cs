@@ -1,4 +1,5 @@
-﻿
+﻿using Selenium_OpenCart.Data.Raiting;
+
 namespace Selenium_OpenCart.Data.ProductReview
 {
     public class ProductReview : IProductReview, IProductReviewBuilder, ISetProductName, ISetReviewerName, ISetReviewText, ISetRaiting, ISetDate
@@ -6,7 +7,7 @@ namespace Selenium_OpenCart.Data.ProductReview
         private string productName;
         private string reviewerName;
         private string reviewText;
-        private int raiting;
+        private RaitingList raiting;
         private string date;
 
         private ProductReview()
@@ -42,7 +43,7 @@ namespace Selenium_OpenCart.Data.ProductReview
             return this;
         }
 
-        public ISetDate SetRaiting(int raiting)
+        public ISetDate SetRaiting(RaitingList raiting)
         {
             this.raiting = raiting;
             return this;
@@ -69,7 +70,7 @@ namespace Selenium_OpenCart.Data.ProductReview
             return this.reviewText;
         }
 
-        public int GetRaiting()
+        public RaitingList GetRaiting()
         {
             return this.raiting;
         }
@@ -85,7 +86,7 @@ namespace Selenium_OpenCart.Data.ProductReview
         string GetProductName();
         string GetReviewerName();
         string GetReviewText();
-        int GetRaiting();
+        RaitingList GetRaiting();
         string GetDate();
     }
 
@@ -111,7 +112,7 @@ namespace Selenium_OpenCart.Data.ProductReview
 
     public interface ISetRaiting
     {
-        ISetDate SetRaiting(int raiting);
+        ISetDate SetRaiting(RaitingList raiting);
     }
 
     public interface ISetDate
