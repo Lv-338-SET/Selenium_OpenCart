@@ -4,6 +4,7 @@ using System.Linq;
 using OpenQA.Selenium;
 
 using Selenium_OpenCart.Data.ProductReview;
+using Selenium_OpenCart.Data.Raiting;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
@@ -58,11 +59,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             tmp = ReviewDate;
             tmp = ReviewText;
             List<IWebElement> tmp2 = Raiting;
-            //STARS COUNT
-            if (tmp2.Count != 5)
+            if (tmp2.Count != RaitingRepository.ListOfRaiting.Count)
             {
-                //EXCEPTION
-                throw new FormatException("Raiting don't have 5 radio boxes, it has " + tmp2.Count);
+                throw new CountRaitingExeption("Raiting don't have 5 stars, it has " + tmp2.Count);
             }
         }
         //
@@ -89,9 +88,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         //
 
         //Atomic for Raiting
-        public int? GetRaiting()
+        public RaitingList GetRaiting()
         {
-            int? raiting = null;
+            int raiting = 0;
             for (int i = 0; i < this.Raiting.Count; i++)
             {
                 if (Raiting[i].FindElements(By.XPath(".//i[@class='fa fa-star fa-stack-2x']")).Any())
@@ -99,7 +98,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                     raiting = (i + 1);
                 }
             }
-            return raiting;
+            return raiting.ToRaiting();
         }
         //
 

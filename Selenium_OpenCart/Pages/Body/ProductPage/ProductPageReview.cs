@@ -4,6 +4,7 @@ using System.Linq;
 using OpenQA.Selenium;
 
 using Selenium_OpenCart.Data.ProductReview;
+using Selenium_OpenCart.Data.Raiting;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
@@ -70,11 +71,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             tmp = AddReviewButton;
             tmp = AddReviewButton;
             List<IWebElement> tmp2 = RatingInputList;
-            //Reiting as emun of somthing else
-            if (tmp2.Count != 5)
+            if (tmp2.Count != RaitingRepository.ListOfRaiting.Count)
             {
-                //ADD OWN EXCEPTION
-                throw new FormatException("Raiting don't have 5 radio boxes, it has " + tmp2.Count);
+                throw new CountRaitingExeption("Raiting don't have 5 radio boxes, it has " + tmp2.Count);
             }
         }
         //
@@ -147,19 +146,19 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         //
 
         //Atomic operations for Raiting
-        public int? GetSelectedRaiting()
+        public RaitingList GetSelectedRaiting()
         {
             if (!int.TryParse(this.RatingInputList.FirstOrDefault(x => x.Selected).GetAttribute("value"), out int selected))
             {
-                return null;
+                return RaitingList.None;
             }
-            return selected;
+            return selected.ToRaiting();
         }
 
         //Fluent Interface
         public void SelectRating(IProductReview productReview)
         {
-            this.RatingInputList.FirstOrDefault(x => Convert.ToInt32(x.GetAttribute("value")) == productReview.GetRaiting()).Click();
+            this.RatingInputList.FirstOrDefault(x => Convert.ToInt32(x.GetAttribute("value")) == productReview.GetRaiting().ToInt()).Click();
         }
         //
 

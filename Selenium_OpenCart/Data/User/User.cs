@@ -10,6 +10,11 @@ namespace Selenium_OpenCart.Data.User
     {
         private string username;
         private string password;
+        private string firstName;
+        private string lastName;
+        private string email;
+        private string telephone;
+        private bool subscribe;
 
         private User()
         {
@@ -38,6 +43,36 @@ namespace Selenium_OpenCart.Data.User
             return this;
         }
 
+        public IUserBuilder SetFirstName(string firstName)
+        {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public IUserBuilder SetLastName(string lastName)
+        {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public IUserBuilder SetEmail(string email)
+        {
+            this.email = email;
+            return this;
+        }
+
+        public IUserBuilder SetTelephone(string telephone)
+        {
+            this.telephone = telephone;
+            return this;
+        }
+
+        public IUserBuilder SetSubscribe(bool subscribe)
+        {
+            this.subscribe = subscribe;
+            return this;
+        }
+
         public string GetUsername()
         {
             return this.username;
@@ -47,10 +82,40 @@ namespace Selenium_OpenCart.Data.User
         {
             return this.password;
         }
+
+        public string GetFirstName()
+        {
+            return this.firstName;
+        }
+
+        public string GetLastName()
+        {
+            return this.lastName;
+        }
+
+        public string GetEmail()
+        {
+            return this.email;
+        }
+
+        public string GetTelephone()
+        {
+            return this.telephone;
+        }
+
+        public bool GetSubscribe()
+        {
+            return this.subscribe;
+        }
     }
 
     public interface IUserBuilder
     {
+        IUserBuilder SetFirstName(string firstName);
+        IUserBuilder SetLastName(string lastName);
+        IUserBuilder SetEmail(string email);
+        IUserBuilder SetTelephone(string phone);
+        IUserBuilder SetSubscribe(bool subscribe);
         IUser Build();
     }
 
@@ -58,6 +123,11 @@ namespace Selenium_OpenCart.Data.User
     {
         string GetUsername();
         string GetPassword();
+        string GetFirstName();
+        string GetLastName();
+        string GetEmail();
+        string GetTelephone();
+        bool GetSubscribe();
     }
 
     public interface ISetUserName

@@ -55,9 +55,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Currency\CurrencyRepository.cs" />
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />
     <Compile Include="Data\Product\Product.cs" />
+    <Compile Include="Data\Raiting\RaitingExeptions.cs" />
+    <Compile Include="Data\Raiting\RaitingRepository.cs" />
+    <Compile Include="Data\User\User.cs" />
+    <Compile Include="Data\User\UserRepository.cs" />
     <Compile Include="Logic\GlobalVariables.cs" />
     <Compile Include="Logic\SearchMethods.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
@@ -93,7 +98,6 @@
   <ItemGroup>
     <Folder Include="AdminPages\" />
     <Folder Include="Data\Application\" />
-    <Folder Include="Data\User\" />
     <Folder Include="Pages\Body\AddressBookPage\" />
     <Folder Include="Pages\Body\CurrencyPage\" />
     <Folder Include="Pages\Body\MenuPage\" />
