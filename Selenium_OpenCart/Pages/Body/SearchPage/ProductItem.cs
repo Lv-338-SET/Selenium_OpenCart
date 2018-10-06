@@ -57,7 +57,7 @@ namespace Selenium_OpenCart.Pages
 
         //GetTextFromLabel
         public string GetTextFromProductName()
-        {
+        {   
             return this.productName.Text;
         }
         public string GetTextFromProductDescription()
@@ -98,7 +98,7 @@ namespace Selenium_OpenCart.Pages
             {
                 return true;
             }
-            else return true;
+            else return false;
         }
     }
 }

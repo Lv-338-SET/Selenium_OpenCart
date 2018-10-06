@@ -5,82 +5,76 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart.Pages;
 
-namespace Selenium_OpenCart.Pages
+
+namespace Selenium_OpenCart
 {
-    class WishListPage 
+    class WishListPage : Header
     {
-
         protected IWebElement Table { get; private set; }
         protected IWebElement ContinueButton { get; private set; }
-        //protected List<WishListProduct> productList { get; private set; }
-        protected IWebElement RemoveButton { get; private set; }
-        protected IWebElement AddToCartButton { get; private set; }
-        protected IWebElement Product { get; private set; }
-        protected IWebElement ProductName { get; private set; }
+        protected List<WishListTableItem> productList { get; private set; }
+        protected IWebElement SuccessMessage { get { return driver.FindElement(By.CssSelector(".alert.alert-success")); } }
 
-        public WishListPage(IWebDriver driver) 
+        public WishListPage(IWebDriver driver):base(driver)
         { 
-            this.Table = driver.FindElement(By.CssSelector(".table-responsive"));
+            this.Table = driver.FindElement(By.XPath("//div[@class='table-responsive']"));
             this.ContinueButton = driver.FindElement(By.LinkText("Continue"));
-            this.ProductName = Table.FindElement(By.XPath("//td[@class='text-left']//a"));
-            this.Product = ProductName.FindElement(By.XPath("//ancestor::tr"));
-            this.RemoveButton = Product.FindElement(By.XPath("//button[@data-original-title='Add to Cart']"));
-            this.AddToCartButton = Product.FindElement(By.XPath("//a[@data-original-title='Remove']"));
+            productList = InitializeProductList(driver.FindElements(By.XPath("//div[@class='table-responsive']//tbody")));
+            
         }
 
-        public void ClickRemoveButton()
+        public List<WishListTableItem> InitializeProductList(IReadOnlyCollection<IWebElement> elements)
         {
-            RemoveButton.Click();
+            List<WishListTableItem> list = new List<WishListTableItem>();
+
+            foreach (var current in elements)
+            {
+                list.Add(new WishListTableItem(driver, current));
+            }
+            return list;
         }
-        public void ClickAddToCartButton()
+
+        public List<WishListTableItem> GetProductList()
         {
-            AddToCartButton.Click();
+            return this.productList;
         }
+
         public void ClickContinueButton()
         {
             ContinueButton.Click();
         }
-        public string GetProductName(string product)
+        
+        public WishListTableItem GetRequiredProduct(string product)
         {
-            return ProductName.Text;
-        }
-        public IWebElement GetProduct(string product)
-        {
-            if (GetProductName(product).ToLower() == product.ToLower())
+            foreach(var item in GetProductList())
             {
-                return Product;
+                if (item.ProductNameIsAppropriate(product))
+                {
+                    return item;
+                }
             }
-            else return null;
+            return null;
+        }
+        public WishListPage RemoveProductFromWishList(string product)
+        {
+            GetRequiredProduct(product).ClickRemoveFromWishListButton();
+            return this;
         }
 
-        //public WishListProduct FindProductInWishList(string expectedProduct)
-        //{
-        //    foreach (var product in productList)
-        //    {
-        //        if (product.ProductExists(expectedProduct))
-        //        {
-        //            return product;
-        //        }
-        //        else continue;
-        //    }
-        //    return null;
-        //}
-        public void AddToCartFromWishListButtonClick(string product)
+        public bool ProductExistsInWishList(string product)
         {
-            GetProduct(product).FindElement(By.XPath("//button[@data-original-title='Add to Cart']")).Click();
-        }
-        public void RemoveFromWishListClick(string product)
-        {
-            GetProduct(product).FindElement(By.XPath("//a[@data-original-title='Remove']")).Click();
-        }
-        public bool IsProductAdded(string product)
-        {
-            if (GetProduct(product) == null)
+            if (GetRequiredProduct(product) == null)
             {
                 return false;
             }
             else return true;
+        }
+        public bool SuccessMessageIsDisplayed()
+        {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            return SuccessMessage.Displayed;
         }
     }
     }

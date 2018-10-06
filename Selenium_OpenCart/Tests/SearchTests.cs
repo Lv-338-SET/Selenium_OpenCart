@@ -4,7 +4,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using TestSite.Pages;
+using Selenium_OpenCart.Pages;
 
 namespace Selenium_OpenCart
 {
@@ -34,16 +34,16 @@ namespace Selenium_OpenCart
             Assert.AreEqual(actual, count);
         }
 
-        [TestCase("Apple")]
-        public void TestCategoryDropDown(string search)
-        {
-            driver.Navigate().GoToUrl(URL);
+        //[TestCase("Apple")]
+        //public void TestCategoryDropDown(string search)
+        //{
+        //    driver.Navigate().GoToUrl(URL);
 
-            Assert.IsTrue(new Header(driver)
-                .Search(search)
-                .TestCategoriesValue(GlobalVariables.inputListCategories)
-            );
-        }
+        //    Assert.IsTrue(new Header(driver)
+        //        .Search(search)
+        //        .TestCategoriesValue(GlobalVariables.inputListCategories)
+        //    );
+        //}
 
         [TestCase("Apple", "Tablets", 4)]
         public void TestCategoryResult(string search, string category, int count)
