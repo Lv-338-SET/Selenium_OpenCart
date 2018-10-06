@@ -10,9 +10,9 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         private const string PAGE_NAME = "Edit Address";
         
 
-        EditAddress(IWebDriver driver) : base(driver)
+        EditAddress(IWebDriver driver)
         {
-            Tools.VerifyPageName(PageName, PAGE_NAME);
+            //Tools.VerifyPageName(PageName, PAGE_NAME);
         }
     }
 }
