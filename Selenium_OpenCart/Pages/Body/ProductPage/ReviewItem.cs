@@ -4,7 +4,7 @@ using System.Linq;
 using OpenQA.Selenium;
 
 using Selenium_OpenCart.Data.ProductReview;
-using Selenium_OpenCart.Data.Raiting;
+using Selenium_OpenCart.Data.Rating;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
@@ -37,7 +37,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             }
         }
 
-        private List<IWebElement> Raiting
+        private List<IWebElement> Rating
         {
             get
             {
@@ -58,10 +58,10 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             IWebElement tmp = ReviewerName;
             tmp = ReviewDate;
             tmp = ReviewText;
-            List<IWebElement> tmp2 = Raiting;
-            if (tmp2.Count != RaitingRepository.ListOfRaiting.Count)
+            List<IWebElement> tmp2 = Rating;
+            if (tmp2.Count != RatingRepository.ListOfRating.Count)
             {
-                throw new CountRaitingExeption("Raiting don't have 5 stars, it has " + tmp2.Count);
+                throw new CountRatingExeption("Rating don't have 5 stars, it has " + tmp2.Count);
             }
         }
         //
@@ -87,18 +87,18 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         }
         //
 
-        //Atomic for Raiting
-        public RaitingList GetRaiting()
+        //Atomic for Rating
+        public RatingList GetRating()
         {
             int raiting = 0;
-            for (int i = 0; i < this.Raiting.Count; i++)
+            for (int i = 0; i < this.Rating.Count; i++)
             {
-                if (Raiting[i].FindElements(By.XPath(".//i[@class='fa fa-star fa-stack-2x']")).Any())
+                if (Rating[i].FindElements(By.XPath(".//i[@class='fa fa-star fa-stack-2x']")).Any())
                 {
                     raiting = (i + 1);
                 }
             }
-            return raiting.ToRaiting();
+            return raiting.ToRating();
         }
         //
 
@@ -125,7 +125,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return (this.GetReviewerNameText().Equals(productReview.GetReviewerName())
                     && this.GetReviewDate().Equals(productReview.GetDate())
                     && this.GetReviewText().Equals(productReview.GetReviewText())
-                    && this.GetRaiting().Equals(productReview.GetRaiting()));
+                    && this.GetRating().Equals(productReview.GetRating()));
             }
             else if (obj is ReviewItem)
             {
@@ -134,7 +134,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return (this.GetReviewerNameText().Equals(productReview.GetReviewerNameText())
                     && this.GetReviewDate().Equals(productReview.GetReviewDate())
                     && this.GetReviewText().Equals(productReview.GetReviewText())
-                    && this.GetRaiting().Equals(productReview.GetRaiting()));
+                    && this.GetRating().Equals(productReview.GetRating()));
             }
             else
             {

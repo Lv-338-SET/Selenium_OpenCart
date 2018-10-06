@@ -1,13 +1,13 @@
-﻿using Selenium_OpenCart.Data.Raiting;
+﻿using Selenium_OpenCart.Data.Rating;
 
 namespace Selenium_OpenCart.Data.ProductReview
 {
-    public class ProductReview : IProductReview, IProductReviewBuilder, ISetProductName, ISetReviewerName, ISetReviewText, ISetRaiting, ISetDate
+    public class ProductReview : IProductReview, IProductReviewBuilder, ISetProductName, ISetReviewerName, ISetReviewText, ISetRating, ISetDate
     {
         private string productName;
         private string reviewerName;
         private string reviewText;
-        private RaitingList raiting;
+        private RatingList raiting;
         private string date;
 
         private ProductReview()
@@ -37,13 +37,13 @@ namespace Selenium_OpenCart.Data.ProductReview
             return this;
         }
 
-        public ISetRaiting SetReviewText(string reviewText)
+        public ISetRating SetReviewText(string reviewText)
         {
             this.reviewText = reviewText;
             return this;
         }
 
-        public ISetDate SetRaiting(RaitingList raiting)
+        public ISetDate SetRating(RatingList raiting)
         {
             this.raiting = raiting;
             return this;
@@ -70,7 +70,7 @@ namespace Selenium_OpenCart.Data.ProductReview
             return this.reviewText;
         }
 
-        public RaitingList GetRaiting()
+        public RatingList GetRating()
         {
             return this.raiting;
         }
@@ -86,7 +86,7 @@ namespace Selenium_OpenCart.Data.ProductReview
         string GetProductName();
         string GetReviewerName();
         string GetReviewText();
-        RaitingList GetRaiting();
+        RatingList GetRating();
         string GetDate();
     }
 
@@ -107,12 +107,12 @@ namespace Selenium_OpenCart.Data.ProductReview
 
     public interface ISetReviewText
     {
-        ISetRaiting SetReviewText(string reviewText);
+        ISetRating SetReviewText(string reviewText);
     }
 
-    public interface ISetRaiting
+    public interface ISetRating
     {
-        ISetDate SetRaiting(RaitingList raiting);
+        ISetDate SetRating(RatingList raiting);
     }
 
     public interface ISetDate

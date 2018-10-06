@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Selenium_OpenCart.Data.Raiting
+namespace Selenium_OpenCart.Data.Rating
 {
-    public enum RaitingList
+    public enum RatingList
     {
         None = 0,
         Rating1 = 1,
@@ -14,35 +14,35 @@ namespace Selenium_OpenCart.Data.Raiting
     }
 
 
-    public class RaitingRepository
+    public class RatingRepository
     {
-        public static Dictionary<RaitingList, int> ListOfRaiting
+        public static Dictionary<RatingList, int> ListOfRating
         {
             get;
             private set;
         }
 
-        static RaitingRepository()
+        static RatingRepository()
         {
-            ListOfRaiting = new Dictionary<RaitingList, int>()
+            ListOfRating = new Dictionary<RatingList, int>()
             {
-                { RaitingList.Rating1, 1 },
-                { RaitingList.Rating2, 2 },
-                { RaitingList.Rating3, 3 },
-                { RaitingList.Rating4, 4 },
-                { RaitingList.Rating5, 5 }
+                { RatingList.Rating1, 1 },
+                { RatingList.Rating2, 2 },
+                { RatingList.Rating3, 3 },
+                { RatingList.Rating4, 4 },
+                { RatingList.Rating5, 5 }
             };
         }
     }
 
     public static class ExtentionMethods
     {
-        public static RaitingList ToRaiting(this int val)
+        public static RatingList ToRating(this int val)
         {
-            return (val >=0  && val <= 5) ? (RaitingList)val : RaitingList.None;
+            return (val >=0  && val <= 5) ? (RatingList)val : RatingList.None;
         }
 
-        public static int ToInt(this RaitingList val)
+        public static int ToInt(this RatingList val)
         {
             return (int)val;
         }
