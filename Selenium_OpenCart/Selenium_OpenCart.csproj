@@ -58,6 +58,8 @@
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />
     <Compile Include="Data\Product\Product.cs" />
+    <Compile Include="Logic\GlobalVariables.cs" />
+    <Compile Include="Logic\SearchMethods.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
     <Compile Include="Pages\Body\CartPage\WishListPage.cs" />
     <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />
@@ -73,13 +75,16 @@
     <Compile Include="Pages\Body\ProductPage\ProductPageSuccessfullyAddedReview.cs" />
     <Compile Include="Pages\Body\ProductPage\ReviewItem.cs" />
     <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
-    <Compile Include="Pages\Body\SearchPage\Content.cs" />
+    <Compile Include="Pages\Body\SearchPage\ProductItem.cs" />
+    <Compile Include="Pages\Body\SearchPage\SearchPage.cs" />
     <Compile Include="Pages\Header\Currency.cs" />
+    <Compile Include="Pages\Header\Header.cs" />
     <Compile Include="Pages\Header\MyAccount.cs" />
     <Compile Include="Pages\Header\TopBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\FeedbackTests.cs" />
+    <Compile Include="Tests\SearchTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -101,8 +106,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props'))" />
-    <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit.3.10.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.0\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets'))" />
   </Target>
   <Import Project="..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" />
 </Project>
