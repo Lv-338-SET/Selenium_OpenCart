@@ -70,6 +70,7 @@
     <Compile Include="Pages\Body\ProductPage\ProductPageDescription.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageInfo.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageReview.cs" />
+    <Compile Include="Pages\Body\ProductPage\ProductPageSuccessfullyAddedProductForComparison.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageSuccessfullyAddedReview.cs" />
     <Compile Include="Pages\Body\ProductPage\ReviewItem.cs" />
     <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
