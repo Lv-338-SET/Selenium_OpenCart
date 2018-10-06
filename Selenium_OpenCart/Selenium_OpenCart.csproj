@@ -94,6 +94,8 @@
     <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
     <Compile Include="Pages\Body\SearchPage\ProductItem.cs" />
     <Compile Include="Pages\Body\SearchPage\SearchPage.cs" />
+    <Compile Include="Pages\Body\WishListPage\WishListPage.cs" />
+    <Compile Include="Pages\Body\WishListPage\WishListTableItem.cs" />
     <Compile Include="Pages\Header\Currency.cs" />
     <Compile Include="Pages\Header\Header.cs" />
     <Compile Include="Pages\Header\MyAccount.cs" />
@@ -102,6 +104,7 @@
     <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\FeedbackTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
+    <Compile Include="Tests\WishListTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
