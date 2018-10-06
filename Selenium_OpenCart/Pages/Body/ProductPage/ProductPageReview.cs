@@ -195,6 +195,11 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
                 return null;
             }
         }
+
+        public bool ReviewExistInListOfReview(IProductReview productReview)
+        {
+            return this.GetReviewsListInAnyReviewExist().Where(x => x.Equals(productReview)).Any();           
+        }
         //
 
         //Business logic

@@ -34,7 +34,7 @@ namespace Selenium_OpenCart.Data.ProductReview
             .SetReviewerName("Volodymyr Matsko")
             .SetReviewText("Some review to smoke test of reviews")
             .SetRaiting(1)
-            .SetDate(DateTime.Now.ToString("dd/MM/YYYY"))
+            .SetDate(DateTime.Now.ToString(@"dd\/MM\/yyyy"))
             .Build();
         }
     }

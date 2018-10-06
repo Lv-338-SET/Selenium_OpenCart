@@ -13,7 +13,8 @@ namespace Selenium_OpenCart.Tests
     public class FeedbackTests
     {
         IWebDriver driver;
-        const string URL = "http://set-338.000webhostapp.com/index.php?route=product/product&product_id=47";
+        //const string URL = "http://set-338.000webhostapp.com/index.php?route=product/product&product_id=47";
+        const string URL = "http://192.168.1.105/index.php?route=product/product&product_id=47";
 
         [OneTimeSetUp]
         public void BeforeAllTests()
@@ -58,9 +59,8 @@ namespace Selenium_OpenCart.Tests
             Assert.AreEqual(review.GetProductName(), page.GetProductNameText(),
                 $"Not {review.GetProductName()} product page");
             List<ReviewItem> myReview = page.ClickReviewsLink().GetReviewsList();
-            //AreEqual
-            CollectionAssert.Contains(myReview, review,
-                "Review not found");
+            bool hasReview = page.ClickReviewsLink().ReviewExistInListOfReview(review);
+            Assert.True(hasReview);
         }
     }
 }

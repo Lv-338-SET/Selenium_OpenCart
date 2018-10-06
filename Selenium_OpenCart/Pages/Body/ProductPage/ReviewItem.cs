@@ -16,7 +16,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return currnetReview.FindElement(By.XPath("//tr//td//strong"));
+                return currnetReview.FindElement(By.XPath(".//tr//td//strong"));
             }
         }
 
@@ -24,7 +24,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return currnetReview.FindElement(By.XPath("//tr//td[@class='text-right']"));
+                return currnetReview.FindElement(By.XPath(".//tr//td[@class='text-right']"));
             }
         }
 
@@ -32,7 +32,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return currnetReview.FindElement(By.XPath("//tr//td//p"));
+                return currnetReview.FindElement(By.XPath(".//tr//td//p"));
             }
         }
 
@@ -40,7 +40,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return currnetReview.FindElements(By.XPath("//tr//td//span")).ToList();
+                return currnetReview.FindElements(By.XPath(".//tr//td//span")).ToList();
             }
         }
         //
@@ -94,7 +94,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             int? raiting = null;
             for (int i = 0; i < this.Raiting.Count; i++)
             {
-                if (Raiting[i].FindElements(By.CssSelector("#fa fa-star fa-stack-2x")).Any())
+                if (Raiting[i].FindElements(By.XPath(".//i[@class='fa fa-star fa-stack-2x']")).Any())
                 {
                     raiting = (i + 1);
                 }
@@ -103,19 +103,44 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         }
         //
 
+        public static bool operator ==(ReviewItem first, object second)
+        {
+            return first.Equals(second);
+        }
+
+        public static bool operator !=(ReviewItem first, object second)
+        {
+            return !first.Equals(second);
+        }
+
         public override bool Equals(object obj)
         {
-            IProductReview productReview = obj as IProductReview;
-
-            if (productReview == null)
+            if (obj == null)
             {
                 return false;
             }
+            else if (obj is IProductReview)
+            {
+                IProductReview productReview = obj as IProductReview;
 
-            return (this.GetReviewerNameText().Equals(productReview.GetReviewerName())
-                && this.GetReviewDate().Equals(productReview.GetDate())
-                && this.GetReviewText().Equals(productReview.GetReviewText())
-                && this.GetRaiting().Equals(productReview.GetRaiting()));
+                return (this.GetReviewerNameText().Equals(productReview.GetReviewerName())
+                    && this.GetReviewDate().Equals(productReview.GetDate())
+                    && this.GetReviewText().Equals(productReview.GetReviewText())
+                    && this.GetRaiting().Equals(productReview.GetRaiting()));
+            }
+            else if (obj is ReviewItem)
+            {
+                ReviewItem productReview = obj as ReviewItem;
+
+                return (this.GetReviewerNameText().Equals(productReview.GetReviewerNameText())
+                    && this.GetReviewDate().Equals(productReview.GetReviewDate())
+                    && this.GetReviewText().Equals(productReview.GetReviewText())
+                    && this.GetRaiting().Equals(productReview.GetRaiting()));
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
