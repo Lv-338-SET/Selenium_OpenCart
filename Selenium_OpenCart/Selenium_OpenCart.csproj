@@ -98,7 +98,6 @@
   <ItemGroup>
     <Folder Include="AdminPages\" />
     <Folder Include="Data\Application\" />
-    <Folder Include="Pages\Body\AddressBookPage\" />
     <Folder Include="Pages\Body\CurrencyPage\" />
     <Folder Include="Pages\Body\MenuPage\" />
     <Folder Include="Pages\Body\OtherPages\" />
