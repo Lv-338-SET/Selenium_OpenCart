@@ -8,7 +8,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Selenium_OpenCart.Pages
 {
-    class WishListPage 
+    public class WishListPage 
     {
 
         protected IWebElement Table { get; private set; }

@@ -8,7 +8,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 
-namespace TestSite.Pages.RegisterPage
+namespace Selenium_OpenCart.Pages.Body.RegisterPage
 {
     public class RegisterPage
     {

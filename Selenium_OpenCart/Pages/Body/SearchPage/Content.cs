@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using TestSite.Logic;
 
-namespace TestSite.Pages
+namespace Selenium_OpenCart.Pages.Body.SearchPage
 {
     class Content : Header
     {

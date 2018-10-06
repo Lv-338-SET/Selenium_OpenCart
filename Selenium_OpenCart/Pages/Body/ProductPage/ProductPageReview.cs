@@ -46,12 +46,11 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                List<ReviewItem> tmp = new List<ReviewItem>();
-                foreach (IWebElement currentReview in driver.FindElements(By.XPath(".//div[@id='review']//table//tbody")))
+                foreach (IWebElement currentReview in driver.FindElements(By.XPath(".//div[@id='review']/table//tbody")))
                 {
-                    tmp.Add(new ReviewItem(driver, currentReview));
+                    Reviews.Add(new ReviewItem(driver, currentReview));
                 }
-                return tmp;
+                return Reviews;
             }
         }
         //
@@ -59,7 +58,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         //
         public ProductPageReview(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;            
+            this.driver = driver;
             VerifyPage();
         }
 
@@ -203,7 +202,6 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             this.ClickClearAndInputToReviewerNameInput(productReview);
             this.ClickClearAndInputToReviewInput(productReview);
             this.SelectRating(productReview);
-            this.ClickOnAddReviewButton();
             return new ProductPageSuccessfullyAddedReview(driver);
         }
         //

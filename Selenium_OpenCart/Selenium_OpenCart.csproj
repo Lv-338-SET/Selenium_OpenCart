@@ -41,12 +41,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.10.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.10.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
     <Reference Include="WebDriver, Version=3.14.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.14.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
@@ -55,11 +71,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\GlobalVariables.cs" />
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />
     <Compile Include="Data\Product\Product.cs" />
+    <Compile Include="Data\User\User.cs" />
+    <Compile Include="Data\User\UserRepository.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
-    <Compile Include="Pages\Body\CartPage\WishListPage.cs" />
     <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />
     <Compile Include="Pages\Body\ContactPage\ContactPage.cs" />
     <Compile Include="Pages\Body\LoginPage\LoginPage.cs" />
@@ -74,12 +92,18 @@
     <Compile Include="Pages\Body\ProductPage\ReviewItem.cs" />
     <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
     <Compile Include="Pages\Body\SearchPage\Content.cs" />
-    <Compile Include="Pages\Header\Currency.cs" />
-    <Compile Include="Pages\Header\MyAccount.cs" />
-    <Compile Include="Pages\Header\TopBar.cs" />
+    <Compile Include="Pages\Body\SearchPage\ProductItem.cs" />
+    <Compile Include="Pages\Body\SearchPage\SearchPage.cs" />
+    <Compile Include="Pages\Body\WishListPage\WishListPage.cs" />
+    <Compile Include="Pages\HeaderCalsses\Currency.cs" />
+    <Compile Include="Pages\HeaderCalsses\Header.cs" />
+    <Compile Include="Pages\HeaderCalsses\MyAccount.cs" />
+    <Compile Include="Pages\HeaderCalsses\TopBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\FeedbackTests.cs" />
+    <Compile Include="Tests\SearchTests.cs" />
+    <Compile Include="Tests\WishListTest.cs" />
+    <Compile Include="Tools\OCDataBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -87,7 +111,6 @@
   <ItemGroup>
     <Folder Include="AdminPages\" />
     <Folder Include="Data\Application\" />
-    <Folder Include="Data\User\" />
     <Folder Include="Pages\Body\AddressBookPage\" />
     <Folder Include="Pages\Body\CurrencyPage\" />
     <Folder Include="Pages\Body\MenuPage\" />

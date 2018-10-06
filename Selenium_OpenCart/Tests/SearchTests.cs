@@ -4,7 +4,8 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using TestSite.Pages;
+using Selenium_OpenCart.Pages;
+using Selenium_OpenCart.Data;
 
 namespace Selenium_OpenCart
 {

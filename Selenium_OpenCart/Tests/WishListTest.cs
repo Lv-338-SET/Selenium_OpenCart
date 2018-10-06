@@ -23,8 +23,8 @@ namespace OpenCart
             //PRODUCT SEARCHING
             Header header = new Header(driver);
             header.Search(product).AddAppropriateItemToWishList(product);
-            header.
-            bool result = wishList.IsProductAdded(product);
+            //header.
+            //bool result = WishListPage.IsProductAdded(product);
             Assert.IsTrue(result, "Expected element is added to wishlist");
             
         }

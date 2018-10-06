@@ -2,18 +2,18 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("TestSite")]
+[assembly: AssemblyTitle("Selenium_OpenCart")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TestSite")]
+[assembly: AssemblyProduct("Selenium_OpenCart")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
 
-[assembly: Guid("54c07673-aa64-4117-980f-702c07a6be1c")]
+[assembly: Guid("d0da0578-9f8d-4fff-b901-42f40cfaeca8")]
 
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]

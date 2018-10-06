@@ -22,6 +22,7 @@ namespace Selenium_OpenCart.Pages
             this.driver = driver;
             Initialize();
         }
+
         #region Initialization
 
         private void Initialize() {
