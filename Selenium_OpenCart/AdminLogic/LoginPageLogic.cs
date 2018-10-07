@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 using Selenium_OpenCart.AdminPages;
 using Selenium_OpenCart.Data.User;
@@ -12,7 +7,7 @@ namespace Selenium_OpenCart.AdminLogic
 {
     public class LoginPageLogic
     {
-        IWebDriver driver;
+        readonly IWebDriver driver;
 
         public LoginPage LoginPage
         {

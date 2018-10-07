@@ -3,7 +3,6 @@ using OpenQA.Selenium;
 
 using Selenium_OpenCart.AdminPages.Body.ReviewsPage;
 using Selenium_OpenCart.Data.ProductReview;
-using Selenium_OpenCart.Data.ProductReview.ReviewStatus;
 
 namespace Selenium_OpenCart.AdminLogic
 {
