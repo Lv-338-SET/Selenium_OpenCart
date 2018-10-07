@@ -121,6 +121,7 @@
     <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\AddressBookTest.cs" />
     <Compile Include="Tests\FeedbackTests.cs" />
+    <Compile Include="Tests\ProductComparisonTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\WishListTests.cs" />
   </ItemGroup>
