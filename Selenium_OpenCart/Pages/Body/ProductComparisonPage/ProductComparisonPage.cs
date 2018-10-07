@@ -10,71 +10,136 @@ using Selenium_OpenCart.Pages.Body.SearchPage;
 
 namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
 {
-    class ProductComparisonPage : Header.Header
+    public class ProductComparisonPage : Header.Header
     {
         #region Constants
-        // Label locators
         private const string COMPARISON_TABLE_NAME = "#content h1"; //CSS
-        private const string PRODUCT_DETAILS_LABEL = "//thead/descendant::*[contains(text(), 'Product Details')]"; //XPath
+        private const string PRODUCT_DETAILS_LABEL = "//strong[text()='Product Details']"; //XPath
         private const string PRODUCT_LABEL = "//td[text() = 'Product']"; //XPath
-        private const string NO_PRODUCTS_TO_COMPARE_LABEL = "//p[contains(text(), 'not chosen any products')]";
-
-        // Link locators
-        private const string FIRST_PRODUCT_LINK = "//td[text() = 'Product']/following-sibling::td"; //XPath
-        private const string LAST_PRODUCT_LINK = "//td[text() = 'Product']/following-sibling::td[last()]"; //XPath
-
-        // Buttons locators
-        private const string ADD_TO_CART_FIRST_BUTTON = "//tbody[last()]/tr[last()]/descendant::input[1]"; //XPath
-        private const string ADD_TO_CART_LAST_BUTTON = "//tbody[last()]/tr[last()]/descendant::input[last()]"; //XPath
-        private const string REMOVE_FIRST_BUTTON = "//tbody[last()]/tr[last()]/descendant::a[1]"; //XPath
-        private const string REMOVE_LAST_BUTTON = "//tbody[last()]/tr[last()]/descendant::a[last()]"; //XPath
+        //TODO
+        private const string NO_COMPARE_PRODUCTS_MESSAGE = "#content p"; //CSS
+        private const string FIRST_PRODUCT_NAME = "//td[text() = 'Product']/following-sibling::td"; //XPath
+        private const string LAST_PRODUCT_NAME = "//td[text() = 'Product']/following-sibling::td[last()]"; //XPath
+        private const string ADD_TO_CART_FIRST = "//tbody[last()]/descendant::input"; //XPath
+        private const string ADD_TO_CART_LAST = "//tbody[last()]/descendant::input[last()]"; //XPath
+        private const string REMOVE_FIRST = "//tbody[last()]/descendant::a"; //XPath
+        private const string REMOVE_LAST = "//tbody[last()]/tr[last()]/descendant::a[last()]"; //XPath
         #endregion
 
         #region Properties
-        // Labels properties
-        public IWebElement ProductComparisonLabel
-        { get { return driver.FindElement(By.CssSelector(COMPARISON_TABLE_NAME)); } }
-        public IWebElement ProductDetailsLabel
-        { get { return driver.FindElement(By.XPath(PRODUCT_DETAILS_LABEL)); } }
-        public IWebElement ProductLabel
-        { get { return driver.FindElement(By.XPath(PRODUCT_LABEL)); } }
-        public IWebElement NoProductsToCompareLabel
-        { get { return driver.FindElement(By.XPath(NO_PRODUCTS_TO_COMPARE_LABEL)); } }
-        // Link properties
-        public IWebElement FirstProduct
-        { get { return driver.FindElement(By.XPath(FIRST_PRODUCT_LINK)); } }
-        public IWebElement LastProduct
-        { get { return driver.FindElement(By.XPath(LAST_PRODUCT_LINK)); } }
-        // Buttons properties
-        public IWebElement AddToCartFirstButton
-        { get { return driver.FindElement(By.XPath(ADD_TO_CART_FIRST_BUTTON)); } }
-        public IWebElement AddToCartLastButton
-        { get { return driver.FindElement(By.XPath(ADD_TO_CART_LAST_BUTTON)); } }
-        public IWebElement RemoveFirstProductButton
-        { get { return driver.FindElement(By.XPath(REMOVE_FIRST_BUTTON)); } }
-        public IWebElement RemoveLastProductButton
-        { get { return driver.FindElement(By.XPath(REMOVE_LAST_BUTTON)); } }
-        public List<IWebElement> AllProducts
-        { get { return driver.FindElements(By.XPath(FIRST_PRODUCT_LINK)).ToList(); } }
+        protected IWebElement ComparisonTableName
+        {
+            get
+            {
+                return driver.FindElement(By.CssSelector(COMPARISON_TABLE_NAME));
+            }
+        }
+
+        protected IWebElement ProductDetailsLabel
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(PRODUCT_DETAILS_LABEL));
+            }
+        }
+
+        protected IWebElement ProductLabel
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(PRODUCT_LABEL));
+            }
+        }
+
+        //TODO
+        protected IWebElement NoCompareProductsMessage
+        {
+            get
+            {
+                return driver.FindElement(By.CssSelector(NO_COMPARE_PRODUCTS_MESSAGE));
+            }
+        }
+
+        protected IWebElement FirstProductName
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(FIRST_PRODUCT_NAME));
+            }
+        }
+
+        protected IWebElement LastProductName
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(LAST_PRODUCT_NAME));
+            }
+        }
+
+        protected IWebElement AddToCartFirst
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(ADD_TO_CART_FIRST));
+            }
+        }
+
+        protected IWebElement AddToCartLast
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(ADD_TO_CART_LAST));
+            }
+        }
+
+        protected IWebElement RemoveFirstProduct
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(REMOVE_FIRST));
+            }
+        }
+
+        protected IWebElement RemoveLastProduct
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(REMOVE_LAST));
+            }
+        }
+
+        //TODO
+        protected List<IWebElement> AllProducts
+        {
+            get
+            {
+                return driver.FindElements(By.XPath(FIRST_PRODUCT_NAME)).ToList();
+            }
+        }
         #endregion
 
         #region Initialization & Verifycation
-        // Constructor
         public ProductComparisonPage(IWebDriver driver) : base(driver)
         {
+            this.driver = driver;
             VerifyWebElements();
         }
 
         private void VerifyWebElements()
         {
-            IWebElement element = ProductComparisonLabel;
+            IWebElement temp = ComparisonTableName;
+            temp = ProductDetailsLabel;
+            temp = ProductLabel;
+            temp = FirstProductName;
+            temp = AddToCartFirst;
+            temp = RemoveFirstProduct;
         }
         #endregion
-        
+
         #region Atomic operations
-        public string GetProductComparisonLabelText()
+        public string GetComparisonTableNameText()
         {
-            return ProductComparisonLabel.Text;
+            return ComparisonTableName.Text;
         }
 
         public string GetProductDetailsLabelText()
@@ -86,49 +151,51 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             return ProductLabel.Text;
         }
+
+        //TODO
         public string GetNoProductsToCompareLabelText()
         {
-            return NoProductsToCompareLabel.Text;
+            return NoCompareProductsMessage.Text;
         }
 
-        public string GetFirstProductText()
+        public string GetFirstProductNameText()
         {
-            return FirstProduct.Text;
+            return FirstProductName.Text;
         }
 
-        public void ClickFirstProductLink()
+        public void ClickFirstProductName()
         {
-            FirstProduct.Click();
+            FirstProductName.Click();
         }
 
-        public string GetLastProductText()
+        public string LastProductNameText()
         {
-            return LastProduct.Text;
+            return LastProductName.Text;
         }
 
-        public void ClickLastProductLink()
+        public void ClickLastProductName()
         {
-            LastProduct.Click();
+            LastProductName.Click();
         }
 
-        public void ClickAddToCartFirstButton()
+        public void ClickAddToCartFirst()
         {
-            AddToCartFirstButton.Click();
+            AddToCartFirst.Click();
         }
 
-        public void ClickAddToCartLastButton()
+        public void ClickAddToCartLast()
         {
-            AddToCartLastButton.Click();
+            AddToCartLast.Click();
         }
 
-        public void ClickRemoveFirstProductButton()
+        public void ClickRemoveFirstProduct()
         {
-            RemoveFirstProductButton.Click();
+            RemoveFirstProduct.Click();
         }
 
-        public void ClickRemoveLastProductButton()
+        public void ClickRemoveLastProduct()
         {
-            RemoveLastProductButton.Click();
+            RemoveLastProduct.Click();
         }
         #endregion
     }
