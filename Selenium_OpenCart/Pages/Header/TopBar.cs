@@ -2,7 +2,7 @@
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.CheckoutPage;
 using Selenium_OpenCart.Pages.Body.ContactPage;
-using Selenium_OpenCart.Pages.Body;
+using Selenium_OpenCart.Pages.Body.WishListPage;
 
 namespace Selenium_OpenCart.Pages.Header
 {
