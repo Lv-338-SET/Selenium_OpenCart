@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    public abstract class AddressForm
+    class AddressFormComponent
     {
         private IWebDriver driver;
 
@@ -14,31 +14,32 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         #region
         private IWebElement AddressFormTag
             { get {return driver.FindElement(By.CssSelector("form[action*='account/address']"));} }
-        protected IWebElement FirstNameInput
+        public IWebElement FirstNameInput
             { get { return driver.FindElement(By.Name("firstname")); } }
-        protected IWebElement LastNameInput
+        public IWebElement LastNameInput
             { get {return driver.FindElement(By.Name("lastname")); } }
-        protected IWebElement CompanyInput
+        public IWebElement CompanyInput
             { get { return driver.FindElement(By.Name("company")); } }
-        protected IWebElement Address1Input
+        public IWebElement Address1Input
             { get { return driver.FindElement(By.Name("address_1")); } }
-        protected IWebElement Address2Input
+        public IWebElement Address2Input
             { get { return driver.FindElement(By.Name("address_2")); } }
-        protected IWebElement CityInput
+        public IWebElement CityInput
             { get { return driver.FindElement(By.Name("city")); } }
-        protected IWebElement PostCodeInput
-            { get { return driver.FindElement(By.Name("postcode")); ; } }
-        protected IWebElement CountryInput
+        public IWebElement PostCodeInput
+            { get { return driver.FindElement(By.Name("postcode")); } }
+        public IWebElement CountryInput
             { get { return driver.FindElement(By.Name("country_id")); } }
-        protected IWebElement RegionStateInput
+        public IWebElement RegionStateInput
             { get { return driver.FindElement(By.Name("zone_id")); } }
-        protected IWebElement DefaultAddressYesInputRadio
+        public IWebElement DefaultAddressYesInputRadio
         { get { return driver.FindElement(By.CssSelector("input[name='default'][value='1']")); } }
-        protected IWebElement DefaultAddressNoInputRadio
+        public IWebElement DefaultAddressNoInputRadio
         { get { return driver.FindElement(By.CssSelector("input[name='default'][value='0']")); } }
+        
         #endregion
 
-        public AddressForm(IWebDriver driver)
+        public AddressFormComponent(IWebDriver driver)
         {
             this.driver = driver;
 
@@ -55,21 +56,23 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             return FirstNameInput.Text;
         }
 
-        public AddressForm ClearFirstNameInput()
+        public AddressFormComponent ClearFirstNameInput()
         {
             FirstNameInput.Clear();
             return this;
         }
 
-        public AddressForm ClickFirstNameInput()
+        public AddressFormComponent ClickFirstNameInput()
         {
             FirstNameInput.Click();
             return this;
         }
 
-        public AddressForm TypeInFirstName(string text)
+        public AddressFormComponent TypeInFirstName(string text)
         {
-            LastNameInput.SendKeys(text);
+            FirstNameInput.Click();
+            FirstNameInput.Clear();
+            FirstNameInput.SendKeys(text);
             return this;
         }
         #endregion
@@ -81,20 +84,22 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             return LastNameInput.Text;
         }
 
-        public AddressForm ClearLastNameInput()
+        public AddressFormComponent ClearLastNameInput()
         {
             LastNameInput.Clear();
             return this;
         }
 
-        public AddressForm ClickLastNameInput()
+        public AddressFormComponent ClickLastNameInput()
         {
             LastNameInput.Click();
             return this;
         }
 
-        public AddressForm TypeInLastNameInput(string text)
+        public AddressFormComponent TypeInLastNameInput(string text)
         {
+            LastNameInput.Click();
+            LastNameInput.Clear();
             LastNameInput.SendKeys(text);
             return this;
         }
@@ -107,20 +112,22 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             return Address1Input.Text;
         }
 
-        public AddressForm ClearAddress1Input()
+        public AddressFormComponent ClearAddress1Input()
         {
             Address1Input.Clear();
             return this;
         }
 
-        public AddressForm ClickAddress1Input()
+        public AddressFormComponent ClickAddress1Input()
         {
             Address1Input.Click();
             return this;
         }
 
-        public AddressForm TypeInAddress1Input(string text)
+        public AddressFormComponent TypeInAddress1Input(string text)
         {
+            Address1Input.Click();
+            Address1Input.Clear();
             Address1Input.SendKeys(text);
             return this;
         }
@@ -133,21 +140,51 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             return CityInput.Text;
         }
 
-        public AddressForm ClearCityInput()
+        public AddressFormComponent ClearCityInput()
         {
             CityInput.Clear();
             return this;
         }
 
-        public AddressForm ClickCityInput()
+        public AddressFormComponent ClickCityInput()
         {
             CityInput.Click();
             return this;
         }
 
-        public AddressForm TypeInCityInput(string text)
+        public AddressFormComponent TypeInCityInput(string text)
         {
+            CityInput.Click();
+            CityInput.Clear();
             CityInput.SendKeys(text);
+            return this;
+        }
+        #endregion
+
+        //PostCodeInput methods
+        #region
+        public string GetPostCodeInputText()
+        {
+            return PostCodeInput.Text;
+        }
+
+        public AddressFormComponent ClearPostCodeInput()
+        {
+            PostCodeInput.Clear();
+            return this;
+        }
+
+        public AddressFormComponent ClickPostCodeInput()
+        {
+            PostCodeInput.Click();
+            return this;
+        }
+
+        public AddressFormComponent TypeInPostCodeInput(string text)
+        {
+            PostCodeInput.Click();
+            PostCodeInput.Clear();
+            PostCodeInput.SendKeys(text);
             return this;
         }
         #endregion
@@ -159,13 +196,13 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             return CityInput.Text;
         }
 
-        public AddressForm ClickCountryInput()
+        public AddressFormComponent ClickCountryInput()
         {
             CountryInput.Click();
             return this;
         }
 
-        public AddressForm ChooseCountry(string country)
+        public AddressFormComponent ChooseCountry(string country)
         {
             SetAddressSelectElement(new SelectElement(CountryInput), country);
             return this;
@@ -179,13 +216,13 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             return RegionStateInput.Text;
         }
 
-        public AddressForm ClickRegionStateInput()
+        public AddressFormComponent ClickRegionStateInput()
         {
             RegionStateInput.Click();
             return this;
         }
 
-        public AddressForm ChooseRegionState(string region)
+        public AddressFormComponent ChooseRegionState(string region)
         {
             SetAddressSelectElement(new SelectElement(RegionStateInput), region);
             return this;
@@ -199,7 +236,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             return DefaultAddressYesInputRadio.Text;
         }
 
-        public AddressForm ClickDefaultAddressYesInputRadio()
+        public AddressFormComponent ClickDefaultAddressYesInputRadio()
         {
             DefaultAddressYesInputRadio.Click();
             return this;
@@ -219,7 +256,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
            return DefaultAddressNoInputRadio.Text;
         }
 
-        public AddressForm ClickDefaultAddressNoInputRadio()
+        public AddressFormComponent ClickDefaultAddressNoInputRadio()
         {
             DefaultAddressYesInputRadio.Click();
             return this;
@@ -230,7 +267,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
            return DefaultAddressNoInputRadio.Selected;
         }
         #endregion
-
+                
         //Tools
         #region
         public static void SetAddressSelectElement(SelectElement select, string value)
@@ -259,6 +296,6 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
                 Console.WriteLine("Error!Cannot find \"{0}\"!", value);
             }
         }
-        #endregion
+        #endregion        
     }
 }

@@ -70,12 +70,11 @@
     <Compile Include="Logic\GlobalVariables.cs" />
     <Compile Include="Logic\SearchMethods.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddNewAddressPage.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\Address.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\AddressBook.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressComponent.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressBookPage.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddressBookException.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\AddressForm.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressFormComponent.cs" />
     <Compile Include="Pages\Body\AddressBookPage\EditAddressPage.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\AddressesTable.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
     <Compile Include="Pages\Body\CartPage\WishListPage.cs" />
     <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />

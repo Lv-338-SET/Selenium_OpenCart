@@ -7,27 +7,27 @@ using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    class Address
+    public class AddressComponent
     {
         private IWebElement address;
-
+        
         private const string EDIT_BUTTON_TEXT = "Edit";
         private const string DELETE_BUTTON_TEXT = "Delete";
 
         public IWebElement LeftCell
-            { get { return address.FindElement(By.ClassName("text-left")); } }
+            { get {return address.FindElement(By.ClassName("text-left"));} }
 
         public IWebElement RightCell
-            { get { return address.FindElement(By.ClassName("text-right")); } }
+            { get {return address.FindElement(By.ClassName("text-right"));} }
 
         public IWebElement EditButton
-            { get { return RightCell.FindElement(By.LinkText(EDIT_BUTTON_TEXT)); } }
+            { get {return address.FindElement(By.LinkText(EDIT_BUTTON_TEXT));} }
 
         public IWebElement DeleteButton
-            { get { return RightCell.FindElement(By.LinkText(DELETE_BUTTON_TEXT)); } }
+            { get {return address.FindElement(By.LinkText(DELETE_BUTTON_TEXT));} }
 
-        public Address(IWebElement address)
-        {
+        public AddressComponent(IWebElement address)
+        {            
             this.address = address;
         }
     }
