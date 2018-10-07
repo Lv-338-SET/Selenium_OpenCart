@@ -96,6 +96,7 @@
     <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
     <Compile Include="Pages\Body\SearchPage\ProductItem.cs" />
     <Compile Include="Pages\Body\SearchPage\SearchPage.cs" />
+    <Compile Include="Pages\Body\WishListPage\EmptyWishListPage.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListPage.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListTableItem.cs" />
     <Compile Include="Pages\Header\Currency.cs" />
