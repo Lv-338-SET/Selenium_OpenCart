@@ -1,12 +1,12 @@
 ﻿using System;
-using Selenium_OpenCart.Data.Rating;
+using Selenium_OpenCart.Data.ProductReview.Rating;
 
 namespace Selenium_OpenCart.Data.ProductReview
 {
     public sealed class ProductReviewRepository
     {
-        public volatile static ProductReviewRepository instance;
-        public static object lockObject = new object();
+        private volatile static ProductReviewRepository instance;
+        private static object lockObject = new object();
 
         private ProductReviewRepository()
         {

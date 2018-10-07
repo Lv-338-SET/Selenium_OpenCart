@@ -1,4 +1,4 @@
-﻿using Selenium_OpenCart.Data.Rating;
+﻿using Selenium_OpenCart.Data.ProductReview.Rating;
 
 namespace Selenium_OpenCart.Data.ProductReview
 {
