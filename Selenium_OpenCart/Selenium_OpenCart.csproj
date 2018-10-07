@@ -85,13 +85,12 @@
     <Compile Include="Logic\ProductPageLogic\ProductPageLogic.cs" />
     <Compile Include="Logic\ProductPageLogic\ProductPageReviewLogic.cs" />
     <Compile Include="Logic\SearchMethods.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\AddAddress.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\AddressBook.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\AddressForm.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\AddressInTable.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\EditAddress.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\Entries.cs" />
-    <Compile Include="Pages\Body\AddressBookPage\Tools.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddNewAddressPage.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressComponent.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressBookPage.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressBookException.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressFormComponent.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\EditAddressPage.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
     <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />
     <Compile Include="Pages\Body\ContactPage\ContactPage.cs" />
@@ -119,6 +118,7 @@
     <Compile Include="Pages\Header\TopBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="testcalasstest.cs" />
+    <Compile Include="Tests\AddressBookTest.cs" />
     <Compile Include="Tests\FeedbackTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\WishListTests.cs" />
