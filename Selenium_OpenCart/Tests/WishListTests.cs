@@ -33,10 +33,14 @@ namespace Selenium_OpenCart.Tests
 
         public void AddToCartFromWishList_AddIphone_IsAdded(string product)
         {
+            Header header = new Header(driver);
+            string expected = header.CurrentPriceSum();
             TopBar topbar = new TopBar(driver);
             topbar.WishListButtonClick();
             WishListPage wishList = new WishListPage(driver);
             wishList.AddToCartFromWishList(product);
+            string result = header.CurrentPriceSum();
+            Assert.AreEqual(expected, result);
         }
 
 
