@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
 using Selenium_OpenCart.Pages.Header;
-using Selenium_OpenCart.Pages.Body;
+using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Logic;
 
 

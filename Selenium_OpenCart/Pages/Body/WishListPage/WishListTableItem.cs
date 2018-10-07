@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 
-namespace Selenium_OpenCart
+namespace Selenium_OpenCart.Pages.Body.WishListPage
 {
     class WishListTableItem
     {
@@ -29,6 +29,7 @@ namespace Selenium_OpenCart
             RemoveFromWishlistButton = element.FindElement(By.XPath("//a[@data-original-title='Remove']"));
         }
 
+        #region AtomicOperations
         public void ImageClick()
         {
             Image.Click();
@@ -62,12 +63,16 @@ namespace Selenium_OpenCart
         {
             RemoveFromWishlistButton.Click();
         }
+
+        #endregion 
+
+        #region Business Logic
         public bool ProductNameIsAppropriate(string product)
         {
             return product.ToLower() == GetProductName().ToLower();
 
         }
-
+        #endregion
 
     }
 }
