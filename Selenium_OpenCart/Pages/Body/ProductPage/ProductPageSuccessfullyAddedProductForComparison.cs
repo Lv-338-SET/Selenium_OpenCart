@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 
-using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
+//using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using Selenium_OpenCart.Logic.ProductPageLogic;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
