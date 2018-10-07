@@ -12,6 +12,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
 {
     class ProductComparisonPage : Header.Header
     {
+        #region Constants
         // Label locators
         private const string COMPARISON_TABLE_NAME = "#content h1"; //CSS
         private const string PRODUCT_DETAILS_LABEL = "//thead/descendant::*[contains(text(), 'Product Details')]"; //XPath
@@ -27,7 +28,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         private const string ADD_TO_CART_LAST_BUTTON = "//tbody[last()]/tr[last()]/descendant::input[last()]"; //XPath
         private const string REMOVE_FIRST_BUTTON = "//tbody[last()]/tr[last()]/descendant::a[1]"; //XPath
         private const string REMOVE_LAST_BUTTON = "//tbody[last()]/tr[last()]/descendant::a[last()]"; //XPath
+        #endregion
 
+        #region Properties
         // Labels properties
         public IWebElement ProductComparisonLabel
         { get { return driver.FindElement(By.CssSelector(COMPARISON_TABLE_NAME)); } }
@@ -53,7 +56,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         { get { return driver.FindElement(By.XPath(REMOVE_LAST_BUTTON)); } }
         public List<IWebElement> AllProducts
         { get { return driver.FindElements(By.XPath(FIRST_PRODUCT_LINK)).ToList(); } }
+        #endregion
 
+        #region Initialization & Verifycation
         // Constructor
         public ProductComparisonPage(IWebDriver driver) : base(driver)
         {
@@ -64,7 +69,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             IWebElement element = ProductComparisonLabel;
         }
-
+        #endregion
+        
+        #region Atomic operations
         public string GetProductComparisonLabelText()
         {
             return ProductComparisonLabel.Text;
@@ -123,5 +130,6 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             RemoveLastProductButton.Click();
         }
+        #endregion
     }
 }
