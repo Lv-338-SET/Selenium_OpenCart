@@ -7,6 +7,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
+using Selenium_OpenCart.Logic.ProductPageLogic;
+
 namespace Selenium_OpenCart.Pages.Body.SearchPage
 {
     public class ProductItem
@@ -21,11 +23,13 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         protected IWebElement productIconFavourite { get; private set; }
         protected IWebElement productIconCompare { get; private set; }
 
-        
 
+        private IWebDriver driver;
        
         public ProductItem(IWebDriver driver, IWebElement current)
         {
+            this.driver = driver;
+
 
             this.productBox = current;
             this.productImage = current.FindElement(By.ClassName("image"));
@@ -42,17 +46,17 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
 
         #region AtomicOperations
         //ProductImage
-        public ProductItem ClickProductImage()
+        public ProductPageLogic ClickProductImage()
         {
             productImage.Click();
-            return this;
+            return new ProductPageLogic(driver);
         }
         
         //ProductName
-        public ProductItem ClickProductName()
+        public ProductPageLogic ClickProductName()
         {
             productName.Click();
-            return this;
+            return new ProductPageLogic(driver);
         }
 
         //GetTextFromLabel

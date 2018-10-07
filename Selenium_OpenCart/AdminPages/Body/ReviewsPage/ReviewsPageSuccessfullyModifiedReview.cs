@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
 {
@@ -14,7 +9,7 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         {
             get
             {
-                return driver.FindElement(By.CssSelector("#alert alert-success alert-dismissible"));
+                return driver.FindElement(By.XPath(".//div[@class='alert alert-success alert-dismissible']"));
             }
         }
         #endregion

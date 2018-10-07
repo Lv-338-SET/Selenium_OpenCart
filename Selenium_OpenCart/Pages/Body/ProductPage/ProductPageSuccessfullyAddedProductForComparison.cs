@@ -12,7 +12,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.CssSelector("#alert alert-success alert-dismissible"));
+                return driver.FindElement(By.XPath(".//div[@class='alert alert-success alert-dismissible']"));
             }
         }
 
@@ -75,10 +75,11 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             return this.CompareProductsPageLink.Text;
         }
 
-        public ProductPageReviewLogic ClickOnCompareProductsPageLink()
+        //public ProductComparisonPage ClickOnCompareProductsPageLink()
+        public ProductPageSuccessfullyAddedProductForComparison ClickOnCompareProductsPageLink()
         {
             this.CompareProductsPageLink.Click();
-            return new ProductPageReviewLogic(driver);
+            return this; //new ProductComparisonPage(driver);
         }
         #endregion
         #endregion
