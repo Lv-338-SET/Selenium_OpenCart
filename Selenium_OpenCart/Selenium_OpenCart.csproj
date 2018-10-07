@@ -112,6 +112,7 @@
     <Compile Include="Pages\Body\WishListPage\EmptyWishListPage.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListPage.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListTableItem.cs" />
+    <Compile Include="Pages\Body\WishListPage\WishListWithProducts.cs" />
     <Compile Include="Pages\Header\Currency.cs" />
     <Compile Include="Pages\Header\Header.cs" />
     <Compile Include="Pages\Header\MyAccount.cs" />
