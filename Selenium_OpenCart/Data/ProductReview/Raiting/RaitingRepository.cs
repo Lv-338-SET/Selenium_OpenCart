@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Selenium_OpenCart.Data.Rating
+namespace Selenium_OpenCart.Data.ProductReview.Rating
 {
     public enum RatingList
     {
@@ -14,7 +14,7 @@ namespace Selenium_OpenCart.Data.Rating
     }
 
 
-    public class RatingRepository
+    public sealed class RatingRepository
     {
         public static Dictionary<RatingList, int> ListOfRating
         {

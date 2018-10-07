@@ -10,7 +10,7 @@ using System.Linq;
 using OpenQA.Selenium;
 
 using Selenium_OpenCart.Data.ProductReview;
-using Selenium_OpenCart.Data.Rating;
+using Selenium_OpenCart.Data.ProductReview.Rating;
 
 using Selenium_OpenCart.Pages.Body.ProductPage;
 
