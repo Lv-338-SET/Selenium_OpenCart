@@ -10,17 +10,27 @@ namespace Selenium_OpenCart.Logic
 {
     class AddToCartMetods
     {
-        IWebDriver webDriver;
-        public void n()
+        IWebDriver WebDriver;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="webDriver"></param>
+        public AddToCartMetods(IWebDriver webDriver)
         {
-            HomePage homePage = new HomePage(webDriver);
-            homePage.GetListProduct();
-            foreach (var s in homePage.GetListProduct())
-            {
-                s.ClickCartButton();
-            }
+            this.WebDriver = webDriver;
         }
-       
+
+
+        public void FindElementProduct(string nameProduck)
+        {
+            HomePage homePage = new HomePage(WebDriver);
+            TopBar shopingCardPage = new TopBar(WebDriver);
+            homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
+
+            shopingCardPage.ShopingCardButtonClick();
+
+        }
+
 
     }
 }
