@@ -58,14 +58,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminLogic\AdminPageLogic.cs" />
+    <Compile Include="AdminLogic\EditReviewPageLogic.cs" />
+    <Compile Include="AdminLogic\ReviewsPageLogic.cs" />
+    <Compile Include="AdminPages\Body\EditReviewPage\EditReviewPage.cs" />
+    <Compile Include="AdminPages\Body\ReviewsPage\ReviewItem.cs" />
+    <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPageSuccessfullyModifiedReview.cs" />
+    <Compile Include="AdminPages\HeaderAndNavigation\Header.cs" />
+    <Compile Include="AdminLogic\LoginPageLogic.cs" />
+    <Compile Include="AdminPages\LoginPage\LoginPage.cs" />
+    <Compile Include="AdminPages\HeaderAndNavigation\Navigation.cs" />
+    <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPage.cs" />
+    <Compile Include="Data\AdminPageExceptions\AdminPageExceptions.cs" />
     <Compile Include="Data\Currency\CurrencyRepository.cs" />
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />
+    <Compile Include="Data\ProductReview\ReviewStatus\ReviewStatusRepository.cs" />
     <Compile Include="Data\Product\Product.cs" />
     <Compile Include="Data\Product\ProductRepository.cs" />
     <Compile Include="Logic\AddToCartMetods.cs" />
-    <Compile Include="Data\Raiting\RaitingExeptions.cs" />
-    <Compile Include="Data\Raiting\RaitingRepository.cs" />
+    <Compile Include="Data\ProductReview\Raiting\RaitingExceptions.cs" />
+    <Compile Include="Data\ProductReview\Raiting\RaitingRepository.cs" />
     <Compile Include="Data\User\User.cs" />
     <Compile Include="Data\User\UserRepository.cs" />
     <Compile Include="Logic\GlobalVariables.cs" />
@@ -113,7 +126,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AdminPages\" />
     <Folder Include="Data\Application\" />
     <Folder Include="Pages\Body\CurrencyPage\" />
     <Folder Include="Pages\Body\MenuPage\" />

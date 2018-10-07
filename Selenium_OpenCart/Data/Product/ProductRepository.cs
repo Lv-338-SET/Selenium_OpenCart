@@ -3,8 +3,8 @@ namespace Selenium_OpenCart.Data.Product
 {
     public sealed class ProductRepository
     {
-        public volatile static ProductRepository instance;
-        public static object lockObject = new object();
+        private volatile static ProductRepository instance;
+        private static object lockObject = new object();
 
         private ProductRepository()
         {
