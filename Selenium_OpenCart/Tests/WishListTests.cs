@@ -25,7 +25,6 @@ namespace Selenium_OpenCart.Tests
             bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
             SearchMethods search = new SearchMethods(driver);
             search.Search(product).AddAppropriateItemToWishList(product);
-            Thread.Sleep(4000);
             bool IsNotEmptyAfterAdding = topBar.WishListButtonClick().IsNotEmpty();
             Assert.AreEqual(IsEmptyBeforeAdding,IsNotEmptyAfterAdding,"Expected element is not added to wishlist");
             addedToWishList = true;
@@ -44,24 +43,24 @@ namespace Selenium_OpenCart.Tests
             string productNameFromWishList = wishlist.GetProduct().GetProductName();
             wishlist.GetProduct().ClickAddToCartButton();
             Header header = new Header(driver);
-            string productNameFromCart = topbar.ShopingCartButtonClick();
-            header.ClickCartBox();
+            string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductPrice();
             Assert.AreEqual(productNameFromWishList,productNameFromCart,"Element is not added to cart from wishlist");
         }
 
 
-        //[TestCase("iPhone")]
-        //[Order(2)]
+        [TestCase("iPhone")]
+        [Order(2)]
 
-        //public void RemoveFromWishList_RemoveIphone_IsRemoved(string product)
-        //{
-        //    Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-        //    driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/index.php?route=account/wishlist");
-        //    WishListPage wishList = new WishListPage(driver);
-        //    wishList.RemoveProductFromWishList(product);
-        //    bool result = wishList.SuccessMessageIsDisplayed();
-        //    Assert.IsTrue(result, "Product still exists");
-        //}
+        public void RemoveFromWishList_RemoveIphone_IsRemoved(string product)
+        {
+            Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
+            TopBar topBar = new TopBar(driver);
+            topBar.WishListButtonClick();
+            WishListWithProducts wishList = new WishListWithProducts(driver);
+            wishList.GetProduct().ClickRemoveFromWishListButton();
+            bool result = wishList.SuccessMessageIsDisplayed();
+            Assert.IsTrue(result, "Product still exists");
+        }
 
         [OneTimeTearDown]
         public void AfterClass()
