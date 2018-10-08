@@ -3,6 +3,7 @@ using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.CheckoutPage;
 using Selenium_OpenCart.Pages.Body.ContactPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
+using System;
 
 namespace Selenium_OpenCart.Pages.Header
 {
@@ -53,6 +54,7 @@ namespace Selenium_OpenCart.Pages.Header
 
         public WishListPage WishListButtonClick()
         {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             WishListButton.Click();
             return new WishListPage(driver);
         }
