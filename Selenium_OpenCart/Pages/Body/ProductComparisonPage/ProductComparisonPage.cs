@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart.Logic.ProductPageLogic;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 
 namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
@@ -163,9 +164,10 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             return FirstProductName.Text;
         }
 
-        public void ClickFirstProductName()
+        public ProductPageLogic ClickFirstProductName()
         {
             FirstProductName.Click();
+            return new ProductPageLogic(driver);
         }
 
         public string LastProductNameText()
