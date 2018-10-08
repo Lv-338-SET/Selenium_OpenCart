@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 
+using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using Selenium_OpenCart.Logic.ProductPageLogic;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
@@ -11,7 +12,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.CssSelector("#alert alert-success alert-dismissible"));
+                return driver.FindElement(By.XPath(".//div[@class='alert alert-success alert-dismissible']"));
             }
         }
 
@@ -74,11 +75,10 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             return this.CompareProductsPageLink.Text;
         }
 
-        public ProductPageReviewLogic ClickOnCompareProductsPageLink()
+        public ProductComparisonPage.ProductComparisonPage ClickOnCompareProductsPageLink()
         {
-            //TODO: CHANGE TO ANDRIY PAGE!
             this.CompareProductsPageLink.Click();
-            return new ProductPageReviewLogic(driver);
+            return new ProductComparisonPage.ProductComparisonPage(driver);
         }
         #endregion
         #endregion

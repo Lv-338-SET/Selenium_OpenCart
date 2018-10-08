@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 using Selenium_OpenCart.Data.ProductReview;
-using Selenium_OpenCart.Data.ProductReview.Rating;
 
 using Selenium_OpenCart.Pages.Body.ProductPage;
 
@@ -29,7 +19,7 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             }
         }
 
-        public ProductPageReviewLogic(IWebDriver driver)
+        public ProductPageReviewLogic(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
         }

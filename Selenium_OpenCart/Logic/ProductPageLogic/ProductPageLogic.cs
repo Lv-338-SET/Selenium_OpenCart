@@ -28,5 +28,10 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
                 return new ProductPageInfo(driver);
             }
         }
+
+        public ProductPageLogic(IWebDriver driver)
+        {
+            this.driver = driver;
+        }
     }
 }
