@@ -54,6 +54,12 @@ namespace Selenium_OpenCart.Tests
             driver.Quit();
         }
 
+        [TearDown]
+        public void AfterEachTest()
+        {
+            driver.Manage().Cookies.DeleteAllCookies();
+        }
+
         private static readonly object[] ValidProductReview =
 {
             new object[] { ProductReviewRepository.Get().ValidHP() }
