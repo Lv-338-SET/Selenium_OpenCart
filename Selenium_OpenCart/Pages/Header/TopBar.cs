@@ -19,6 +19,8 @@ namespace Selenium_OpenCart.Pages.Header
         { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-user')]")); } }
         private IWebElement WishListButton
         { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-heart')]")); } }
+        private IWebElement WishListButtonContent
+        { get { return driver.FindElement(By.CssSelector("#wishlist-total > span")); } }
         private IWebElement ShopingCardButton
         { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-shopping-cart')]")); } }
         private IWebElement CheckoutButton
@@ -54,11 +56,15 @@ namespace Selenium_OpenCart.Pages.Header
             WishListButton.Click();
             return new WishListPage(driver);
         }
+        public string GetWishListButtonContent()
+        {
+            return WishListButtonContent.Text; 
+        }
 
-        public ShopingCardPage ShopingCardButtonClick()
+        public ShopingCartPage ShopingCartButtonClick()
         {
             ShopingCardButton.Click();
-            return new ShopingCardPage(driver);
+            return new ShopingCartPage(driver);
         }
 
         public CheckoutPage CheckoutButtonClick()

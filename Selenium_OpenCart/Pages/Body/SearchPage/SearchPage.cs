@@ -217,9 +217,10 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             return null;
         }
 
-        public void AddAppropriateItemToWishList(string product)
+        public SearchPage AddAppropriateItemToWishList(string product)
         {
             FindAppropriateProduct(product).ClickCartfavourite();
+            return new SearchPage(driver);
         }
 
         #endregion
