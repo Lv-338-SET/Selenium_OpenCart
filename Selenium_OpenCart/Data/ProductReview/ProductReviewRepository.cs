@@ -6,7 +6,7 @@ namespace Selenium_OpenCart.Data.ProductReview
     public sealed class ProductReviewRepository
     {
         private volatile static ProductReviewRepository instance;
-        private static object lockObject = new object();
+        private static readonly object lockObject = new object();
 
         private ProductReviewRepository()
         {
@@ -28,10 +28,21 @@ namespace Selenium_OpenCart.Data.ProductReview
             return instance;
         }
 
-        public IProductReview Valid()
+        public IProductReview ValidHP()
         {
             return ProductReview.Get()
             .SetProductName("HP LP3065")
+            .SetReviewerName("Volodymyr Matsko")
+            .SetReviewText("Some review to smoke test of reviews")
+            .SetRating(1.ToRating())
+            .SetDate(DateTime.Now.ToString(@"dd\/MM\/yyyy"))
+            .Build();
+        }
+
+        public IProductReview ValidMac()
+        {
+            return ProductReview.Get()
+            .SetProductName("MacBook")
             .SetReviewerName("Volodymyr Matsko")
             .SetReviewText("Some review to smoke test of reviews")
             .SetRating(1.ToRating())
