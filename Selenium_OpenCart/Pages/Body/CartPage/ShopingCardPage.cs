@@ -7,13 +7,13 @@ using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    public class ShopingCardPage
+    public class ShopingCardPage : Header.Header
     {
-        private IWebDriver driver;
-
-        public ShopingCardPage(IWebDriver driver)
-        {
-            this.driver = driver;
-        }
+        protected IWebElement Table { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']")); } }
+        public ShopingCardPage(IWebDriver driver) : base(driver)
+        { }
+        
     }
+
+    
 }

@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.MainPage;
+using Selenium_OpenCart.Pages.Header;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +27,8 @@ namespace Selenium_OpenCart.Logic
             HomePage homePage = new HomePage(WebDriver);
             TopBar shopingCardPage = new TopBar(WebDriver);
             homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
-
             shopingCardPage.ShopingCardButtonClick();
+            //shopingCardPage.ShopingCardButtonClick();
 
         }
 
