@@ -98,7 +98,10 @@
     <Compile Include="Pages\Body\LogoutPage\LogoutPage.cs" />
     <Compile Include="Pages\Body\MainPage\HomePage.cs" />
     <Compile Include="Pages\Body\MyAccountPage\MyAccountPage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPageWhithMessage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPageWhithMessage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageDescription.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageInfo.cs" />

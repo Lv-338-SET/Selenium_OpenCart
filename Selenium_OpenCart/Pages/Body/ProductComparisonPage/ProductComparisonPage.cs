@@ -11,7 +11,7 @@ using Selenium_OpenCart.Pages.Body.SearchPage;
 
 namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
 {
-    public class ProductComparisonPage : Header.Header
+    public class ProductComparisonPage : EmptyProductComparisonPage
     {
         #region Constants
         private const string COMPARISON_TABLE_NAME = "#content h1"; //CSS
