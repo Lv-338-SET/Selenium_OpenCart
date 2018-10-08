@@ -66,7 +66,7 @@
     <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPageSuccessfullyModifiedReview.cs" />
     <Compile Include="AdminPages\HeaderAndNavigation\Header.cs" />
     <Compile Include="AdminLogic\LoginPageLogic.cs" />
-    <Compile Include="AdminPages\LoginPage\LoginPage.cs" />
+    <Compile Include="AdminPages\Body\LoginPage\LoginPage.cs" />
     <Compile Include="AdminPages\HeaderAndNavigation\Navigation.cs" />
     <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPage.cs" />
     <Compile Include="Data\AdminPageExceptions\AdminPageExceptions.cs" />
@@ -100,11 +100,14 @@
     <Compile Include="Pages\Body\MyAccountPage\MyAccountPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPage.cs" />
+    <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\InvalidReviewerNameAlertPage.cs" />
+    <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\InvalidReviewTextAlertPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageDescription.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageInfo.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageReview.cs" />
-    <Compile Include="Pages\Body\ProductPage\ProductPageSuccessfullyAddedProductForComparison.cs" />
-    <Compile Include="Pages\Body\ProductPage\ProductPageSuccessfullyAddedReview.cs" />
+    <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\SuccessfullyAddedProductForComparisonPage.cs" />
+    <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\SuccessfullyAddedReviewPage.cs" />
+    <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\NotSelectedRatingAlertPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ReviewItem.cs" />
     <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
     <Compile Include="Pages\Body\SearchPage\ProductItem.cs" />
@@ -120,7 +123,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\AddressBookTest.cs" />
-    <Compile Include="Tests\FeedbackTests.cs" />
+    <Compile Include="Tests\FeedbackTests\Feedbacktests.cs" />
+    <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleThreaded.cs" />
     <Compile Include="Tests\ProductComparisonTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\WishListTests.cs" />
