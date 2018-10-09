@@ -8,10 +8,11 @@ using OpenQA.Selenium.Chrome;
 
 namespace Selenium_OpenCart.Pages.Body.WishListPage
 {
-    class WishListWithProducts:WishListPage
+    public class WishListWithProducts:WishListPage
     {
         protected IWebElement Table { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']")); } }
-        protected List<WishListTableItem> productList { get { return InitializeProductList(driver.FindElements(By.XPath("//div[@class='table-responsive']//tbody"))); } }
+        protected IWebElement TableRow { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tbody")); } }
+        protected WishListTableItem product { get { return GetProduct(GetTableRow()); } }
         protected IWebElement SuccessMessage { get { return driver.FindElement(By.CssSelector(".alert.alert-success")); }}
 
         public WishListWithProducts(IWebDriver driver) : base(driver)
@@ -20,15 +21,9 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         }
 
         #region Initialization
-        public List<WishListTableItem> InitializeProductList(IReadOnlyCollection<IWebElement> elements)
+        public WishListTableItem GetProduct(IWebElement element)
         {
-            List<WishListTableItem> list = new List<WishListTableItem>();
-
-            foreach (var current in elements)
-            {
-                list.Add(new WishListTableItem(driver, current));
-            }
-            return list;
+            return new WishListTableItem(driver, element);
         }
         #endregion
 
@@ -37,9 +32,13 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         {
             return this.Table;
         }
-        public List<WishListTableItem> GetProductList()
+        public IWebElement GetTableRow()
         {
-            return this.productList;
+            return this.TableRow;
+        }
+        public WishListTableItem GetProduct()
+        {
+            return this.product;
         }
         public bool SuccessMessageIsDisplayed()
         {
@@ -50,39 +49,8 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         #endregion
 
         #region Business Logic
-        public WishListTableItem GetRequiredProduct(string product)
-        {
-            foreach (var item in GetProductList())
-            {
-                if (item.ProductNameIsAppropriate(product))
-                {
-                    return item;
-                }
-            }
-            return null;
-        }
 
-        public bool ProductExistsInWishList(string product)
-        {
-            if (GetRequiredProduct(product) == null)
-            {
-                return false;
-            }
-            else return true;
-        }
-
-        public WishListPage RemoveProductFromWishList(string product)
-        {
-            GetRequiredProduct(product).ClickRemoveFromWishListButton();
-            return this;
-        }
-
-
-        public WishListPage AddToCartFromWishList(string product)
-        {
-            GetRequiredProduct(product).ClickAddToCartButton();
-            return this;
-        }
+        
         #endregion
     }
 }
