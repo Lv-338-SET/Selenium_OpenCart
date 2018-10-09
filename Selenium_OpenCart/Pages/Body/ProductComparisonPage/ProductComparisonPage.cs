@@ -22,6 +22,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         private const string ADD_TO_CART_LAST = "//tbody[last()]/descendant::input[last()]"; //XPath
         private const string REMOVE_FIRST = "//tbody[last()]/descendant::a"; //XPath
         private const string REMOVE_LAST = "//tbody[last()]/tr[last()]/descendant::a[last()]"; //XPath
+        private const string PRODUCT_COLUMN = "tr .text-center"; //CSS
 
         #endregion
 
@@ -89,6 +90,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
                 return driver.FindElement(By.XPath(REMOVE_LAST));
             }
         }
+
+        protected List<ProductItem> ListProduct
+        {
+            get
+            {
+                return InitializeListProduct(driver.FindElements(By.CssSelector(PRODUCT_COLUMN)));
+            }
+        }
         #endregion
 
         #region Initialization & Verifycation
@@ -105,6 +114,16 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             temp = FirstProductName;
             temp = AddToCartFirst;
             temp = RemoveFirstProduct;
+        }
+
+        private List<ProductItem> InitializeListProduct(IReadOnlyCollection<IWebElement> elements)
+        {
+            List<ProductItem> list = new List<ProductItem>();
+            foreach (var current in elements)
+            {
+                list.Add(new ProductItem(driver, current));
+            }
+            return list;
         }
         #endregion
 
@@ -154,16 +173,22 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         }
 
         //TODO !!!!!!!!!!!! як взнати яку сторінку ретурнити, оскільки після видалення може бути або пуста або ще заповнена
-        //public ProductComparisonPageWhithMessage ClickRemoveFirstProduct()
-        //{
-        //    RemoveFirstProduct.Click();
-        //    return new ProductComparisonPageWhithMessage(driver);
-        //}
+        public ProductComparisonPageWhithMessage ClickRemoveFirstProduct()
+        {
+            RemoveFirstProduct.Click();
+            return new ProductComparisonPageWhithMessage(driver);
+        }
 
-        //public ProductComparisonPageWhithMessage ClickRemoveLastProduct()
+        public EmptyProductComparisonPageWhithMessage ClickRemoveLastProduct()
+        {
+            RemoveLastProduct.Click();
+            return new EmptyProductComparisonPageWhithMessage(driver);
+        }
+
+        //public int ColumnsCount()
         //{
-        //    RemoveLastProduct.Click();
-        //    return new ProductComparisonPageWhithMessage(driver);
+
+        //    return RemoveFirstProduct.Count;
         //}
         #endregion
     }

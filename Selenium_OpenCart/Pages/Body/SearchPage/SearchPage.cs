@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Header;
+using Selenium_OpenCart.Pages.Body.ProductPage;
 
 namespace Selenium_OpenCart.Pages.Body.SearchPage
 {
@@ -205,6 +206,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         {
             return this.selectShow.SelectedOption.Text;
         }
+
         public ProductItem FindAppropriateProduct(string product)
         {
             foreach (var item in listProduct)
@@ -221,6 +223,18 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         {
             FindAppropriateProduct(product).ClickCartfavourite();
             return new SearchPage(driver);
+        }
+
+        public SearchPage AddAppropriateProductToComparison(string product)
+        {
+            FindAppropriateProduct(product).ClickCompareButton();
+            return new SearchPage(driver);
+        }
+
+        public ProductPage.ProductPage OpenAppropriateProductPage(string product)
+        {
+            FindAppropriateProduct(product).ClickProductName();
+            return new ProductPage.ProductPage(driver);
         }
 
         #endregion
