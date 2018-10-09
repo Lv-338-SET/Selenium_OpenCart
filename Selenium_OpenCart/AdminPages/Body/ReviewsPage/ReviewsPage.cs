@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OpenQA.Selenium;
 
-using Selenium_OpenCart.Data.ProductReview.Rating;
-using Selenium_OpenCart.Data.ProductReview.ReviewStatus;
-
 using Selenium_OpenCart.AdminLogic;
-using Selenium_OpenCart.AdminPages.HeaderAndNavigation;
 
 namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
 {

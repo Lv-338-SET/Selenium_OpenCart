@@ -18,6 +18,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         protected IWebElement ButtonContinue { get { return driver.FindElement(By.XPath("//a[text() = 'Continue']")); } }
         protected List<ShopingCartTableItem> ListShopingCartProducts { get { return ListProductFromHomePage(driver.FindElements(By.XPath("//div[@class='table-responsive']//tbody"))); } }
 
+
         public ShopingCartPage(IWebDriver driver) : base(driver)
         { }
 
@@ -33,6 +34,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         }
 
         public HomePage GoToMainPageIfCartIsEmpty()
+
         {
             ButtonContinue.Click();
             return new HomePage(driver);

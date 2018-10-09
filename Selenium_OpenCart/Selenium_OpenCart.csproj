@@ -70,8 +70,7 @@
     <Compile Include="AdminPages\HeaderAndNavigation\Navigation.cs" />
     <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPage.cs" />
     <Compile Include="Data\AdminPageExceptions\AdminPageExceptions.cs" />
-    <Compile Include="Data\Application\ApplicationSource.cs" />
-    <Compile Include="Data\Application\ApplicationSourceRepository.cs" />
+    <Compile Include="Data\Constants\CONST_EN.cs" />
     <Compile Include="Data\Currency\CurrencyRepository.cs" />
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />

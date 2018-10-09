@@ -65,7 +65,12 @@ namespace Selenium_OpenCart.Pages.Header
             this.searchButton.Click();
             return new SearchPage(driver);
         }
-        public string CurrentPriceSum()
+        public CartBox ClickCartBox()
+        {
+            CartBox.Click();
+            return new CartBox(driver);
+        }
+        public string CartPriceSum()
         {
             return CartBox.Text;
         }
