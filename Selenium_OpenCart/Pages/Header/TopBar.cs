@@ -1,9 +1,12 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.CheckoutPage;
 using Selenium_OpenCart.Pages.Body.ContactPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using System;
+using System.Threading;
 
 namespace Selenium_OpenCart.Pages.Header
 {
@@ -21,7 +24,7 @@ namespace Selenium_OpenCart.Pages.Header
         private IWebElement WishListButton
         { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-heart')]")); } }
         private IWebElement WishListButtonContent
-        { get { return driver.FindElement(By.CssSelector("#wishlist-total > span")); } }
+        { get { return driver.FindElement(By.CssSelector("#wishlist-total")); } }
         private IWebElement ShopingCardButton
         { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-shopping-cart')]")); } }
         private IWebElement CheckoutButton
@@ -54,7 +57,7 @@ namespace Selenium_OpenCart.Pages.Header
 
         public WishListPage WishListButtonClick()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            Thread.Sleep(1500);
             WishListButton.Click();
             return new WishListPage(driver);
         }
