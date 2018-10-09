@@ -60,94 +60,117 @@ namespace TestSite.Pages.RegisterPage
         {
             FirstNameField.Click();
         }
+
         public void InputFirstName(string firstName)
         {
             FirstNameField.SendKeys(firstName);
         }
+
         public void ClickLastName()
         {
             LastNameField.Click();
         }
+
         public void InputLastName(string lastName)
         {
             LastNameField.SendKeys(lastName);
         }
+
         public void ClickEmail()
         {
             EMailField.Click();
         }
+
         public void InputEmail(string email)
         {
             EMailField.SendKeys(email);
         }
+
         public void ClickTelephone()
         {
             TelephoneField.Click();
         }
+
         public void InputTelephone(string telephone)
         {
             TelephoneField.SendKeys(telephone);
         }
+
         public void ClickFax()
         {
             FaxField.Click();
         }
+
         public void InputFax(string fax)
         {
             FaxField.SendKeys(fax);
         }
+
         public void ClickCompany()
         {
             CompanyField.Click();
         }
+
         public void InputCompanyName(string companyName)
         {
             CompanyField.SendKeys(companyName);
         }
+
         public void ClickAddress1()
         {
             Address1Field.Click();
         }
+
         public void InputAddress1(string address1)
         {
             Address1Field.SendKeys(address1);
         }
+
         public void ClickAddress2()
         {
             Address2Field.Click();
         }
+
         public void InputAddress2(string address2)
         {
             Address2Field.SendKeys(address2);
         }
+
         public void ClickCity()
         {
             CityField.Click();
         }
+
         public void InputCity(string city)
         {
             CityField.SendKeys(city);
         }
+
         public void ClickPostCode()
         {
             PostCodeField.Click();
         }
+
         public void InputPostCode(string postCode)
         {
             PostCodeField.SendKeys(postCode);
         }
+
         public void ClickCountry()
         {
             CountryField.Click();
         }
+
         public void InputCountry(string country)
         {
             CountryField.SendKeys(country);
         }
+
         public void CkickRegion()
         {
             RegionField.Click();
         }
+
         public void InputRegion(string region)
         {
             RegionField.SendKeys(region);
@@ -157,14 +180,17 @@ namespace TestSite.Pages.RegisterPage
         {
             PasswordField.Click();
         }
+
         public void InputPassword(string password)
         {
             PasswordField.SendKeys(password);
         }
+
         public void ClickPasswordConfirm()
         {
             PasswordConfirmField.Click();
         }
+
         public void InputPasswordConfirm(string passwordConfirm)
         {
             PasswordConfirmField.SendKeys(passwordConfirm);
@@ -176,10 +202,10 @@ namespace TestSite.Pages.RegisterPage
             action.MoveToElement(driver.FindElement(By.ClassName("radio-inline")), 1, 1).Click().Perform();
             NewsletterSubscribe = true;
         }
+
         public void ClickPrivacyPolicy()
         {
             PrivacyPolicy.Click();
         }
     }
-
 }
