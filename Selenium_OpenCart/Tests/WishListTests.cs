@@ -29,10 +29,18 @@ namespace Selenium_OpenCart.Tests
             Assert.AreEqual(IsEmptyBeforeAdding,IsNotEmptyAfterAdding,"Expected element is not added to wishlist");
             addedToWishList = true;
         }
+        [TestCase("iPhone")]
+        [Order(1)]
+        public void SuccessAlertMessageIsDisplayedAfterAdding(string product)
+        {
+            SearchMethods search = new SearchMethods(driver);
+            bool result = search.Search(product).AddAppropriateItemToWishList(product).isSuccessMessageDisplayed();
+            Assert.IsTrue(result, "Success message is not displayed");
+        }
 
 
         [TestCase]
-        [Order(1)]
+        [Order(2)]
 
         public void AddToCartFromWishList_AddIphone_IsAdded()
         {
@@ -42,16 +50,15 @@ namespace Selenium_OpenCart.Tests
             WishListWithProducts wishlist = new WishListWithProducts(driver);
             string productNameFromWishList = wishlist.GetProduct().GetProductName();
             wishlist.GetProduct().ClickAddToCartButton();
-            Header header = new Header(driver);
             string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductPrice();
             Assert.AreEqual(productNameFromWishList,productNameFromCart,"Element is not added to cart from wishlist");
         }
 
 
-        [TestCase("iPhone")]
-        [Order(2)]
+        [TestCase]
+        [Order(3)]
 
-        public void RemoveFromWishList_RemoveIphone_IsRemoved(string product)
+        public void RemoveFromWishList_RemoveIphone_IsRemoved()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
             TopBar topBar = new TopBar(driver);
