@@ -50,7 +50,7 @@ namespace Selenium_OpenCart.Tests
             WishListWithProducts wishlist = new WishListWithProducts(driver);
             string productNameFromWishList = wishlist.GetProduct().GetProductName();
             wishlist.GetProduct().ClickAddToCartButton();
-            string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductPrice();
+            string productNameFromCart = topbar.ShoppingCartButtonClick().GetProduct().GetProductPrice();
             Assert.AreEqual(productNameFromWishList,productNameFromCart,"Element is not added to cart from wishlist");
         }
 
