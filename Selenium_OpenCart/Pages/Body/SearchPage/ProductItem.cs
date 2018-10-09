@@ -78,20 +78,20 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         }
 
         //Buttons
-        public ProductItem ClickCartButton()
+        public SearchPage ClickCartButton()
         {
             productIconCart.Click();
-            return this;
+            return new SearchPage(driver);
         }
-        public ProductItem ClickCartfavourite()
+        public SearchPage ClickCartfavourite()
         {
             productIconFavourite.Click();
-            return this;
+            return new SearchPage(driver);
         }
-        public ProductItem ClickCompareButton()
+        public SearchPage ClickCompareButton()
         {
             productIconCompare.Click();
-            return this;
+            return new SearchPage(driver);
         }
         public bool IsAppropriate(string product)
         {
