@@ -97,17 +97,17 @@ namespace Selenium_OpenCart.Tools
             this.Search = new SearchElement();
         }
 
-        public HomePage LoadLoginPage()
-        {
-            Browser.OpenUrl(ApplicationSource.HomePageUrl);//////////!!!!!
-            return new HomePage();
-        }
+        //public HomePage LoadLoginPage()
+        //{
+        //    Browser.OpenUrl(ApplicationSource.HomePageUrl);//////////!!!!!
+        //    return new HomePage(driver);
+        //}
 
-        public HomePage LogoutAction()
-        {
-            //TO DO!!!!!!!!!!!!!!!!
-            Browser.OpenUrl(ApplicationSource.HomePageUrl);
-            return new HomePage();
-        }
+        //public HomePage LogoutAction()
+        //{
+        //    //TO DO!!!!!!!!!!!!!!!!
+        //    Browser.OpenUrl(ApplicationSource.HomePageUrl);
+        //    return new HomePage();
+        //}
     }
 }
