@@ -31,6 +31,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
                 return addresses;
             } 
         }
+
         public AddressComponent Address { get; private set; }        
         public IWebElement NewAddressButton
             { get { return driver.FindElement(By.LinkText(NEW_ADDRESS_BUTTON_TEXT));} }
@@ -100,7 +101,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// Verifies if address is in adress table
         /// </summary>
         /// <returns>bool</returns>
-        public bool isAddressInTable(string text)
+        public bool IsAddressInTableByShortAddress(string text)
         {
             Console.WriteLine(AddressesTable.Count);
             if (AddressesTable.Count > 0)
