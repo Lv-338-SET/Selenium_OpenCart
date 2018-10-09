@@ -77,7 +77,7 @@ namespace Selenium_OpenCart.Tests
                         city, postCode, country, region).Continue();
             
             //Act
-            bool actual = addressBook.isAddressInTable(expected);
+            bool actual = addressBook.IsAddressInTableByShortAddress(expected);
 
             //Assert
             Assert.IsTrue(actual);
@@ -93,7 +93,7 @@ namespace Selenium_OpenCart.Tests
             addressBook = editAddress.FillAllNotRequareField(company, address2, postCode).Continue();
             
             //Act
-            bool actual = addressBook.isAddressInTable(expected);
+            bool actual = addressBook.IsAddressInTableByShortAddress(expected);
 
             //Assert
             Assert.True(actual);
@@ -107,7 +107,7 @@ namespace Selenium_OpenCart.Tests
             addressBook.GetAddressByShortAddress(expected).DeleteButton.Click();
             
             //Act
-            bool actual = addressBook.isAddressInTable(expected);
+            bool actual = addressBook.IsAddressInTableByShortAddress(expected);
             
             //Assert
             Assert.IsFalse(actual);
