@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Selenium_OpenCart.Logic;
+using Selenium_OpenCart.Pages.Body.CartPage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,18 @@ namespace Selenium_OpenCart.Tests
             addToCartMetods.FindElementProduct(product);
 
         }
+
+        [TestCase("MacBook")]
+        public void RemoveFromCart(string product)
+        {
+            AddToCartMetods addToCartMetods = new AddToCartMetods(driver);
+            addToCartMetods.FindElementProduct(product);
+            
+
+        }
+
+
+
 
         [TearDown]
         public void TearDown()
