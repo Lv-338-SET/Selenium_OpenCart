@@ -21,6 +21,7 @@ namespace Selenium_OpenCart.Tests
         {
             driver = new ChromeDriver();
             driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/");
+
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
