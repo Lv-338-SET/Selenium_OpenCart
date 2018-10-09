@@ -29,7 +29,6 @@ namespace Selenium_OpenCart.Tests
         {
             AddToCartMetods addToCartMetods = new AddToCartMetods(driver);
             addToCartMetods.FindElementProduct(product);
-
         }
 
         [TestCase("MacBook")]
@@ -37,8 +36,6 @@ namespace Selenium_OpenCart.Tests
         {
             AddToCartMetods addToCartMetods = new AddToCartMetods(driver);
             addToCartMetods.FindElementProduct(product);
-            
-
         }
 
 
