@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Data.Constants;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 	      
@@ -11,7 +12,8 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
     {
         IWebDriver driver;
 
-        IJavaScriptExecutor js;
+        IJavaScriptExecutor js;        
+
         private const string NEW_ADDRESS_BUTTON_TEXT = "New Address";
         private const string PAGE_NAME = "Address Book Entries";
         private const string NO_ADDRESSES_MESSAGE = "Your shopping cart is empty!";
