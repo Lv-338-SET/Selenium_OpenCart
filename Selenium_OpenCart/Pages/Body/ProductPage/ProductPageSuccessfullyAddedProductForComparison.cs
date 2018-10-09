@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 
+using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using Selenium_OpenCart.Logic.ProductPageLogic;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
@@ -74,11 +75,10 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             return this.CompareProductsPageLink.Text;
         }
 
-        //public ProductComparisonPage ClickOnCompareProductsPageLink()
-        public ProductPageSuccessfullyAddedProductForComparison ClickOnCompareProductsPageLink()
+        public ProductComparisonPage.ProductComparisonPage ClickOnCompareProductsPageLink()
         {
             this.CompareProductsPageLink.Click();
-            return this; //new ProductComparisonPage(driver);
+            return new ProductComparisonPage.ProductComparisonPage(driver);
         }
         #endregion
         #endregion

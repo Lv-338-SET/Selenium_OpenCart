@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.WishListPage
 {
-    class EmptyWishListPage : WishListPage
+    public class EmptyWishListPage : WishListPage
     {
         public EmptyWishListPage(IWebDriver driver) : base(driver)
         {

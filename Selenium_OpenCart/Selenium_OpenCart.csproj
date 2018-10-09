@@ -70,6 +70,8 @@
     <Compile Include="AdminPages\HeaderAndNavigation\Navigation.cs" />
     <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPage.cs" />
     <Compile Include="Data\AdminPageExceptions\AdminPageExceptions.cs" />
+    <Compile Include="Data\Application\ApplicationSource.cs" />
+    <Compile Include="Data\Application\ApplicationSourceRepository.cs" />
     <Compile Include="Data\Currency\CurrencyRepository.cs" />
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Pages\Body\LogoutPage\LogoutPage.cs" />
     <Compile Include="Pages\Body\MainPage\HomePage.cs" />
     <Compile Include="Pages\Body\MyAccountPage\MyAccountPage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageDescription.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageInfo.cs" />
@@ -112,6 +115,7 @@
     <Compile Include="Pages\Body\WishListPage\WishListPage.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListTableItem.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListWithProducts.cs" />
+    <Compile Include="Pages\Header\CartBox.cs" />
     <Compile Include="Pages\Header\Currency.cs" />
     <Compile Include="Pages\Header\Header.cs" />
     <Compile Include="Pages\Header\MyAccount.cs" />
@@ -120,19 +124,27 @@
     <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\AddressBookTest.cs" />
     <Compile Include="Tests\FeedbackTests.cs" />
+    <Compile Include="Tests\ProductComparisonTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\WishListTests.cs" />
+    <Compile Include="Tools\AllBrowsers.cs" />
+    <Compile Include="Tools\Application.cs" />
+    <Compile Include="Tools\ApplicationSingleBrouser.cs" />
+    <Compile Include="Tools\SearchWebElements\AbstractSearchClass.cs" />
+    <Compile Include="Tools\SearchWebElements\ISearch.cs" />
+    <Compile Include="Tools\SearchWebElements\ISearchStrategy.cs" />
+    <Compile Include="Tools\SearchWebElements\SearchElement.cs" />
+    <Compile Include="Tools\SearchWebElements\SearchExplicit.cs" />
+    <Compile Include="Tools\SearchWebElements\SearchImplicit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Application\" />
     <Folder Include="Pages\Body\CurrencyPage\" />
     <Folder Include="Pages\Body\MenuPage\" />
     <Folder Include="Pages\Body\OtherPages\" />
-    <Folder Include="Pages\Body\ProductComparisonPage\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

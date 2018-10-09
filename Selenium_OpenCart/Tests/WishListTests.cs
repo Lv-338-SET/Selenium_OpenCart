@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Logic;
-
+using System.Threading;
 
 namespace Selenium_OpenCart.Tests
 {
@@ -13,6 +13,7 @@ namespace Selenium_OpenCart.Tests
     [TestFixture]
     public class WishListTests
     {
+        bool addedToWishList = false;
 
         IWebDriver driver;
 
@@ -20,38 +21,50 @@ namespace Selenium_OpenCart.Tests
         [Order(0)]
         public void WishListWorks_AddingIphone_IsAdded(string product)
         {
+            TopBar topBar = new TopBar(driver);
+            bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
             SearchMethods search = new SearchMethods(driver);
             search.Search(product).AddAppropriateItemToWishList(product);
-            TopBar topBar = new TopBar(driver);
-            bool result = topBar.WishListButtonClick().ProductExistsInWishList(product);
-            Assert.IsTrue(result, "Expected element is not added to wishlist");
+            bool IsNotEmptyAfterAdding = topBar.WishListButtonClick().IsNotEmpty();
+            Assert.AreEqual(IsEmptyBeforeAdding,IsNotEmptyAfterAdding,"Expected element is not added to wishlist");
+            addedToWishList = true;
         }
-
-
         [TestCase("iPhone")]
         [Order(1)]
-
-        public void AddToCartFromWishList_AddIphone_IsAdded(string product)
+        public void SuccessAlertMessageIsDisplayedAfterAdding(string product)
         {
-            Header header = new Header(driver);
-            string expected = header.CurrentPriceSum();
-            TopBar topbar = new TopBar(driver);
-            topbar.WishListButtonClick();
-            WishListPage wishList = new WishListPage(driver);
-            wishList.AddToCartFromWishList(product);
-            string result = header.CurrentPriceSum();
-            Assert.AreEqual(expected, result);
+            SearchMethods search = new SearchMethods(driver);
+            bool result = search.Search(product).AddAppropriateItemToWishList(product).isSuccessMessageDisplayed();
+            Assert.IsTrue(result, "Success message is not displayed");
         }
 
 
-        [TestCase("iPhone")]
+        [TestCase]
         [Order(2)]
 
-        public void RemoveFromWishList_RemoveIphone_IsRemoved(string product)
+        public void AddToCartFromWishList_AddIphone_IsAdded()
         {
-            driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/index.php?route=account/wishlist");
-            WishListPage wishList = new WishListPage(driver);
-            wishList.RemoveProductFromWishList(product);
+            Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
+            TopBar topbar = new TopBar(driver);
+            topbar.WishListButtonClick();
+            WishListWithProducts wishlist = new WishListWithProducts(driver);
+            string productNameFromWishList = wishlist.GetProduct().GetProductName();
+            wishlist.GetProduct().ClickAddToCartButton();
+            string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductPrice();
+            Assert.AreEqual(productNameFromWishList,productNameFromCart,"Element is not added to cart from wishlist");
+        }
+
+
+        [TestCase]
+        [Order(3)]
+
+        public void RemoveFromWishList_RemoveIphone_IsRemoved()
+        {
+            Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
+            TopBar topBar = new TopBar(driver);
+            topBar.WishListButtonClick();
+            WishListWithProducts wishList = new WishListWithProducts(driver);
+            wishList.GetProduct().ClickRemoveFromWishListButton();
             bool result = wishList.SuccessMessageIsDisplayed();
             Assert.IsTrue(result, "Product still exists");
         }

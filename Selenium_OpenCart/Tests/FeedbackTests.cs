@@ -24,17 +24,8 @@ namespace Selenium_OpenCart.Tests
     {
         IWebDriver driver;
 
-        //const string PAGE_URL = "http://set-338.000webhostapp.com/index.php?route=product/product&product_id=47";
-        //const string URL = "http://set-338.000webhostapp.com/";
-        //const string ADMIN_URL = "http://set-338.000webhostapp.com/admin";
-
-        //const string PAGE_URL = "http://192.168.1.105/index.php?route=product/product&product_id=47";
-        //const string URL = "http://192.168.1.105/";
-        //const string ADMIN_URL = "http://192.168.1.105/admin";
-
-        const string PAGE_URL = "http://192.168.1.105/index.php?route=product/product&product_id=47";
-        const string URL = "https://oc.mightytech.org/";
-        const string ADMIN_URL = "https://oc.mightytech.org/admin";
+        const string URL = "http://40.118.125.245/";
+        const string ADMIN_URL = "http://40.118.125.245/admin";
 
         const string REVIEWS_PAG_NAME = "Reviews";
 
@@ -42,19 +33,15 @@ namespace Selenium_OpenCart.Tests
         const int NO_IMPLISIT_WAIT = 0;
         const int EXPLISIT_WAIT = 1;
 
-        //const int IMPLISIT_WAIT = 35;
-        //const int NO_IMPLISIT_WAIT = 0;
-        //const int EXPLISIT_WAIT = 60;
-
-        bool addedReview;
-        bool approvedReview;
+        bool addedReview = false;
+        bool approvedReview = false;
 
         [OneTimeSetUp]
         public void BeforeAllTests()
         {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments("--start-maximized");
-            chromeOptions.AddArguments("--headless");
+            //chromeOptions.AddArguments("--headless");
             driver = new ChromeDriver(chromeOptions);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
         }
@@ -67,16 +54,20 @@ namespace Selenium_OpenCart.Tests
             driver.Quit();
         }
 
+        [TearDown]
+        public void AfterEachTest()
+        {
+            driver.Manage().Cookies.DeleteAllCookies();
+        }
+
         private static readonly object[] ValidProductReview =
 {
-            //new object[] { ProductReviewRepository.Get().ValidHP() }
-            new object[] { ProductReviewRepository.Get().ValidMac() }
+            new object[] { ProductReviewRepository.Get().ValidHP() }
         };
 
         private static readonly object[] ValidProductReviewAndAdminUser =
         {
-            //new object[] { ProductReviewRepository.Get().ValidHP(), UserRepository.Get().Admin() }
-            new object[] { ProductReviewRepository.Get().ValidMac(), UserRepository.Get().AdminDefault() }
+            new object[] { ProductReviewRepository.Get().ValidHP(), UserRepository.Get().Admin() }           
         };
 
         private void DeleteAllTestReviewsFromValidProductReviewAndAdminUserSource()
@@ -91,10 +82,14 @@ namespace Selenium_OpenCart.Tests
                 Catalog menu = new LoginPageLogic(driver)
                    .InputValidUserAndLogin(user)
                    .Navigation.ClickOnCatalogLink();
+
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
+
                 wait.Until(d => menu.GetTextFromReviewLink().Equals(REVIEWS_PAG_NAME));
+
                 driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
+
                 menu.ClickOnReviewLink().DeleteAllReviewsThatEqualsTo(review);
             }
         }
@@ -122,16 +117,20 @@ namespace Selenium_OpenCart.Tests
         [Test, TestCaseSource("ValidProductReviewAndAdminUser"), Order(2)]
         public void AproveReviewTest(IProductReview review, IUser user)
         {
-            //Assert.IsTrue(addedReview
-            //    , "Blocked. Preconditions fail: add review test failed");
+            Assert.IsTrue(addedReview
+                , "Blocked. Preconditions fail: add review test failed");
 
             driver.Navigate().GoToUrl(ADMIN_URL);
 
             Catalog menu = new LoginPageLogic(driver).InputValidUserAndLogin(user).Navigation.ClickOnCatalogLink();
+
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
+
             wait.Until(d => menu.GetTextFromReviewLink().Equals(REVIEWS_PAG_NAME));
+
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
+
             ReviewsPageLogic page = menu.ClickOnReviewLink();
             //Assert
             Assert.AreEqual(REVIEWS_PAG_NAME, page.Header.GetTextFromCurnetPageLink()
@@ -146,8 +145,8 @@ namespace Selenium_OpenCart.Tests
         [Test, TestCaseSource("ValidProductReview"), Order(3)]
         public void CheckReviewTest(IProductReview review)
         {
-            //Assert.IsTrue(addedReview && approvedReview
-            //    , "Blocked. Preconditions fail: add review test failed or approve review test failed");
+            Assert.IsTrue(addedReview && approvedReview
+                , "Blocked. Preconditions fail: add review test failed or approve review test failed");
 
             driver.Navigate().GoToUrl(URL);
             ProductPageLogic productPage = new SearchMethods(driver)
