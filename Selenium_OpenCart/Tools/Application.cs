@@ -1,4 +1,5 @@
 ﻿using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using System.Collections.Generic;
 using System.Threading;
@@ -95,5 +96,18 @@ namespace Selenium_OpenCart.Tools
         {
             this.Search = new SearchElement();
         }
+
+        //public HomePage LoadLoginPage()
+        //{
+        //    Browser.OpenUrl(ApplicationSource.HomePageUrl);//////////!!!!!
+        //    return new HomePage(driver);
+        //}
+
+        //public HomePage LogoutAction()
+        //{
+        //    //TO DO!!!!!!!!!!!!!!!!
+        //    Browser.OpenUrl(ApplicationSource.HomePageUrl);
+        //    return new HomePage();
+        //}
     }
 }

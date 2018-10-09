@@ -1,49 +1,39 @@
 ﻿using OpenQA.Selenium;
-using Selenium_OpenCart.Data.Application;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.CheckoutPage;
 using Selenium_OpenCart.Pages.Body.ContactPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
-using Selenium_OpenCart.Tools.SearchWebElements;
-using Selenium_OpenCart.Tools;
 using System;
+using System.Threading;
 
 namespace Selenium_OpenCart.Pages.Header
 {
      class TopBar
     {
-        private IWebDriver driver;//REMOVE
-        protected ISearch Search { get; private set; }
+        private IWebDriver driver;
 
         //Properties
         private IWebElement CurrencyButton
-        //{ get { return driver.FindElement(By.XPath("//div/button/strong[text()='$']")); } }//REMOVE
-        { get { return Search.ElementByXPath("//div/button/strong[text()='$']"); } }
+        { get { return driver.FindElement(By.XPath("//div/button/strong[text()='$']")); } }
         private IWebElement PhoneButton
-        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-phone')]")); } }//REMOVE
-        { get { return Search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-phone')]"); } }
+        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-phone')]")); } }
         private IWebElement MyAccountButton
-        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-user')]")); } }//REMOVE
-        { get { return Search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-user')]"); } }
+        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-user')]")); } }
         private IWebElement WishListButton
-        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-heart')]")); } }//REMOVE
-        { get { return Search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-heart')]"); } }
+        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-heart')]")); } }
         private IWebElement WishListButtonContent
-        //{ get { return driver.FindElement(By.CssSelector("#wishlist-total > span")); } }//REMOVE
-        { get { return Search.ElementByCssSelector("#wishlist-total > span"); } }
+        { get { return driver.FindElement(By.CssSelector("#wishlist-total")); } }
         private IWebElement ShopingCardButton
-        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-shopping-cart')]")); } }//REMOVE
-        { get { return Search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-shopping-cart')]"); } }
+        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-shopping-cart')]")); } }
         private IWebElement CheckoutButton
-        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-share')]")); } }//REMOVE
-        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-share')]"); } }
+        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-share')]")); } }
 
         //Constructor
-        public TopBar(IWebDriver driver)////REMOVE DRIVER
+        public TopBar(IWebDriver driver)
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
-
-            this.driver = driver;///REMOVE!!!!!!!!!!!!!!!!
+            this.driver = driver;
         }
 
         //Methods
@@ -67,7 +57,7 @@ namespace Selenium_OpenCart.Pages.Header
 
         public WishListPage WishListButtonClick()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            Thread.Sleep(1500);
             WishListButton.Click();
             return new WishListPage(driver);
         }
@@ -76,7 +66,7 @@ namespace Selenium_OpenCart.Pages.Header
             return WishListButtonContent.Text; 
         }
 
-        public ShopingCartPage ShoppingCartButtonClick()
+        public ShopingCartPage ShopingCartButtonClick()
         {
             ShopingCardButton.Click();
             return new ShopingCartPage(driver);
