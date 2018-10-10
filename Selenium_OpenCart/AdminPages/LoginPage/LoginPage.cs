@@ -98,11 +98,6 @@ namespace Selenium_OpenCart.AdminPages
         {
             this.LoginButton.Click();
         }
-
-        public bool IsLoginPage()
-        {
-            return this.LoginButton.Displayed;
-        }
         #endregion
         #endregion
     }

@@ -3,9 +3,9 @@
 using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using Selenium_OpenCart.Logic.ProductPageLogic;
 
-namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
+namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
-    public sealed class SuccessfullyAddedProductForComparisonPage : ProductPage
+    public sealed class ProductPageSuccessfullyAddedProductForComparison : ProductPage
     {
         #region Properties
         private IWebElement SuccessAllert
@@ -34,7 +34,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         #endregion
 
         #region Initialization And Verifycation
-        public SuccessfullyAddedProductForComparisonPage(IWebDriver driver) : base(driver)
+        public ProductPageSuccessfullyAddedProductForComparison(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
             VerifyPage();

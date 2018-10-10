@@ -39,23 +39,12 @@ namespace Selenium_OpenCart.Data.ProductReview
             .Build();
         }
 
-        public IProductReview InvalidOnLeftEndgeOfBVClass()
+        public IProductReview ValidMac()
         {
             return ProductReview.Get()
-            .SetProductName("HP LP3065")
-            .SetReviewerName("Vo")
-            .SetReviewText("Some review to smoke te")
-            .SetRating(1.ToRating())
-            .SetDate(DateTime.Now.ToString(@"dd\/MM\/yyyy"))
-            .Build();
-        }
-
-        public IProductReview InvalidOnRightEndgeOfBVClass()
-        {
-            return ProductReview.Get()
-            .SetProductName("HP LP3065")
-            .SetReviewerName("Ostap-Suleyman-Berta-Maria-Bender-Bey")
-            .SetReviewText("sasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfsasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfsasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfsasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfsasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfasdql")
+            .SetProductName("MacBook")
+            .SetReviewerName("Volodymyr Matsko")
+            .SetReviewText("Some review to smoke test of reviews")
             .SetRating(1.ToRating())
             .SetDate(DateTime.Now.ToString(@"dd\/MM\/yyyy"))
             .Build();
