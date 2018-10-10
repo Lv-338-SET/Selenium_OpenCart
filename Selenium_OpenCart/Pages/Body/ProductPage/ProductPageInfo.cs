@@ -11,7 +11,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath($".//div[@class='rating']//a[contains(text(), ' reviews')]"));
+                return Search.ElementByXPath($".//div[@class='rating']//a[contains(text(), ' reviews')]");
             }
         }
 
@@ -19,7 +19,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath($".//ul[@class='nav nav-tabs']//a[contains(text(), 'Reviews')]"));
+                return Search.ElementByXPath($".//ul[@class='nav nav-tabs']//a[contains(text(), 'Reviews')]");
             }
         }
 
@@ -27,7 +27,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return new ProductPageDescription(driver);
+                return new ProductPageDescription();
             }
         }
 
@@ -35,15 +35,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return new ProductPageReviewLogic(driver);
+                return new ProductPageReviewLogic();
             }
         }
         #endregion
 
         #region Initialization and Verifycation
-        public ProductPageInfo(IWebDriver driver) : base(driver)
+        public ProductPageInfo()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
@@ -74,7 +73,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         public ProductPageDescription ClickOnDescriptionLink()
         {
             DescriptionLink.Click();
-            return new ProductPageDescription(driver);
+            return new ProductPageDescription();
         }
         #endregion
 
@@ -91,7 +90,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         public ProductPageReview ClickOnReviewsLink()
         {
             ReviewsLinkInNavigation.Click();
-            return new ProductPageReview(driver);
+            return new ProductPageReview();
         }
         #endregion
         #endregion

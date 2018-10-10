@@ -1,18 +1,26 @@
 ﻿using OpenQA.Selenium;
 
 using Selenium_OpenCart.Pages.Body.ProductPage;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Logic.ProductPageLogic
 {
     public class ProductPageLogic
     {
-        protected IWebDriver driver;
+        protected ISearch Search
+        {
+            get
+            {
+                return Application.Get().Search;
+            }
+        }
 
         public ProductPage ProductPage
         {
             get
             {
-                return new ProductPage(driver);
+                return new ProductPage();
             }
         }
 
@@ -20,13 +28,13 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
         {
             get
             {
-                return new ProductPageInfo(driver);
+                return new ProductPageInfo();
             }
         }
 
-        public ProductPageLogic(IWebDriver driver)
+        public ProductPageLogic()
         {
-            this.driver = driver;
+            
         }
     }
 }

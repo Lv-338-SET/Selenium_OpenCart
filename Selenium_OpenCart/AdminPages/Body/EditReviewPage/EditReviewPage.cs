@@ -18,7 +18,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='panel-heading']//h3[@class='panel-title']"));
+                return Search.ElementByXPath(".//div[@class='panel-heading']//h3[@class='panel-title']");
             }
         }
 
@@ -26,7 +26,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-author"));
+                return Search.ElementById("input-author");
             }
         }
 
@@ -34,7 +34,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-product"));
+                return Search.ElementById("input-product");
             }
         }
 
@@ -42,7 +42,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-text"));
+                return Search.ElementById("input-text");
             }
         }
 
@@ -50,7 +50,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElements(By.XPath(".//input[@type='radio' and @name='rating']")).ToList();
+                return Search.ElementsByXPath(".//input[@type='radio' and @name='rating']").ToList();
             }
         }
 
@@ -58,7 +58,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-date-added"));
+                return Search.ElementById("input-date-added");
             }
         }
 
@@ -66,7 +66,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElements(By.XPath(".//select[@id='input-status']//option")).ToList();
+                return Search.ElementsByXPath(".//select[@id='input-status']//option").ToList();
             }
         }
 
@@ -74,15 +74,14 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//button[@data-original-title='Save']"));
+                return Search.ElementByXPath(".//button[@data-original-title='Save']");
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public EditReviewPage(IWebDriver driver) : base(driver)
+        public EditReviewPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 

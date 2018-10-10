@@ -1,18 +1,24 @@
-﻿using OpenQA.Selenium;
-
-using Selenium_OpenCart.AdminPages.HeaderAndNavigation;
+﻿using Selenium_OpenCart.AdminPages.HeaderAndNavigation;
+using Selenium_OpenCart.Tools.SearchWebElements;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.AdminLogic
 {
     public class AdminPageLogic
     {
-        protected IWebDriver driver;
+        protected ISearch Search
+        {
+            get
+            {
+                return Application.Get().Search;
+            }
+        }
 
         public Header Header
         {
             get
             {
-                return new Header(driver);
+                return new Header();
             }
         }
 
@@ -20,13 +26,13 @@ namespace Selenium_OpenCart.AdminLogic
         {
             get
             {
-                return new Navigation(driver);
+                return new Navigation();
             }
         }
 
-        public AdminPageLogic(IWebDriver driver)
+        public AdminPageLogic()
         {
-            this.driver = driver;
+
         }
     }
 }

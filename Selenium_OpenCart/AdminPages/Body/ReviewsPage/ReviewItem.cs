@@ -3,7 +3,6 @@
 using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Data.ProductReview.Rating;
 using Selenium_OpenCart.Data.ProductReview.ReviewStatus;
-using Selenium_OpenCart.AdminPages.Body.EditReviewPage;
 
 namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
 {
@@ -70,9 +69,8 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         #endregion
 
         #region Initialization And Verifycation
-        public ReviewItem(IWebDriver driver, IWebElement currentReview) : base(driver)
+        public ReviewItem(IWebElement currentReview)
         {
-            this.driver = driver;
             this.currentReview = currentReview;
             VerifyPage();
         }
@@ -151,7 +149,7 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         public EditReviewPage.EditReviewPage ClickOnEditLink()
         {
             EditLink.Click();
-            return new EditReviewPage.EditReviewPage(driver);
+            return new EditReviewPage.EditReviewPage();
         }
         #endregion
         #endregion

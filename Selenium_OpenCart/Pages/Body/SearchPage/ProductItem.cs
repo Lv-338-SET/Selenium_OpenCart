@@ -50,14 +50,14 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public ProductPageLogic ClickProductImage()
         {
             productImage.Click();
-            return new ProductPageLogic(driver);
+            return new ProductPageLogic();
         }
         
         //ProductName
         public ProductPageLogic ClickProductName()
         {
             productName.Click();
-            return new ProductPageLogic(driver);
+            return new ProductPageLogic();
         }
 
         //GetTextFromLabel

@@ -1,6 +1,4 @@
-﻿using OpenQA.Selenium;
-
-using Selenium_OpenCart.AdminPages.Body.ReviewsPage;
+﻿using Selenium_OpenCart.AdminPages.Body.ReviewsPage;
 using Selenium_OpenCart.AdminPages.Body.EditReviewPage;
 using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Data.ProductReview.ReviewStatus;
@@ -13,13 +11,13 @@ namespace Selenium_OpenCart.AdminLogic
         {
             get
             {
-                return new EditReviewPage(driver);
+                return new EditReviewPage();
             }
         }
 
-        public EditReviewPageLogic(IWebDriver driver) : base(driver)
+        public EditReviewPageLogic()
         {
-            this.driver = driver;
+
         }
 
         /// <summary>
@@ -48,7 +46,7 @@ namespace Selenium_OpenCart.AdminLogic
         {
             EditReviewPage.SetReviewStatus(ReviewStatusList.Enabled);
             EditReviewPage.ClickOnSaveButton();
-            return new ReviewsPageSuccessAllert(driver);
+            return new ReviewsPageSuccessAllert();
         }
     }
 }

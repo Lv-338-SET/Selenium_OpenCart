@@ -46,7 +46,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         #endregion
 
         #region Initialization And Verifycation
-        public ReviewItem(IWebDriver driver, IWebElement currnetReview) : base(driver)
+        public ReviewItem(IWebElement currnetReview)
         {
             this.currnetReview = currnetReview;
             VerifyPage();
