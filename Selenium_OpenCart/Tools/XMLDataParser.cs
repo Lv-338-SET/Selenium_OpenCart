@@ -69,13 +69,13 @@ namespace OpenCartDB
             doc.Save("cart.xml");
 
         }
-        public void CreateCategoryXML()
+        public void CreateCategoryXML(string name, string description)
         {
             XmlDocument doc = new XmlDocument();
             XmlElement el = (XmlElement)doc.AppendChild(doc.CreateElement("category"));
             el.AppendChild(doc.CreateElement("id")).InnerText = "2";
-            el.AppendChild(doc.CreateElement("name")).InnerText = "Cat1";
-            el.AppendChild(doc.CreateElement("description")).InnerText = "desc1";
+            el.AppendChild(doc.CreateElement("name")).InnerText = name;
+            el.AppendChild(doc.CreateElement("description")).InnerText = description;
             el.AppendChild(doc.CreateElement("parent")).InnerText = "2";
             doc.Save("category.xml");
         }
