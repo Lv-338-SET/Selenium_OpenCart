@@ -1,14 +1,11 @@
-﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
+﻿using System.Threading;
+using OpenQA.Selenium;
+using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.CheckoutPage;
 using Selenium_OpenCart.Pages.Body.ContactPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
-using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
-using System;
-using System.Threading;
 
 namespace Selenium_OpenCart.Pages.Header
 {
@@ -43,9 +40,9 @@ namespace Selenium_OpenCart.Pages.Header
         //Constructor
         public TopBar(IWebDriver driver)
         {
-            Search = TestsApplication.Get().Search;
+            Search = Application.Get().Search;
             //this.driver = driver;
-            this.driver = TestsApplication.Get().Browser.Driver;
+            this.driver = Application.Get().Browser.Driver;
         }
 
         //Methods
@@ -71,7 +68,7 @@ namespace Selenium_OpenCart.Pages.Header
         {
             WishListButton.Click();
             Thread.Sleep(1500);
-            return new WishListPage(driver);
+            return new WishListPage();
         }
 
         public string GetWishListButtonContent()
@@ -79,11 +76,11 @@ namespace Selenium_OpenCart.Pages.Header
             return WishListButtonContent.Text; 
         }
 
-        public ShoppingCartPage ShoppingCartButtonClick()
+        public ShopingCartPage ShoppingCartButtonClick()
         {
             ShopingCardButton.Click();
             Thread.Sleep(2000);
-            return new ShoppingCartPage(driver);
+            return new ShopingCartPage(driver);
         }
 
         public CheckoutPage CheckoutButtonClick()

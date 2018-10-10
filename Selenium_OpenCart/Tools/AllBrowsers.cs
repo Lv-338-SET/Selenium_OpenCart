@@ -3,7 +3,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using Selenium_OpenCart.Data.Application;
-using System;
 using System.Collections.Generic;
 
 namespace Selenium_OpenCart.Tools
@@ -17,8 +16,11 @@ namespace Selenium_OpenCart.Tools
     {
         public IWebDriver GetBrowser(ApplicationSource applicationSource)
         {
-            ChromeOptions options = new ChromeOptions();
-            options.AddArguments(applicationSource.optionsParams);
+            if (applicationSource.optionsParams != null)
+            {
+                ChromeOptions options = new ChromeOptions();
+                options.AddArguments(applicationSource.optionsParams);
+            }
             return new ChromeDriver();
         }
     }
@@ -27,8 +29,11 @@ namespace Selenium_OpenCart.Tools
     {
         public IWebDriver GetBrowser(ApplicationSource applicationSource)
         {
-            FirefoxOptions options = new FirefoxOptions();
-            options.AddArguments(applicationSource.optionsParams);
+            if (applicationSource.optionsParams != null)
+            {
+                FirefoxOptions options = new FirefoxOptions();
+                options.AddArguments(applicationSource.optionsParams);
+            }
             return new FirefoxDriver();
         }
     }

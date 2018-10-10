@@ -1,4 +1,6 @@
-﻿namespace Selenium_OpenCart.Data.Application
+﻿using System;
+
+namespace Selenium_OpenCart.Data.Application
 {
     public class ApplicationSource
     {
@@ -12,8 +14,10 @@
 
         //Params for brouser. Each Arguments most be preceeded by two dashes ("--")
         public string[] optionsParams = null;
+        public string LoginPagetUrl { get { return $"{HomePageUrl}index.php?route=account/logout"; } }
+        public string LogoutPageUrl { get { return $"{HomePageUrl}index.php?route=account/logout"; } }
         public string HomePageUrl { get; private set; }
-        
+
         public ApplicationSource(string browserName,
                 long implicitWaitTimeOut,
                 long explicitTimeOut,
@@ -24,7 +28,20 @@
             this.ImplicitWaitTimeOut = implicitWaitTimeOut;
             this.ExplicitTimeOut = explicitTimeOut;
             this.HomePageUrl = homePageUrl;
-            this.optionsParams = new string[1];
+            SetOptions(optionsParams);
+            
+        }
+
+        private void SetOptions(string[] optionsParams)
+        {
+            if (optionsParams == null)
+            {
+                this.optionsParams = new string[] {""};
+            }
+            else
+            {
+
+            }
         }
     }
 }

@@ -52,7 +52,7 @@ namespace Selenium_OpenCart.Tests
             WishListWithProducts wishlist = new WishListWithProducts(Application.Get().Browser.Driver);
             string productNameFromWishList = wishlist.GetProduct().GetProductName();
             wishlist.GetProduct().ClickAddToCartButton();
-            string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductName();
+            string productNameFromCart = topbar.ShoppingCartButtonClick().GetProduct().GetProductName();
             Assert.AreEqual(productNameFromWishList, productNameFromCart, "Element is not added to cart from wishlist");
         }
 
@@ -75,7 +75,7 @@ namespace Selenium_OpenCart.Tests
         public void AfterClass()
         {
             TopBar topBar = new TopBar(Application.Get().Browser.Driver);
-            topBar.ShopingCartButtonClick().GetProduct().ClickRemoveButton();
+            topBar.ShoppingCartButtonClick().GetProduct().ClickRemoveButton();
             Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
             Application.Remove();
         }

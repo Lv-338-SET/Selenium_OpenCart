@@ -14,15 +14,15 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
 
         public override void ResetWaits()
         {
-            TestsApplication.Get().Browser.Driver.Manage().Timeouts().ImplicitWait
-                = TimeSpan.FromSeconds(TestsApplication.Get().ApplicationSource.ImplicitWaitTimeOut);
+            Application.Get().Browser.Driver.Manage().Timeouts().ImplicitWait
+                = TimeSpan.FromSeconds(Application.Get().ApplicationSource.ImplicitWaitTimeOut);
         }
 
         public override bool PresenceOfWebElement(IWebElement element)
         {
             bool result = false;
             long startTime = GetSecondStamp();
-            while ((GetSecondStamp() - startTime <= TestsApplication.Get().ApplicationSource.ImplicitWaitTimeOut)
+            while ((GetSecondStamp() - startTime <= Application.Get().ApplicationSource.ImplicitWaitTimeOut)
                    && !result)
             {
                 try
@@ -43,7 +43,7 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
         {
             bool result = false;
             long startTime = GetSecondStamp();
-            while ((GetSecondStamp() - startTime <= TestsApplication.Get().ApplicationSource.ImplicitWaitTimeOut)
+            while ((GetSecondStamp() - startTime <= Application.Get().ApplicationSource.ImplicitWaitTimeOut)
                   && !result)
             {
                 try
@@ -62,12 +62,12 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
 
         public override IWebElement GetWebElement(By by)
         {
-            return TestsApplication.Get().Browser.Driver.FindElement(by);
+            return Application.Get().Browser.Driver.FindElement(by);
         }
 
         public override IReadOnlyCollection<IWebElement> GetWebElements(By by)
         {
-            return TestsApplication.Get().Browser.Driver.FindElements(by);
+            return Application.Get().Browser.Driver.FindElements(by);
         }
     }
 }
