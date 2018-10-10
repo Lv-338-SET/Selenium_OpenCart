@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.WishListPage
 {
-    class WishListTableItem
+    public class WishListTableItem
     {
         protected IWebElement Image { get; private set; }
         protected IWebElement ProductName { get; private set; }
@@ -65,14 +65,6 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         }
 
         #endregion 
-
-        #region Business Logic
-        public bool ProductNameIsAppropriate(string product)
-        {
-            return product.ToLower() == GetProductName().ToLower();
-
-        }
-        #endregion
 
     }
 }

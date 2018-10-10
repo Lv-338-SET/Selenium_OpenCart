@@ -43,5 +43,17 @@ namespace Selenium_OpenCart.Pages.Body.MainPage
         {
             return ListProduct;
         }
+
+        public ProductItem FindAppropriateProduct(string product)
+        {
+            foreach (var item in ListProduct)
+            {
+                if (item.IsAppropriate(product))
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
     }
 }
