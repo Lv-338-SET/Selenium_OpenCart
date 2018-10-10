@@ -1,0 +1,32 @@
+DBDataReader - клас для доступу до БД.
+Створення об'єкта:
+	DBDataReader reader = new DBDataReader();
+
+Виклик методів з об'єкта класу.
+Методи:
+	GetProducts(string whereString = "") - метод для отримання усіх продуктів з БД. 
+		Повертає List<IProduct>
+		whereString - необов'язковий параметр, заповнюється при фільтації вибірки.
+		наприклад: whereString = "name LIKE '%Apple%'" - шукає усі продукти, які в назві містять слово Apple.
+		Шукати можна по любому полю, яке є в класі Product (Data папка).
+		Якщо поле int - то whereString має такий вигляд: "product_id = 25"
+
+	GetProductsReview(string whereString = "") - метод для отримання усіх review з БД. 
+		Повертає List<IProductReview>
+
+	GetUsers(string whereString = "") - метод для отримання усіх юзерів з БД. 
+		Повертає List<IUser>
+		
+	GetCategories(string whereString = "") - метод для отримання категорій фільтру з БД. 
+		Повертає List<ICategory>
+		
+	GetCart(string whereString = "") - метод для отримання кошиків з БД. 
+		Повертає List<ICart>
+		
+	GetCurrency(string whereString = "") - метод для отримання валюти з БД. 
+		Повертає List<ICurrency>
+		
+Example:
+	
+	DBDataReader reader = new DBDataReader();
+	IUser user = reader.GetUsers("username = 'test@gmail.com'").FirstOrDefault();//Дістати юзера з логіном 'test@gmail.com'

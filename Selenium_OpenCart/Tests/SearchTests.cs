@@ -11,6 +11,7 @@ using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Data.Product;
 using Selenium_OpenCart.Data.Search;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Address;
 
 namespace Selenium_OpenCart.Tests
 {
@@ -43,6 +44,7 @@ namespace Selenium_OpenCart.Tests
             driver.Navigate().GoToUrl(URL);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
+            var list = new DBDataReader().GetAddress();
 
             int actual = logicSearch
                 .Search(InputData

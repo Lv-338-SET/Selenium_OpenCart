@@ -91,6 +91,8 @@
     <Compile Include="AdminPages\LoginPage\LoginPage.cs" />
     <Compile Include="AdminPages\HeaderAndNavigation\Navigation.cs" />
     <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPage.cs" />
+    <Compile Include="Data\Address\AddressRepository.cs" />
+    <Compile Include="Data\Address\Address.cs" />
     <Compile Include="Data\AdminPageExceptions\AdminPageExceptions.cs" />
     <Compile Include="Data\Application\ApplicationSource.cs" />
     <Compile Include="Data\Application\ApplicationSourceRepository.cs" />
