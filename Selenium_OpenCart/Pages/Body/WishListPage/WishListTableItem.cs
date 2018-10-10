@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using OpenQA.Selenium;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Pages.Body.WishListPage
 {
@@ -19,7 +20,7 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         protected IWebElement RemoveFromWishlistButton { get; private set; }
 
 
-        public WishListTableItem(IWebDriver driver, IWebElement element)
+        public WishListTableItem(IWebElement element)
         {
             Image = element.FindElement(By.XPath("//td[@class='text-center']//img"));
             ProductName = element.FindElement(By.CssSelector(".text-left >a"));

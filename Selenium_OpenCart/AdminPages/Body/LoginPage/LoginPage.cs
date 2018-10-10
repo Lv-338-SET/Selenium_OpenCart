@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
+using Selenium_OpenCart.AdminLogic;
 using Selenium_OpenCart.Data.User;
 
 namespace Selenium_OpenCart.AdminPages
 {
-    public class LoginPage
+    public class LoginPage : LoginPageLogic
     {
-        private IWebDriver driver;
         #region Properties
         protected IWebElement UsernameInput
         {
             get
             {
-                return driver.FindElement(By.Id("input-username"));
+                return Search.ElementById("input-username");
             }
         }
 
@@ -25,7 +20,7 @@ namespace Selenium_OpenCart.AdminPages
         {
             get
             {
-                return driver.FindElement(By.Id("input-password"));
+                return Search.ElementById("input-password");
             }
         }
 
@@ -33,15 +28,14 @@ namespace Selenium_OpenCart.AdminPages
         {
             get
             {
-                return driver.FindElement(By.XPath(".//form//div//button[@type='submit']"));
+                return Search.ElementByXPath(".//form//div//button[@type='submit']");
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public LoginPage(IWebDriver driver)
+        public LoginPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 

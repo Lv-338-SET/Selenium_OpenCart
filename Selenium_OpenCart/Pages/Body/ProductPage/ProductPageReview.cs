@@ -15,7 +15,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-name"));
+                return Search.ElementById("input-name");
             }
         }
 
@@ -23,7 +23,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-review"));
+                return Search.ElementById("input-review");
             }
         }
 
@@ -31,7 +31,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElements(By.XPath(".//form[@id='form-review']//input[@type='radio' and @name='rating']")).ToList();
+                return Search.ElementsByXPath(".//form[@id='form-review']//input[@type='radio' and @name='rating']").ToList();
             }
         }
 
@@ -39,7 +39,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.Id("button-review"));
+                return Search.ElementById("button-review");
             }
         }
 
@@ -48,9 +48,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             get
             {
                 List<ReviewItem> tmp = new List<ReviewItem>();
-                foreach (IWebElement currentReview in driver.FindElements(By.XPath(".//div[@id='review']//table//tbody")))
+                foreach (IWebElement currentReview in Search.ElementsByXPath(".//div[@id='review']//table//tbody"))
                 {
-                    tmp.Add(new ReviewItem(driver, currentReview));
+                    tmp.Add(new ReviewItem(currentReview));
                 }
                 return tmp;
             }
@@ -58,9 +58,8 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         #endregion
 
         #region Initialization And Verifycation
-        public ProductPageReview(IWebDriver driver) : base(driver)
-        {
-            this.driver = driver;            
+        public ProductPageReview()
+        {        
             VerifyPage();
         }
 

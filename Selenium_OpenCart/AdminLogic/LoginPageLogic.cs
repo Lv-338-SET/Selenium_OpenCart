@@ -1,25 +1,31 @@
-﻿using OpenQA.Selenium;
-
-using Selenium_OpenCart.AdminPages;
+﻿using Selenium_OpenCart.AdminPages;
 using Selenium_OpenCart.Data.User;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.AdminLogic
 {
     public class LoginPageLogic
     {
-        readonly IWebDriver driver;
+        protected ISearch Search
+        {
+            get
+            {
+                return Application.Get().Search;
+            }
+        }
 
         public LoginPage LoginPage
         {
             get
             {
-                return new LoginPage(driver);
+                return new LoginPage();
             }
         }
 
-        public LoginPageLogic(IWebDriver driver)
+        public LoginPageLogic()
         {
-            this.driver = driver;
+
         }
 
         /// <summary>
@@ -62,7 +68,7 @@ namespace Selenium_OpenCart.AdminLogic
             ClickClearAndInputTextInUsernameInput(user);
             ClickClearAndInputTextInPasswordInput(user);
             LoginPage.ClickOnLoginButton();
-            return new AdminPageLogic(driver);
+            return new AdminPageLogic();
         }
     }
 }

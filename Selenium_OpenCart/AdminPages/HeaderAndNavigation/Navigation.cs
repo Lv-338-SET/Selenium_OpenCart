@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 
 using Selenium_OpenCart.AdminLogic;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
 {
@@ -11,15 +12,14 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
         {
             get
             {
-                return driver.FindElement(By.Id("menu-catalog"));
+                return Search.ElementById("menu-catalog");
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public Navigation(IWebDriver driver) : base(driver)
+        public Navigation()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
@@ -45,7 +45,7 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
         public Catalog ClickOnCatalogLink()
         {
             CatalogLink.Click();
-            return new Catalog(driver);
+            return new Catalog();
         }
         #endregion
         #endregion
@@ -58,15 +58,23 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
         {
             get
             {
-                return driver.FindElement(By.XPath(".//ul[@id='collapse1']//li//a[text()='Reviews']"));
+                //STRATEGY OT WORKING
+                //Application.Get().Search.SetExplicitStrategy();
+                //IWebElement tmp = Search.ElementByXPath(".//ul[@id='collapse1']//li//a[text()='Reviews']");
+                //Application.Get().Search.SetImplicitStrategy();
+                Application.Get().Search.SetExplicitStrategy();
+                OpenQA.Selenium.Support.UI.WebDriverWait wait = new OpenQA.Selenium.Support.UI.WebDriverWait(Application.Get().Browser.Driver, System.TimeSpan.FromSeconds(1));
+                wait.Until(d => Search.ElementByXPath(".//ul[@id='collapse1']//li//a[text()='Reviews']").Displayed);
+                IWebElement tmp = Search.ElementByXPath(".//ul[@id='collapse1']//li//a[text()='Reviews']");
+                Application.Get().Search.SetImplicitStrategy();
+                return tmp;
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public Catalog(IWebDriver driver) : base(driver)
+        public Catalog()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
@@ -92,7 +100,7 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
         public ReviewsPageLogic ClickOnReviewLink()
         {
             ReviewLink.Click();
-            return new ReviewsPageLogic(driver);
+            return new ReviewsPageLogic();
         }
         #endregion
         #endregion

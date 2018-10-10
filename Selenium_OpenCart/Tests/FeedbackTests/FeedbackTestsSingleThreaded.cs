@@ -16,6 +16,7 @@ using Selenium_OpenCart.AdminLogic;
 using Selenium_OpenCart.AdminPages.HeaderAndNavigation;
 using Selenium_OpenCart.AdminPages.Body.ReviewsPage;
 using Selenium_OpenCart.Pages.Body.SearchPage;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Tests.FeedbackTests
 {
@@ -23,8 +24,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
     [SingleThreaded]
     public class FeedbackTestsSingleThreaded
     {
-        IWebDriver driver;
-
         const string URL = "http://40.118.125.245/";
         const string ADMIN_URL = "http://40.118.125.245/admin";
 
@@ -32,32 +31,19 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         const string REVIEWS_PAGE_NAME = "Reviews";
         const string REVIEW_ADDED_ALERT_TEXT = "Thank you for your review. It has been submitted to the webmaster for approval.";
 
-        const int IMPLISIT_WAIT = 5;
-        const int NO_IMPLISIT_WAIT = 0;
-        const int EXPLISIT_WAIT = 1;
-
         bool TestCase649 = false;
         bool TestCase670 = false;
-
-        [OneTimeSetUp]
-        public void BeforeAllTests()
-        {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.AddArguments("--start-maximized");
-            driver = new ChromeDriver(chromeOptions);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
-        }
-
-        [OneTimeTearDown]
-        public void AfterAllTests()
-        {
-            driver.Quit();
-        }
 
         [TearDown]
         public void AfterEachTest()
         {
-            driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
+        }
+
+        [OneTimeTearDown]
+        public void AfterAllTest()
+        {
+            Application.Remove();
         }
 
         private static readonly object[] ValidProductReview =
@@ -73,13 +59,13 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview"), Order(1)]
         public void TestCase649AddReviewTest(IProductReview review)
         {
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.OpenUrl(URL);
 
             HomePage homePage;
-            Assert.DoesNotThrow(() => { homePage = new HomePage(driver);  },
+            Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver);  },
                 "Step 1 Failed: Not home page");
 
-            List<ProductItem> searchPage = new SearchMethods(driver)
+            List<ProductItem> searchPage = new SearchMethods(Application.Get().Browser.Driver)
                 .Search(review.GetProductName())
                 .GetListProduct();
             Assert.True(searchPage.Any(), 
@@ -104,28 +90,19 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReviewAndAdminUser"), Order(2)]
         public void TestCase670AproveReviewTest(IProductReview review, IUser user)
         {
-            Assert.IsTrue(TestCase649, 
+            Assert.IsTrue(TestCase649,
                 "Blocked. Preconditions fail: add review test failed");
 
-            driver.Navigate().GoToUrl(ADMIN_URL);
+            Application.Get().Browser.OpenUrl(ADMIN_URL);
 
-            LoginPageLogic loginPage = new LoginPageLogic(driver);
+            LoginPageLogic loginPage = new LoginPageLogic();
             Assert.True(loginPage.LoginPage.IsLoginPage(), 
                 "Step 1 Failed: Not login page");
 
-            AdminPageLogic homePage = new LoginPageLogic(driver).InputValidUserAndLogin(user);
+            AdminPageLogic homePage = loginPage.InputValidUserAndLogin(user);
             Assert.AreEqual(homePage.Header.GetTextFromCurnetPageLable(), ADMIN_HOME_PAGE_NAME,
                 "Step 2 Failed: Not admin home page");
              Catalog catalog = homePage.Navigation.ClickOnCatalogLink();
-
-            //
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
-
-            wait.Until(d => catalog.GetTextFromReviewLink().Equals(REVIEWS_PAGE_NAME));
-
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
-            //
 
             ReviewsPageLogic reviewsPage = catalog.ClickOnReviewLink();
             Assert.True(reviewsPage.ReviewsPage.IsReviewsPage(), 
@@ -147,13 +124,13 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649 && TestCase670, 
                 "Blocked. Preconditions fail: add review test failed or approve review test failed");
 
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.OpenUrl(URL);
 
             HomePage homePage;
-            Assert.DoesNotThrow(() => { homePage = new HomePage(driver); },
+            Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver); },
                 "Step 1 Failed: Not home page");
 
-            List<ProductItem> searchPage = new SearchMethods(driver)
+            List<ProductItem> searchPage = new SearchMethods(Application.Get().Browser.Driver)
                 .Search(review.GetProductName())
                 .GetListProduct();
             Assert.True(searchPage.Any(), 
@@ -180,25 +157,16 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649,
                 "Blocked. Preconditions fail: add review test failed");
 
-            driver.Navigate().GoToUrl(ADMIN_URL);
+            Application.Get().Browser.OpenUrl(ADMIN_URL);
 
-            LoginPageLogic loginPage = new LoginPageLogic(driver);
+            LoginPageLogic loginPage = new LoginPageLogic();
             Assert.True(loginPage.LoginPage.IsLoginPage(),
                 "Step 1 Failed: Not login page");
 
-            AdminPageLogic homePage = new LoginPageLogic(driver).InputValidUserAndLogin(user);
+            AdminPageLogic homePage = loginPage.InputValidUserAndLogin(user);
             Assert.AreEqual(homePage.Header.GetTextFromCurnetPageLable(), ADMIN_HOME_PAGE_NAME,
                 "Step 2 Failed: Not admin home page");
             Catalog catalog = homePage.Navigation.ClickOnCatalogLink();
-
-            //
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
-
-            wait.Until(d => catalog.GetTextFromReviewLink().Equals(REVIEWS_PAGE_NAME));
-
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
-            //
 
             ReviewsPageLogic reviewsPage = catalog.ClickOnReviewLink();
             Assert.True(reviewsPage.ReviewsPage.IsReviewsPage(),

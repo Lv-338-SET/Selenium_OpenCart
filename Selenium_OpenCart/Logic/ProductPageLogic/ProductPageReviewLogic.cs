@@ -13,16 +13,13 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
         {
             get
             {
-                return new ProductPageReview(driver);                
-            }
-            private set
-            {
+                return new ProductPageReview();                
             }
         }
 
-        public ProductPageReviewLogic(IWebDriver driver) : base(driver)
+        public ProductPageReviewLogic()
         {
-            this.driver = driver;
+
         }
 
         /// <summary>
@@ -67,7 +64,7 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             ClickClearAndInputToReviewTextInput(productReview);
             ProductPageReview.SelectRating(productReview);
             ProductPageReview.ClickOnAddReviewButton();
-            return new SuccessfullyAddedReviewPage(driver);
+            return new SuccessfullyAddedReviewPage();
         }
 
         /// <summary>
@@ -82,7 +79,7 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             ClickClearAndInputToReviewerNameInput(productReview);
             ClickClearAndInputToReviewTextInput(productReview);
             ProductPageReview.ClickOnAddReviewButton();
-            return new UnsuccessfullyAddedReviewPage(driver);
+            return new UnsuccessfullyAddedReviewPage();
         }
 
         /// <summary>
@@ -100,7 +97,7 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             ClickClearAndInputToReviewTextInput(invalidReview);
             ProductPageReview.SelectRating(validReview);
             ProductPageReview.ClickOnAddReviewButton();
-            return new UnsuccessfullyAddedReviewPage(driver);
+            return new UnsuccessfullyAddedReviewPage();
         }
 
         /// <summary>
@@ -118,7 +115,7 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             ClickClearAndInputToReviewTextInput(validReview);
             ProductPageReview.SelectRating(validReview);
             ProductPageReview.ClickOnAddReviewButton();
-            return new UnsuccessfullyAddedReviewPage(driver);
+            return new UnsuccessfullyAddedReviewPage();
         }
     }
 }

@@ -9,15 +9,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         {
             get
             {
-                return driver.FindElement(By.CssSelector("#form-review > div.alert.alert-danger.alert-dismissible"));
+                return Search.ElementByCssSelector("#form-review > div.alert.alert-danger.alert-dismissible");
             }
         }
         #endregion
 
         #region Initialization and Verifycation        
-        public UnsuccessfullyAddedReviewPage(IWebDriver driver) : base(driver)
+        public UnsuccessfullyAddedReviewPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
