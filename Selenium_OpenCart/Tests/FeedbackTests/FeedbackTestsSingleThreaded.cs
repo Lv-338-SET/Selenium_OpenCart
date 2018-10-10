@@ -31,10 +31,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         const string REVIEWS_PAGE_NAME = "Reviews";
         const string REVIEW_ADDED_ALERT_TEXT = "Thank you for your review. It has been submitted to the webmaster for approval.";
 
-        const int IMPLISIT_WAIT = 5;
-        const int NO_IMPLISIT_WAIT = 0;
-        const int EXPLISIT_WAIT = 1;
-
         bool TestCase649 = false;
         bool TestCase670 = false;
 
@@ -94,8 +90,8 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReviewAndAdminUser"), Order(2)]
         public void TestCase670AproveReviewTest(IProductReview review, IUser user)
         {
-            //Assert.IsTrue(TestCase649, 
-            //    "Blocked. Preconditions fail: add review test failed");
+            Assert.IsTrue(TestCase649,
+                "Blocked. Preconditions fail: add review test failed");
 
             Application.Get().Browser.OpenUrl(ADMIN_URL);
 
@@ -107,15 +103,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.AreEqual(homePage.Header.GetTextFromCurnetPageLable(), ADMIN_HOME_PAGE_NAME,
                 "Step 2 Failed: Not admin home page");
              Catalog catalog = homePage.Navigation.ClickOnCatalogLink();
-
-            //
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
-            //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
-
-            //wait.Until(d => catalog.GetTextFromReviewLink().Equals(REVIEWS_PAGE_NAME));
-
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
-            //
 
             ReviewsPageLogic reviewsPage = catalog.ClickOnReviewLink();
             Assert.True(reviewsPage.ReviewsPage.IsReviewsPage(), 
@@ -180,15 +167,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.AreEqual(homePage.Header.GetTextFromCurnetPageLable(), ADMIN_HOME_PAGE_NAME,
                 "Step 2 Failed: Not admin home page");
             Catalog catalog = homePage.Navigation.ClickOnCatalogLink();
-
-            ////
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
-            //WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
-
-            //wait.Until(d => catalog.GetTextFromReviewLink().Equals(REVIEWS_PAGE_NAME));
-
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
-            ////
 
             ReviewsPageLogic reviewsPage = catalog.ClickOnReviewLink();
             Assert.True(reviewsPage.ReviewsPage.IsReviewsPage(),
