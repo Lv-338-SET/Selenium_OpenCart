@@ -22,33 +22,41 @@ namespace Selenium_OpenCart.Logic
             this.WebDriver = webDriver;
         }
 
+
         public void FindElementProduct(string nameProduck)
         {
             HomePage homePage = new HomePage(WebDriver);
             TopBar topBar = new TopBar(WebDriver);
             homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
-            topBar.ShoppingCartButtonClick();
-            //shopingCardPage.ShopingCardButtonClick();
+            topBar.ShopingCartButtonClick();
+        }
+
+        public void FindNameProduckt(string nameProduck)
+        {
+            ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
+            HomePage homePage = new HomePage(WebDriver);
+            TopBar topBar = new TopBar(WebDriver);
+            homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
+            topBar.ShopingCartButtonClick();
+            shopingCartPage.GetProduct().ClickRemoveButton();
 
         }
 
         public HomePage IsCartIsEmpty()
         {
             HomePage homePage = new HomePage(WebDriver);
-            ShoppingCartPage shopingCartPage = new ShoppingCartPage(WebDriver);
+            ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
             TopBar topBar = new TopBar(WebDriver);
-            topBar.ShoppingCartButtonClick();
+            topBar.ShopingCartButtonClick();
             shopingCartPage.GoToMainPageIfCartIsEmpty();
             return new HomePage(WebDriver);
-
         }
-
-        public ShoppingCartPage RemoveFromCart(string name)
+        public void VerifyIsCartEmpty()
         {
-            ShoppingCartPage shopingCartPage = new ShoppingCartPage(WebDriver);
-            return shopingCartPage;
+            TopBar topBar = new TopBar(WebDriver);
+            ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
+            topBar.ShopingCartButtonClick();
+            shopingCartPage.GetEmptyCartMessage();
         }
-
-
     }
 }

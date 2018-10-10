@@ -3,6 +3,7 @@ using System.Linq;
 using OpenQA.Selenium;
 
 using Selenium_OpenCart.AdminLogic;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
 {
@@ -13,7 +14,7 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//form//table//thead//tr//td//input[@type='checkbox']"));
+                return Search.ElementByXPath(".//form//table//thead//tr//td//input[@type='checkbox']");
             }
             
         }
@@ -22,7 +23,7 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//button[@data-original-title='Delete']"));
+                return Search.ElementByXPath(".//button[@data-original-title='Delete']");
             }
         }
 
@@ -31,9 +32,9 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
             get
             {
                 List<ReviewItem> tmp = new List<ReviewItem>();
-                foreach (IWebElement item in driver.FindElements(By.XPath(".//form//table//tbody//tr")).ToList())
+                foreach (IWebElement item in Search.ElementsByXPath(".//form//table//tbody//tr").ToList())
                 {
-                    tmp.Add(new ReviewItem(driver, item));
+                    tmp.Add(new ReviewItem(item));
                 }
                 return tmp;
             }
@@ -41,50 +42,63 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         #endregion
 
         #region Initialization And Verifycation
-        public ReviewsPage(IWebDriver driver) : base(driver)
+        public ReviewsPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = SelectAllReviewsCheckBox;
             tmp = DeleteButton;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsReviewsPage()
+        {
+            return VerifyPage();
+        }
+
         #region Atomic operations for SelectAllReviewsCheckBox
         public void SelectAllReviews()
         {
-            this.SelectAllReviewsCheckBox.Click();
+            SelectAllReviewsCheckBox.Click();
         }
         #endregion
 
         #region Atomic operations for DeleteButton
+        /// <summary>
+        /// Deletes review
+        /// </summary>
+        /// <returns>Returns on ReviewsPageLogic</returns>
         public ReviewsPageLogic DeleteReview()
         {
-            this.DeleteButton.Click();
-            IAlert alert = driver.SwitchTo().Alert();
+            DeleteButton.Click();
+            IAlert alert = Application.Get().Browser.Driver.SwitchTo().Alert();
             alert.Accept();
-            return new ReviewsPageLogic(driver);
+            return new ReviewsPageLogic();
         }
         #endregion
 
         #region Atomic operations for ReviewsList
+        /// <summary>
+        /// Get all reviews from page is at least one review exist
+        /// </summary>
+        /// <returns>List<ReviewItem> is any review exist and null if not</returns>
         public List<ReviewItem> GetReviewsListIfAnyExists()
         {
             if (IsAnyReviewExist())
             {
-                return this.ReviewsList;
+                return ReviewsList;
             }
             return null;
         }
 
         public bool IsAnyReviewExist()
         {
-            return (this.ReviewsList.Any());
+            return (ReviewsList.Any());
         }
         #endregion
         #endregion

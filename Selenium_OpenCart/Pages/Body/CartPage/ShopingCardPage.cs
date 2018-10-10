@@ -11,25 +11,21 @@ using Selenium_OpenCart.Pages.Body.WishListPage;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    public class ShoppingCartPage : Header.Header
+    class ShopingCartPage : Header.Header
     {
-        protected IWebElement Table { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']")); } }
-        protected IWebElement ButtonContinue { get { return driver.FindElement(By.XPath("//a[text() = 'Continue']")); } }
-        protected List<ShopingCartTableItem> ListShopingCartProducts { get { return ListProductFromHomePage(driver.FindElements(By.XPath("//div[@class='table-responsive']//tbody"))); } }
+        protected IWebElement TableRow
+        { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tbody")); } }
+        protected IWebElement ButtonContinue
+        { get { return driver.FindElement(By.XPath("//a[text() = 'Continue']")); } }
+        protected IWebElement EmptyCartMessage
+        { get { return driver.FindElement(By.XPath("//p[contains(text(),'Your shopping cart is empty!')]")); } }
+        protected ShopingCartTableItem ShopingCartProduct
+        { get { return GetProductElement(GetTableRow()); } }
 
-        public ShoppingCartPage(IWebDriver driver) : base(driver)
+
+
+        public ShopingCartPage(IWebDriver driver) : base(driver)
         { }
-
-        public List<ShopingCartTableItem> ListProductFromHomePage(IReadOnlyCollection<IWebElement> cartPageElements)
-        {
-            List<ShopingCartTableItem> listElements = new List<ShopingCartTableItem>();
-
-            foreach (var currents in cartPageElements)
-            {
-                listElements.Add(new ShopingCartTableItem(driver, currents));
-            }
-            return listElements;
-        }
 
         public HomePage GoToMainPageIfCartIsEmpty()
         {
@@ -37,25 +33,25 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
             return new HomePage(driver);
         }
 
-        public List<ShopingCartTableItem> GetProductList()
+        public ShopingCartTableItem GetProductElement(IWebElement webElement)
         {
-            return this.ListShopingCartProducts;
-        }
-        public IWebElement GetTable()
-        {
-            return this.Table;
+            return new ShopingCartTableItem(webElement);
         }
 
-        public bool IsCardEmpty(IWebElement element)
+        public IWebElement GetTableRow()
         {
-            try
-            {
-                return ButtonContinue != null || ButtonContinue.Enabled || ButtonContinue.Displayed;
-            }
-            catch (StaleElementReferenceException)
-            {
-                return false;
-            }
+            return this.TableRow;
+        }
+
+        public ShopingCartTableItem GetProduct()
+        {
+            return this.ShopingCartProduct;
+        }
+
+
+        public bool GetEmptyCartMessage()
+        {
+            return EmptyCartMessage.Displayed;
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using System.Threading;
 
 using Selenium_OpenCart.Logic.ProductPageLogic;
 
@@ -50,14 +51,14 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public ProductPageLogic ClickProductImage()
         {
             productImage.Click();
-            return new ProductPageLogic(driver);
+            return new ProductPageLogic();
         }
         
         //ProductName
         public ProductPageLogic ClickProductName()
         {
             productName.Click();
-            return new ProductPageLogic(driver);
+            return new ProductPageLogic();
         }
 
         //GetTextFromLabel
@@ -92,16 +93,19 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public SearchPage ClickCartButton()
         {
             productIconCart.Click();
+            Thread.Sleep(1500);
             return new SearchPage(driver);
         }
-        public SearchPage ClickCartfavourite()
+        public SearchPage ClickCartFavourite()
         {
             productIconFavourite.Click();
+            Thread.Sleep(1500);
             return new SearchPage(driver);
         }
         public SearchPage ClickCompareButton()
         {
             productIconCompare.Click();
+            Thread.Sleep(1500);
             return new SearchPage(driver);
         }
         public bool IsAppropriate(string product)

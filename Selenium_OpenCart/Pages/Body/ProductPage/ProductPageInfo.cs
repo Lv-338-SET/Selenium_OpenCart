@@ -11,7 +11,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath($".//div[@class='rating']//a[contains(text(), ' reviews')]"));
+                return Search.ElementByXPath($".//div[@class='rating']//a[contains(text(), ' reviews')]");
             }
         }
 
@@ -19,7 +19,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath($".//ul[@class='nav nav-tabs']//a[contains(text(), 'Reviews')]"));
+                return Search.ElementByXPath($".//ul[@class='nav nav-tabs']//a[contains(text(), 'Reviews')]");
             }
         }
 
@@ -27,7 +27,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return new ProductPageDescription(driver);
+                return new ProductPageDescription();
             }
         }
 
@@ -35,49 +35,62 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return new ProductPageReviewLogic(driver);
+                return new ProductPageReviewLogic();
             }
         }
         #endregion
 
         #region Initialization and Verifycation
-        public ProductPageInfo(IWebDriver driver) : base(driver)
+        public ProductPageInfo()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = ReviewsLinkInNavigation;
             tmp = DescriptionLink;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsProductPageInfo()
+        {
+            return VerifyPage();
+        }
+
         #region Atomic operations for DescriptionLink
         public string GetTextFromDescriptionLink()
         {
-            return this.DescriptionLink.Text;
+            return DescriptionLink.Text;
         }
 
+        /// <summary>
+        /// Click on Description link in menu
+        /// </summary>
+        /// <returns>ProductPageDescription page</returns>
         public ProductPageDescription ClickOnDescriptionLink()
         {
-            this.DescriptionLink.Click();
-            return new ProductPageDescription(driver);
+            DescriptionLink.Click();
+            return new ProductPageDescription();
         }
         #endregion
 
         #region Atomic operations for ReviewsLink
-        public string GetTextFromReviewsLink()
+        public string GetTextFromReviewsLinkInMenu()
         {
-            return this.ReviewsLinkInNavigation.Text;
+            return ReviewsLinkInNavigation.Text;
         }
 
+        /// <summary>
+        /// Click on Review link in menu
+        /// </summary>
+        /// <returns>ProductPageReview page</returns>
         public ProductPageReview ClickOnReviewsLink()
         {
-            this.ReviewsLinkInNavigation.Click();
-            return new ProductPageReview(driver);
+            ReviewsLinkInNavigation.Click();
+            return new ProductPageReview();
         }
         #endregion
         #endregion

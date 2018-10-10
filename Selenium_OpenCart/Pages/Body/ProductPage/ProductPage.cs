@@ -1,17 +1,19 @@
 ﻿using OpenQA.Selenium;
-
+using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Logic.ProductPageLogic;
+
+using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
-    public class ProductPage : Header.Header
+    public class ProductPage : ProductPageLogic
     {
         #region Properties
         protected IWebElement ProductNameLablel
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@id='content']//h1"));
+                return Search.ElementByXPath(".//div[@id='content']//h1");
             }
         }
 
@@ -19,7 +21,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='rating']//a[text() = 'Write a review']"));
+                return Search.ElementByXPath(".//div[@class='rating']//a[text() = 'Write a review']");
             }
         }
 
@@ -27,7 +29,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='rating']//a[contains(text(),' reviews')]"));
+                return Search.ElementByXPath(".//div[@class='rating']//a[contains(text(),' reviews')]");
             }
         }
 
@@ -35,7 +37,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//button[contains(@onclick,'compare.add')]"));
+                return Search.ElementByXPath(".//button[contains(@onclick,'compare.add')]");
             }
         }
 
@@ -43,66 +45,93 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return new ProductPageInfo(driver);
+                return new ProductPageInfo();
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public ProductPage(IWebDriver driver) : base(driver)
+        public ProductPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = ProductNameLablel;
             tmp = WriteRewiewLink;
             tmp = ReviewsLink;
             tmp = CompareProductButton;
+            return true;
         }
         #endregion
 
         #region Atomic operations
-        #region Atomic operations for ProductNameLabel
-        public string GetProductNameText()
+        public bool IsProductPage()
         {
-            return this.ProductNameLablel.Text;
+            return VerifyPage();
+        }
+
+        #region Atomic operations for ProductNameLabel
+        public string GetTextFromProductName()
+        {
+            return ProductNameLablel.Text;
+        }
+
+        /// <summary>
+        /// Check is it product page of specific product
+        /// </summary>
+        /// <param name="productReview">Produc review in IProductReview format</param>
+        /// <returns>True if product name equals and false if not</returns>
+        public bool IsProductPageOf(IProductReview productReview)
+        {
+            return GetTextFromProductName().Equals(productReview.GetProductName());
         }
         #endregion
 
         #region Atomic operations for WriteReviewLink
-        public string GetWriteReviewLinkText()
+        public string GetTextFromWriteReviewLink()
         {
-            return this.WriteRewiewLink.Text;
+            return WriteRewiewLink.Text;
         }
 
+        /// <summary>
+        /// Click on write review link
+        /// </summary>
+        /// <returns>ProductPageReviewLogic page</returns>
         public ProductPageReviewLogic ClickWriteReviewLink()
         {
-            this.WriteRewiewLink.Click();
-            return new ProductPageReviewLogic(driver);
+            WriteRewiewLink.Click();
+            return new ProductPageReviewLogic();
         }
         #endregion
 
         #region Atomic operations for ReviewsLink
-        public string GetReviewsLinkText()
+        public string GetTextFromReviewsLink()
         {
-            return this.ReviewsLink.Text;
+            return ReviewsLink.Text;
         }
 
+        /// <summary>
+        /// Click on Reviews
+        /// </summary>
+        /// <returns>ProductPageReviewLogic page</returns>
         public ProductPageReviewLogic ClickReviewsLink()
         {
-            this.ReviewsLink.Click();
-            return new ProductPageReviewLogic(driver);
+            ReviewsLink.Click();
+            return new ProductPageReviewLogic();
         }
         #endregion
 
-        #region Atomic operations for CpmpareProductButton
-        public ProductPageSuccessfullyAddedProductForComparison ClickCompareProductButton()
+        #region Atomic operations for CompareProductButton
+        /// <summary>
+        /// Click on compare product button
+        /// </summary>
+        /// <returns>SuccessfullyAddedProductForComparisonPage page</returns>
+        public SuccessfullyAddedProductForComparisonPage ClickOnCompareProductButton()
         {
-            this.CompareProductButton.Click();
-            return new ProductPageSuccessfullyAddedProductForComparison(driver);
+            CompareProductButton.Click();
+            return new SuccessfullyAddedProductForComparisonPage();
         }
         #endregion
         #endregion

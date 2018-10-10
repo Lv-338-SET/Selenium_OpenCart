@@ -5,7 +5,10 @@ using NUnit.Framework;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Logic;
+using Selenium_OpenCart.Data.Application;
 using System.Threading;
+using Selenium_OpenCart.Tools;
+using OpenQA.Selenium.Support.UI;
 
 namespace Selenium_OpenCart.Tests
 {
@@ -15,44 +18,43 @@ namespace Selenium_OpenCart.Tests
     {
         bool addedToWishList = false;
 
-        IWebDriver driver;
-
         [TestCase("iPhone")]
         [Order(0)]
         public void WishListWorks_AddingIphone_IsAdded(string product)
         {
-            TopBar topBar = new TopBar(driver);
+            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
             bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
-            SearchMethods search = new SearchMethods(driver);
+            SearchMethods search = new SearchMethods(Application.Get().Browser.Driver);
             search.Search(product).AddAppropriateItemToWishList(product);
-            bool IsNotEmptyAfterAdding = topBar.WishListButtonClick().IsNotEmpty();
-            Assert.AreEqual(IsEmptyBeforeAdding,IsNotEmptyAfterAdding,"Expected element is not added to wishlist");
+            bool IsEmptyAfterAdding = topBar.WishListButtonClick().IsEmpty();
+            Assert.AreNotEqual(IsEmptyBeforeAdding,IsEmptyAfterAdding,"Expected element is not added to wishlist");
             addedToWishList = true;
         }
         [TestCase("iPhone")]
         [Order(1)]
         public void SuccessAlertMessageIsDisplayedAfterAdding(string product)
         {
-            SearchMethods search = new SearchMethods(driver);
+            SearchMethods search = new SearchMethods(Application.Get().Browser.Driver);
             bool result = search.Search(product).AddAppropriateItemToWishList(product).isSuccessMessageDisplayed();
             Assert.IsTrue(result, "Success message is not displayed");
         }
 
 
-        //[TestCase]
-        //[Order(2)]
+        [TestCase]
+        [Order(2)]
 
-        //public void AddToCartFromWishList_AddIphone_IsAdded()
-        //{
-        //    Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-        //    TopBar topbar = new TopBar(driver);
-        //    topbar.WishListButtonClick();
-        //    WishListWithProducts wishlist = new WishListWithProducts(driver);
-        //    string productNameFromWishList = wishlist.GetProduct().GetProductName();
-        //    wishlist.GetProduct().ClickAddToCartButton();
-        //    string productNameFromCart = topbar.ShoppingCartButtonClick().GetProduct().GetProductPrice();
-        //    Assert.AreEqual(productNameFromWishList,productNameFromCart,"Element is not added to cart from wishlist");
-        //}
+        public void AddToCartFromWishList_AddIphone_IsAdded()
+        {
+            Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
+            TopBar topbar = new TopBar(Application.Get().Browser.Driver);
+           
+            topbar.WishListButtonClick();
+            WishListWithProducts wishlist = new WishListWithProducts(Application.Get().Browser.Driver);
+            string productNameFromWishList = wishlist.GetProduct().GetProductName();
+            wishlist.GetProduct().ClickAddToCartButton();
+            string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductName();
+            Assert.AreEqual(productNameFromWishList, productNameFromCart, "Element is not added to cart from wishlist");
+        }
 
 
         [TestCase]
@@ -61,9 +63,9 @@ namespace Selenium_OpenCart.Tests
         public void RemoveFromWishList_RemoveIphone_IsRemoved()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-            TopBar topBar = new TopBar(driver);
+            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
             topBar.WishListButtonClick();
-            WishListWithProducts wishList = new WishListWithProducts(driver);
+            WishListWithProducts wishList = new WishListWithProducts(Application.Get().Browser.Driver);
             wishList.GetProduct().ClickRemoveFromWishListButton();
             bool result = wishList.SuccessMessageIsDisplayed();
             Assert.IsTrue(result, "Product still exists");
@@ -72,31 +74,27 @@ namespace Selenium_OpenCart.Tests
         [OneTimeTearDown]
         public void AfterClass()
         {
-            driver.Quit();
+            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
+            topBar.ShopingCartButtonClick().GetProduct().ClickRemoveButton();
+            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Remove();
         }
 
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/");
+            Application.Get().Browser.OpenUrl("http://40.118.125.245/");
 
             //Login page opening
-            driver.FindElement(By.ClassName("caret")).Click();
-            driver.FindElement(By.LinkText("Login")).Click();
+            Application.Get().Search.ElementByClassName("caret").Click();
+            Application.Get().Search.ElementByLinkText("Login").Click();
 
             //LOGGING IN
-            driver.FindElement(By.Id("input-email")).SendKeys("iwilltestyounow@gmail.com");
-            driver.FindElement(By.Id("input-password")).SendKeys("qwerty12345");
-            driver.FindElement(By.XPath("//input[@type='submit' and @value='Login']")).Click();
+            Application.Get().Search.ElementById("input-email").SendKeys("test@gmail.com");
+            Application.Get().Search.ElementById("input-password").SendKeys("testtest");
+            Application.Get().Search.ElementByXPath("//input[@type='submit' and @value='Login']").Click();
         }
-        [SetUp]
-        public void BeforeMethod()
-        {
-            driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/");
-        }
+        
 
     }
 }

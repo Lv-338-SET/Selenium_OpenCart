@@ -5,25 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Pages.Body.WishListPage
 {
-    public class WishListWithProducts:WishListPage
+    public class WishListWithProducts
     {
-        protected IWebElement Table { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']")); } }
-        protected IWebElement TableRow { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tbody")); } }
-        protected WishListTableItem product { get { return GetProduct(GetTableRow()); } }
-        protected IWebElement SuccessMessage { get { return driver.FindElement(By.CssSelector(".alert.alert-success")); }}
+        protected IWebElement Table { get { return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']"); } }
+        protected IWebElement TableRow { get { return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']//tbody"); } }
+        protected WishListTableItem product { get { return GetProductElement(GetTableRow()); } }
+        protected IWebElement SuccessMessage { get { return Application.Get().Search.ElementByCssSelector(".alert.alert-success"); }}
 
-        public WishListWithProducts(IWebDriver driver) : base(driver)
+        public WishListWithProducts(IWebDriver driver)
         {
 
         }
 
         #region Initialization
-        public WishListTableItem GetProduct(IWebElement element)
+        public WishListTableItem GetProductElement(IWebElement element)
         {
-            return new WishListTableItem(driver, element);
+            return new WishListTableItem(element);
         }
         #endregion
 
@@ -42,7 +43,6 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         }
         public bool SuccessMessageIsDisplayed()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             return SuccessMessage.Displayed;
         }
 

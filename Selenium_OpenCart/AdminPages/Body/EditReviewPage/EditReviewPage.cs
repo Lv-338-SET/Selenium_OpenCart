@@ -14,11 +14,19 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
     public sealed class EditReviewPage : AdminPageLogic
     {
         #region Properties
+        private IWebElement PageTitle
+        {
+            get
+            {
+                return Search.ElementByXPath(".//div[@class='panel-heading']//h3[@class='panel-title']");
+            }
+        }
+
         private IWebElement ReviewerName
         {
             get
             {
-                return driver.FindElement(By.Id("input-author"));
+                return Search.ElementById("input-author");
             }
         }
 
@@ -26,7 +34,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-product"));
+                return Search.ElementById("input-product");
             }
         }
 
@@ -34,7 +42,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-text"));
+                return Search.ElementById("input-text");
             }
         }
 
@@ -42,7 +50,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElements(By.XPath(".//input[@type='radio' and @name='rating']")).ToList();
+                return Search.ElementsByXPath(".//input[@type='radio' and @name='rating']").ToList();
             }
         }
 
@@ -50,7 +58,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-date-added"));
+                return Search.ElementById("input-date-added");
             }
         }
 
@@ -58,7 +66,7 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElements(By.XPath(".//select[@id='input-status']//option")).ToList();
+                return Search.ElementsByXPath(".//select[@id='input-status']//option").ToList();
             }
         }
 
@@ -66,19 +74,18 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//button[@data-original-title='Save']"));
+                return Search.ElementByXPath(".//button[@data-original-title='Save']");
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public EditReviewPage(IWebDriver driver) : base(driver)
+        public EditReviewPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = ReviewerName;
             tmp = ProductName;
@@ -88,71 +95,91 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
             List<IWebElement> tmp2 = ReviewRating;
             if (tmp2.Count != RatingRepository.ListOfRating.Count)
             {
-                throw new CountRatingExeption("Expected " + RatingRepository.ListOfRating.Count + " raiting radio boxed bu was " + tmp2.Count);
+                throw new CountRatingExeption("Expected " + RatingRepository.ListOfRating.Count + " raiting radio buttons but was " + tmp2.Count);
             }
             tmp2 = ReviewStatus;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsEditReviewPage()
+        {
+            return VerifyPage();
+        }
+
+        #region Atomic operations for PageTitle
+        public string GetTextFomPageTitle()
+        {
+            return PageTitle.Text;
+        }
+        #endregion
+
         #region Atomic operations for ReviewerName
         public string GetTextFomReviewerNameInput()
         {
-            return this.ReviewerName.Text;
+            return ReviewerName.Text;
         }
         #endregion
 
         #region Atomic operations for ProductName
         public string GetTextFomProductNameInput()
         {
-            return this.ProductName.Text;
+            return ProductName.Text;
         }
         #endregion
 
         #region Atomic operations for ReviewText
         public string GetTextFomReviewTextInput()
         {
-            return this.ReviewText.Text;
+            return ReviewText.Text;
         }
         #endregion
 
         #region Atomic operations for ReviewDate
+        /// <summary>
+        /// NOTE! In these case date format is yyyy-MM-dd but in all others is dd/MM/yyyy
+        /// so date format is changed to suport using on other pages
+        /// </summary>
+        /// <returns>Date when review was written in format dd/MM/yyyy</returns>
         public string GetDateFomReviewDateInput()
         {
-            //Format at server in thise case is yyyy-MM-dd but in all others is dd/MM/yyyy
-            
             DateTime.TryParse(this.ReviewDate.GetAttribute("value"), out DateTime date);
             return date.ToString(@"dd\/MM\/yyyy");
         }
         #endregion
 
         #region Atomic operations for ReviewRating
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Review rating in RatingList enum or none if cant parce rating</returns>
         public RatingList GetSelectedRating()
         {
             if (!int.TryParse(this.ReviewRating.FirstOrDefault(x => x.Selected).GetAttribute("value"), out int selected))
             {
                 return RatingList.None;
             }
-            return RatingList.None;
+            return selected.ToRating();
         }
         #endregion
 
         #region Atomic operations for ReviewStatus
         public ReviewStatusList GetReviewStatus()
         {
-            return this.ReviewStatus.FirstOrDefault(x => x.GetAttribute("selected") == "selected").Text.ToReviewStatus();
+            return ReviewStatus.FirstOrDefault(x => x.GetAttribute("selected") == "selected").Text.ToReviewStatus();
         }
 
         public void SetReviewStatus(ReviewStatusList status)
         {
-            this.ReviewStatus.FirstOrDefault(x => x.Text == status.ToString()).Click();
+            ReviewStatus.FirstOrDefault(x => x.Text == status.ToString()).Click();
         }
         #endregion
 
         #region Atomic operations for SaveButton
         public void ClickOnSaveButton()
         {
-            this.SaveButton.Click();
+            SaveButton.Click();
         }
         #endregion
         #endregion
@@ -168,6 +195,11 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
             return !first.Equals(second);
         }
 
+        /// <summary>
+        /// Checks if data on page is equal to some obj
+        /// </summary>
+        /// <param name="obj">Can be IProductReview or ReviewItem,  represents Review that will be checked to equals</param>
+        /// <returns>True is two reviews data are equal and false if not</returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -178,19 +210,19 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
             {
                 IProductReview productReview = obj as IProductReview;
 
-                return (this.GetTextFomProductNameInput().Equals(productReview.GetProductName())
-                    && this.GetTextFomReviewerNameInput().Equals(productReview.GetReviewerName())
-                    && this.GetDateFomReviewDateInput().Equals(productReview.GetDate())
-                    && this.GetSelectedRating().Equals(productReview.GetRating()));
+                return (GetTextFomProductNameInput().Equals(productReview.GetProductName())
+                    && GetTextFomReviewerNameInput().Equals(productReview.GetReviewerName())
+                    && GetDateFomReviewDateInput().Equals(productReview.GetDate())
+                    && GetSelectedRating().Equals(productReview.GetRating()));
             }
             else if (obj is ReviewItem)
             {
                 ReviewItem productReview = obj as ReviewItem;
 
-                return (this.GetTextFomProductNameInput().Equals(productReview.GetProductName())
-                    && this.GetTextFomReviewerNameInput().Equals(productReview.GetReviewerName())
-                    && this.GetDateFomReviewDateInput().Equals(productReview.GetReviewDate())
-                    && this.GetSelectedRating().Equals(productReview.GetReviewRaiting()));
+                return (GetTextFomProductNameInput().Equals(productReview.GetProductName())
+                    && GetTextFomReviewerNameInput().Equals(productReview.GetReviewerName())
+                    && GetDateFomReviewDateInput().Equals(productReview.GetReviewDate())
+                    && GetSelectedRating().Equals(productReview.GetReviewRaiting()));
             }
             else
             {
@@ -200,8 +232,8 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
 
         public override int GetHashCode()
         {
-            return (this.GetTextFomProductNameInput() + " " + this.GetTextFomReviewerNameInput() + " " + this.GetTextFomReviewTextInput() + " " 
-                + this.GetSelectedRating() + " " + this.GetDateFomReviewDateInput()).GetHashCode();
+            return (GetTextFomProductNameInput() + " " + GetTextFomReviewerNameInput() + " " + GetTextFomReviewTextInput() + " " 
+                + GetSelectedRating() + " " + GetDateFomReviewDateInput()).GetHashCode();
         }
         #endregion
 

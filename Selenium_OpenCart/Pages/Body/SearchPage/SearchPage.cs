@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Header;
+using Selenium_OpenCart.Pages.Body.ProductPage;
 using System.Threading;
 
 namespace Selenium_OpenCart.Pages.Body.SearchPage
@@ -32,7 +33,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         protected IWebElement productPageLabel
             { get { return driver.FindElement(By.ClassName("text-right")); } }
         protected IWebElement successAlertMessage
-        { get { return driver.FindElement(By.XPath("//div[@class='alert alert-success']")); } }
+        { get { return driver.FindElement(By.XPath("//div[@class='alert alert-success alert-dismissible']")); } }
 
         protected SelectElement selectCategory
             { get { return new SelectElement(driver.FindElement(By.Name("category_id"))); } }
@@ -101,19 +102,16 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             searchTextBoxInsideContent.Clear();
             return this;
         }
-
         public SearchPage ClicksearchTextBoxInsideContent()
         {
             searchTextBoxInsideContent.Click();
             return this;
         }
-
         public SearchPage SetTextInsearchTextBoxInsideContent(string text)
         {
             this.searchTextBoxInsideContent.SendKeys(text);
             return this;
         }
-
         public string GetTextFromsearchTextBoxInsideContent()
         {
             return this.searchTextBoxInsideContent.Text;
@@ -124,7 +122,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.searchCategoryCheck.Click();
             return this;
         }
-
         public bool GetSearchCategoryValue()
         {
             return this.searchCategoryCheck.Selected;
@@ -134,7 +131,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         {
             return this.searchDescriptionChek.Selected;
         }
-
         public SearchPage ClickSearchDescription()
         {
             this.searchDescriptionChek.Click();
@@ -164,7 +160,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.productCompareLabel.Click();
             return this;
         }
-
         public string GetProductCompareText()
         {
             return this.productCompareLabel.Text;
@@ -190,7 +185,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.selectCategory.SelectByText(category);
             return this;
         }
-
         public string GetSelectedCategory()
         {
             return this.selectCategory.SelectedOption.Text;
@@ -201,7 +195,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.selectSortBy.SelectByText(sorted);
             return this;
         }
-
         public string GetSelectedSortBy()
         {
             return this.selectSortBy.SelectedOption.Text;
@@ -212,7 +205,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.selectShow.SelectByText(category);
             return this;
         }
-
         public string GetSelectedShow()
         {
             return this.selectShow.SelectedOption.Text;
@@ -232,15 +224,26 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
 
         public SearchPage AddAppropriateItemToWishList(string product)
         {
-            FindAppropriateProduct(product).ClickCartfavourite();
+            FindAppropriateProduct(product).ClickCartFavourite();
             return new SearchPage(driver);
+        }
+
+        public SearchPage AddAppropriateProductToComparison(string product)
+        {
+            FindAppropriateProduct(product).ClickCompareButton();
+            return new SearchPage(driver);
+        }
+
+        public ProductPage.ProductPage OpenAppropriateProductPage(string product)
+        {
+            FindAppropriateProduct(product).ClickProductName();
+            return new ProductPage.ProductPage(driver);
         }
 
         public string successAlertMessageText()
         {
             return successAlertMessage.Text;
         }
-
         public bool isSuccessMessageDisplayed()
         {
             return successAlertMessage.Displayed;
@@ -253,5 +256,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
 
 
         #endregion
+
+
     }
 }

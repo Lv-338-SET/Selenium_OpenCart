@@ -4,34 +4,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Selenium_OpenCart.Pages.Body.ProductPage;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
     public class ShopingCartTableItem
     {
-        protected IWebElement Image { get; private set; }
+        protected IWebDriver driver;
+        public IWebElement Image { get; private set; }
         protected IWebElement ProductName { get; private set; }
         protected IWebElement Model { get; private set; }
         protected IWebElement CountsTextBox { get; private set; }
         protected IWebElement UpdateButton { get; private set; }
         protected IWebElement RemoveButton { get; private set; }
         protected IWebElement UnitPrice { get; private set; }
+        protected IWebElement TotalPrice { get; private set; }
 
-        public ShopingCartTableItem(IWebDriver driver, IWebElement element)
+        public ShopingCartTableItem(IWebElement element)
         {
-            Image = element.FindElement(By.XPath("//tr/td[@class='text-center']//img"));
-            ProductName = element.FindElement(By.CssSelector(".text-left >a"));
-            Model = element.FindElement(By.XPath("//td[@class='text-left' and string-length(text()) > 0]"));
-            CountsTextBox = element.FindElement(By.XPath("td[@class='input-group btn-block']"));
-            UpdateButton = element.FindElement(By.XPath("//td[@class='btn btn-primary'"));
-            RemoveButton = element.FindElement(By.XPath("//td[@class='btn btn-danger'"));
-            UnitPrice = element.FindElement(By.XPath("//div[@class='price']"));
+            Initialize(element);
+        }
+
+        private void Initialize(IWebElement element)
+        {
+            Image = element.FindElement(By.XPath("//td[1]"));
+            ProductName = element.FindElement(By.CssSelector("tr > td:nth-child(2) > a"));
+            Model = element.FindElement(By.XPath("//td[3]"));
+            CountsTextBox = element.FindElement(By.XPath("//td[4]/div/input[@class='form-control']"));
+            UpdateButton = element.FindElement(By.XPath("//td[4]/div//i[@class='fa fa-refresh']"));
+            RemoveButton = element.FindElement(By.XPath("//td[4]/div//i[@class='fa fa-times-circle']"));
+            UnitPrice = element.FindElement(By.XPath("//td[5]"));
+            TotalPrice = element.FindElement(By.XPath("//td[6]"));
         }
 
         //Image
-        public void ImageClick()
+        public ProductPage.ProductPage ImageClick()
         {
             Image.Click();
+            return new ProductPage.ProductPage();
         }
 
         //ProductName
@@ -55,7 +65,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         //CountsTextBox
         public string GetCountText()
         {
-           return CountsTextBox.Text;
+            return CountsTextBox.Text;
         }
         public void ClickCountsTextBox()
         {
@@ -69,7 +79,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         {
             CountsTextBox.SendKeys(count);
         }
-       
+
 
         //UpdateButton
         public void ClickUpdateButton()
@@ -87,6 +97,12 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         public string GetProductPrice()
         {
             return this.UnitPrice.Text;
+        }
+
+        //TotalPrice
+        public string GetProductTotalPrice()
+        {
+            return this.TotalPrice.Text;
         }
 
 

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using OpenQA.Selenium;
 
 using Selenium_OpenCart.AdminPages.Body.ReviewsPage;
 using Selenium_OpenCart.Data.ProductReview;
@@ -12,36 +11,58 @@ namespace Selenium_OpenCart.AdminLogic
         {
             get
             {
-                return new ReviewsPage(driver);
+                return new ReviewsPage();
             }
         }
 
-        public ReviewsPageLogic(IWebDriver driver) : base(driver)
+        public ReviewsPageLogic()
         {
-            this.driver = driver;
+
         }
 
-        public ReviewsPageSuccessfullyModifiedReview DeleteAllReviews()
+        /// <summary>
+        /// Deletes all reviews on page
+        /// </summary>
+        /// <returns>ReviewsPageSuccessAllert page</returns>
+        public ReviewsPageSuccessAllert DeleteAllReviews()
         {
             ReviewsPage.SelectAllReviews();
             ReviewsPage.DeleteReview();
-            return new ReviewsPageSuccessfullyModifiedReview(driver);
+            return new ReviewsPageSuccessAllert();
         }
 
-        public EditReviewPageLogic EditReviewThatExistAndEqualsTo(IProductReview productReview)
+        /// <summary>
+        /// Open edit review page if these review is on page
+        /// </summary>
+        /// <param name="productReview">Review data in IProductReview format</param>
+        /// <returns>EditReviewPageLogic page if review exist and null if not</returns>
+        public EditReviewPageLogic EditReviewThatEqualsTo(IProductReview productReview)
         {
-            ReviewsPage.GetReviewsListIfAnyExists().FirstOrDefault(x => x.Equals(productReview)).ClickOnEditLink();
-            return new EditReviewPageLogic(driver);
+            ReviewItem tmp = ReviewsPage.GetReviewsListIfAnyExists().FirstOrDefault(x => x.Equals(productReview));
+            if (tmp != null)
+            {
+                tmp.ClickOnEditLink();
+                return new EditReviewPageLogic();
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public ReviewsPageSuccessfullyModifiedReview DeleteAllReviewsThatEqualsTo(IProductReview productReview)
+        /// <summary>
+        /// Deletes all review on the page that equals to some review
+        /// </summary>
+        /// <param name="productReview">Review data in IProductReview format</param>
+        /// <returns>ReviewsPageSuccessAllert page</returns>
+        public ReviewsPageSuccessAllert DeleteAllReviewsThatEqualsTo(IProductReview productReview)
         {
             foreach (ReviewItem item in ReviewsPage.GetReviewsListIfAnyExists().Where(x => x.Equals(productReview)))
             {
                 item.SelectReview();
             }
             ReviewsPage.DeleteReview();
-            return new ReviewsPageSuccessfullyModifiedReview(driver);
+            return new ReviewsPageSuccessAllert();
         }
     }
 }
