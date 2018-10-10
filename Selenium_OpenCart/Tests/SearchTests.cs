@@ -18,7 +18,9 @@ namespace Selenium_OpenCart.Tests
         DBDataReader reader;
 
         IWebDriver driver;
+
         const string URL = "http://atqc-shop.epizy.com/";
+        const string SEARCH_STRING = "Apple";
         
         [OneTimeSetUp]
         public void SetUp()
@@ -29,26 +31,26 @@ namespace Selenium_OpenCart.Tests
             reader = new DBDataReader();
         }
 
-        [TestCase("Apple")]
-        public void SearchingResultItemsCount(string search)
+        [Test]
+        public void SearchingResultItemsCount()
         {
             driver.Navigate().GoToUrl(URL);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
 
             int actual = logicSearch
-                .Search(search)
+                .Search(SEARCH_STRING)
                 .GetListProduct()
                 .Count;
 
             int expected = 
-                reader.GetProducts(String.Format("name LIKE '%{0}%'", search)).Count;
+                reader.GetProducts(String.Format("name LIKE '%{0}%'", SEARCH_STRING)).Count;
 
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase("Apple")]
-        public void TestCategoryDropDown(string search)
+        [Test]
+        public void TestCategoryDropDown()
         {
             driver.Navigate().GoToUrl(URL);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
@@ -61,26 +63,26 @@ namespace Selenium_OpenCart.Tests
             );
         }
 
-        [TestCase("Apple", "Tablets", 4)]
-        public void TestCategoryResult(string search, string category, int count)
+        [TestCase("Tablets", 4)]
+        public void TestCategoryResult(string category, int count)
         {
             driver.Navigate().GoToUrl(URL);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
             int actual = logicSearch
-                .SearchByCategory(search, category);
+                .SearchByCategory(SEARCH_STRING, category);
             Assert.AreEqual(count, actual);
         }
 
-        [TestCase("Apple")]
+        [Test]
         public void TestLabelSearch(string search)
         {
             driver.Navigate().GoToUrl(URL);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
             string actual = logicSearch
-                .GetSearchHeader(search);
-            string expected = "Search - " + search;
+                .GetSearchHeader(SEARCH_STRING);
+            string expected = "Search - " + SEARCH_STRING;
 
             Assert.AreEqual(expected, actual);
         }

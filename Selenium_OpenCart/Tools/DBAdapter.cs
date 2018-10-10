@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using Renci.SshNet;
 
 namespace Selenium_OpenCart
 {
@@ -11,19 +12,28 @@ namespace Selenium_OpenCart
     {
         protected MySqlConnection conn;
 
-        protected string DataPath = string.Format("Server=localhost; database={0}; UID=root; password=; SslMode = none", "shop");
+        protected string DataPath = string.Format("Server=localhost; database={0}; UID=opencart; password=opencart; SslMode = none", "shop");
+
+        SshClient client = new SshClient("40.118.125.245", "test", "test");
 
         #region AtomicOperations
-        
+
         /// <summary>
         /// Open connection for DB
         /// </summary>
         /// <returns>Object opened MySqlConnection</returns>
         public MySqlConnection OpenConnection()
         {
-            this.conn = new MySqlConnection(DataPath);
-            conn.Open();
+            client.Connect();
+            var tunnel = new ForwardedPortLocal("127.0.0.1", 3306, "127.0.0.1", 3306);
+            client.AddForwardedPort(tunnel);
+            tunnel.Start();
 
+            if (client.IsConnected)
+            {
+                this.conn = new MySqlConnection(DataPath);
+                conn.Open();
+            }
             return conn;
         }
 
@@ -36,6 +46,7 @@ namespace Selenium_OpenCart
             try
             {
                 conn.Close();
+                client.Disconnect();
                 return true;
             }
             catch
