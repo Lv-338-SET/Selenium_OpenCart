@@ -58,7 +58,7 @@ namespace Selenium_OpenCart.Pages.Header
         public WishListPage WishListButtonClick()
         {
             WishListButton.Click();
-            return new WishListPage(driver);
+            return new WishListPage();
         }
         public string GetWishListButtonContent()
         {
