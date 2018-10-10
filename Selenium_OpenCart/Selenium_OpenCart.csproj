@@ -129,6 +129,8 @@
     <Compile Include="Tests\FeedbackTests\Feedbacktests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleThreaded.cs" />
     <Compile Include="Tests\CartTests.cs" />
+    <Compile Include="Tests\FeedbackTests\Feedbacktests.cs" />
+    <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleThreaded.cs" />
     <Compile Include="Tests\ProductComparisonTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\WishListTests.cs" />
