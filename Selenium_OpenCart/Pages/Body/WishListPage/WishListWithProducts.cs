@@ -12,7 +12,7 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
     {
         protected IWebElement Table { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']")); } }
         protected IWebElement TableRow { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tbody")); } }
-        protected WishListTableItem product { get { return GetProduct(GetTableRow()); } }
+        protected WishListTableItem product { get { return GetProductElement(GetTableRow()); } }
         protected IWebElement SuccessMessage { get { return driver.FindElement(By.CssSelector(".alert.alert-success")); }}
 
         public WishListWithProducts(IWebDriver driver) : base(driver)
@@ -21,7 +21,7 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         }
 
         #region Initialization
-        public WishListTableItem GetProduct(IWebElement element)
+        public WishListTableItem GetProductElement(IWebElement element)
         {
             return new WishListTableItem(driver, element);
         }
