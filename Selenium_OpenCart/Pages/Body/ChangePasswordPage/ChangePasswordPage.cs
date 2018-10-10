@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 
 namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 {
@@ -41,9 +42,10 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
             ChangePasswordConfirm.SendKeys(passwordConfirm);
         }
 
-        public void ClickChangeButton()
+        public MyAccountPage ClickChangeButton()
         {
             ChangeButton.Click();
+            return new MyAccountPage(driver);
         }
 
         static bool VerifyChangePasswordPage(IWebDriver driver)

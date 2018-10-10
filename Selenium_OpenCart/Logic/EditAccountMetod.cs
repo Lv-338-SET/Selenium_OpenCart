@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.EditAccount;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace Selenium_OpenCart.Logic
             login.GoToLoginPage();
             login.FillingUserNamePassword(Email, password);
             MyAccountPage page = new MyAccountPage(driver);
-            page.ClickEditAccount();           
+            page.ClickLinkEditAccount();           
             return new EditAccountPage(driver);
         }
 
