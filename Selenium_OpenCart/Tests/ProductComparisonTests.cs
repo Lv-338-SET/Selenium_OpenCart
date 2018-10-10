@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Selenium_OpenCart.Logic;
+using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,21 +35,24 @@ namespace Selenium_OpenCart.Tests
         }
 
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-660
-        [Test]
-        public void ProductComparison_ClickingTwoTimesCompareButton_OneProductAdded()
+        [TestCase("iMac")]
+        public void ProductComparison_ClickingTwoTimesCompareButton_OneProductAdded(string product)
         {
-            SearchMethods search = new SearchMethods(driver);
-            search.Search("mac")
-                .AddAppropriateProductToComparison("mac")
-                .OpenAppropriateProductPage("mac")
+            //Arrange
+            SearchMethods addedToComparisonProduct = new SearchMethods(driver);
+            ProductComparisonPage columns = new ProductComparisonPage(driver);
+            //Act
+            addedToComparisonProduct.Search(product)
+                .AddAppropriateProductToComparison(product)
+                .OpenAppropriateProductPage(product)
                 .ClickCompareProductButton()
                 .ClickOnCompareProductsPageLink()
                 .GetFirstProductNameText();
-            Assert.AreEqual(search, "mac", "The selected product was not added to the comparison table.");
-            Assert.True(columnsCount == 1, "One product is added to the comparison table several times.");
-
-
-
+            //Assert
+            Assert.AreEqual(product, addedToComparisonProduct, "The selected product was not added to the comparison table.");            
+            Assert.True(columns.CountColumns() == 1, "One product is added to the comparison table several times.");
         }
+
+
     }
 }

@@ -22,7 +22,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         private const string ADD_TO_CART_LAST = "//tbody[last()]/descendant::input[last()]"; //XPath
         private const string REMOVE_FIRST = "//tbody[last()]/descendant::a"; //XPath
         private const string REMOVE_LAST = "//tbody[last()]/tr[last()]/descendant::a[last()]"; //XPath
-        private const string PRODUCT_COLUMN = "tr .text-center"; //CSS
+        //private const string PRODUCT_COLUMN = "tr .text-center"; //CSS
 
         #endregion
 
@@ -91,13 +91,13 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             }
         }
 
-        protected List<ProductItem> ListProduct
-        {
-            get
-            {
-                return InitializeListProduct(driver.FindElements(By.CssSelector(PRODUCT_COLUMN)));
-            }
-        }
+        //protected List<ProductComparisonPage> ListProductColumn
+        //{
+        //    get
+        //    {
+        //        return InitializeListProductColumn(driver.FindElements(By.CssSelector(PRODUCT_COLUMN)));
+        //    }
+        //}
         #endregion
 
         #region Initialization & Verifycation
@@ -114,17 +114,19 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             temp = FirstProductName;
             temp = AddToCartFirst;
             temp = RemoveFirstProduct;
+
+            //var listProductColumn = ListProductColumn;
         }
 
-        private List<ProductItem> InitializeListProduct(IReadOnlyCollection<IWebElement> elements)
-        {
-            List<ProductItem> list = new List<ProductItem>();
-            foreach (var current in elements)
-            {
-                list.Add(new ProductItem(driver, current));
-            }
-            return list;
-        }
+        //private List<ProductComparisonPage> InitializeListProductColumn(IReadOnlyCollection<IWebElement> elements)
+        //{
+        //    List<ProductComparisonPage> list = new List<ProductComparisonPage>();
+        //    foreach (var current in elements)
+        //    {
+        //        list.Add(new ProductComparisonPage(driver));
+        //    }
+        //    return list;
+        //}
         #endregion
 
         #region Atomic operations
@@ -185,11 +187,33 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             return new EmptyProductComparisonPageWhithMessage(driver);
         }
 
-        //public int ColumnsCount()
+        //public ProductComparisonPage ColumnsCount()
         //{
-
-        //    return RemoveFirstProduct.Count;
+        //    int i = 0;
+        //    foreach (var item in ListProductColumn)
+        //    {
+        //        i++;
+        //    }
+        //    return null;
         //}
+
+        public bool IsElementPresent()
+        {
+            try
+            {
+                GetFirstProductNameText();
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
+        public int CountColumns()
+        {
+            return driver.FindElements(By.XPath("//tbody[last()]/descendant::tr")).Count;//try different locator, then replace to constants
+        }
         #endregion
     }
 }
