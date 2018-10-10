@@ -16,7 +16,7 @@
         public static ApplicationSource ChromeTAQC()
         {
             var option = new[] { "--no-proxy-server", "--ignore-certificate-errors" 
-                        , "--disable-extensions", "--start-maximized", "--ignore-certificate-errors" };
+                        , "--disable-extensions", "--start-maximized"};
             return new ApplicationSource(CHROME_BROWSER, 10L, 10L,
                 "http://atqc-shop.epizy.com/", option);
         }

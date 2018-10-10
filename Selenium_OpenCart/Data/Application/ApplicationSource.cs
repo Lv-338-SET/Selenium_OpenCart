@@ -4,11 +4,6 @@
     {
         //Browser Data
         public string BrowserName { get; private set; }
-        //Login Page Link
-        public string LoginUrl { get { return HomePageUrl + "index.php?route=account/login"; } }
-        //Logout Page Link
-        public string LoginOut { get { return HomePageUrl + "index.php?route=account/logout"; } }
-        public string ADMIN_URL { get { return HomePageUrl + "admin"; } }
 
         //Implicit and Implicit Waits
         public long ImplicitWaitTimeOut { get; private set; }

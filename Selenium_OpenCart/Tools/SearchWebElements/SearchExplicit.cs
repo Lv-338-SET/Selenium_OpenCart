@@ -15,7 +15,7 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
 
         public override void ResetWaits()
         {
-            Application.Get().Browser.Driver.Manage().Timeouts().ImplicitWait
+            TestsApplication.Get().Browser.Driver.Manage().Timeouts().ImplicitWait
                 = TimeSpan.FromSeconds(0);
         }
 
@@ -37,8 +37,8 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
 
         public override bool PresenceOfWebElement(IWebElement IWebElement)
         {
-            return new WebDriverWait(Application.Get().Browser.Driver,
-                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
+            return new WebDriverWait(TestsApplication.Get().Browser.Driver,
+                    TimeSpan.FromSeconds(TestsApplication.Get().ApplicationSource.ExplicitTimeOut))
                     .Until(StalenessOf(IWebElement));
         }
 
@@ -66,15 +66,15 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
         //Check Disappearance of web element on page
         public override bool WebElementDisappearance(By by)
         {
-            return new WebDriverWait(Application.Get().Browser.Driver,
-                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
+            return new WebDriverWait(TestsApplication.Get().Browser.Driver,
+                    TimeSpan.FromSeconds(TestsApplication.Get().ApplicationSource.ExplicitTimeOut))
                     .Until(InvisibilityOfElementLocated(by));
         }
 
         public override IWebElement GetWebElement(By by)
         {
-            return new WebDriverWait(Application.Get().Browser.Driver,
-                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
+            return new WebDriverWait(TestsApplication.Get().Browser.Driver,
+                    TimeSpan.FromSeconds(TestsApplication.Get().ApplicationSource.ExplicitTimeOut))
                     .Until(driver => driver.FindElement(by));
         }
 
@@ -101,8 +101,8 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
 
         public override IReadOnlyCollection<IWebElement> GetWebElements(By by)
         {
-            return new WebDriverWait(Application.Get().Browser.Driver,
-                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
+            return new WebDriverWait(TestsApplication.Get().Browser.Driver,
+                    TimeSpan.FromSeconds(TestsApplication.Get().ApplicationSource.ExplicitTimeOut))
                     .Until(VisibilityOfAllElementsLocatedBy(by));
         }
     }

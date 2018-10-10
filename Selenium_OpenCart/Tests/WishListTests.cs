@@ -50,13 +50,13 @@ namespace Selenium_OpenCart.Tests
         //    WishListWithProducts wishlist = new WishListWithProducts(driver);
         //    string productNameFromWishList = wishlist.GetProduct().GetProductName();
         //    wishlist.GetProduct().ClickAddToCartButton();
-        //    string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductPrice();
+        //    string productNameFromCart = topbar.ShoppingCartButtonClick().GetProduct().GetProductPrice();
         //    Assert.AreEqual(productNameFromWishList,productNameFromCart,"Element is not added to cart from wishlist");
         //}
 
 
         [TestCase]
-        [Order(2)]
+        [Order(3)]
 
         public void RemoveFromWishList_RemoveIphone_IsRemoved()
         {
@@ -92,11 +92,11 @@ namespace Selenium_OpenCart.Tests
             driver.FindElement(By.Id("input-password")).SendKeys("qwerty12345");
             driver.FindElement(By.XPath("//input[@type='submit' and @value='Login']")).Click();
         }
-        //[SetUp]
-        //public void BeforeMethod()
-        //{
-        //    driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/");
-        //}
+        [SetUp]
+        public void BeforeMethod()
+        {
+            driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/");
+        }
 
     }
 }

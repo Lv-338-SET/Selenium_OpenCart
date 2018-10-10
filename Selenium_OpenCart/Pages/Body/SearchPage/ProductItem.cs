@@ -77,6 +77,16 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             return this.productExTax.Text;
         }
 
+        public IWebElement GetProductCartButton()
+        {
+            return this.productIconCart;
+        }
+
+        public IWebElement GetProductWishListButton()
+        {
+            return this.productIconFavourite;
+        }
+
         //Buttons
         public SearchPage ClickCartButton()
         {

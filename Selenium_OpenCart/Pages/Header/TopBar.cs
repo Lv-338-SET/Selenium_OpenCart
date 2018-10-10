@@ -57,19 +57,20 @@ namespace Selenium_OpenCart.Pages.Header
 
         public WishListPage WishListButtonClick()
         {
-            Thread.Sleep(1500);
             WishListButton.Click();
+            Thread.Sleep(1500);
             return new WishListPage(driver);
         }
+
         public string GetWishListButtonContent()
         {
             return WishListButtonContent.Text; 
         }
 
-        public ShopingCartPage ShopingCartButtonClick()
+        public ShoppingCartPage ShoppingCartButtonClick()
         {
             ShopingCardButton.Click();
-            return new ShopingCartPage(driver);
+            return new ShoppingCartPage(driver);
         }
 
         public CheckoutPage CheckoutButtonClick()
