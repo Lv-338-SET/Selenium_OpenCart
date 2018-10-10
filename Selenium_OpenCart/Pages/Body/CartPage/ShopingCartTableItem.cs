@@ -8,7 +8,7 @@ using Selenium_OpenCart.Pages.Body.ProductPage;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    class ShopingCartTableItem
+    public class ShopingCartTableItem
     {
         protected IWebDriver driver;
         public IWebElement Image { get; private set; }

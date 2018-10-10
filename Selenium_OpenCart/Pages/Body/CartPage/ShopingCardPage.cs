@@ -11,7 +11,7 @@ using Selenium_OpenCart.Pages.Body.WishListPage;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    class ShopingCartPage : Header.Header
+     public class ShopingCartPage : Header.Header
     {
         protected IWebElement TableRow
         { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tr")); } }
