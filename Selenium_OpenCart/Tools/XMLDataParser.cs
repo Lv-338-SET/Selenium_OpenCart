@@ -41,6 +41,20 @@ namespace Selenium_OpenCart.Tools
                     .Build();
         }
 
+        public IUser GetUserInputData()
+        {
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(XML_PATH + USER_FILE_NAME);
+            XmlElement node = doc.DocumentElement;
+            return User.Get()
+                    .SetUsername(node.GetElementsByTagName("username")[0].InnerText)
+                    .SetPassword(HashPassword(node.GetElementsByTagName("password")[0].InnerText,
+                                 node.GetElementsByTagName("sault")[0].InnerText))
+                    .Build();
+        }
+
+
         public IProduct GetInputProduct() {
 
             XmlDocument doc = new XmlDocument();
