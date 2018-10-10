@@ -13,7 +13,17 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
 {
     public sealed class EditReviewPage : AdminPageLogic
     {
+        const string EDIT_REVIEW_PAGE_TITLE = "Edit Review";
+
         #region Properties
+        private IWebElement PageTitle
+        {
+            get
+            {
+                return driver.FindElement(By.XPath(".//div[@class='panel-heading']//h3[@class='panel-title']"));
+            }
+        }
+
         private IWebElement ReviewerName
         {
             get
@@ -95,6 +105,19 @@ namespace Selenium_OpenCart.AdminPages.Body.EditReviewPage
         #endregion
 
         #region Atomic operations
+        #region Atomic operations for PageTitle
+        public string GetTextFomPageTitle()
+        {
+            return this.PageTitle.Text;
+        }
+
+        public bool IsEditReviewPage()
+        {
+            return this.PageTitle.Text.Equals(EDIT_REVIEW_PAGE_TITLE);
+        }
+        #endregion
+
+
         #region Atomic operations for ReviewerName
         public string GetTextFomReviewerNameInput()
         {

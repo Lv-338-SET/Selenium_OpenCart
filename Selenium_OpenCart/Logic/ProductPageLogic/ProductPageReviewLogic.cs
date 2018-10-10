@@ -3,6 +3,7 @@
 using Selenium_OpenCart.Data.ProductReview;
 
 using Selenium_OpenCart.Pages.Body.ProductPage;
+using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
 
 namespace Selenium_OpenCart.Logic.ProductPageLogic
 {
@@ -25,7 +26,7 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
         }
 
         //Fluent Interface
-        public ProductPageReviewLogic ClickClearAndInputToReviewInput(IProductReview productReview)
+        public ProductPageReviewLogic ClickClearAndInputToReviewTextInput(IProductReview productReview)
         {
             ProductPageReview.ClickOnReviewInput();
             ProductPageReview.ClearReviewInput();
@@ -33,13 +34,37 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             return this;
         }
 
-        public ProductPageSuccessfullyAddedReview InputValidReviewAndClickOnAddReviewButton(IProductReview productReview)
+        public SuccessfullyAddedReviewPage InputValidReviewAndClickOnAddReviewButton(IProductReview productReview)
         {
             ClickClearAndInputToReviewerNameInput(productReview);
-            ClickClearAndInputToReviewInput(productReview);
+            ClickClearAndInputToReviewTextInput(productReview);
             ProductPageReview.SelectRating(productReview);
             ProductPageReview.ClickOnAddReviewButton();
-            return new ProductPageSuccessfullyAddedReview(driver);
+            return new SuccessfullyAddedReviewPage(driver);
+        }
+
+        public NotSelectedRatingAlertPage InputValidReviewButNotSelectRatingAndClickOnAddReviewButton(IProductReview productReview)
+        {
+            ClickClearAndInputToReviewerNameInput(productReview);
+            ClickClearAndInputToReviewTextInput(productReview);
+            ProductPageReview.ClickOnAddReviewButton();
+            return new NotSelectedRatingAlertPage(driver);
+        }
+
+        public InvalidReviewTextAlertPage InputValidReviewerNameAndSelectRatingAndClickOnAddReviewButton(IProductReview productReview)
+        {
+            ClickClearAndInputToReviewerNameInput(productReview);
+            ProductPageReview.SelectRating(productReview);
+            ProductPageReview.ClickOnAddReviewButton();
+            return new InvalidReviewTextAlertPage(driver);
+        }
+
+        public InvalidReviewerNameAlertPage InputValidReviewTextAndSelectRatingAndClickOnAddReviewButton(IProductReview productReview)
+        {
+            ClickClearAndInputToReviewTextInput(productReview);
+            ProductPageReview.SelectRating(productReview);
+            ProductPageReview.ClickOnAddReviewButton();
+            return new InvalidReviewerNameAlertPage(driver);
         }
 
         //Fluent Interface
