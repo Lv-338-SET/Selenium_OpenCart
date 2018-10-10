@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
-
+using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Logic.ProductPageLogic;
+
+using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
@@ -70,6 +72,11 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             return this.ProductNameLablel.Text;
         }
+
+        public bool IsProductPageOf(IProductReview productReview)
+        {
+            return GetProductNameText().Equals(productReview.GetProductName());
+        }
         #endregion
 
         #region Atomic operations for WriteReviewLink
@@ -98,11 +105,11 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         }
         #endregion
 
-        #region Atomic operations for CpmpareProductButton
-        public ProductPageSuccessfullyAddedProductForComparison ClickCompareProductButton()
+        #region Atomic operations for CompareProductButton
+        public SuccessfullyAddedProductForComparisonPage ClickCompareProductButton()
         {
             this.CompareProductButton.Click();
-            return new ProductPageSuccessfullyAddedProductForComparison(driver);
+            return new SuccessfullyAddedProductForComparisonPage(driver);
         }
         #endregion
         #endregion

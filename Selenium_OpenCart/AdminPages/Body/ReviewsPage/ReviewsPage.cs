@@ -8,6 +8,8 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
 {
     public class ReviewsPage : ReviewsPageLogic
     {
+        const string REVIEWS_PAGE_CURNET_PAGE_LABLE = "Reviews";
+
         #region Properties
         protected IWebElement SelectAllReviewsCheckBox
         {
@@ -86,6 +88,14 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         {
             return (this.ReviewsList.Any());
         }
+        #endregion
+
+        #region Atomic operation for verity is page reviews page
+        public bool IsReviewsPage()
+        {
+            return this.Header.GetTextFromCurnetPageLable().Equals(REVIEWS_PAGE_CURNET_PAGE_LABLE);
+        }
+        
         #endregion
         #endregion
     }
