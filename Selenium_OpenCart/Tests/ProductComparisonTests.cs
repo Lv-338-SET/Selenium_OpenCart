@@ -24,9 +24,7 @@ namespace Selenium_OpenCart.Tests
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments("--start-maximized");
             driver = new ChromeDriver(chromeOptions);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);//TODO!!!!!!!!!!!!!!
-
-            
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);//TODO!!!!!!!!!!!!!!            
         }
 
         [OneTimeTearDown]
