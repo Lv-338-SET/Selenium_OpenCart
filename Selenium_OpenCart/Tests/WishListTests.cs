@@ -6,6 +6,7 @@ using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Logic;
 using System.Threading;
+using OpenQA.Selenium.Support.UI;
 
 namespace Selenium_OpenCart.Tests
 {
@@ -46,6 +47,7 @@ namespace Selenium_OpenCart.Tests
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
             TopBar topbar = new TopBar(driver);
+           
             topbar.WishListButtonClick();
             WishListWithProducts wishlist = new WishListWithProducts(driver);
             string productNameFromWishList = wishlist.GetProduct().GetProductName();
@@ -72,6 +74,9 @@ namespace Selenium_OpenCart.Tests
         [OneTimeTearDown]
         public void AfterClass()
         {
+            TopBar topBar = new TopBar(driver);
+            topBar.ShopingCartButtonClick().GetProduct().ClickRemoveButton();
+            driver.Manage().Cookies.DeleteAllCookies();
             driver.Quit();
         }
 
@@ -81,22 +86,18 @@ namespace Selenium_OpenCart.Tests
             driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/");
+            driver.Navigate().GoToUrl("http://40.118.125.245/");
 
             //Login page opening
             driver.FindElement(By.ClassName("caret")).Click();
             driver.FindElement(By.LinkText("Login")).Click();
 
             //LOGGING IN
-            driver.FindElement(By.Id("input-email")).SendKeys("iwilltestyounow@gmail.com");
-            driver.FindElement(By.Id("input-password")).SendKeys("qwerty12345");
+            driver.FindElement(By.Id("input-email")).SendKeys("test@gmail.com");
+            driver.FindElement(By.Id("input-password")).SendKeys("testtest");
             driver.FindElement(By.XPath("//input[@type='submit' and @value='Login']")).Click();
         }
-        //[SetUp]
-        //public void BeforeMethod()
-        //{
-        //    driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/");
-        //}
+        
 
     }
 }

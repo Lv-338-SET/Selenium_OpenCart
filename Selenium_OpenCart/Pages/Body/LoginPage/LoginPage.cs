@@ -29,7 +29,7 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
             this.driver = driver;
         }
 
-        public void ClrearLoginEmail()
+        public void ClearLoginEmail()
         {
             LoginEmailFile.Clear();
         }
@@ -49,7 +49,7 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
             LoginPasswordFile.Clear();
         }
 
-        public void ClikLoginPassword()
+        public void ClickLoginPassword()
         {
             LoginPasswordFile.Click();
         }

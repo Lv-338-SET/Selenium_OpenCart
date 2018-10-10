@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.WishListPage
@@ -57,6 +58,7 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         }
         public void ClickAddToCartButton()
         {
+            Thread.Sleep(1500);
             AddToCartButton.Click();
         }
         public void ClickRemoveFromWishListButton()
