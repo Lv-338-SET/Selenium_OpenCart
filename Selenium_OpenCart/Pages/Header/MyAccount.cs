@@ -56,7 +56,7 @@ namespace Selenium_OpenCart.Pages.Header
         public RegisterPage RegisterButtonClick()
         {
             RegisterButton.Click();
-            return new RegisterPage(driver);
+            return new RegisterPage();
         }
 
         public LoginPage LoginButtomClick()

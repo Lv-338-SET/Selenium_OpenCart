@@ -7,23 +7,34 @@ using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Selenium_OpenCart.Logic
 {
     public class CurencyMethods
     {
-        protected IWebDriver Driver { get; private set; }
-        protected AllBrowsers Browser { get; private set; }
+        protected IWebDriver driver;
+        protected ISearch search;
+        protected AllBrowsers Browser;
 
         public CurencyMethods()
         {
-            this.Driver = TestsApplication.Get().Browser.Driver;
-            this.Browser = TestsApplication.Get().Browser;
+            this.driver = Application.Get(ApplicationSourceRepository.Default()).Browser.Driver;
+            this.search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            this.Browser = Application.Get(ApplicationSourceRepository.Default()).Browser;
+        }
+
+        public void CurencyMetho()
+        {
+            this.search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            search.PresenceOfWebElement(search.ElementByXPath("some xapatrh or anothe"));//присутність елемента на сторінці
+            IWebElement asd = search.ElementByXPath("some xapatrh or anothe");
         }
 
         public void Login(string userName, string Userpassword)
@@ -31,15 +42,34 @@ namespace Selenium_OpenCart.Logic
             //loged in
         }
 
+        public void Loginasd()
+        {
+            TopBar topBar = new TopBar(driver);
+            Currency currencyMenu = topBar.ReturnCurrencyList();
+            Thread.Sleep(10000);
+            currencyMenu.ClickButtonEuro();
+            Thread.Sleep(10000);
+            currencyMenu.ClickButtonPoundSterling();
+            Thread.Sleep(10000);
+            currencyMenu.ClickButtonUSDolar();
+        }
+
+        public void GotoElement(IWebElement element)
+        {
+            //IWebDriver driver = Application.Get(ApplicationSourceRepository.Default()).Browser.Driver;
+            Actions action = new Actions(driver);
+            action.MoveToElement(element, 1, 1).Click().Perform();
+        }
+
         public HomePage GoToHomePage()
         {
-            Browser.OpenUrl(TestsApplication.Get().ApplicationSource.HomePageUrl);
-            return new HomePage(Driver);
+            Browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.HomePageUrl);
+            return new HomePage(driver);
         }
 
         public SearchPage SearchProducts(string searchItemName)
         {
-            SearchMethods searchMethods = new SearchMethods(Driver);
+            SearchMethods searchMethods = new SearchMethods(driver);
             return searchMethods.Search(searchItemName);
         }
 
@@ -51,24 +81,24 @@ namespace Selenium_OpenCart.Logic
 
         public void AddProductToCart(ProductItem product)
         {
-            product.ClickCartfavourite();
+            product.ClickCartButton();
         }
 
         public void AddProductToWishList(ProductItem product)
         {
-            product.ClickCartButton();
+            product.ClickCartFavourite();
         }
 
         public void ScroolToElementWishList(ProductItem product)
         {
-            Actions actions = new Actions(Driver);
+            Actions actions = new Actions(driver);
             actions.MoveToElement(product.GetProductCartButton());
             //actions.Perform();
         }
 
         public void ScrollTo(int xPosition = 0, int yPosition = 0)
         {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             string title = (string)js.ExecuteScript("window.scrollTo({0}, {1})", xPosition, yPosition);
         }
 
@@ -82,20 +112,20 @@ namespace Selenium_OpenCart.Logic
 
         public void ScroolToElementCartButton(ProductItem product)
         {
-            Actions actions = new Actions(Driver);
+            Actions actions = new Actions(driver);
             actions.MoveToElement(product.GetProductCartButton());
             //actions.Perform();
         }
 
-        public ShoppingCartPage GoToCart()
+        public ShopingCartPage GoToCart()
         {
-            TopBar topBar = new TopBar(Driver);
+            TopBar topBar = new TopBar(driver);
             return topBar.ShoppingCartButtonClick();
         }
 
         public WishListPage GoToWishList()
         {
-            TopBar topBar = new TopBar(Driver);
+            TopBar topBar = new TopBar(driver);
             return topBar.WishListButtonClick();
         }
 

@@ -23,14 +23,14 @@ namespace Selenium_OpenCart.Tests
         [OneTimeSetUp]
         public void BeforeAllMethods()
         {
-            TestsApplication.Get();
+            Application.Get(ApplicationSourceRepository.Default());
             cm = new CurencyMethods();
         }
 
         [OneTimeTearDown]
         public void AfterAllMethods()
         {
-            TestsApplication.Remove();
+            Application.Remove();
         }
 
         [SetUp]
@@ -49,11 +49,13 @@ namespace Selenium_OpenCart.Tests
         {
             //cm.SearchProducts("Samsung");
             ProductItem product = cm.ChooseAppropriateProduct("Samsung SyncMaster");
-            cm.ScrollToView(product.GetProductCartButton());
-            cm.AddProductToCart(product);
-
-            cm.ScroolToElementCartButton(product);
+            //cm.GotoElement(product.GetProductCartButton());
+            //cm.ScrollToView(product.GetProductCartButton());
+            //cm.AddProductToCart(product);
+            cm.Loginasd();
+            //cm.ScroolToElementCartButton(product);
             cm.GoToCart();
+            Thread.Sleep(50000);
         }
 
         //[Test]

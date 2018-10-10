@@ -40,7 +40,7 @@ namespace Selenium_OpenCart.Data.Application
             }
             else
             {
-
+                this.optionsParams = optionsParams;
             }
         }
     }

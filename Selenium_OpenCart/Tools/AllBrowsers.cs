@@ -16,11 +16,8 @@ namespace Selenium_OpenCart.Tools
     {
         public IWebDriver GetBrowser(ApplicationSource applicationSource)
         {
-            if (applicationSource.optionsParams != null)
-            {
-                ChromeOptions options = new ChromeOptions();
-                options.AddArguments(applicationSource.optionsParams);
-            }
+            ChromeOptions options = new ChromeOptions();
+            options.AddArguments(applicationSource.optionsParams);
             return new ChromeDriver();
         }
     }
@@ -29,11 +26,8 @@ namespace Selenium_OpenCart.Tools
     {
         public IWebDriver GetBrowser(ApplicationSource applicationSource)
         {
-            if (applicationSource.optionsParams != null)
-            {
-                FirefoxOptions options = new FirefoxOptions();
-                options.AddArguments(applicationSource.optionsParams);
-            }
+            FirefoxOptions options = new FirefoxOptions();
+            options.AddArguments(applicationSource.optionsParams);
             return new FirefoxDriver();
         }
     }

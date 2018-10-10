@@ -10,7 +10,7 @@
 
         public static ApplicationSource Default()
         {
-            return ChromeNew();
+            return ChromeTAQC();
         }
 
         public static ApplicationSource ChromeTAQC()
