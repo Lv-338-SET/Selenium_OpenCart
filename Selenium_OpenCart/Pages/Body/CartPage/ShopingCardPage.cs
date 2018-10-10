@@ -13,7 +13,6 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
 {
     public class ShoppingCartPage : Header.Header
     {
-        private IWebDriver driver;
         protected IWebElement Table { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']")); } }
         protected IWebElement ButtonContinue { get { return driver.FindElement(By.XPath("//a[text() = 'Continue']")); } }
         protected List<ShopingCartTableItem> ListShopingCartProducts { get { return ListProductFromHomePage(driver.FindElements(By.XPath("//div[@class='table-responsive']//tbody"))); } }

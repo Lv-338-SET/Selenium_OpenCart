@@ -49,13 +49,10 @@ namespace Selenium_OpenCart.Tests
         {
             //cm.SearchProducts("Samsung");
             ProductItem product = cm.ChooseAppropriateProduct("Samsung SyncMaster");
-            Thread.Sleep(5000);
             cm.ScrollToView(product.GetProductCartButton());
-            Thread.Sleep(5000);
             cm.AddProductToCart(product);
 
-            //cm.ScroolToElementCartButton(product);
-            Thread.Sleep(5000);
+            cm.ScroolToElementCartButton(product);
             cm.GoToCart();
         }
 

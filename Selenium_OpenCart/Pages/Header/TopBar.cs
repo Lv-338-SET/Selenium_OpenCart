@@ -5,6 +5,8 @@ using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.CheckoutPage;
 using Selenium_OpenCart.Pages.Body.ContactPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 using System;
 using System.Threading;
 
@@ -13,27 +15,37 @@ namespace Selenium_OpenCart.Pages.Header
      class TopBar
     {
         private IWebDriver driver;
+        private ISearch Search;
 
         //Properties
         private IWebElement CurrencyButton
-        { get { return driver.FindElement(By.XPath("//div/button/strong[text()='$']")); } }
+        //{ get { return driver.FindElement(By.XPath("//div/button/strong[text()='$']")); } }
+        { get { return Search.ElementByXPath("//div/button/strong[text()='$']"); } }
         private IWebElement PhoneButton
-        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-phone')]")); } }
+        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-phone')]")); } }
+        { get { return Search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-phone')]"); } }
         private IWebElement MyAccountButton
-        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-user')]")); } }
+        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-user')]")); } }
+        { get { return Search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-user')]"); } }
         private IWebElement WishListButton
-        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-heart')]")); } }
+        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-heart')]")); } }
+        { get { return Search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-heart')]"); } }
         private IWebElement WishListButtonContent
-        { get { return driver.FindElement(By.CssSelector("#wishlist-total")); } }
+        //{ get { return driver.FindElement(By.CssSelector("#wishlist-total")); } }
+        { get { return Search.ElementByCssSelector("#wishlist-total"); } }
         private IWebElement ShopingCardButton
-        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-shopping-cart')]")); } }
+        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-shopping-cart')]")); } }
+        { get { return Search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-shopping-cart')]"); } }
         private IWebElement CheckoutButton
-        { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-share')]")); } }
+        //{ get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-share')]")); } }
+        { get { return Search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-share')]"); } }
 
         //Constructor
         public TopBar(IWebDriver driver)
         {
-            this.driver = driver;
+            Search = TestsApplication.Get().Search;
+            //this.driver = driver;
+            this.driver = TestsApplication.Get().Browser.Driver;
         }
 
         //Methods
@@ -70,6 +82,7 @@ namespace Selenium_OpenCart.Pages.Header
         public ShoppingCartPage ShoppingCartButtonClick()
         {
             ShopingCardButton.Click();
+            Thread.Sleep(2000);
             return new ShoppingCartPage(driver);
         }
 

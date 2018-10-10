@@ -8,9 +8,9 @@ using Selenium_OpenCart.Data.Currency;
 using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Data.User;
 using MySql.Data.MySqlClient;
+using Selenium_OpenCart.Data.ProductReview.Rating;
 using Selenium_OpenCart.Data.Category;
 using Selenium_OpenCart.Data.Cart;
-using Selenium_OpenCart.Data.ProductReview.Rating;
 
 namespace Selenium_OpenCart
 {
@@ -94,7 +94,7 @@ namespace Selenium_OpenCart
                         .SetProductName(products["name"].ToString())
                         .SetReviewerName(products["author"].ToString())
                         .SetReviewText(products["text"].ToString())
-                        .SetRaiting((Int32.Parse(products["raiting"].ToString())).ToRating())
+                        .SetRating((Int32.Parse(products["raiting"].ToString())).ToRating())
                         .SetDate(products["date_added"].ToString())
                         .Build());
                     //"name,author,text,raiting,date_added"                        
