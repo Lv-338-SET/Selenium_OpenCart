@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
 {
-    public sealed class InvalidReviewTextAlertPage : ProductPageReview
+    public sealed class UnsuccessfullyAddedReviewPage : ProductPageReview
     {
         #region Properties
         private IWebElement WarningAlert
@@ -20,7 +20,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         #endregion
 
         #region Initialization and Verifycation        
-        public InvalidReviewTextAlertPage(IWebDriver driver) : base(driver)
+        public UnsuccessfullyAddedReviewPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
             VerifyPage();

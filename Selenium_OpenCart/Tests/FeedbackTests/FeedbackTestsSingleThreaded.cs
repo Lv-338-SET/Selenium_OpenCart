@@ -43,7 +43,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments("--start-maximized");
-            //chromeOptions.AddArguments("--headless");
             driver = new ChromeDriver(chromeOptions);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
         }
@@ -51,8 +50,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [OneTimeTearDown]
         public void AfterAllTests()
         {
-            DeleteAllTestReviewsFromValidProductReviewAndAdminUserSource();
-
             driver.Quit();
         }
 
@@ -71,30 +68,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         {
             new object[] { ProductReviewRepository.Get().ValidHP(), UserRepository.Get().Admin() }           
         };
-
-        private void DeleteAllTestReviewsFromValidProductReviewAndAdminUserSource()
-        {
-            foreach (object[] item in ValidProductReviewAndAdminUser)
-            {
-                IUser user = item[1] as IUser;
-                IProductReview review = item[0] as IProductReview;
-
-                driver.Navigate().GoToUrl(ADMIN_URL);
-
-                Catalog menu = new LoginPageLogic(driver)
-                   .InputValidUserAndLogin(user)
-                   .Navigation.ClickOnCatalogLink();
-
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
-                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
-
-                wait.Until(d => menu.GetTextFromReviewLink().Equals(REVIEWS_PAGE_NAME));
-
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
-
-                menu.ClickOnReviewLink().DeleteAllReviewsThatEqualsTo(review);
-            }
-        }
 
         [Test, TestCaseSource("ValidProductReview"), Order(1)]
         public void TestCase649AddReviewTest(IProductReview review)
@@ -198,6 +171,41 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             bool hasReview = productReviewPage.ProductPageReview.ReviewExistInListOfReview(review);
             Assert.True(hasReview,
                 "Step 6 Failed: Review not exist");
+        }
+
+        [Test, TestCaseSource("ValidProductReviewAndAdminUser"), Order(4)]
+        public void TestCase_DeleteReview (IProductReview review, IUser user)
+        {
+            Assert.IsTrue(TestCase649,
+                "Blocked. Preconditions fail: add review test failed");
+
+            driver.Navigate().GoToUrl(ADMIN_URL);
+
+            LoginPageLogic loginPage = new LoginPageLogic(driver);
+            Assert.True(loginPage.LoginPage.IsLoginPage(),
+                "Step 1 Failed: Not login page");
+
+            AdminPageLogic homePage = new LoginPageLogic(driver).InputValidUserAndLogin(user);
+            Assert.True(homePage.Header.IsHomePage(),
+                "Step 2 Failed: Not admin home page");
+            Catalog catalog = homePage.Navigation.ClickOnCatalogLink();
+
+            //
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
+
+            wait.Until(d => catalog.GetTextFromReviewLink().Equals(REVIEWS_PAGE_NAME));
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
+            //
+
+            ReviewsPageLogic reviewsPage = catalog.ClickOnReviewLink();
+            Assert.True(reviewsPage.ReviewsPage.IsReviewsPage(),
+                "Step 3 Failed: Not reviews page");
+
+            ReviewsPageSuccessfullyModifiedReview page2 = reviewsPage.DeleteAllReviewsThatEqualsTo(review);
+            Assert.True(page2.IsReviewModified(),
+                "Step 4 Failed: Review wasn't deleted");
         }
     }
 }

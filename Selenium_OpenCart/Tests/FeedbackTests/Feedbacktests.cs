@@ -81,7 +81,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.True(productReviewPage.ProductPageReview.IsReviewPage(),
                 "Step 5 Failed: Not reviews page");
 
-            NotSelectedRatingAlertPage notSelectedRatingAlertPage = productReviewPage.InputValidReviewButNotSelectRatingAndClickOnAddReviewButton(review);
+            UnsuccessfullyAddedReviewPage notSelectedRatingAlertPage = productReviewPage.InputValidReviewButNotSelectRatingAndClickOnAddReviewButton(review);
             Assert.AreEqual(notSelectedRatingAlertPage.GetWarningAlertText(), NOT_SELECTED_RATING_ALERT_TEXT,
                 "Step 7 Failed: " + NOT_SELECTED_RATING_ALERT_TEXT + " message not appeared");
         }
@@ -111,7 +111,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.True(productReviewPage.ProductPageReview.IsReviewPage(),
                 "Step 5 Failed: Not reviews page");
 
-            InvalidReviewTextAlertPage emptyReviewTextAlertPage = productReviewPage.InputValidReviewerNameAndSelectRatingAndClickOnAddReviewButton(review);
+            UnsuccessfullyAddedReviewPage emptyReviewTextAlertPage = productReviewPage.InputValidReviewerNameAndSelectRatingAndClickOnAddReviewButton(review);
             Assert.AreEqual(emptyReviewTextAlertPage.GetWarningAlertText(), EMPTY_REVIEW_TEXT_ALERT_TEXT,
                 "Step 7 Failed: " + EMPTY_REVIEW_TEXT_ALERT_TEXT + " message not appeared");
         }
@@ -141,7 +141,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.True(productReviewPage.ProductPageReview.IsReviewPage(),
                 "Step 5 Failed: Not reviews page");
 
-            InvalidReviewerNameAlertPage invalidReviewerNameAlertPage = productReviewPage.InputValidReviewTextAndSelectRatingAndClickOnAddReviewButton(review);
+            UnsuccessfullyAddedReviewPage invalidReviewerNameAlertPage = productReviewPage.InputValidReviewTextAndSelectRatingAndClickOnAddReviewButton(review);
             Assert.AreEqual(invalidReviewerNameAlertPage.GetWarningAlertText(), EMPTY_REVIEWER_NAME_ALERT_TEXT,
                 "Step 7 Failed: " + NOT_SELECTED_RATING_ALERT_TEXT + " message not appeared");
         }
