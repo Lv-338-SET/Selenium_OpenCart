@@ -32,7 +32,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         protected IWebElement productPageLabel
             { get { return driver.FindElement(By.ClassName("text-right")); } }
         protected IWebElement successAlertMessage
-        { get { return driver.FindElement(By.XPath("//div[@class='alert alert-success']")); } }
+        { get { return driver.FindElement(By.XPath("//div[@class='alert alert-success alert-dismissible']")); } }
 
         protected SelectElement selectCategory
             { get { return new SelectElement(driver.FindElement(By.Name("category_id"))); } }
@@ -222,7 +222,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
 
         public SearchPage AddAppropriateItemToWishList(string product)
         {
-            FindAppropriateProduct(product).ClickCartfavourite();
+            FindAppropriateProduct(product).ClickCartFavourite();
             return new SearchPage(driver);
         }
         public string successAlertMessageText()

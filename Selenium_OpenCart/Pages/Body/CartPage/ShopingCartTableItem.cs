@@ -27,14 +27,14 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
 
         private void Initialize(IWebElement element)
         {
-            Image = element.FindElement(By.XPath("/td[1]"));
-            ProductName = element.FindElement(By.CssSelector("/td[2]"));
-            Model = element.FindElement(By.XPath("/td[3]"));
-            CountsTextBox = element.FindElement(By.XPath("/td[4]/div/input[@class='form-control']"));
-            UpdateButton = element.FindElement(By.XPath("/td[4]/div//i[@class='fa fa-refresh']"));
-            RemoveButton = element.FindElement(By.XPath("/td[4]/div//i[@class='fa fa-times-circle']"));
-            UnitPrice = element.FindElement(By.XPath("/td[5]"));
-            TotalPrice = element.FindElement(By.XPath("/td[6]"));
+            Image = element.FindElement(By.XPath("//td[1]"));
+            ProductName = element.FindElement(By.CssSelector("tr > td:nth-child(2) > a"));
+            Model = element.FindElement(By.XPath("//td[3]"));
+            CountsTextBox = element.FindElement(By.XPath("//td[4]/div/input[@class='form-control']"));
+            UpdateButton = element.FindElement(By.XPath("//td[4]/div//i[@class='fa fa-refresh']"));
+            RemoveButton = element.FindElement(By.XPath("//td[4]/div//i[@class='fa fa-times-circle']"));
+            UnitPrice = element.FindElement(By.XPath("//td[5]"));
+            TotalPrice = element.FindElement(By.XPath("//td[6]"));
         }
 
         //Image
