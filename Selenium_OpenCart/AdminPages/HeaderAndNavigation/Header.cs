@@ -2,20 +2,20 @@
 using System.Linq;
 using OpenQA.Selenium;
 
+using Selenium_OpenCart.AdminLogic;
 using Selenium_OpenCart.Data.AdminPageExeptions;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
 {
-    public class Header
+    public class Header : AdminPageLogic
     {
-        protected IWebDriver driver;
-
         #region Properties
         protected IWebElement CurnetPageLabel
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@id='content']//div[@class='page-header']//div[@class='container-fluid']//h1"));
+                return Search.ElementByXPath(".//div[@id='content']//div[@class='page-header']//div[@class='container-fluid']//h1");
             }
         }
 
@@ -23,15 +23,15 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
         {
             get
             {
-                return driver.FindElements(By.XPath(".//div[@id='content']//div[@class='page-header']//div[@class='container-fluid']//ul[@class='breadcrumb']//a")).ToList();
+                return Search.ElementsByXPath(".//div[@id='content']//div[@class='page-header']//div[@class='container-fluid']//ul[@class='breadcrumb']//a").ToList();
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public Header(IWebDriver driver)
+        public Header()
         {
-            this.driver = driver;
+
         }
 
         private bool VerifyPage()

@@ -9,15 +9,14 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='alert alert-success alert-dismissible']"));
+                return Search.ElementByXPath(".//div[@class='alert alert-success alert-dismissible']");
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public ReviewsPageSuccessAllert(IWebDriver driver) : base(driver)
+        public ReviewsPageSuccessAllert()
         {
-            this.driver = driver;
             VerifyPage();
         }
 

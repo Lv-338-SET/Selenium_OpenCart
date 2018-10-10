@@ -9,15 +9,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         {
             get
             {
-                return driver.FindElement(By.CssSelector("#form-review > div.alert.alert-success"));
+                return Search.ElementByCssSelector("#form-review > div.alert.alert-success");
             }
         }
         #endregion
 
         #region Initialization and Verifycation
-        public SuccessfullyAddedReviewPage(IWebDriver driver) : base(driver)
+        public SuccessfullyAddedReviewPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 

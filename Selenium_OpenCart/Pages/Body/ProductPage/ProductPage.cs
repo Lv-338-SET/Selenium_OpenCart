@@ -6,14 +6,14 @@ using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage
 {
-    public class ProductPage : Header.Header
+    public class ProductPage : ProductPageLogic
     {
         #region Properties
         protected IWebElement ProductNameLablel
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@id='content']//h1"));
+                return Search.ElementByXPath(".//div[@id='content']//h1");
             }
         }
 
@@ -21,7 +21,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='rating']//a[text() = 'Write a review']"));
+                return Search.ElementByXPath(".//div[@class='rating']//a[text() = 'Write a review']");
             }
         }
 
@@ -29,7 +29,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='rating']//a[contains(text(),' reviews')]"));
+                return Search.ElementByXPath(".//div[@class='rating']//a[contains(text(),' reviews')]");
             }
         }
 
@@ -37,7 +37,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//button[contains(@onclick,'compare.add')]"));
+                return Search.ElementByXPath(".//button[contains(@onclick,'compare.add')]");
             }
         }
 
@@ -45,15 +45,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return new ProductPageInfo(driver);
+                return new ProductPageInfo();
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public ProductPage(IWebDriver driver) : base(driver)
+        public ProductPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
@@ -103,7 +102,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         public ProductPageReviewLogic ClickWriteReviewLink()
         {
             WriteRewiewLink.Click();
-            return new ProductPageReviewLogic(driver);
+            return new ProductPageReviewLogic();
         }
         #endregion
 
@@ -120,7 +119,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         public ProductPageReviewLogic ClickReviewsLink()
         {
             ReviewsLink.Click();
-            return new ProductPageReviewLogic(driver);
+            return new ProductPageReviewLogic();
         }
         #endregion
 
@@ -132,7 +131,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         public SuccessfullyAddedProductForComparisonPage ClickOnCompareProductButton()
         {
             CompareProductButton.Click();
-            return new SuccessfullyAddedProductForComparisonPage(driver);
+            return new SuccessfullyAddedProductForComparisonPage();
         }
         #endregion
         #endregion

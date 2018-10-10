@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using OpenQA.Selenium;
 
 using Selenium_OpenCart.AdminPages.Body.ReviewsPage;
 using Selenium_OpenCart.Data.ProductReview;
@@ -12,13 +11,13 @@ namespace Selenium_OpenCart.AdminLogic
         {
             get
             {
-                return new ReviewsPage(driver);
+                return new ReviewsPage();
             }
         }
 
-        public ReviewsPageLogic(IWebDriver driver) : base(driver)
+        public ReviewsPageLogic()
         {
-            this.driver = driver;
+
         }
 
         /// <summary>
@@ -29,7 +28,7 @@ namespace Selenium_OpenCart.AdminLogic
         {
             ReviewsPage.SelectAllReviews();
             ReviewsPage.DeleteReview();
-            return new ReviewsPageSuccessAllert(driver);
+            return new ReviewsPageSuccessAllert();
         }
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Selenium_OpenCart.AdminLogic
             if (tmp != null)
             {
                 tmp.ClickOnEditLink();
-                return new EditReviewPageLogic(driver);
+                return new EditReviewPageLogic();
             }
             else
             {
@@ -63,7 +62,7 @@ namespace Selenium_OpenCart.AdminLogic
                 item.SelectReview();
             }
             ReviewsPage.DeleteReview();
-            return new ReviewsPageSuccessAllert(driver);
+            return new ReviewsPageSuccessAllert();
         }
     }
 }

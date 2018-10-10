@@ -41,7 +41,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         public ProductPage.ProductPage ImageClick()
         {
             Image.Click();
-            return new ProductPage.ProductPage(driver);
+            return new ProductPage.ProductPage();
         }
 
         //ProductName
