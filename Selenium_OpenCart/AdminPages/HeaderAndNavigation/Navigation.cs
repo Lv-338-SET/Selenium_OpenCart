@@ -23,22 +23,28 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = CatalogLink;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsNavigationPage()
+        {
+            return VerifyPage();
+        }
+
         #region Atomic operations for CatalogLink
         public string GetTextFromCatalogLink()
         {
-            return this.CatalogLink.Text;
+            return CatalogLink.Text;
         }
 
         public Catalog ClickOnCatalogLink()
         {
-            this.CatalogLink.Click();
+            CatalogLink.Click();
             return new Catalog(driver);
         }
         #endregion
@@ -64,22 +70,28 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = ReviewLink;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsCatalog()
+        {
+            return VerifyPage();
+        }
+
         #region Atomic operations for ReviewLink
         public string GetTextFromReviewLink()
         {
-            return this.ReviewLink.Text;
+            return ReviewLink.Text;
         }
 
         public ReviewsPageLogic ClickOnReviewLink()
         {
-            this.ReviewLink.Click();
+            ReviewLink.Click();
             return new ReviewsPageLogic(driver);
         }
         #endregion

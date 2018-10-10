@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
+  <Import Project="..\packages\NUnit.3.10.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.0\build\NUnit.props')" />
   <Import Project="..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -54,8 +54,8 @@
     <Reference Include="MySql.Data, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.10.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.10.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -82,7 +82,7 @@
     <Compile Include="AdminLogic\ReviewsPageLogic.cs" />
     <Compile Include="AdminPages\Body\EditReviewPage\EditReviewPage.cs" />
     <Compile Include="AdminPages\Body\ReviewsPage\ReviewItem.cs" />
-    <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPageSuccessfullyModifiedReview.cs" />
+    <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPageSuccessAllert.cs" />
     <Compile Include="AdminPages\HeaderAndNavigation\Header.cs" />
     <Compile Include="AdminLogic\LoginPageLogic.cs" />
     <Compile Include="AdminPages\Body\LoginPage\LoginPage.cs" />
@@ -122,20 +122,20 @@
     <Compile Include="Pages\Body\CartPage\ShopingCartTableItem.cs" />
     <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />
     <Compile Include="Pages\Body\ContactPage\ContactPage.cs" />
+    <Compile Include="Pages\Body\EditAccount\EditAccountPage.cs" />
+    <Compile Include="Pages\Body\EditAccount\VerifyEditedAccount.cs" />
     <Compile Include="Pages\Body\LoginPage\LoginPage.cs" />
     <Compile Include="Pages\Body\LogoutPage\LogoutPage.cs" />
     <Compile Include="Pages\Body\MainPage\HomePage.cs" />
     <Compile Include="Pages\Body\MyAccountPage\MyAccountPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPage.cs" />
-    <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\InvalidReviewerNameAlertPage.cs" />
-    <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\InvalidReviewTextAlertPage.cs" />
+    <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\UnsuccessfullyAddedReviewPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageDescription.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageInfo.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageReview.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\SuccessfullyAddedProductForComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\SuccessfullyAddedReviewPage.cs" />
-    <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\NotSelectedRatingAlertPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ReviewItem.cs" />
     <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
     <Compile Include="Pages\Body\SearchPage\ProductItem.cs" />
@@ -152,9 +152,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\AddressBookTest.cs" />
-    <Compile Include="Tests\CartTests.cs" />
-    <Compile Include="Tests\FeedbackTests\Feedbacktests.cs" />
+    <Compile Include="Tests\FeedbackTests\FeedbackTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleThreaded.cs" />
+    <Compile Include="Tests\CartTests.cs" />
     <Compile Include="Tests\ProductComparisonTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\WishListTests.cs" />
@@ -188,7 +188,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props'))" />
-    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.10.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.0\build\NUnit.props'))" />
   </Target>
   <Import Project="..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" />
 </Project>

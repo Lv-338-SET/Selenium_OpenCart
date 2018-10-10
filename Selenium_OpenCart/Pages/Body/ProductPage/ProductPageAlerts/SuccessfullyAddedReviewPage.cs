@@ -21,22 +21,23 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = SuccessAllert;
+            return true;
         }
         #endregion
 
         #region Atomic operations
-        #region Atomic operations for SuccessAllert
         public bool IsReviewAdded()
         {
-            return this.SuccessAllert.Displayed;
+            return VerifyPage();
         }
 
-        public string GetSuccessAllertText()
+        #region Atomic operations for SuccessAllert
+        public string GetTextFromSuccessAllert()
         {
-            return this.SuccessAllert.Text;
+            return SuccessAllert.Text;
         }
         #endregion
         #endregion

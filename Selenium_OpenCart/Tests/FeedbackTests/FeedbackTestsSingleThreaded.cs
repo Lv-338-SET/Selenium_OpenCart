@@ -28,6 +28,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         const string URL = "http://40.118.125.245/";
         const string ADMIN_URL = "http://40.118.125.245/admin";
 
+        const string ADMIN_HOME_PAGE_NAME = "Dashboard";
         const string REVIEWS_PAGE_NAME = "Reviews";
         const string REVIEW_ADDED_ALERT_TEXT = "Thank you for your review. It has been submitted to the webmaster for approval.";
 
@@ -43,7 +44,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments("--start-maximized");
-            //chromeOptions.AddArguments("--headless");
             driver = new ChromeDriver(chromeOptions);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
         }
@@ -51,8 +51,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [OneTimeTearDown]
         public void AfterAllTests()
         {
-            DeleteAllTestReviewsFromValidProductReviewAndAdminUserSource();
-
             driver.Quit();
         }
 
@@ -71,30 +69,6 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         {
             new object[] { ProductReviewRepository.Get().ValidHP(), UserRepository.Get().Admin() }           
         };
-
-        private void DeleteAllTestReviewsFromValidProductReviewAndAdminUserSource()
-        {
-            foreach (object[] item in ValidProductReviewAndAdminUser)
-            {
-                IUser user = item[1] as IUser;
-                IProductReview review = item[0] as IProductReview;
-
-                driver.Navigate().GoToUrl(ADMIN_URL);
-
-                Catalog menu = new LoginPageLogic(driver)
-                   .InputValidUserAndLogin(user)
-                   .Navigation.ClickOnCatalogLink();
-
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
-                WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
-
-                wait.Until(d => menu.GetTextFromReviewLink().Equals(REVIEWS_PAGE_NAME));
-
-                driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
-
-                menu.ClickOnReviewLink().DeleteAllReviewsThatEqualsTo(review);
-            }
-        }
 
         [Test, TestCaseSource("ValidProductReview"), Order(1)]
         public void TestCase649AddReviewTest(IProductReview review)
@@ -122,7 +96,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
                 "Step 5 Failed: Not reviews page");
              
             SuccessfullyAddedReviewPage addedReview = productReviewPage.InputValidReviewAndClickOnAddReviewButton(review);
-            Assert.AreEqual(addedReview.GetSuccessAllertText(), REVIEW_ADDED_ALERT_TEXT,
+            Assert.AreEqual(addedReview.GetTextFromSuccessAllert(), REVIEW_ADDED_ALERT_TEXT,
                 "Step 6 Failed: " + REVIEW_ADDED_ALERT_TEXT + " message not appeared");
             TestCase649 = true;
         }
@@ -140,7 +114,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
                 "Step 1 Failed: Not login page");
 
             AdminPageLogic homePage = new LoginPageLogic(driver).InputValidUserAndLogin(user);
-            Assert.True(homePage.Header.IsHomePage(), 
+            Assert.AreEqual(homePage.Header.GetTextFromCurnetPageLable(), ADMIN_HOME_PAGE_NAME,
                 "Step 2 Failed: Not admin home page");
              Catalog catalog = homePage.Navigation.ClickOnCatalogLink();
 
@@ -157,11 +131,11 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.True(reviewsPage.ReviewsPage.IsReviewsPage(), 
                 "Step 3 Failed: Not reviews page");
 
-            EditReviewPageLogic page2 = reviewsPage.EditReviewThatExistAndEqualsTo(review);
+            EditReviewPageLogic page2 = reviewsPage.EditReviewThatEqualsTo(review);
             Assert.True(page2.EditReviewPage.IsEditReviewPage(), 
                 "Step 4 Failed: Not edit review page");
 
-            ReviewsPageSuccessfullyModifiedReview successfullyModifiedReview = page2.EnableReview();
+            ReviewsPageSuccessAllert successfullyModifiedReview = page2.EnableReview();
             Assert.True(successfullyModifiedReview.IsReviewModified(), 
                 "Step 5 Failed: Review wasn't approved");
             TestCase670 = true;
@@ -198,6 +172,41 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             bool hasReview = productReviewPage.ProductPageReview.ReviewExistInListOfReview(review);
             Assert.True(hasReview,
                 "Step 6 Failed: Review not exist");
+        }
+
+        [Test, TestCaseSource("ValidProductReviewAndAdminUser"), Order(4)]
+        public void TestCase_DeleteReview (IProductReview review, IUser user)
+        {
+            Assert.IsTrue(TestCase649,
+                "Blocked. Preconditions fail: add review test failed");
+
+            driver.Navigate().GoToUrl(ADMIN_URL);
+
+            LoginPageLogic loginPage = new LoginPageLogic(driver);
+            Assert.True(loginPage.LoginPage.IsLoginPage(),
+                "Step 1 Failed: Not login page");
+
+            AdminPageLogic homePage = new LoginPageLogic(driver).InputValidUserAndLogin(user);
+            Assert.AreEqual(homePage.Header.GetTextFromCurnetPageLable(), ADMIN_HOME_PAGE_NAME,
+                "Step 2 Failed: Not admin home page");
+            Catalog catalog = homePage.Navigation.ClickOnCatalogLink();
+
+            //
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromTicks(NO_IMPLISIT_WAIT);
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(EXPLISIT_WAIT));
+
+            wait.Until(d => catalog.GetTextFromReviewLink().Equals(REVIEWS_PAGE_NAME));
+
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
+            //
+
+            ReviewsPageLogic reviewsPage = catalog.ClickOnReviewLink();
+            Assert.True(reviewsPage.ReviewsPage.IsReviewsPage(),
+                "Step 3 Failed: Not reviews page");
+
+            ReviewsPageSuccessAllert page2 = reviewsPage.DeleteAllReviewsThatEqualsTo(review);
+            Assert.True(page2.IsReviewModified(),
+                "Step 4 Failed: Review wasn't deleted");
         }
     }
 }

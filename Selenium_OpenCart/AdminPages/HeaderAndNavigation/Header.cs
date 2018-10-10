@@ -10,8 +10,6 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
     {
         protected IWebDriver driver;
 
-        const string HOME_PAGE_CURNET_PAGE_LABLE = "Dashboard";
-
         #region Properties
         protected IWebElement CurnetPageLabel
         {
@@ -36,7 +34,7 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
             this.driver = driver;
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = CurnetPageLabel;
             List<IWebElement> tmp2 = SiteMap;
@@ -44,36 +42,45 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
             {
                 throw new BadSiteMap("Last element in site must be " + tmp.Text + " bu is " + tmp2.LastOrDefault().Text);
             }
+            return true;
         }
         #endregion
 
         #region Atomic operations
-        #region Atomic operations for CurnetPageLable
-        public string GetTextFromCurnetPageLable()
+        public bool IsHeader()
         {
-            return this.CurnetPageLabel.Text;
+            return VerifyPage();
         }
 
-        public bool IsHomePage()
+        #region Atomic operations for CurnetPageLable
+        /// <summary>
+        /// Gets curnet page name from header. Equals with last link from SiteMat
+        /// </summary>
+        /// <returns>Curnet page name from header</returns>
+        public string GetTextFromCurnetPageLable()
         {
-            return this.CurnetPageLabel.Text.Equals(HOME_PAGE_CURNET_PAGE_LABLE);
+            return CurnetPageLabel.Text;
         }
         #endregion
 
         #region Atomic operations SiteMap
         public string GetTextFromFirstPageLink()
         {
-            return this.SiteMap.FirstOrDefault().Text;
+            return SiteMap.FirstOrDefault().Text;
         }
 
         public string GetTextFromLastPageLink()
         {
-            return this.SiteMap.LastOrDefault().Text;
+            return SiteMap.LastOrDefault().Text;
         }
 
+        /// <summary>
+        /// Gets all links from header site map
+        /// </summary>
+        /// <returns>List<IWebElement> with all page links from header</returns>
         public List<IWebElement> GetSiteMapList()
         {
-            return this.SiteMap;
+            return SiteMap;
         }
         #endregion
         #endregion
