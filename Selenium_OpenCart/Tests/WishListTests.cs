@@ -5,7 +5,9 @@ using NUnit.Framework;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Logic;
+using Selenium_OpenCart.Data.Application;
 using System.Threading;
+using Selenium_OpenCart.Tools;
 using OpenQA.Selenium.Support.UI;
 
 namespace Selenium_OpenCart.Tests
@@ -16,15 +18,13 @@ namespace Selenium_OpenCart.Tests
     {
         bool addedToWishList = false;
 
-        IWebDriver driver;
-
         [TestCase("iPhone")]
         [Order(0)]
         public void WishListWorks_AddingIphone_IsAdded(string product)
         {
-            TopBar topBar = new TopBar(driver);
+            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
             bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
-            SearchMethods search = new SearchMethods(driver);
+            SearchMethods search = new SearchMethods(Application.Get().Browser.Driver);
             search.Search(product).AddAppropriateItemToWishList(product);
             bool IsEmptyAfterAdding = topBar.WishListButtonClick().IsEmpty();
             Assert.AreNotEqual(IsEmptyBeforeAdding,IsEmptyAfterAdding,"Expected element is not added to wishlist");
@@ -34,7 +34,7 @@ namespace Selenium_OpenCart.Tests
         [Order(1)]
         public void SuccessAlertMessageIsDisplayedAfterAdding(string product)
         {
-            SearchMethods search = new SearchMethods(driver);
+            SearchMethods search = new SearchMethods(Application.Get().Browser.Driver);
             bool result = search.Search(product).AddAppropriateItemToWishList(product).isSuccessMessageDisplayed();
             Assert.IsTrue(result, "Success message is not displayed");
         }
@@ -46,10 +46,10 @@ namespace Selenium_OpenCart.Tests
         public void AddToCartFromWishList_AddIphone_IsAdded()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-            TopBar topbar = new TopBar(driver);
+            TopBar topbar = new TopBar(Application.Get().Browser.Driver);
            
             topbar.WishListButtonClick();
-            WishListWithProducts wishlist = new WishListWithProducts(driver);
+            WishListWithProducts wishlist = new WishListWithProducts(Application.Get().Browser.Driver);
             string productNameFromWishList = wishlist.GetProduct().GetProductName();
             wishlist.GetProduct().ClickAddToCartButton();
             string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductName();
@@ -63,9 +63,9 @@ namespace Selenium_OpenCart.Tests
         public void RemoveFromWishList_RemoveIphone_IsRemoved()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-            TopBar topBar = new TopBar(driver);
+            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
             topBar.WishListButtonClick();
-            WishListWithProducts wishList = new WishListWithProducts(driver);
+            WishListWithProducts wishList = new WishListWithProducts(Application.Get().Browser.Driver);
             wishList.GetProduct().ClickRemoveFromWishListButton();
             bool result = wishList.SuccessMessageIsDisplayed();
             Assert.IsTrue(result, "Product still exists");
@@ -74,28 +74,25 @@ namespace Selenium_OpenCart.Tests
         [OneTimeTearDown]
         public void AfterClass()
         {
-            TopBar topBar = new TopBar(driver);
+            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
             topBar.ShopingCartButtonClick().GetProduct().ClickRemoveButton();
-            driver.Manage().Cookies.DeleteAllCookies();
-            driver.Quit();
+            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Remove();
         }
 
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Navigate().GoToUrl("http://40.118.125.245/");
+            Application.Get().Browser.OpenUrl("http://40.118.125.245/");
 
             //Login page opening
-            driver.FindElement(By.ClassName("caret")).Click();
-            driver.FindElement(By.LinkText("Login")).Click();
+            Application.Get().Search.ElementByClassName("caret").Click();
+            Application.Get().Search.ElementByLinkText("Login").Click();
 
             //LOGGING IN
-            driver.FindElement(By.Id("input-email")).SendKeys("test@gmail.com");
-            driver.FindElement(By.Id("input-password")).SendKeys("testtest");
-            driver.FindElement(By.XPath("//input[@type='submit' and @value='Login']")).Click();
+            Application.Get().Search.ElementById("input-email").SendKeys("test@gmail.com");
+            Application.Get().Search.ElementById("input-password").SendKeys("testtest");
+            Application.Get().Search.ElementByXPath("//input[@type='submit' and @value='Login']").Click();
         }
         
 
