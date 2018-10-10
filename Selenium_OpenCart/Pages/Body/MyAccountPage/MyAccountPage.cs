@@ -8,7 +8,7 @@ using Selenium_OpenCart.Pages.Body.EditAccount;
 
 namespace Selenium_OpenCart.Pages.Body.MyAccountPage
 {
-    class MyAccountPage
+    public class MyAccountPage
     {
         private IWebDriver driver;
 
@@ -59,8 +59,6 @@ namespace Selenium_OpenCart.Pages.Body.MyAccountPage
                 return driver.FindElement(By.XPath("//a[contains(@href,'/logout')]"));
             }
         }
-
-       
 
         public void ClickMyAccount()
         {
