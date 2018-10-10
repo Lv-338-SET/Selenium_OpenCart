@@ -1,38 +1,36 @@
 ﻿using OpenQA.Selenium;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Pages.Header;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestSite.Pages.RegisterPage;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Logic
 {
 
     class RegisterPageMethod
     {
-        IWebDriver driver;
+        protected ISearch Search { get; private set; }
 
 
-        public RegisterPageMethod(IWebDriver driver)
+        public RegisterPageMethod()
         {
-            this.driver = driver;
+            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
         }
 
         public RegisterPage GoToRegisterPage()
         {
-            TopBar item = new TopBar(driver);
+            TopBar item = new TopBar();
             item.MyAccountButtonClick();
-            LoginAcountElements register = new LoginAcountElements(driver);
+            LoginAcountElements register = new LoginAcountElements();
             register.RegisterButtonClick();            
-            return new RegisterPage(driver);
+            return new RegisterPage();
         }
         public MyAccountPage FillingFieldsRegister(string firstName, string lastName, string email, 
             string telephone, string password, string passwordConfirm)
         {
-            RegisterPage filling = new RegisterPage(driver);
+            RegisterPage filling = new RegisterPage();
             filling.ClickInputFirstNameField(firstName);
             filling.ClickInputLastNameField(lastName);
             filling.ClickInputEMailField(email);
@@ -43,14 +41,14 @@ namespace Selenium_OpenCart.Logic
             filling.ClickPrivacyPolicy();
             filling.ClickButtonContinue();
             filling.ClickButtonsuccess();
-            return new MyAccountPage(driver);
+            return new MyAccountPage();
         }
         public MyAccountPage ValidRegister(string firstName, string lastName, string email,
             string telephone, string password, string passwordConfirm)
         {
             GoToRegisterPage();
             FillingFieldsRegister(firstName, lastName, email, telephone, password, passwordConfirm);
-            return new MyAccountPage(driver);
+            return new MyAccountPage();
         }
     }
 }

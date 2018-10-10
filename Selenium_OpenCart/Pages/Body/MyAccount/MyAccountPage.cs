@@ -1,30 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
+using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.EditAccount;
-using Selenium_OpenCart.Pages.Body.AddressBookPage;
+using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.MyAccount
 {
     class MyAccountPage
     {
-        private IWebDriver driver;
+        //private IWebDriver driver;
         private ISearch Search;
 
-        public MyAccountPage(IWebDriver driver)
+        public MyAccountPage()
         {
-            this.driver = driver;
+            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
         }
         public IWebElement MyAccount
         {
             get
             {
                 
-                return driver.FindElement(By.XPath("//a[contains(@href,'/account')]"));
+                return Search.ElementByXPath("//a[contains(@href,'/account')]");
             }
 
         }
@@ -32,63 +28,63 @@ namespace Selenium_OpenCart.Pages.Body.MyAccount
         {
             get
             {
-                return driver.FindElement(By.XPath("//a[contains(@href,'/edit')]"));
+                return Search.ElementByXPath("//a[contains(@href,'/edit')]");
             }
         }
         public IWebElement ChangePassword
         {
             get
             {
-                return driver.FindElement(By.XPath("//a[contains(@href,'/password')]"));
+                return Search.ElementByXPath("//a[contains(@href,'/password')]");
             }
         }
         public IWebElement AddressBook
         {
             get
             {
-                return driver.FindElement(By.XPath("//a[contains(@href,'/address')]"));
+                return Search.ElementByXPath("//a[contains(@href,'/address')]");
             }
         }
         public IWebElement WishList
         {
             get
             {
-                return driver.FindElement(By.XPath("//a[contains(@href,'/wishlist')]"));
+                return Search.ElementByXPath("//a[contains(@href,'/wishlist')]");
             }
         }
         public IWebElement Logout
         {
             get
             {
-                return driver.FindElement(By.XPath("//a[contains(@href,'/logout')]"));
+                return Search.ElementByXPath("//a[contains(@href,'/logout')]");
             }
         }
 
         public MyAccountPage ClikLinkMyAccount()
         {
             MyAccount.Click();
-            return new MyAccountPage(driver);
+            return new MyAccountPage();
         }
         public EditAccountPage ClickLinkEditAccount()
         {
             EditAccount.Click();
-            return new EditAccountPage(driver);
+            return new EditAccountPage();
         }
         public ChangePasswordPage.ChangePasswordPage ClickLinkChangePassword()
         {
             ChangePassword.Click();
-            return new ChangePasswordPage.ChangePasswordPage(driver);
+            return new ChangePasswordPage.ChangePasswordPage();
         }
         public AddressBookPage.AddressBookPage ClickLinkAddressBook()
         {
             AddressBook.Click();
-            return new AddressBookPage.AddressBookPage(driver);
+            return new AddressBookPage.AddressBookPage();
         }
 
         public LogoutPage.LogoutPage ClickLinkLogout()
         {
             Logout.Click();
-            return new LogoutPage.LogoutPage(driver);
+            return new LogoutPage.LogoutPage();
         }
     }
 }
