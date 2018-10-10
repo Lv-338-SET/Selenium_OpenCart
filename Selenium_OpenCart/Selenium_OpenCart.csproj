@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NUnit.3.10.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.10.0\build\NUnit.props')" />
+  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
   <Import Project="..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -44,8 +44,8 @@
     <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="nunit.framework, Version=3.10.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnit.3.10.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,6 +70,7 @@
     <Compile Include="AdminPages\HeaderAndNavigation\Navigation.cs" />
     <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPage.cs" />
     <Compile Include="Data\AdminPageExceptions\AdminPageExceptions.cs" />
+    <Compile Include="Data\Constants\CONST_EN.cs" />
     <Compile Include="Data\Currency\CurrencyRepository.cs" />
     <Compile Include="Data\ProductReview\ProductReview.cs" />
     <Compile Include="Data\ProductReview\ProductReviewRepository.cs" />
@@ -92,6 +93,7 @@
     <Compile Include="Pages\Body\AddressBookPage\AddressFormComponent.cs" />
     <Compile Include="Pages\Body\AddressBookPage\EditAddressPage.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
+    <Compile Include="Pages\Body\CartPage\ShopingCartTableItem.cs" />
     <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />
     <Compile Include="Pages\Body\ContactPage\ContactPage.cs" />
     <Compile Include="Pages\Body\LoginPage\LoginPage.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="Pages\Body\WishListPage\WishListPage.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListTableItem.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListWithProducts.cs" />
+    <Compile Include="Pages\Header\CartBox.cs" />
     <Compile Include="Pages\Header\Currency.cs" />
     <Compile Include="Pages\Header\Header.cs" />
     <Compile Include="Pages\Header\MyAccount.cs" />
@@ -123,18 +126,27 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\AddressBookTest.cs" />
-    <Compile Include="Tests\FeedbackTests\Feedbacktests.cs" />
+    <Compile Include="Tests\FeedbackTests\FeedbackTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleThreaded.cs" />
+    <Compile Include="Tests\CartTests.cs" />
     <Compile Include="Tests\ProductComparisonTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\WishListTests.cs" />
+    <Compile Include="Tools\AllBrowsers.cs" />
+    <Compile Include="Tools\Application.cs" />
+    <Compile Include="Tools\ApplicationSingleBrouser.cs" />
+    <Compile Include="Tools\SearchWebElements\AbstractSearchClass.cs" />
+    <Compile Include="Tools\SearchWebElements\ISearch.cs" />
+    <Compile Include="Tools\SearchWebElements\ISearchStrategy.cs" />
+    <Compile Include="Tools\SearchWebElements\SearchElement.cs" />
+    <Compile Include="Tools\SearchWebElements\SearchExplicit.cs" />
+    <Compile Include="Tools\SearchWebElements\SearchImplicit.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Data\Application\" />
     <Folder Include="Pages\Body\CurrencyPage\" />
     <Folder Include="Pages\Body\MenuPage\" />
     <Folder Include="Pages\Body\OtherPages\" />
@@ -147,7 +159,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props'))" />
-    <Error Condition="!Exists('..\packages\NUnit.3.10.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.0\build\NUnit.props'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
   </Target>
   <Import Project="..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" />
 </Project>

@@ -1,8 +1,12 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.CheckoutPage;
 using Selenium_OpenCart.Pages.Body.ContactPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
+using System;
+using System.Threading;
 
 namespace Selenium_OpenCart.Pages.Header
 {
@@ -19,6 +23,8 @@ namespace Selenium_OpenCart.Pages.Header
         { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-user')]")); } }
         private IWebElement WishListButton
         { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-heart')]")); } }
+        private IWebElement WishListButtonContent
+        { get { return driver.FindElement(By.CssSelector("#wishlist-total")); } }
         private IWebElement ShopingCardButton
         { get { return driver.FindElement(By.XPath("//li/a/i[contains(@class, 'fa fa-shopping-cart')]")); } }
         private IWebElement CheckoutButton
@@ -51,14 +57,19 @@ namespace Selenium_OpenCart.Pages.Header
 
         public WishListPage WishListButtonClick()
         {
+            Thread.Sleep(1500);
             WishListButton.Click();
             return new WishListPage(driver);
         }
+        public string GetWishListButtonContent()
+        {
+            return WishListButtonContent.Text; 
+        }
 
-        public ShopingCardPage ShopingCardButtonClick()
+        public ShopingCartPage ShopingCartButtonClick()
         {
             ShopingCardButton.Click();
-            return new ShopingCardPage(driver);
+            return new ShopingCartPage(driver);
         }
 
         public CheckoutPage CheckoutButtonClick()
