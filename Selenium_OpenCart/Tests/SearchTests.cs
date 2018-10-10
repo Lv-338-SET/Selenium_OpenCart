@@ -44,8 +44,6 @@ namespace Selenium_OpenCart.Tests
             driver.Navigate().GoToUrl(URL);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            var list = new DBDataReader().GetAddress();
-
             int actual = logicSearch
                 .Search(InputData
                     .GetName())

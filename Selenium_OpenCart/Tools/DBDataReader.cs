@@ -141,7 +141,7 @@ namespace Selenium_OpenCart
                     list.Add(User.Get()
                         .SetUsername(products["email"].ToString())
                         .SetPassword(products["password"].ToString())
-                        .SetSault(products["sault"].ToString())
+                        .SetSault(products["salt"].ToString())
                         .SetID(Int32.Parse(products["customer_id"].ToString()))
                         .SetEmail(products["email"].ToString())
                         .SetFirstName(products["firstname"].ToString())
