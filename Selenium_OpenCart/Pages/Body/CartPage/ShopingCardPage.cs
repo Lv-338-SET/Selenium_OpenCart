@@ -55,7 +55,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
             }
             catch (StaleElementReferenceException)
             {
-                return true;
+                return false;
             }
         }
     }

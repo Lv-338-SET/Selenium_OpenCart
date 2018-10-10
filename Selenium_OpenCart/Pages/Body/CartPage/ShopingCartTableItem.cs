@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    class ShopingCartTableItem
+    public class ShopingCartTableItem
     {
         protected IWebElement Image { get; private set; }
         protected IWebElement ProductName { get; private set; }

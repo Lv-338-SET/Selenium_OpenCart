@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.MainPage;
@@ -36,36 +37,54 @@ namespace Selenium_OpenCart.Logic
             return new HomePage(Driver);
         }
 
-        public SearchPage SearchProduct(string productName)
+        public SearchPage SearchProducts(string searchItemName)
         {
             SearchMethods searchMethods = new SearchMethods(Driver);
-            return searchMethods.Search(productName);
+            return searchMethods.Search(searchItemName);
         }
 
         public ProductItem ChooseAppropriateProduct(string productName)
         {
-            SearchPage search = SearchProduct(productName);
+            SearchPage search = SearchProducts(productName);
             return search.FindAppropriateProduct(productName);
         }
 
         public void AddProductToCart(ProductItem product)
         {
-            //TopBar topBar = new TopBar(Driver);
-            //ShopingCartPage shopingCart = new ShopingCartPage(Driver);
-            ////Clear Cart
-            //SearchPage search = SearchProduct(productName);
-            //search.FindAppropriateProduct(productName).ClickCartfavourite();
             product.ClickCartfavourite();
         }
 
         public void AddProductToWishList(ProductItem product)
         {
-            //TopBar topBar = new TopBar(Driver);
-            //bool isWishListEmpty = topBar.WishListButtonClick().IsEmpty();
-            ////Clear WishList
-            //SearchMethods search = new SearchMethods(Driver);
-            //search.Search(productName).FindAppropriateProduct(productName).ClickCartfavourite();
             product.ClickCartButton();
+        }
+
+        public void ScroolToElementWishList(ProductItem product)
+        {
+            Actions actions = new Actions(Driver);
+            actions.MoveToElement(product.GetProductCartButton());
+            //actions.Perform();
+        }
+
+        public void ScrollTo(int xPosition = 0, int yPosition = 0)
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+            string title = (string)js.ExecuteScript("window.scrollTo({0}, {1})", xPosition, yPosition);
+        }
+
+        public void ScrollToView(IWebElement element)
+        {
+            if (element.Location.Y > 200)
+            {
+                ScrollTo(0, element.Location.Y - 100);
+            }
+        }
+
+        public void ScroolToElementCartButton(ProductItem product)
+        {
+            Actions actions = new Actions(Driver);
+            actions.MoveToElement(product.GetProductCartButton());
+            //actions.Perform();
         }
 
         public ShoppingCartPage GoToCart()
