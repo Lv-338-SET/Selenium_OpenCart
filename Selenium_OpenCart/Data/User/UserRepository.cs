@@ -1,10 +1,11 @@
-﻿
+﻿using System;
+
 namespace Selenium_OpenCart.Data.User
 {
     public sealed class UserRepository
     {
-        private volatile static UserRepository instance;
-        private static readonly object lockObject = new object();
+        public volatile static UserRepository instance;
+        public static object lockObject = new object();
 
         private UserRepository()
         {
@@ -31,18 +32,6 @@ namespace Selenium_OpenCart.Data.User
             return User.Get()
                 .SetUsername("admin")
                 .SetPassword("setadmin")
-                .SetFirstName("John")
-                .SetLastName("Doe")
-                .Build();
-        }
-
-        public IUser AdminDefault()
-        {
-            return User.Get()
-                .SetUsername("admin")
-                .SetPassword("admin")
-                .SetFirstName("admin")
-                .SetLastName("admin")
                 .Build();
         }
     }

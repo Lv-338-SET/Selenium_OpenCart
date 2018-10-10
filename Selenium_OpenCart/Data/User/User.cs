@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace Selenium_OpenCart.Data.User
 {
-    public class User : IUserBuilder, IUser, ISetUserName, ISetPassword
+    public class User : IUserBuilder, IUser, ISetUserName, ISetPassword, ISetSault
     {
+        private int ID;
         private string username;
         private string password;
+        private string sault;
+
         private string firstName;
         private string lastName;
         private string email;
@@ -31,15 +34,28 @@ namespace Selenium_OpenCart.Data.User
             return new User();
         }
 
+        
         public ISetPassword SetUsername(string username)
         {
             this.username = username;
             return this;
         }
 
+        public IUserBuilder SetID(int ID)
+        {
+            this.ID = ID;
+            return this;
+        }
+
         public IUserBuilder SetPassword(string password)
         {
             this.password = password;
+            return this;
+        }
+
+        public IUserBuilder SetSault(string sault)
+        {
+            this.sault = sault;
             return this;
         }
 
@@ -82,10 +98,19 @@ namespace Selenium_OpenCart.Data.User
         {
             return this.password;
         }
+        public string GetSault()
+        {
+            return this.sault;
+        }
 
         public string GetFirstName()
         {
             return this.firstName;
+        }
+
+        public int GetID()
+        {
+            return this.ID;
         }
 
         public string GetLastName()
@@ -113,7 +138,9 @@ namespace Selenium_OpenCart.Data.User
     {
         IUserBuilder SetFirstName(string firstName);
         IUserBuilder SetLastName(string lastName);
+        IUserBuilder SetSault(string sault);
         IUserBuilder SetEmail(string email);
+        IUserBuilder SetID(int ID);
         IUserBuilder SetTelephone(string phone);
         IUserBuilder SetSubscribe(bool subscribe);
         IUser Build();
@@ -121,8 +148,10 @@ namespace Selenium_OpenCart.Data.User
 
     public interface IUser
     {
+        int GetID();
         string GetUsername();
         string GetPassword();
+        string GetSault();
         string GetFirstName();
         string GetLastName();
         string GetEmail();
@@ -135,8 +164,18 @@ namespace Selenium_OpenCart.Data.User
         ISetPassword SetUsername(string username);
     }
 
+    public interface ISetID
+    {
+        IUserBuilder SetID(int ID);
+    }
+
     public interface ISetPassword
     {
         IUserBuilder SetPassword(string password);
+    }
+
+    public interface ISetSault
+    {
+        IUserBuilder SetSault(string sault);
     }
 }
