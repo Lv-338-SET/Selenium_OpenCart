@@ -7,38 +7,31 @@ using System.Threading.Tasks;
 
 namespace Selenium_OpenCart.Data.Currency
 {
-    public enum CurrencyList
+    public sealed class CurrencyRepository
     {
-        [Description("€ Euro")] euro,
-        [Description("£ Pound Sterling")] pound,
-        [Description("$ US Dollar")] dollar
-    }
+        public volatile static CurrencyRepository instance;
+        public static object lockObject = new object();
 
-    public class CurrencyRepository
-    {
-        public static Dictionary<CurrencyList, char> CurrencyFullTextToSign
+        private CurrencyRepository()
         {
-            get;
-            private set;
+
         }
 
-        static CurrencyRepository()
+        public static CurrencyRepository Get()
         {
-            CurrencyFullTextToSign = new Dictionary<CurrencyList, char>()
+            if (instance == null)
             {
-                { CurrencyList.euro, '€' },
-                { CurrencyList.pound, '£' },
-                { CurrencyList.dollar, '$' }
-            };
-        }
-    }
+                lock (lockObject)
+                {
+                    if (instance == null)
+                    {
+                        instance = new CurrencyRepository();
 
-    public static class ExtentionMethods
-    {
-        public static string ToDescriptionString(this CurrencyList val)
-        {
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])val.GetType().GetField(val.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false);
-            return attributes.Length > 0 ? attributes[0].Description : string.Empty;
+                    }
+                }
+            }
+            return instance;
         }
     }
 }
+
