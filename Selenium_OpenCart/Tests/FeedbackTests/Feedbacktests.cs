@@ -12,14 +12,13 @@ using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
 using Selenium_OpenCart.Logic.ProductPageLogic;
 using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.SearchPage;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Tests.FeedbackTests
 {
     [TestFixture]
     public class FeedbackTests
     {
-        IWebDriver driver;
-
         const string URL = "http://40.118.125.245/";
 
         const string NOT_SELECTED_RATING_ALERT_TEXT = "Warning: Please select a review rating!";
@@ -28,26 +27,10 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
 
         const int IMPLISIT_WAIT = 5;
 
-        [OneTimeSetUp]
-        public void BeforeAllTests()
-        {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.AddArguments("--start-maximized");
-            //chromeOptions.AddArguments("--headless");
-            driver = new ChromeDriver(chromeOptions);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(IMPLISIT_WAIT);
-        }
-
-        [OneTimeTearDown]
-        public void AfterAllTests()
-        {
-            driver.Quit();
-        }
-
         [TearDown]
         public void AfterEachTest()
         {
-            driver.Manage().Cookies.DeleteAllCookies();
+            Application.Remove();
         }
 
         private static readonly object[] ValidProductReview =
@@ -59,13 +42,13 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview")]
         public void TestCase703VerifyNotSelectedRatingMessage(IProductReview validReview, IProductReview invalidReview)
         {
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.OpenUrl(URL);
 
             HomePage homePage;
-            Assert.DoesNotThrow(() => { homePage = new HomePage(driver); },
+            Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver); },
                 "Step 1 Failed: Not home page");
 
-            List<ProductItem> searchPage = new SearchMethods(driver)
+            List<ProductItem> searchPage = new SearchMethods(Application.Get().Browser.Driver)
                 .Search(validReview.GetProductName())
                 .GetListProduct();
             Assert.True(searchPage.Any(),
@@ -89,13 +72,13 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview")]
         public void TestCase704VerifyInvalidTextMessage(IProductReview validReview, IProductReview invalidReview)
         {
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.OpenUrl(URL);
 
             HomePage homePage;
-            Assert.DoesNotThrow(() => { homePage = new HomePage(driver); },
+            Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver); },
                 "Step 1 Failed: Not home page");
 
-            List<ProductItem> searchPage = new SearchMethods(driver)
+            List<ProductItem> searchPage = new SearchMethods(Application.Get().Browser.Driver)
                 .Search(validReview.GetProductName())
                 .GetListProduct();
             Assert.True(searchPage.Any(),
@@ -119,13 +102,13 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview")]
         public void TestCase705VerifyInvalidRevierNameMessage(IProductReview validReview, IProductReview invalidReview)
         {
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.OpenUrl(URL);
 
             HomePage homePage;
-            Assert.DoesNotThrow(() => { homePage = new HomePage(driver); },
+            Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver); },
                 "Step 1 Failed: Not home page");
 
-            List<ProductItem> searchPage = new SearchMethods(driver)
+            List<ProductItem> searchPage = new SearchMethods(Application.Get().Browser.Driver)
                 .Search(validReview.GetProductName())
                 .GetListProduct();
             Assert.True(searchPage.Any(),

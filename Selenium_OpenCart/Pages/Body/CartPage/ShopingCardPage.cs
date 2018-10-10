@@ -14,7 +14,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
      public class ShopingCartPage : Header.Header
     {
         protected IWebElement TableRow
-        { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tr")); } }
+        { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tbody")); } }
         protected IWebElement ButtonContinue
         { get { return driver.FindElement(By.XPath("//a[text() = 'Continue']")); } }
         protected IWebElement EmptyCartMessage

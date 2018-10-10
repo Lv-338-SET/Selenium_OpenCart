@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 
 using Selenium_OpenCart.Logic.ProductPageLogic;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
 {
@@ -11,7 +12,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='alert alert-success alert-dismissible']"));
+                return Search.ElementByXPath(".//div[@class='alert alert-success alert-dismissible']");
             }
         }
 
@@ -19,7 +20,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='alert alert-success alert-dismissible']//a[contains(@href,'route=product/product')]"));
+                return Search.ElementByXPath(".//div[@class='alert alert-success alert-dismissible']//a[contains(@href,'route=product/product')]");
             }
         }
 
@@ -27,15 +28,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='alert alert-success alert-dismissible']//a[contains(@href,'route=product/compare')]"));
+                return Search.ElementByXPath(".//div[@class='alert alert-success alert-dismissible']//a[contains(@href,'route=product/compare')]");
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public SuccessfullyAddedProductForComparisonPage(IWebDriver driver) : base(driver)
+        public SuccessfullyAddedProductForComparisonPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
@@ -63,7 +63,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         public ProductPageReviewLogic ClickOnProductPageLink()
         {
             ProductPageLink.Click();
-            return new ProductPageReviewLogic(driver);
+            return new ProductPageReviewLogic();
         }
         #endregion
 
@@ -76,7 +76,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         public ProductComparisonPage.ProductComparisonPage ClickOnCompareProductsPageLink()
         {
             CompareProductsPageLink.Click();
-            return new ProductComparisonPage.ProductComparisonPage(driver);
+            return new ProductComparisonPage.ProductComparisonPage(Application.Get().Browser.Driver);
         }
         #endregion
         #endregion

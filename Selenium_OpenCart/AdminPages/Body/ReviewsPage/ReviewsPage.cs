@@ -3,6 +3,7 @@ using System.Linq;
 using OpenQA.Selenium;
 
 using Selenium_OpenCart.AdminLogic;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
 {
@@ -13,7 +14,7 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//form//table//thead//tr//td//input[@type='checkbox']"));
+                return Search.ElementByXPath(".//form//table//thead//tr//td//input[@type='checkbox']");
             }
             
         }
@@ -22,7 +23,7 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         {
             get
             {
-                return driver.FindElement(By.XPath(".//button[@data-original-title='Delete']"));
+                return Search.ElementByXPath(".//button[@data-original-title='Delete']");
             }
         }
 
@@ -31,9 +32,9 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
             get
             {
                 List<ReviewItem> tmp = new List<ReviewItem>();
-                foreach (IWebElement item in driver.FindElements(By.XPath(".//form//table//tbody//tr")).ToList())
+                foreach (IWebElement item in Search.ElementsByXPath(".//form//table//tbody//tr").ToList())
                 {
-                    tmp.Add(new ReviewItem(driver, item));
+                    tmp.Add(new ReviewItem(item));
                 }
                 return tmp;
             }
@@ -41,9 +42,8 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         #endregion
 
         #region Initialization And Verifycation
-        public ReviewsPage(IWebDriver driver) : base(driver)
+        public ReviewsPage()
         {
-            this.driver = driver;
             VerifyPage();
         }
 
@@ -76,9 +76,9 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         public ReviewsPageLogic DeleteReview()
         {
             DeleteButton.Click();
-            IAlert alert = driver.SwitchTo().Alert();
+            IAlert alert = Application.Get().Browser.Driver.SwitchTo().Alert();
             alert.Accept();
-            return new ReviewsPageLogic(driver);
+            return new ReviewsPageLogic();
         }
         #endregion
 

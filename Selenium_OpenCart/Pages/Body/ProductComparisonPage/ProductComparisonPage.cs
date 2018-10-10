@@ -147,7 +147,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         public ProductPageLogic ClickFirstProductName()
         {
             FirstProductName.Click();
-            return new ProductPageLogic(driver);
+            return new ProductPageLogic();
         }
 
         public string LastProductNameText()
