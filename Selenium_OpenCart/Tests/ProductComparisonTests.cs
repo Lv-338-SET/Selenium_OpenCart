@@ -45,7 +45,7 @@ namespace Selenium_OpenCart.Tests
             addedToComparisonProduct.Search(product)
                 .AddAppropriateProductToComparison(product)
                 .OpenAppropriateProductPage(product)
-                .ClickCompareProductButton()
+                .ClickOnCompareProductButton()
                 .ClickOnCompareProductsPageLink()
                 .GetFirstProductNameText();
             //Assert
