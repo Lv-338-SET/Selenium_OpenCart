@@ -26,8 +26,8 @@ namespace Selenium_OpenCart.Tests
             bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
             SearchMethods search = new SearchMethods(driver);
             search.Search(product).AddAppropriateItemToWishList(product);
-            bool IsNotEmptyAfterAdding = topBar.WishListButtonClick().IsNotEmpty();
-            Assert.AreEqual(IsEmptyBeforeAdding,IsNotEmptyAfterAdding,"Expected element is not added to wishlist");
+            bool IsEmptyAfterAdding = topBar.WishListButtonClick().IsEmpty();
+            Assert.AreNotEqual(IsEmptyBeforeAdding,IsEmptyAfterAdding,"Expected element is not added to wishlist");
             addedToWishList = true;
         }
         [TestCase("iPhone")]

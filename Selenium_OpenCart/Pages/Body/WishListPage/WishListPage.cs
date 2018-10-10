@@ -33,21 +33,22 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         }
         public bool IsEmpty()
         {
-            if (driver.FindElement(By.CssSelector("#content p")).Enabled)
+            IWebElement element;
+            try
+            {
+                element= driver.FindElement(By.CssSelector("#content p"));
+            }
+            catch
+            {
+                return false;
+            }
+
+            if (element.Enabled)
             {
                 return true;
             }
             else return false;
         }
-        public bool IsNotEmpty()
-        {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
-            wait.Until(ExpectedConditions.ElementExists(By.XPath("//div[@class='table-responsive']")));
-            if (driver.FindElement(By.XPath("//div[@class='table-responsive']")).Enabled)
-            {
-                return true;
-            }
-            else return false;
-        }
+        
         }
     }
