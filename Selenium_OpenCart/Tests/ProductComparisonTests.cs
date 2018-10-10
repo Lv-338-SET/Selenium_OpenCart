@@ -4,6 +4,7 @@ using OpenQA.Selenium.Chrome;
 using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using Selenium_OpenCart.Pages.Body.SearchPage;
+using Selenium_OpenCart.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,32 +16,28 @@ namespace Selenium_OpenCart.Tests
     [TestFixture]
     public class ProductComparisonTests
     {
-        IWebDriver driver;
         const string URL = "http://40.118.125.245/";
 
-        [OneTimeSetUp]
-        public void BeforeAllTests()
+        [SetUp]
+        public void BeforeEachTest()
         {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.AddArguments("--start-maximized");
-            driver = new ChromeDriver(chromeOptions);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);//TODO!!!!!!!!!!!!!!            
+            Application.Get();
         }
 
-        [OneTimeTearDown]
-        public void AfterAllTests()
+        [TearDown]
+        public void AfterEachTest()
         {
-            driver.Quit();
+            Application.Remove();
         }
 
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-660
         [TestCase("iMac")]
         public void ProductComparison_ClickingTwoTimesCompareButton_OneProductAdded(string product)
         {
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.OpenUrl(URL);
 
             //Arrange
-            SearchPage searchPage = new SearchMethods(driver).Search(product);
+            SearchPage searchPage = new SearchMethods(Application.Get().Browser.Driver).Search(product);
             ProductComparisonPage comparePage = searchPage
                 .AddAppropriateProductToComparison(product)
                 .OpenAppropriateProductPage(product)

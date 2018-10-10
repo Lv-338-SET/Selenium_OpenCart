@@ -76,7 +76,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         public ProductComparisonPage.ProductComparisonPage ClickOnCompareProductsPageLink()
         {
             CompareProductsPageLink.Click();
-            return new ProductComparisonPage.ProductComparisonPage(Application.Get().Browser.Driver);
+            return new ProductComparisonPage.ProductComparisonPage();
         }
         #endregion
         #endregion

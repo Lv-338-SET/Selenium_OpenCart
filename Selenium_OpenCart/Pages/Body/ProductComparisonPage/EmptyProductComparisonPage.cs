@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.MainPage;
+using Selenium_OpenCart.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.CssSelector(NO_COMPARE_PRODUCTS_MESSAGE));
+                return Search.ElementByCssSelector(NO_COMPARE_PRODUCTS_MESSAGE);
             }
         }
 
@@ -28,15 +29,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.CssSelector(CONTINUE_BUTTON));
+                return Search.ElementByCssSelector(CONTINUE_BUTTON);
             }
         }
         #endregion
 
         #region Initialization & Verifycation
-        public EmptyProductComparisonPage(IWebDriver driver) : base(driver)
+        public EmptyProductComparisonPage()
         {
-            this.driver = driver;
             VerifyWebElements();
         }
 
@@ -57,7 +57,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         public HomePage ClickContinueButton()
         {
             ContinueButton.Click();
-            return new HomePage(driver);
+            return new HomePage(Application.Get().Browser.Driver);
         }
         #endregion
     }

@@ -18,15 +18,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.CssSelector(SUCCESS_REMOVE_MESSAGE));
+                return Search.ElementByCssSelector(SUCCESS_REMOVE_MESSAGE);
             }
         }
         #endregion
 
         #region Initialization & Verifycation
-        public EmptyProductComparisonPageWhithMessage(IWebDriver driver) : base(driver)
+        public EmptyProductComparisonPageWhithMessage()
         {
-            this.driver = driver;
             VerifyWebElements();
         }
 
