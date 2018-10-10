@@ -42,10 +42,9 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
             ChangePasswordConfirm.SendKeys(passwordConfirm);
         }
 
-        public MyAccountPage ClickChangeButton()
+        public void ClickChangeButton()
         {
-            ChangeButton.Click();
-            return new MyAccountPage(driver);
+            ChangeButton.Click();            
         }
 
         static bool VerifyChangePasswordPage(IWebDriver driver)
