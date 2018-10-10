@@ -1,19 +1,17 @@
 ﻿using Selenium_OpenCart.Data.Application;
-using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using System.Collections.Generic;
 using System.Threading;
 
 namespace Selenium_OpenCart.Tools
 {
-    public class Application
+    public class TestsApplication
     {
         //Fields
-        private volatile static Application instance;
-        private static object lockingObject = new object();
+        private volatile static TestsApplication instance;
         private ISearchStrategy search;
         //For Parallel work
-        private Dictionary<int, AllBrowsers> browser;
+        private Dictionary<int, AllBrowsers> browsers;
 
         //Properties
         public ApplicationSource ApplicationSource { get; private set; }
@@ -22,11 +20,11 @@ namespace Selenium_OpenCart.Tools
             get
             {
                 int currentThread = Thread.CurrentThread.ManagedThreadId;
-                if (!browser.ContainsKey(currentThread))
+                if (!browsers.ContainsKey(currentThread))
                 {
                     InitBrowser(currentThread);
                 }
-                return browser[currentThread];
+                return browsers[currentThread];
             }
         }
 
@@ -45,32 +43,26 @@ namespace Selenium_OpenCart.Tools
             }
         }
 
-        private Application(ApplicationSource applicationSource)
+        private TestsApplication(ApplicationSource applicationSource)
         {
-            browser = new Dictionary<int, AllBrowsers>();
+            browsers = new Dictionary<int, AllBrowsers>();
             this.ApplicationSource = applicationSource;
         }
 
-        public static Application Get()
+        public static TestsApplication Get()
         {
             return Get(null);
         }
 
-        public static Application Get(ApplicationSource applicationSource)
+        public static TestsApplication Get(ApplicationSource applicationSource)
         {
             if (instance == null)
             {
-                lock (lockingObject)
+                if (applicationSource == null)
                 {
-                    if (instance == null)
-                    {
-                        if (applicationSource == null)
-                        {
-                            applicationSource = ApplicationSourceRepository.Default();
-                        }
-                        instance = new Application(applicationSource);
-                    }
+                    applicationSource = ApplicationSourceRepository.Default();
                 }
+                instance = new TestsApplication(applicationSource);
             }
             return instance;
         }
@@ -79,9 +71,9 @@ namespace Selenium_OpenCart.Tools
         {
             if (instance != null)
             {
-                foreach (KeyValuePair<int, AllBrowsers> kvp in instance.browser)
+                foreach (KeyValuePair<int, AllBrowsers> currentBrowser in instance.browsers)
                 {
-                    kvp.Value.Quit();
+                    currentBrowser.Value.Quit();
                 }
                 instance = null;
             }
@@ -89,7 +81,7 @@ namespace Selenium_OpenCart.Tools
 
         private void InitBrowser(int currentThread)
         {
-            browser.Add(currentThread, new AllBrowsers(ApplicationSource));
+            browsers.Add(currentThread, new AllBrowsers(ApplicationSource));
         }
 
         private void InitSearch()

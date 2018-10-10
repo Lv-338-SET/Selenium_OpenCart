@@ -101,16 +101,19 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             searchTextBoxInsideContent.Clear();
             return this;
         }
+
         public SearchPage ClicksearchTextBoxInsideContent()
         {
             searchTextBoxInsideContent.Click();
             return this;
         }
+
         public SearchPage SetTextInsearchTextBoxInsideContent(string text)
         {
             this.searchTextBoxInsideContent.SendKeys(text);
             return this;
         }
+
         public string GetTextFromsearchTextBoxInsideContent()
         {
             return this.searchTextBoxInsideContent.Text;
@@ -121,6 +124,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.searchCategoryCheck.Click();
             return this;
         }
+
         public bool GetSearchCategoryValue()
         {
             return this.searchCategoryCheck.Selected;
@@ -130,6 +134,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         {
             return this.searchDescriptionChek.Selected;
         }
+
         public SearchPage ClickSearchDescription()
         {
             this.searchDescriptionChek.Click();
@@ -159,6 +164,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.productCompareLabel.Click();
             return this;
         }
+
         public string GetProductCompareText()
         {
             return this.productCompareLabel.Text;
@@ -184,6 +190,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.selectCategory.SelectByText(category);
             return this;
         }
+
         public string GetSelectedCategory()
         {
             return this.selectCategory.SelectedOption.Text;
@@ -194,6 +201,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.selectSortBy.SelectByText(sorted);
             return this;
         }
+
         public string GetSelectedSortBy()
         {
             return this.selectSortBy.SelectedOption.Text;
@@ -204,10 +212,12 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             this.selectShow.SelectByText(category);
             return this;
         }
+
         public string GetSelectedShow()
         {
             return this.selectShow.SelectedOption.Text;
         }
+
         public ProductItem FindAppropriateProduct(string product)
         {
             foreach (var item in listProduct)
@@ -225,10 +235,12 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             FindAppropriateProduct(product).ClickCartfavourite();
             return new SearchPage(driver);
         }
+
         public string successAlertMessageText()
         {
             return successAlertMessage.Text;
         }
+
         public bool isSuccessMessageDisplayed()
         {
             return successAlertMessage.Displayed;
@@ -241,7 +253,5 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
 
 
         #endregion
-
-
     }
 }

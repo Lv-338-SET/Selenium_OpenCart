@@ -35,7 +35,7 @@ namespace Selenium_OpenCart.Logic
         public HomePage IsCartIsEmpty()
         {
             HomePage homePage = new HomePage(WebDriver);
-            ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
+            ShoppingCartPage shopingCartPage = new ShoppingCartPage(WebDriver);
             TopBar topBar = new TopBar(WebDriver);
             topBar.ShoppingCartButtonClick();
             shopingCartPage.GoToMainPageIfCartIsEmpty();
@@ -43,9 +43,9 @@ namespace Selenium_OpenCart.Logic
 
         }
 
-        public ShopingCartPage RemoveFromCart(string name)
+        public ShoppingCartPage RemoveFromCart(string name)
         {
-            ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
+            ShoppingCartPage shopingCartPage = new ShoppingCartPage(WebDriver);
             return shopingCartPage;
         }
 
