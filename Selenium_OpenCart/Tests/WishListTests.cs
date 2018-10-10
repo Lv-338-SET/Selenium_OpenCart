@@ -39,24 +39,24 @@ namespace Selenium_OpenCart.Tests
         }
 
 
-        //[TestCase]
-        //[Order(2)]
+        [TestCase]
+        [Order(2)]
 
-        //public void AddToCartFromWishList_AddIphone_IsAdded()
-        //{
-        //    Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-        //    TopBar topbar = new TopBar(driver);
-        //    topbar.WishListButtonClick();
-        //    WishListWithProducts wishlist = new WishListWithProducts(driver);
-        //    string productNameFromWishList = wishlist.GetProduct().GetProductName();
-        //    wishlist.GetProduct().ClickAddToCartButton();
-        //    string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductPrice();
-        //    Assert.AreEqual(productNameFromWishList,productNameFromCart,"Element is not added to cart from wishlist");
-        //}
+        public void AddToCartFromWishList_AddIphone_IsAdded()
+        {
+            Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
+            TopBar topbar = new TopBar(driver);
+            topbar.WishListButtonClick();
+            WishListWithProducts wishlist = new WishListWithProducts(driver);
+            string productNameFromWishList = wishlist.GetProduct().GetProductName();
+            wishlist.GetProduct().ClickAddToCartButton();
+            string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductName();
+            Assert.AreEqual(productNameFromWishList, productNameFromCart, "Element is not added to cart from wishlist");
+        }
 
 
         [TestCase]
-        [Order(2)]
+        [Order(3)]
 
         public void RemoveFromWishList_RemoveIphone_IsRemoved()
         {

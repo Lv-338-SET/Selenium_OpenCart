@@ -10,6 +10,8 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
     {
         protected IWebDriver driver;
 
+        const string HOME_PAGE_CURNET_PAGE_LABLE = "Dashboard";
+
         #region Properties
         protected IWebElement CurnetPageLabel
         {
@@ -47,9 +49,14 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
 
         #region Atomic operations
         #region Atomic operations for CurnetPageLable
-        public string GetTextFromCurnetPageLink()
+        public string GetTextFromCurnetPageLable()
         {
             return this.CurnetPageLabel.Text;
+        }
+
+        public bool IsHomePage()
+        {
+            return this.CurnetPageLabel.Text.Equals(HOME_PAGE_CURNET_PAGE_LABLE);
         }
         #endregion
 
