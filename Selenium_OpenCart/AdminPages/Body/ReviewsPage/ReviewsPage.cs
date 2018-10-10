@@ -47,25 +47,35 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = SelectAllReviewsCheckBox;
             tmp = DeleteButton;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsReviewsPage()
+        {
+            return VerifyPage();
+        }
+
         #region Atomic operations for SelectAllReviewsCheckBox
         public void SelectAllReviews()
         {
-            this.SelectAllReviewsCheckBox.Click();
+            SelectAllReviewsCheckBox.Click();
         }
         #endregion
 
         #region Atomic operations for DeleteButton
+        /// <summary>
+        /// Deletes review
+        /// </summary>
+        /// <returns>Returns on ReviewsPageLogic</returns>
         public ReviewsPageLogic DeleteReview()
         {
-            this.DeleteButton.Click();
+            DeleteButton.Click();
             IAlert alert = driver.SwitchTo().Alert();
             alert.Accept();
             return new ReviewsPageLogic(driver);
@@ -73,18 +83,22 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         #endregion
 
         #region Atomic operations for ReviewsList
+        /// <summary>
+        /// Get all reviews from page is at least one review exist
+        /// </summary>
+        /// <returns>List<ReviewItem> is any review exist and null if not</returns>
         public List<ReviewItem> GetReviewsListIfAnyExists()
         {
             if (IsAnyReviewExist())
             {
-                return this.ReviewsList;
+                return ReviewsList;
             }
             return null;
         }
 
         public bool IsAnyReviewExist()
         {
-            return (this.ReviewsList.Any());
+            return (ReviewsList.Any());
         }
         #endregion
         #endregion

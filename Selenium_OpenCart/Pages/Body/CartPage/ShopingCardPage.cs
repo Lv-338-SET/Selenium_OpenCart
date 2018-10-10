@@ -4,16 +4,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart;
+using Selenium_OpenCart.Pages.Body.MainPage;
+using Selenium_OpenCart.Pages.Body.WishListPage;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    public class ShopingCartPage
+    class ShopingCartPage : Header.Header
     {
-        private IWebDriver driver;
+        protected IWebElement TableRow
+        { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tr")); } }
+        protected IWebElement ButtonContinue
+        { get { return driver.FindElement(By.XPath("//a[text() = 'Continue']")); } }
+        protected IWebElement EmptyCartMessage
+        { get { return driver.FindElement(By.XPath("//p[contains(text(),'Your shopping cart is empty!')]")); } }
+        protected ShopingCartTableItem ShopingCartProduct
+        { get { return GetProductElement(GetTableRow()); } }
 
-        public ShopingCartPage(IWebDriver driver)
+
+
+        public ShopingCartPage(IWebDriver driver) : base(driver)
+        { }
+
+        public HomePage GoToMainPageIfCartIsEmpty()
         {
-            this.driver = driver;
+            ButtonContinue.Click();
+            return new HomePage(driver);
+        }
+
+        public ShopingCartTableItem GetProductElement(IWebElement webElement)
+        {
+            return new ShopingCartTableItem(webElement);
+        }
+
+        public IWebElement GetTableRow()
+        {
+            return this.TableRow;
+        }
+
+        public ShopingCartTableItem GetProduct()
+        {
+            return this.ShopingCartProduct;
+        }
+
+
+        public bool GetEmptyCartMessage()
+        {
+            return EmptyCartMessage.Displayed;
         }
     }
 }

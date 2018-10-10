@@ -77,7 +77,7 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = SelectCheckBox;
             tmp = ProductName;
@@ -86,35 +86,42 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
             tmp = ReviewStatus;
             tmp = ReviewDate;
             tmp = EditLink;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsReviewItem()
+        {
+            return VerifyPage();
+        }
+
         #region Atomic operations for SelectCheckBox
         public void SelectReview()
         {
-            this.SelectCheckBox.Click();
+            SelectCheckBox.Click();
         }
         #endregion
 
         #region Atomic operations for ProductName
         public string GetProductName()
         {
-            return this.ProductName.Text;
+            return ProductName.Text;
         }
         #endregion
 
         #region Atomic operations for ReviewerName
         public string GetReviewerName()
         {
-            return this.ReviewerName.Text;
+            return ReviewerName.Text;
         }
         #endregion
 
         #region Atomic operations for ReviewRaiting
+        /// <returns>Review Rating as RatingList enum, returns None if can't parce rating to enum</returns>
         public RatingList GetReviewRaiting()
         {
-            if (int.TryParse(this.ReviewRating.Text, out int rating))
+            if (int.TryParse(ReviewRating.Text, out int rating))
             {
                 return rating.ToRating();
             }
@@ -126,9 +133,10 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         #endregion
 
         #region Atomic operations for ReviewStatus
+        /// <returns>Review status as ReviewStatusList enum</returns>
         public ReviewStatusList GetReviewStatus()
         {
-            return this.ReviewStatus.Text.ToReviewStatus();
+            return ReviewStatus.Text.ToReviewStatus();
         }
         #endregion
 
@@ -142,7 +150,7 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         #region Atomic operations for EditLink
         public EditReviewPage.EditReviewPage ClickOnEditLink()
         {
-            this.EditLink.Click();
+            EditLink.Click();
             return new EditReviewPage.EditReviewPage(driver);
         }
         #endregion
@@ -159,6 +167,11 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
             return !first.Equals(second);
         }
 
+        /// <summary>
+        /// Checks if review data is equal to another. Support IProductReview or ReviewItem
+        /// </summary>
+        /// <param name="obj">Can be IProductReview or ReviewItem</param>
+        /// <returns>true if review data equals to obj data</returns>
         public override bool Equals(object obj)
         {
             if (obj == null)

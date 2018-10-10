@@ -8,6 +8,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Pages.Body.ProductPage;
+using System.Threading;
 
 namespace Selenium_OpenCart.Pages.Body.SearchPage
 {
@@ -31,6 +32,8 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             { get { return driver.FindElement(By.Id("compare-total")); } }
         protected IWebElement productPageLabel
             { get { return driver.FindElement(By.ClassName("text-right")); } }
+        protected IWebElement successAlertMessage
+        { get { return driver.FindElement(By.XPath("//div[@class='alert alert-success']")); } }
 
         protected SelectElement selectCategory
             { get { return new SelectElement(driver.FindElement(By.Name("category_id"))); } }
@@ -237,6 +240,14 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             return new ProductPage.ProductPage(driver);
         }
 
+        public string successAlertMessageText()
+        {
+            return successAlertMessage.Text;
+        }
+        public bool isSuccessMessageDisplayed()
+        {
+            return successAlertMessage.Displayed;
+        }
         #endregion
 
         #region BussinesLogic

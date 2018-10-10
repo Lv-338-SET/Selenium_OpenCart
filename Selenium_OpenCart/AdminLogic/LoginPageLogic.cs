@@ -22,26 +22,45 @@ namespace Selenium_OpenCart.AdminLogic
             this.driver = driver;
         }
 
-        public LoginPageLogic ClickClearAndInputTextToUsernameInput(IUser user)
+        /// <summary>
+        /// Click, Clear and Input Text to Username Input on page
+        /// Using Fluent Inteface
+        /// </summary>
+        /// <param name="user">User data in IUser format</param>
+        /// <returns>Itself so you can countinue using this page</returns>
+        public LoginPageLogic ClickClearAndInputTextInUsernameInput(IUser user)
         {
             LoginPage.ClickOnUsernameInput();
             LoginPage.ClearUsernameInput();
-            LoginPage.InputTextToUsernameInput(user);
+            LoginPage.InputTextInUsernameInput(user);
             return this;
         }
 
-        public LoginPageLogic ClickClearAndInputTextToPasswordInput(IUser user)
+        /// <summary>
+        /// Click, Clear and Input Text to Password Input on page
+        /// Using Fluent Inteface
+        /// </summary>
+        /// <param name="user">User data in IUser format</param>
+        /// <returns>Itself so you can countinue using this page</returns>
+        public LoginPageLogic ClickClearAndInputTextInPasswordInput(IUser user)
         {
             LoginPage.ClickOnPasswordInput();
             LoginPage.ClearPasswordInput();
-            LoginPage.InputTextToPasswordInput(user);
+            LoginPage.InputTextInPasswordInput(user);
             return this;
         }
 
+        /// <summary>
+        /// Click, Clear and Input Text to Username Input on page
+        /// Click, Clear and Input Text to Password Input on page
+        /// Using Fluent Inteface
+        /// </summary>
+        /// <param name="user">Valid user data in IUser format</param>
+        /// <returns>AdminPageLogic page</returns>
         public AdminPageLogic InputValidUserAndLogin(IUser user)
         {
-            ClickClearAndInputTextToUsernameInput(user);
-            ClickClearAndInputTextToPasswordInput(user);
+            ClickClearAndInputTextInUsernameInput(user);
+            ClickClearAndInputTextInPasswordInput(user);
             LoginPage.ClickOnLoginButton();
             return new AdminPageLogic(driver);
         }
