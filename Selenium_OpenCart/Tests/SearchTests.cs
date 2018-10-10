@@ -7,6 +7,7 @@ using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Logic;
+using Selenium_OpenCart.Data.Product;
 
 namespace Selenium_OpenCart.Tests
 {
@@ -15,8 +16,12 @@ namespace Selenium_OpenCart.Tests
     {
         SearchMethods logicSearch;
 
+        DBDataReader reader;
+
         IWebDriver driver;
         const string URL = "http://atqc-shop.epizy.com/";
+
+
 
         [OneTimeSetUp]
         public void SetUp()
@@ -24,10 +29,11 @@ namespace Selenium_OpenCart.Tests
             driver = new ChromeDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             logicSearch = new SearchMethods(driver);
+            reader = new DBDataReader();
         }
 
-        [TestCase("Apple", 7)]
-        public void SearchingResultItemsCount(string search, int count)
+        [TestCase("Apple")]
+        public void SearchingResultItemsCount(string search)
         {
             driver.Navigate().GoToUrl(URL);
 
@@ -36,10 +42,10 @@ namespace Selenium_OpenCart.Tests
                 .GetListProduct()
                 .Count;
 
-       
+            int expected = 
+                reader.GetProducts(String.Format("name='{0}'",search)).Count;
 
-
-            Assert.AreEqual(actual, count);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestCase("Apple")]
@@ -48,7 +54,10 @@ namespace Selenium_OpenCart.Tests
             driver.Navigate().GoToUrl(URL);
 
             Assert.IsTrue(logicSearch
-                .TestCategoriesValue(GlobalVariables.inputListCategories)
+                .TestCategoriesValue(
+                    logicSearch
+                        .ConvertToListStringCategory(reader.GetCategories())
+                )
             );
         }
 

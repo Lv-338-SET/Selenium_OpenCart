@@ -10,6 +10,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
+using Selenium_OpenCart.Data.Category;
+
 namespace Selenium_OpenCart.Logic
 {
     class SearchMethods
@@ -62,6 +64,14 @@ namespace Selenium_OpenCart.Logic
             content = content.ClickSearchButtonInsideContent();
 
             return content.GetListProduct().Count;
+        }
+
+        public List<string> ConvertToListStringCategory(List<ICategory> list) {
+            List<string> output = new List<string>();
+            foreach (var current in list) {
+                output.Add(current.GetName());
+            }
+            return output;
         }
 
         public void SearchingMethod(string testSearch, string category, bool chekSubcategory = false, bool checkSearchInDesc = false)

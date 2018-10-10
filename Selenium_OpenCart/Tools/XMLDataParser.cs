@@ -46,6 +46,7 @@ namespace OpenCartDB
 
         }
 
+
         public void CreateProductXML(string name, string description, double price, int quantity, string image = "") {
             XmlDocument doc = new XmlDocument();
             XmlElement el = (XmlElement)doc.AppendChild(doc.CreateElement("product"));
@@ -120,6 +121,8 @@ namespace OpenCartDB
             doc.Save("user.xml");
 
         }
+
+        public void CreateSearchXML() { }
 
         public string HashPassword(string password, string sault) {
 
