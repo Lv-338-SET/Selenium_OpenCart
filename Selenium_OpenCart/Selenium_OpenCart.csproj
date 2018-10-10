@@ -106,7 +106,6 @@
     <Compile Include="Data\ProductReview\Raiting\RaitingRepository.cs" />
     <Compile Include="Data\User\User.cs" />
     <Compile Include="Data\User\UserRepository.cs" />
-    <Compile Include="Logic\GlobalVariables.cs" />
     <Compile Include="Logic\ProductPageLogic\ProductPageLogic.cs" />
     <Compile Include="Logic\ProductPageLogic\ProductPageReviewLogic.cs" />
     <Compile Include="Logic\SearchMethods.cs" />
