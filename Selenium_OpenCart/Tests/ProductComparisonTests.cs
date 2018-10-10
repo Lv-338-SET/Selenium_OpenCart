@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
+using Selenium_OpenCart.Pages.Body.SearchPage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,7 @@ namespace Selenium_OpenCart.Tests
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.AddArguments("--start-maximized");
             driver = new ChromeDriver(chromeOptions);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);//TODO!!!!!!!!!!!!!!
-
-            driver.Navigate().GoToUrl(URL);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);//TODO!!!!!!!!!!!!!!            
         }
 
         [OneTimeTearDown]
@@ -38,19 +37,18 @@ namespace Selenium_OpenCart.Tests
         [TestCase("iMac")]
         public void ProductComparison_ClickingTwoTimesCompareButton_OneProductAdded(string product)
         {
+            driver.Navigate().GoToUrl(URL);
+
             //Arrange
-            SearchMethods addedToComparisonProduct = new SearchMethods(driver);
-            ProductComparisonPage columns = new ProductComparisonPage(driver);
-            //Act
-            addedToComparisonProduct.Search(product)
+            SearchPage searchPage = new SearchMethods(driver).Search(product);
+            ProductComparisonPage comparePage = searchPage
                 .AddAppropriateProductToComparison(product)
                 .OpenAppropriateProductPage(product)
                 .ClickOnCompareProductButton()
-                .ClickOnCompareProductsPageLink()
-                .GetFirstProductNameText();
+                .ClickOnCompareProductsPageLink();
             //Assert
-            Assert.AreEqual(product, addedToComparisonProduct, "The selected product was not added to the comparison table.");            
-            Assert.True(columns.CountColumns() == 1, "One product is added to the comparison table several times.");
+            Assert.AreEqual(product, comparePage.GetFirstProductNameText(), "The selected product was not added to the comparison table.");            
+            Assert.True(comparePage.CountColumns() == 1, "One product is added to the comparison table several times.");
         }
 
 

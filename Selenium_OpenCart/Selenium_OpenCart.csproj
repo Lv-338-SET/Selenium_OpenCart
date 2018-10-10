@@ -130,6 +130,7 @@
     <Compile Include="Pages\Body\MyAccountPage\MyAccountPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPageWhithMessage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\MainComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPageWhithMessage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPage.cs" />

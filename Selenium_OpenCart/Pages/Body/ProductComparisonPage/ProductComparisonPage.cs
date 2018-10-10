@@ -11,7 +11,7 @@ using Selenium_OpenCart.Pages.Body.SearchPage;
 
 namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
 {
-    public class ProductComparisonPage : EmptyProductComparisonPage
+    public class ProductComparisonPage : MainComparisonPage
     {
         #region Constants
         private const string PRODUCT_DETAILS_LABEL = "//strong[text()='Product Details']"; //XPath
@@ -23,7 +23,6 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         private const string REMOVE_FIRST = "//tbody[last()]/descendant::a"; //XPath
         private const string REMOVE_LAST = "//tbody[last()]/tr[last()]/descendant::a[last()]"; //XPath
         //private const string PRODUCT_COLUMN = "tr .text-center"; //CSS
-
         #endregion
 
         #region Properties
