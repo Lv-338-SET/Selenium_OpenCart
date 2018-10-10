@@ -43,16 +43,29 @@ namespace Selenium_OpenCart.Logic
         {
             SearchPage content = new SearchPage(this.driver);
             List<string> actual = content.GetListOfCategories();
+            actual.RemoveAt(0);
+
+            for (int i = 0; i < actual.Count; i++)
+            {
+                actual[i] = actual[i].Trim(' ');
+                list[i] = list[i].Replace("amp;","");
+            }
+
+
+            actual.Sort();
+
+            list.Sort();
+
             int count = 0;
             for (int i = 0; i < actual.Count; i++)
             {
-                if (actual[i].Replace(" ", "") == list[i].Replace(" ", ""))
+                if (actual[i] == list[i])
                 {
                     count++;
                 }
             }
 
-            return count == actual.Count;
+            return count == list.Count;
         }
 
         public int SearchByCategory(string textSearch, string category)

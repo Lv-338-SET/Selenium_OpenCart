@@ -12,7 +12,7 @@ namespace Selenium_OpenCart
     {
         protected MySqlConnection conn;
 
-        protected string DataPath = string.Format("Server=localhost; database={0}; UID=opencart; password=opencart; SslMode = none", "shop");
+        protected string DataPath = string.Format("Server=localhost; database={0}; UID=opencart; password=opencart; SslMode = none", "opencart");
 
         SshClient client = new SshClient("40.118.125.245", "test", "test");
 
@@ -24,13 +24,15 @@ namespace Selenium_OpenCart
         /// <returns>Object opened MySqlConnection</returns>
         public MySqlConnection OpenConnection()
         {
+
             client.Connect();
-            var tunnel = new ForwardedPortLocal("127.0.0.1", 3306, "127.0.0.1", 3306);
-            client.AddForwardedPort(tunnel);
-            tunnel.Start();
 
             if (client.IsConnected)
             {
+                var portForwarded = new ForwardedPortLocal("127.0.0.1", 3306, "127.0.0.1", 3306);
+                client.AddForwardedPort(portForwarded);
+                portForwarded.Start();
+               
                 this.conn = new MySqlConnection(DataPath);
                 conn.Open();
             }

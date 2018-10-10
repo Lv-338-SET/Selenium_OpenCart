@@ -10,15 +10,16 @@ using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Data.User;
 using Selenium_OpenCart.Data.Category;
 using Selenium_OpenCart.Data.Cart;
+using Selenium_OpenCart.Data.Search;
 using System.Xml;
 using EasyEncryption;
 
 
-namespace OpenCartDB
+namespace Selenium_OpenCart.Tools
 {
-    class XMLDataParser
+    public class XMLDataParser
     {
-        const string XML_PATH = "";
+        const string XML_PATH = "Selenium_OpenCart/XML/";
         const string PRODUCT_FILE_NAME = "product.xml";
         const string CART_FILE_NAME = "cart.xml";
         const string CATEGORY_FILE_NAME = "category.xml";
@@ -26,6 +27,19 @@ namespace OpenCartDB
         const string PRODUCT_REVIEW_FILE_NAME = "product_review.xml";
         const string RATING_FILE_NAME = "rating.xml";
         const string USER_FILE_NAME = "user.xml";
+        const string SEARCH_FILE_NAME = "search.xml";
+
+        public ISearch GetSearchInputData() {
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(XML_PATH + SEARCH_FILE_NAME);
+            XmlElement node = doc.DocumentElement;
+            return Search.Get()
+                    .SetName(node.GetElementsByTagName("search")[0].InnerText)
+                    .SetCategory(node.GetElementsByTagName("category")[0].InnerText)
+                    .SetCount(Int32.Parse(node.GetElementsByTagName("count")[0].InnerText))
+                    .Build();
+        }
 
         public IProduct GetInputProduct() {
 
