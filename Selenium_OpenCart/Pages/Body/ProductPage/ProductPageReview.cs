@@ -148,6 +148,11 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             this.AddReviewButton.Click();
             return new ProductPageReviewLogic(driver);
         }
+
+        public bool IsReviewPage()
+        {
+            return this.AddReviewButton.Displayed;
+        }
         #endregion
 
         #region Atomic operations for Reviews

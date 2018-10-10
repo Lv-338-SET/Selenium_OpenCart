@@ -1,8 +1,8 @@
 ﻿using OpenQA.Selenium;
 
-namespace Selenium_OpenCart.Pages.Body.ProductPage
+namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
 {
-    public sealed class ProductPageSuccessfullyAddedReview : ProductPageReview
+    public sealed class SuccessfullyAddedReviewPage : ProductPageReview
     {
         #region Properties
         private IWebElement SuccessAllert
@@ -15,7 +15,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         #endregion
 
         #region Initialization and Verifycation
-        public ProductPageSuccessfullyAddedReview(IWebDriver driver) : base(driver)
+        public SuccessfullyAddedReviewPage(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
             VerifyPage();
