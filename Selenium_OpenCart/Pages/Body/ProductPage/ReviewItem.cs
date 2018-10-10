@@ -52,7 +52,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = ReviewerName;
             tmp = ReviewDate;
@@ -62,32 +62,42 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             {
                 throw new CountRatingExeption("Rating don't have 5 stars, it has " + tmp2.Count);
             }
+            return true;
         }
         #endregion
 
         #region Atomic operations
-        #region Atomic operations for ReviewerName
-        public string GetReviewerNameText()
+        public bool IsReview()
         {
-            return this.ReviewerName.Text;
+            return VerifyPage();
+        }
+
+        #region Atomic operations for ReviewerName
+        public string GetTextFromReviewerName()
+        {
+            return ReviewerName.Text;
         }
         #endregion
 
         #region Atomic operations for ReviewDate
         public string GetReviewDate()
         {
-            return this.ReviewDate.Text;
+            return ReviewDate.Text;
         }
         #endregion
 
         #region Atomic operations for ReviewText
         public string GetReviewText()
         {
-            return this.ReviewText.Text;
+            return ReviewText.Text;
         }
         #endregion
 
         #region Atomic operations for Rating
+        /// <summary>
+        /// Get review rating in RatingList enum format
+        /// </summary>
+        /// <returns>review rating in RatingList enum format</returns>
         public RatingList GetRating()
         {
             int raiting = 0;
@@ -114,6 +124,11 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             return !first.Equals(second);
         }
 
+        /// <summary>
+        /// Checks if review data is equal to another. Support IProductReview or ReviewItem
+        /// </summary>
+        /// <param name="obj">Can be IProductReview or ReviewItem</param>
+        /// <returns>true if review data equals to obj data</returns>
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -124,19 +139,19 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             {
                 IProductReview productReview = obj as IProductReview;
 
-                return (this.GetReviewerNameText().Equals(productReview.GetReviewerName())
-                    && this.GetReviewDate().Equals(productReview.GetDate())
-                    && this.GetReviewText().Equals(productReview.GetReviewText())
-                    && this.GetRating().Equals(productReview.GetRating()));
+                return (GetTextFromReviewerName().Equals(productReview.GetReviewerName())
+                    && GetReviewDate().Equals(productReview.GetDate())
+                    && GetReviewText().Equals(productReview.GetReviewText())
+                    && GetRating().Equals(productReview.GetRating()));
             }
             else if (obj is ReviewItem)
             {
                 ReviewItem productReview = obj as ReviewItem;
 
-                return (this.GetReviewerNameText().Equals(productReview.GetReviewerNameText())
-                    && this.GetReviewDate().Equals(productReview.GetReviewDate())
-                    && this.GetReviewText().Equals(productReview.GetReviewText())
-                    && this.GetRating().Equals(productReview.GetRating()));
+                return (GetTextFromReviewerName().Equals(productReview.GetTextFromReviewerName())
+                    && GetReviewDate().Equals(productReview.GetReviewDate())
+                    && GetReviewText().Equals(productReview.GetReviewText())
+                    && GetRating().Equals(productReview.GetRating()));
             }
             else
             {
@@ -146,7 +161,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
 
         public override int GetHashCode()
         {
-            return  (this.GetReviewerNameText() + " " + this.GetReviewText() + " " + this.GetRating() + " " + this.GetReviewDate()).GetHashCode();
+            return  (GetTextFromReviewerName() + " " + this.GetReviewText() + " " + this.GetRating() + " " + this.GetReviewDate()).GetHashCode();
         }
         #endregion
     }

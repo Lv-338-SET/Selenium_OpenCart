@@ -45,63 +45,72 @@ namespace Selenium_OpenCart.AdminPages
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
-            IWebElement tmp = this.UsernameInput;
-            tmp = this.PasswordInput;
-            tmp = this.LoginButton;
+            IWebElement tmp = UsernameInput;
+            tmp = PasswordInput;
+            tmp = LoginButton;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsLoginPage()
+        {
+            return VerifyPage();
+        }
+
         #region Atomic operations for UsernameInput
         public void ClickOnUsernameInput()
         {
-            this.UsernameInput.Click();
+            UsernameInput.Click();
         }
 
         public void ClearUsernameInput()
         {
-            this.UsernameInput.Clear();
+            UsernameInput.Clear();
         }
 
-        public void InputTextToUsernameInput(IUser user)
+        /// <summary>
+        /// Inputs username to Username Input on page
+        /// </summary>
+        /// <param name="user">User data in IUser format</param>
+        public void InputTextInUsernameInput(IUser user)
         {
-            this.UsernameInput.SendKeys(user.GetUsername());
+            UsernameInput.SendKeys(user.GetUsername());
         }
         #endregion
 
         #region Atomic operations for PasswordInput
         public void ClickOnPasswordInput()
         {
-            this.PasswordInput.Click();
+            PasswordInput.Click();
         }
 
         public void ClearPasswordInput()
         {
-            this.PasswordInput.Clear();
+            PasswordInput.Clear();
         }
 
-        public void InputTextToPasswordInput(IUser user)
+        /// <summary>
+        /// Inputs user password to Password Input on page
+        /// </summary>
+        /// <param name="user">User data in IUser format</param>
+        public void InputTextInPasswordInput(IUser user)
         {
-            this.PasswordInput.SendKeys(user.GetPassword());
+            PasswordInput.SendKeys(user.GetPassword());
         }
         #endregion
 
         #region Atomic operations for LoginButton
         public string GetTextFromLoginButton()
         {
-            return this.LoginButton.Text;
+            return LoginButton.Text;
         }
 
         public void ClickOnLoginButton()
         {
-            this.LoginButton.Click();
-        }
-
-        public bool IsLoginPage()
-        {
-            return this.LoginButton.Displayed;
+            LoginButton.Click();
         }
         #endregion
         #endregion

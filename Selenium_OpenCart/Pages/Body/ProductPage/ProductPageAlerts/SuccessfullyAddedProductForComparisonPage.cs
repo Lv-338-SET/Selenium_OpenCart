@@ -1,6 +1,5 @@
 ﻿using OpenQA.Selenium;
 
-using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using Selenium_OpenCart.Logic.ProductPageLogic;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
@@ -40,44 +39,43 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = this.SuccessAllert;
             tmp = this.ProductPageLink;
             tmp = this.CompareProductsPageLink;
+            return true;
         }
         #endregion
 
         #region Atomic operations
-        #region Atomic operations for SuccessAllert
         public bool IsProductAddedToComparePage()
         {
-            return this.SuccessAllert.Displayed;
+            return VerifyPage();
         }
-        #endregion
 
         #region Atomic operations for ProductPageLink
-        public string GetProductPageLinkText()
+        public string GetTextFromProductPageLink()
         {
-            return this.ProductPageLink.Text;
+            return ProductPageLink.Text;
         }
 
         public ProductPageReviewLogic ClickOnProductPageLink()
         {
-            this.ProductPageLink.Click();
+            ProductPageLink.Click();
             return new ProductPageReviewLogic(driver);
         }
         #endregion
 
         #region Atomic operations for CompareProductsPageLink
-        public string GetCompareProductsPageLink()
+        public string GetTextFromCompareProductsPageLink()
         {
-            return this.CompareProductsPageLink.Text;
+            return CompareProductsPageLink.Text;
         }
 
         public ProductComparisonPage.ProductComparisonPage ClickOnCompareProductsPageLink()
         {
-            this.CompareProductsPageLink.Click();
+            CompareProductsPageLink.Click();
             return new ProductComparisonPage.ProductComparisonPage(driver);
         }
         #endregion

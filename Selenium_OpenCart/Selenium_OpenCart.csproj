@@ -63,7 +63,7 @@
     <Compile Include="AdminLogic\ReviewsPageLogic.cs" />
     <Compile Include="AdminPages\Body\EditReviewPage\EditReviewPage.cs" />
     <Compile Include="AdminPages\Body\ReviewsPage\ReviewItem.cs" />
-    <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPageSuccessfullyModifiedReview.cs" />
+    <Compile Include="AdminPages\Body\ReviewsPage\ReviewsPageSuccessAllert.cs" />
     <Compile Include="AdminPages\HeaderAndNavigation\Header.cs" />
     <Compile Include="AdminLogic\LoginPageLogic.cs" />
     <Compile Include="AdminPages\Body\LoginPage\LoginPage.cs" />

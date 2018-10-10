@@ -25,7 +25,12 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             this.driver = driver;
         }
 
-        //Fluent Interface
+        /// <summary>
+        /// Click, Clear and Input Text to Review Text Input on page
+        /// Uses Fluent Interface so you can use page again
+        /// </summary>
+        /// <param name="productReview">Data that represents reveiw in IProduct Review fromat</param>
+        /// <returns>ProductPageReviewLogic page</returns>
         public ProductPageReviewLogic ClickClearAndInputToReviewTextInput(IProductReview productReview)
         {
             ProductPageReview.ClickOnReviewInput();
@@ -34,6 +39,28 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             return this;
         }
 
+        /// <summary>
+        /// Click, Clear and Input Text to Reviewer Name Input on page
+        /// Uses Fluent Interface so you can use page again
+        /// </summary>
+        /// <param name="productReview">Data that represents reveiw in IProduct Review fromat</param>
+        /// <returns>ProductPageReviewLogic page</returns>
+        public ProductPageReviewLogic ClickClearAndInputToReviewerNameInput(IProductReview productReview)
+        {
+            ProductPageReview.ClickOnReviewerNameInput();
+            ProductPageReview.ClearReviewerNameInput();
+            ProductPageReview.InputTextToReviewerNameInput(productReview);
+            return this;
+        }
+
+        /// <summary>
+        /// Click, Clear and Input Text to Reviewer Name Input on page
+        /// Click, Clear and Input Text to Review Text Input on page
+        /// Select rating
+        /// Click on add review buuton
+        /// </summary>
+        /// <param name="productReview">Valid data that represents reveiw in IProduct Review fromat</param>
+        /// <returns>SuccessfullyAddedReviewPage page</returns>
         public SuccessfullyAddedReviewPage InputValidReviewAndClickOnAddReviewButton(IProductReview productReview)
         {
             ClickClearAndInputToReviewerNameInput(productReview);
@@ -43,7 +70,14 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             return new SuccessfullyAddedReviewPage(driver);
         }
 
-        public UnsuccessfullyAddedReviewPage InputValidReviewButNotSelectRatingAndClickOnAddReviewButton(IProductReview productReview)
+        /// <summary>
+        /// Click, Clear and Input Text to Reviewer Name Input on page
+        /// Click, Clear and Input Text to Review Text Input on page
+        /// Click on add review buuton
+        /// </summary>
+        /// <param name="productReview">Data that represents reveiw in IProduct Review fromat</param>
+        /// <returns>UnsuccessfullyAddedReviewPage page</returns>
+        public UnsuccessfullyAddedReviewPage InputReviewWithoutRatingAndClickOnAddReviewButton(IProductReview productReview)
         {
             ClickClearAndInputToReviewerNameInput(productReview);
             ClickClearAndInputToReviewTextInput(productReview);
@@ -51,29 +85,40 @@ namespace Selenium_OpenCart.Logic.ProductPageLogic
             return new UnsuccessfullyAddedReviewPage(driver);
         }
 
-        public UnsuccessfullyAddedReviewPage InputValidReviewerNameAndSelectRatingAndClickOnAddReviewButton(IProductReview productReview)
+        /// <summary>
+        /// Click, Clear and Input valid Text to Review Name Input on page
+        /// Click, Clear and Input invalid Text to Review Text Input on page
+        /// Select valid rating
+        /// Click on add review buuton
+        /// </summary>
+        /// <param name="validReview">Valid data that represents reveiw in IProduct Review fromat</param>
+        /// <param name="invalidReview">Invalid data that represents reveiw in IProduct Review fromat</param>
+        /// <returns>UnsuccessfullyAddedReviewPage page</returns>
+        public UnsuccessfullyAddedReviewPage InputReviewWithInvalidReviewTextAndClickOnAddReviewButton(IProductReview validReview, IProductReview invalidReview)
         {
-            ClickClearAndInputToReviewerNameInput(productReview);
-            ProductPageReview.SelectRating(productReview);
+            ClickClearAndInputToReviewerNameInput(validReview);
+            ClickClearAndInputToReviewTextInput(invalidReview);
+            ProductPageReview.SelectRating(validReview);
             ProductPageReview.ClickOnAddReviewButton();
             return new UnsuccessfullyAddedReviewPage(driver);
         }
 
-        public UnsuccessfullyAddedReviewPage InputValidReviewTextAndSelectRatingAndClickOnAddReviewButton(IProductReview productReview)
+        /// <summary>
+        /// Click, Clear and Input invalid Text to Review Name Input on page
+        /// Click, Clear and Input valid Text to Review Text Input on page
+        /// Select valid rating
+        /// Click on add review buuton
+        /// </summary>
+        /// <param name="validReview">Valid data that represents reveiw in IProduct Review fromat</param>
+        /// <param name="invalidReview">Invalid data that represents reveiw in IProduct Review fromat</param>
+        /// <returns>UnsuccessfullyAddedReviewPage page</returns>
+        public UnsuccessfullyAddedReviewPage InputReviewWithInvalidReviewerNameAndClickOnAddReviewButton(IProductReview validReview, IProductReview invalidReview)
         {
-            ClickClearAndInputToReviewTextInput(productReview);
-            ProductPageReview.SelectRating(productReview);
+            ClickClearAndInputToReviewerNameInput(invalidReview);
+            ClickClearAndInputToReviewTextInput(validReview);
+            ProductPageReview.SelectRating(validReview);
             ProductPageReview.ClickOnAddReviewButton();
             return new UnsuccessfullyAddedReviewPage(driver);
-        }
-
-        //Fluent Interface
-        public ProductPageReviewLogic ClickClearAndInputToReviewerNameInput(IProductReview productReview)
-        {
-            ProductPageReview.ClickOnReviewerNameInput();
-            ProductPageReview.ClearReviewerNameInput();
-            ProductPageReview.InputTextToReviewerNameInput(productReview);
-            return this;
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
 {
-    public sealed class ReviewsPageSuccessfullyModifiedReview : ReviewsPage
+    public sealed class ReviewsPageSuccessAllert : ReviewsPage
     {
         #region Properties
         private IWebElement SuccessAllert
@@ -15,26 +15,31 @@ namespace Selenium_OpenCart.AdminPages.Body.ReviewsPage
         #endregion
 
         #region Initialization And Verifycation
-        public ReviewsPageSuccessfullyModifiedReview(IWebDriver driver) : base(driver)
+        public ReviewsPageSuccessAllert(IWebDriver driver) : base(driver)
         {
             this.driver = driver;
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = SuccessAllert;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsReviewsPageWithSuccessAllert()
+        {
+            return VerifyPage();
+        }
         #region Atomic operations for SuccessAllert
         public bool IsReviewModified()
         {
             return this.SuccessAllert.Displayed;
         }
 
-        public string GetSuccessAllertText()
+        public string GetTextFromSuccessAllert()
         {
             return this.SuccessAllert.Text;
         }

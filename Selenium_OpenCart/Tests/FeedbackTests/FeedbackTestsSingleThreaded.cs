@@ -28,6 +28,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         const string URL = "http://40.118.125.245/";
         const string ADMIN_URL = "http://40.118.125.245/admin";
 
+        const string ADMIN_HOME_PAGE_NAME = "Dashboard";
         const string REVIEWS_PAGE_NAME = "Reviews";
         const string REVIEW_ADDED_ALERT_TEXT = "Thank you for your review. It has been submitted to the webmaster for approval.";
 
@@ -95,7 +96,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
                 "Step 5 Failed: Not reviews page");
              
             SuccessfullyAddedReviewPage addedReview = productReviewPage.InputValidReviewAndClickOnAddReviewButton(review);
-            Assert.AreEqual(addedReview.GetSuccessAllertText(), REVIEW_ADDED_ALERT_TEXT,
+            Assert.AreEqual(addedReview.GetTextFromSuccessAllert(), REVIEW_ADDED_ALERT_TEXT,
                 "Step 6 Failed: " + REVIEW_ADDED_ALERT_TEXT + " message not appeared");
             TestCase649 = true;
         }
@@ -113,7 +114,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
                 "Step 1 Failed: Not login page");
 
             AdminPageLogic homePage = new LoginPageLogic(driver).InputValidUserAndLogin(user);
-            Assert.True(homePage.Header.IsHomePage(), 
+            Assert.AreEqual(homePage.Header.GetTextFromCurnetPageLable(), ADMIN_HOME_PAGE_NAME,
                 "Step 2 Failed: Not admin home page");
              Catalog catalog = homePage.Navigation.ClickOnCatalogLink();
 
@@ -130,11 +131,11 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.True(reviewsPage.ReviewsPage.IsReviewsPage(), 
                 "Step 3 Failed: Not reviews page");
 
-            EditReviewPageLogic page2 = reviewsPage.EditReviewThatExistAndEqualsTo(review);
+            EditReviewPageLogic page2 = reviewsPage.EditReviewThatEqualsTo(review);
             Assert.True(page2.EditReviewPage.IsEditReviewPage(), 
                 "Step 4 Failed: Not edit review page");
 
-            ReviewsPageSuccessfullyModifiedReview successfullyModifiedReview = page2.EnableReview();
+            ReviewsPageSuccessAllert successfullyModifiedReview = page2.EnableReview();
             Assert.True(successfullyModifiedReview.IsReviewModified(), 
                 "Step 5 Failed: Review wasn't approved");
             TestCase670 = true;
@@ -186,7 +187,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
                 "Step 1 Failed: Not login page");
 
             AdminPageLogic homePage = new LoginPageLogic(driver).InputValidUserAndLogin(user);
-            Assert.True(homePage.Header.IsHomePage(),
+            Assert.AreEqual(homePage.Header.GetTextFromCurnetPageLable(), ADMIN_HOME_PAGE_NAME,
                 "Step 2 Failed: Not admin home page");
             Catalog catalog = homePage.Navigation.ClickOnCatalogLink();
 
@@ -203,7 +204,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.True(reviewsPage.ReviewsPage.IsReviewsPage(),
                 "Step 3 Failed: Not reviews page");
 
-            ReviewsPageSuccessfullyModifiedReview page2 = reviewsPage.DeleteAllReviewsThatEqualsTo(review);
+            ReviewsPageSuccessAllert page2 = reviewsPage.DeleteAllReviewsThatEqualsTo(review);
             Assert.True(page2.IsReviewModified(),
                 "Step 4 Failed: Review wasn't deleted");
         }

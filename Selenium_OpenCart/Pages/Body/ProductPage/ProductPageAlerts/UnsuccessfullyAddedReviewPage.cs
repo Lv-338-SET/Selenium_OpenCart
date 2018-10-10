@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
 {
@@ -26,22 +21,23 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = WarningAlert;
+            return true;
         }
         #endregion
 
         #region Atomic operations
-        #region Atomic operations for WarningAlert
         public bool IsWarningAlertDisplayed()
         {
-            return this.WarningAlert.Displayed;
+            return VerifyPage();
         }
 
-        public string GetWarningAlertText()
+        #region Atomic operations for WarningAlert
+        public string GetTextFromWarningAlert()
         {
-            return this.WarningAlert.Text;
+            return WarningAlert.Text;
         }
         #endregion
         #endregion
