@@ -41,7 +41,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         [Test, Order(0)]
-        [TestCase("test", "test", "Orest77Test1@gmail.com", "067544321", "settest", "settest")]
+        [TestCase("test", "test", "Orest777Test1@gmail.com", "067544321", "settest", "settest")]
         public void  RegisterNewUsersTest(string firstName, string lastName, string email,
             string telephone, string password, string passwordConfirm)
         {
@@ -51,7 +51,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         [Test, Order(1)]
-        [TestCase("Orest77Test1@gmail.com", "settest")]
+        [TestCase("Orest777Test1@gmail.com", "settest")]
         public void LoginedUserTest(string email, string password)
         {
             LoginPageMethods login = new LoginPageMethods();
@@ -59,7 +59,7 @@ namespace Selenium_OpenCart.Tests
             Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser());          
         }
         [Test, Order(2)]
-        [TestCase("Orest77Test1@gmail.com", "settest", "settest", "settest", "Cllly@gmail.com", "0678765234")]
+        [TestCase("Orest777Test1@gmail.com", "settest", "settest", "settest", "Clll7y@gmail.com", "0678765234")]
         public void EditUserAccountTest(string Email, string password, string NewFirstName
             , string NewLastName, string NewEmail, string NewTelephone)
         {
@@ -70,7 +70,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         [Test, Order(3)]
-        [TestCase("Cllly@gmail.com", "settest", "settest", "settest")]
+        [TestCase("Clll7y@gmail.com", "settest", "settest", "settest")]
         public void ChangePasswordTest(string email, string password
             , string Newpassword, string NewpasswordConfirm)
         {
