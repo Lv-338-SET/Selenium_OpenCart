@@ -80,7 +80,7 @@ namespace Selenium_OpenCart.Tests
                 .ClickOnCompareProductButton()
                 .ClickOnCompareProductsPageLink();
 
-            Assert.AreEqual(product, comparePage.GetFirstProductNameText(), "The selected product was not added to the comparison table.");
+            Assert.AreEqual(product, comparePage.GetLastProductNameText(), "The selected product was not added to the comparison table.");
             Assert.True(comparePage.CountColumns() == 1, "One product is added to the comparison table several times.");
         }
         
