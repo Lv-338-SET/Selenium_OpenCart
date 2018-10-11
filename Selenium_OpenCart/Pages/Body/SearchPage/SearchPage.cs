@@ -9,46 +9,57 @@ using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Pages.Body.ProductPage;
 using System.Threading;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.SearchPage
 {
-    public class SearchPage : Header.Header
+    //header
+    public class SearchPage
     {
+        protected ISearch Search
+        {
+            get
+            {
+                return Application.Get().Search;
+            }
+        }
+
         protected IWebElement searchLabel
-            { get { return driver.FindElement(By.CssSelector("#content h1")); } }
+            { get { return Search.ElementByCssSelector("#content h1"); } }
         protected IWebElement searchTextBoxInsideContent
-            { get { return driver.FindElement(By.Id("input-search")); } }
+            { get { return Search.ElementById("input-search"); } }
         protected IWebElement searchCategoryCheck
-            { get { return driver.FindElement(By.Name("sub_category")); } }
+            { get { return Search.ElementByName("sub_category"); } }
         protected IWebElement searchDescriptionChek
-            { get { return driver.FindElement(By.Name("description")); } }
+            { get { return Search.ElementByName("description"); } }
         protected IWebElement searchButtonInsideContent
-            { get { return driver.FindElement(By.Id("button-search")); } }
+            { get { return Search.ElementById("button-search"); } }
         protected IWebElement listShowButton
-            { get { return driver.FindElement(By.Id("list-view")); } }
+            { get { return Search.ElementById("list-view"); } }
         protected IWebElement gridShowButton
-            { get { return driver.FindElement(By.Id("grid-view")); } }
+            { get { return Search.ElementById("grid-view"); } }
         protected IWebElement productCompareLabel
-            { get { return driver.FindElement(By.Id("compare-total")); } }
+            { get { return Search.ElementById("compare-total"); } }
         protected IWebElement productPageLabel
-            { get { return driver.FindElement(By.ClassName("text-right")); } }
+            { get { return Search.ElementByClassName("text-right"); } }
         protected IWebElement successAlertMessage
-        { get { return driver.FindElement(By.XPath("//div[@class='alert alert-success alert-dismissible']")); } }
+        { get { return Search.ElementByXPath("//div[@class='alert alert-success']"); } }
+
 
         protected SelectElement selectCategory
-            { get { return new SelectElement(driver.FindElement(By.Name("category_id"))); } }
+            { get { return new SelectElement(Search.ElementByName("category_id")); } }
         protected SelectElement selectSortBy
-            { get { return new SelectElement(driver.FindElement(By.Id("input-sort"))); } }
+            { get { return new SelectElement(Search.ElementById("input-sort")); } }
         protected SelectElement selectShow
-            { get { return new SelectElement(driver.FindElement(By.Id("input-limit"))); } }
+            { get { return new SelectElement(Search.ElementById("input-limit")); } }
 
         protected List<ProductItem> listProduct
-            { get { return InitializeListProduct(driver.FindElements(By.ClassName("product-layout"))); } }
+            { get { return InitializeListProduct(Search.ElementsByClassName("product-layout")); } }
 
-        public SearchPage(IWebDriver driver) : base(driver)
+        public SearchPage()
         {
             Initialize();
-            this.driver = driver;
         }
 
         #region Initialization
@@ -79,7 +90,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
 
             foreach (var current in elements)
             {
-                list.Add(new ProductItem(driver, current));
+                list.Add(new ProductItem(current));
             }
             return list;
         }
@@ -140,7 +151,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public SearchPage ClickSearchButtonInsideContent()
         {
             this.searchButtonInsideContent.Click();
-            return new SearchPage(this.driver);
+            return new SearchPage();
         }
 
         public SearchPage ClickListShowButton()
@@ -225,7 +236,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public SearchPage AddAppropriateItemToWishList(string product)
         {
             FindAppropriateProduct(product).ClickCartFavourite();
-            return new SearchPage(driver);
+            return new SearchPage();
         }
 
         public SearchPage AddAppropriateItemToShopingCart(string product)
@@ -237,7 +248,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public SearchPage AddAppropriateProductToComparison(string product)
         {
             FindAppropriateProduct(product).ClickCompareButton();
-            return new SearchPage(driver);
+            return new SearchPage();
         }
 
         public ProductPage.ProductPage OpenAppropriateProductPage(string product)
@@ -256,12 +267,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         }
         #endregion
 
-        #region BussinesLogic
-
-
-
-
-        #endregion
 
 
     }

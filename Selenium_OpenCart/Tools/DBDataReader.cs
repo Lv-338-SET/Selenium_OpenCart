@@ -11,6 +11,8 @@ using MySql.Data.MySqlClient;
 using Selenium_OpenCart.Data.ProductReview.Rating;
 using Selenium_OpenCart.Data.Category;
 using Selenium_OpenCart.Data.Cart;
+using Selenium_OpenCart.Data.ProductReview.Rating;
+using Selenium_OpenCart.Data.Address;
 
 namespace Selenium_OpenCart
 {
@@ -140,7 +142,7 @@ namespace Selenium_OpenCart
                     list.Add(User.Get()
                         .SetUsername(products["email"].ToString())
                         .SetPassword(products["password"].ToString())
-                        .SetSault(products["sault"].ToString())
+                        .SetSault(products["salt"].ToString())
                         .SetID(Int32.Parse(products["customer_id"].ToString()))
                         .SetEmail(products["email"].ToString())
                         .SetFirstName(products["firstname"].ToString())
@@ -302,7 +304,87 @@ namespace Selenium_OpenCart
             return list;
         }
 
+        /// <summary>
+        /// Get list of address from database
+        /// </summary>
+        /// <param name="whereString">sql string contain 'where' params. Ex: "name LIKE '%name%'"</param>
+        /// <returns>List of Address objects</returns>
+        public List<IAdress> GetAddress(string whereString = "")
+        {
 
+            List<IAdress> list = new List<IAdress>();
+            DBAdapter adapter = new DBAdapter();
+            MySqlDataReader products;
+            try
+            {
+                /*
+                 SELECT 
+                 oc_customer.firstname,
+                 oc_customer.lastname,
+                 company,address_1,
+                 address_2,city,
+                 postcode,
+                 oc_country.name,
+                 oc_zone.name 
+                 FROM oc_address 
+                 LEFT JOIN oc_customer USING(customer_id) 
+                 LEFT JOIN oc_country USING(country_id) 
+                 LEFT JOIN oc_zone USING(zone_id)
+                 */
+                adapter.OpenConnection();
+                if (whereString == "")
+                {
+                    products = adapter.GetSelectReader("oc_address", 
+                        columns: "oc_customer.firstname,oc_customer.lastname,company,address_1,address_2,city,postcode,oc_country.name as country,oc_zone.name as zone ", 
+                        join:
+                        String.Concat(
+                            GetJoinedTableString("oc_customer","LEFT","customer_id"),
+                            GetJoinedTableString("oc_country", "LEFT", "country_id"),
+                            GetJoinedTableString("oc_zone", "LEFT", "zone_id")
+                            )
+                        );
+                }
+                else
+                {
+                    products = adapter.GetSelectReader("oc_address",
+                        columns: "oc_customer.firstname,oc_customer.lastname,company,address_1,address_2,city,postcode,oc_country.name as country,oc_zone.name as zone ",
+                        where: whereString,
+                        join:
+                        String.Concat(
+                            GetJoinedTableString("oc_customer", "LEFT", "customer_id"),
+                            GetJoinedTableString("oc_country", "LEFT", "country_id"),
+                            GetJoinedTableString("oc_zone", "LEFT", "zone_id")
+                            )
+                        );
+                }
+                while (products.Read())
+                {
+
+                    list.Add(Adress.Get()
+                        .SetFirstName(products["firstname"].ToString())
+                        .SetLastName(products["lastname"].ToString())
+                        .SetAddress1(products["address_1"].ToString())
+                        .SetCity(products["city"].ToString())
+                        .SetPostCode(products["postcode"].ToString())
+                        .SetCountry(products["country"].ToString())
+                        .SetRegion(products["zone"].ToString())
+                        .SetAddress2(products["address_2"].ToString())
+                        .SetCompany(products["company"].ToString())
+                        .Build()
+                        );
+                }
+
+            }
+            catch
+            {
+                throw new Exception();
+            }
+            finally
+            {
+                adapter.CloseConnection();
+            }
+            return list;
+        }
     }
 
 }

@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 using Selenium_OpenCart.Logic.ProductPageLogic;
 
@@ -14,6 +16,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
 {
     public class ProductItem
     {
+        
         protected IWebElement productBox { get; private set; }
         protected IWebElement productImage { get; private set; }
         protected IWebElement productName { get; private set; }
@@ -23,15 +26,10 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         protected IWebElement productIconCart { get; private set; }
         protected IWebElement productIconFavourite { get; private set; }
         protected IWebElement productIconCompare { get; private set; }
-
-
-        private IWebDriver driver;
        
-        public ProductItem(IWebDriver driver, IWebElement current)
+        public ProductItem(IWebElement current)
         {
-            this.driver = driver;
-
-
+            
             this.productBox = current;
             this.productImage = current.FindElement(By.ClassName("image"));
             this.productName = current.FindElement(By.CssSelector(".caption>h4>a"));
@@ -92,20 +90,17 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public SearchPage ClickCartButton()
         {
             productIconCart.Click();
-            Thread.Sleep(1500);
-            return new SearchPage(driver);
+            return new SearchPage();
         }
         public SearchPage ClickCartFavourite()
         {
             productIconFavourite.Click();
-            Thread.Sleep(1500);
-            return new SearchPage(driver);
+            return new SearchPage();
         }
         public SearchPage ClickCompareButton()
         {
             productIconCompare.Click();
-            Thread.Sleep(1500);
-            return new SearchPage(driver);
+            return new SearchPage();
         }
         public bool IsAppropriate(string product)
         {

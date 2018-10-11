@@ -24,7 +24,7 @@ namespace Selenium_OpenCart.Tests
         {
             TopBar topBar = new TopBar();
             bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
-            SearchMethods search = new SearchMethods(Application.Get().Browser.Driver);
+            SearchMethods search = new SearchMethods();
             search.Search(product).AddAppropriateItemToWishList(product);
             bool IsEmptyAfterAdding = topBar.WishListButtonClick().IsEmpty();
             Assert.AreNotEqual(IsEmptyBeforeAdding,IsEmptyAfterAdding,"Expected element is not added to wishlist");
@@ -35,7 +35,7 @@ namespace Selenium_OpenCart.Tests
         [Order(1)]
         public void SuccessAlertMessageIsDisplayedAfterAdding(string product)
         {
-            SearchMethods search = new SearchMethods(Application.Get().Browser.Driver);
+            SearchMethods search = new SearchMethods();
             bool result = search.Search(product).AddAppropriateItemToWishList(product).isSuccessMessageDisplayed();
             Assert.IsTrue(result, "Success message is not displayed");
         }
