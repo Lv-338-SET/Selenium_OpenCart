@@ -48,6 +48,9 @@
       <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="MySql.Data, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
@@ -105,10 +108,13 @@
     <Compile Include="Data\ProductReview\Raiting\RaitingRepository.cs" />
     <Compile Include="Data\User\User.cs" />
     <Compile Include="Data\User\UserRepository.cs" />
-    <Compile Include="Logic\CurencyMethods.cs" />
+    <Compile Include="Logic\ChangePasswordMethods.cs" />
+    <Compile Include="Logic\EditAccountMetod.cs" />
     <Compile Include="Logic\GlobalVariables.cs" />
+    <Compile Include="Logic\LoginPageMethods.cs" />
     <Compile Include="Logic\ProductPageLogic\ProductPageLogic.cs" />
     <Compile Include="Logic\ProductPageLogic\ProductPageReviewLogic.cs" />
+    <Compile Include="Logic\RegisterPageMethod.cs" />
     <Compile Include="Logic\SearchMethods.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddNewAddressPage.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddressComponent.cs" />
@@ -118,6 +124,8 @@
     <Compile Include="Pages\Body\AddressBookPage\EditAddressPage.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCartTableItem.cs" />
+    <Compile Include="Pages\Body\ChangePasswordPage\ChangePasswordPage.cs" />
+    <Compile Include="Pages\Body\ChangePasswordPage\VerifyChangedPassword.cs" />
     <Compile Include="Pages\Body\CheckoutPage\CheckoutPage.cs" />
     <Compile Include="Pages\Body\ContactPage\ContactPage.cs" />
     <Compile Include="Pages\Body\EditAccount\EditAccountPage.cs" />
@@ -125,7 +133,7 @@
     <Compile Include="Pages\Body\LoginPage\LoginPage.cs" />
     <Compile Include="Pages\Body\LogoutPage\LogoutPage.cs" />
     <Compile Include="Pages\Body\MainPage\HomePage.cs" />
-    <Compile Include="Pages\Body\MyAccountPage\MyAccountPage.cs" />
+    <Compile Include="Pages\Body\MyAccount\MyAccountPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPageWhithMessage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPage.cs" />
@@ -150,11 +158,12 @@
     <Compile Include="Pages\Header\MyAccount.cs" />
     <Compile Include="Pages\Header\TopBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="testcalasstest.cs" />
     <Compile Include="Tests\AddressBookTest.cs" />
-    <Compile Include="Tests\CurrencyTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleThreaded.cs" />
     <Compile Include="Tests\CartTests.cs" />
+    <Compile Include="Tests\LoginPageTest.cs" />
     <Compile Include="Tests\ProductComparisonTests.cs" />
     <Compile Include="Tests\SearchTests.cs" />
     <Compile Include="Tests\WishListTests.cs" />
@@ -176,7 +185,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Pages\Body\CurrencyPage\" />
     <Folder Include="Pages\Body\MenuPage\" />
+    <Folder Include="Pages\Body\OtherPages\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

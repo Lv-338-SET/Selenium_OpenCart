@@ -110,6 +110,7 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
         {
             return LoginButton.Text;
         }
+       
         public void ClickLoginButton()
         {
             LoginButton.Click();

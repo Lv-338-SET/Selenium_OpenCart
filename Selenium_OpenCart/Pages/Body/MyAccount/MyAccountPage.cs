@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.EditAccount;
+using Selenium_OpenCart.Pages.Body.AddressBookPage;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
-namespace Selenium_OpenCart.Pages.Body.MyAccountPage
+namespace Selenium_OpenCart.Pages.Body.MyAccount
 {
-    public class MyAccountPage
+    class MyAccountPage
     {
         private IWebDriver driver;
+        private ISearch Search;
 
         public MyAccountPage(IWebDriver driver)
         {
@@ -20,6 +23,7 @@ namespace Selenium_OpenCart.Pages.Body.MyAccountPage
         {
             get
             {
+                
                 return driver.FindElement(By.XPath("//a[contains(@href,'/account')]"));
             }
 
@@ -60,26 +64,31 @@ namespace Selenium_OpenCart.Pages.Body.MyAccountPage
             }
         }
 
-        public void ClickMyAccount()
+        public MyAccountPage ClikLinkMyAccount()
         {
             MyAccount.Click();
+            return new MyAccountPage(driver);
         }
-        public void ClickEditAccount()
+        public EditAccountPage ClickLinkEditAccount()
         {
             EditAccount.Click();
-            
+            return new EditAccountPage(driver);
         }
-        public void ClickChangePassword()
+        public ChangePasswordPage.ChangePasswordPage ClickLinkChangePassword()
         {
             ChangePassword.Click();
+            return new ChangePasswordPage.ChangePasswordPage(driver);
         }
-        public void ClickAddressBook()
+        public AddressBookPage.AddressBookPage ClickLinkAddressBook()
         {
             AddressBook.Click();
+            return new AddressBookPage.AddressBookPage(driver);
         }
-        public void ClickLogout()
+
+        public LogoutPage.LogoutPage ClickLinkLogout()
         {
             Logout.Click();
+            return new LogoutPage.LogoutPage(driver);
         }
     }
 }
