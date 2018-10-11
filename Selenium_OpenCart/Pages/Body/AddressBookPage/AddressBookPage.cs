@@ -2,31 +2,41 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Data.Constants;
+using Selenium_OpenCart.Tools.SearchWebElements;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 	      
 {
-    class AddressBookPage
+    public class AddressBookPage
     {
-        IWebDriver driver;
+        //IWebDriver driver;
+        protected ISearch Search
+        {
+            get
+            {
+                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
+            }
+        }
 
         IJavaScriptExecutor js;        
 
-        private const string NEW_ADDRESS_BUTTON_TEXT = "New Address";
-        private const string PAGE_NAME = "Address Book Entries";
-        private const string NO_ADDRESSES_MESSAGE = "Your shopping cart is empty!";
-        
+        private const string NEW_ADDRESS_BUTTON_TEXT = "New Address"; //TODO
+        private const string PAGE_NAME = "Address Book Entries"; //TODO
+        private const string NO_ADDRESSES_MESSAGE = "Your shopping cart is empty!"; //TODO
+
         public IWebElement PageName { get; private set; }
         public IWebElement BackButton
-            { get {return driver.FindElement(By.CssSelector("form[action*='account/address']"));} }
+            { get {return Search.ElementByCssSelector("form[action*='account/address']");} } //TODO
         public List<AddressComponent> AddressesTable
         {
             get
             {
                 List<AddressComponent> addresses = new List<AddressComponent>();
-                foreach (IWebElement address in driver.FindElements(By.CssSelector("#content tr")))
+                foreach (IWebElement address in Search.ElementsByCssSelector("#content tr"))
                 {
                     addresses.Add(new AddressComponent(address));
                 }
@@ -36,22 +46,15 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 
         public AddressComponent Address { get; private set; }        
         public IWebElement NewAddressButton
-            { get { return driver.FindElement(By.LinkText(NEW_ADDRESS_BUTTON_TEXT));} }
+            { get { return Search.ElementByLinkText(NEW_ADDRESS_BUTTON_TEXT);} }
         public bool IsNoAddressMessage 
-            { get { return driver.FindElement(By.XPath("//p[ . = '"+ NO_ADDRESSES_MESSAGE +"']")).Enabled;} }
+            { get { return Search.ElementByXPath("//p[ . = '"+ NO_ADDRESSES_MESSAGE +"']").Enabled;} }
         public bool IsTable
-            { get { return driver.FindElement(By.CssSelector("#content table")).Enabled;} }
+            { get { return Search.ElementByCssSelector("#content table").Enabled;} }
 
-        public AddressBookPage(IWebDriver driver)
-        {
-            this.driver = driver;
-
-            PageName = driver.FindElement(By.CssSelector("#content h2"));
-
-            if (!PageName.Text.Contains(PAGE_NAME))
-            {
-                throw new AddressBookException("The 'Address Book' page cannot be found");
-            }         
+        public AddressBookPage()
+        {            
+            PageName = Search.ElementByCssSelector("#content h2");                   
         }
                 
         /// <summary>
@@ -120,23 +123,24 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// Returning to My Account Page
         /// </summary>
         /// <returns>MyAccountPage.MyAccountPage</returns>
-        public MyAccountPage.MyAccountPage ClickToBackButton ()
+
+        public MyAccountPage ClickToBackButton ()
         {
             BackButton.Click();
-            return new MyAccountPage.MyAccountPage(driver);
+            return new MyAccountPage(Application.Get().Browser.Driver);
         }
 
         /// <summary>
         /// Redirects to "add new Address" page  
         /// </summary>
         /// <returns>AddNewAddressPage</returns>
-        public AddNewAddressPage getNewAddress()
+        public AddNewAddressPage GoToNewAddressPage()
         {
-            js = driver as IJavaScriptExecutor;
+            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
             js.ExecuteScript("window.scrollBy(0,100)"); //Moving scrollbar down
 
             NewAddressButton.Click();
-            return new AddNewAddressPage(driver);
+            return new AddNewAddressPage();
         }
         /// <summary>
         /// Redirects to "edit Address" page, by the Address 
@@ -144,10 +148,10 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// <returns>EditAddressPage</returns>
         public EditAddressPage EditAddress(string shortAddress)
         {
-            js = driver as IJavaScriptExecutor;
+            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
             js.ExecuteScript("window.scrollBy(0,100)"); //Moving scrollbar down
             GetAddressByShortAddress(shortAddress).EditButton.Click();
-            return new EditAddressPage(driver);
+            return new EditAddressPage();
         }
     }
 }

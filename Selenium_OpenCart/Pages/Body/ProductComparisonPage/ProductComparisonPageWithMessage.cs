@@ -52,11 +52,13 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             return SuccessMessage.Text;
         }
 
+
         public ShopingCartPage ClickSuccessAddToCartMessageLink()
         {
             SuccessAddToCartMessageLink.Click();
-            return new ShopingCartPage(Application.Get().Browser.Driver);
+            return new ShopingCartPage();
         }
+
         #endregion
     }
 }

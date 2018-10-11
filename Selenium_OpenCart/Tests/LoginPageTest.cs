@@ -5,7 +5,7 @@ using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.ChangePasswordPage;
 using Selenium_OpenCart.Pages.Body.EditAccount;
 using Selenium_OpenCart.Pages.Body.LoginPage;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Pages.Body.RegisterPage;
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace Selenium_OpenCart.Tests
         public void LoginedUserTest(string email, string password)
         {
             LoginPageMethods login = new LoginPageMethods(driver);
-            login.ValidLogin(email, password);
+            login.LogIntoAccount(email, password);
             Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser(driver));          
         }
         [Test, Order(2)]

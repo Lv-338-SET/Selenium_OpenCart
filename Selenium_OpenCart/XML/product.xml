@@ -1,0 +1,8 @@
+<test>
+  <name>iPhone</name>
+  <description>Description1</description>
+  <id>12</id>
+  <image>Image1</image>
+  <price>200,5</price>
+  <quantity>1</quantity>
+</test>

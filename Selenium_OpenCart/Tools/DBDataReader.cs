@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Selenium_OpenCart.Data.Product;
 using Selenium_OpenCart.Data.Currency;
 using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Data.User;
 using MySql.Data.MySqlClient;
+using Selenium_OpenCart.Data.ProductReview.Rating;
 using Selenium_OpenCart.Data.Category;
 using Selenium_OpenCart.Data.Cart;
-using Selenium_OpenCart.Data.ProductReview.Rating;
+using Selenium_OpenCart.Data.Address;
 
 namespace Selenium_OpenCart
 {
@@ -32,7 +30,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_product",/*where: "name LIKE '%h%'",*/ join: adapter.GetJoinedTableString("oc_product_description", "LEFT", "product_id"));
+                    products = adapter.GetSelectReader("oc_product", join: adapter.GetJoinedTableString("oc_product_description", "LEFT", "product_id"));
                 }
                 else
                 {
@@ -47,9 +45,7 @@ namespace Selenium_OpenCart
                         .SetID(Int32.Parse(products["product_id"].ToString()))
                         .SetImage(products["image"].ToString())
                         .SetPrice(Convert.ToDouble(products["price"].ToString()))
-                        //.SetPriceExTax()
                         .SetQuantity(Int32.Parse(products["quantity"].ToString()))
-                        //.SetCurrency(CurrencyList[products[""]])
                         .Build()
                         );
                 }
@@ -82,7 +78,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_review",/*where: "name LIKE '%h%'",*/ join: adapter.GetJoinedTableString("oc_product_description", "LEFT", "product_id"));
+                    products = adapter.GetSelectReader("oc_review",join: adapter.GetJoinedTableString("oc_product_description", "LEFT", "product_id"));
                 }
                 else
                 {
@@ -97,7 +93,6 @@ namespace Selenium_OpenCart
                         .SetRating((Int32.Parse(products["raiting"].ToString())).ToRating())
                         .SetDate(products["date_added"].ToString())
                         .Build());
-                    //"name,author,text,raiting,date_added"                        
                 }
 
             }
@@ -128,7 +123,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_customer"/*where: "name LIKE '%h%'",*/);
+                    products = adapter.GetSelectReader("oc_customer");
                 }
                 else
                 {
@@ -140,7 +135,7 @@ namespace Selenium_OpenCart
                     list.Add(User.Get()
                         .SetUsername(products["email"].ToString())
                         .SetPassword(products["password"].ToString())
-                        .SetSault(products["sault"].ToString())
+                        .SetSault(products["salt"].ToString())
                         .SetID(Int32.Parse(products["customer_id"].ToString()))
                         .SetEmail(products["email"].ToString())
                         .SetFirstName(products["firstname"].ToString())
@@ -149,7 +144,6 @@ namespace Selenium_OpenCart
                         .SetTelephone(products["telephone"].ToString())
                         .Build()
                         );
-                    //email,firstname,lastname,newsletter,telephone,,
                 }
 
             }
@@ -180,7 +174,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_category",/*where: "name LIKE '%h%'",*/ join: adapter.GetJoinedTableString("oc_category_description", "LEFT", "category_id"));
+                    products = adapter.GetSelectReader("oc_category", join: adapter.GetJoinedTableString("oc_category_description", "LEFT", "category_id"));
                 }
                 else
                 {
@@ -226,7 +220,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_cart"/*where: "name LIKE '%h%'",*/);
+                    products = adapter.GetSelectReader("oc_cart");
                 }
                 else
                 {
@@ -272,7 +266,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_currency"/*where: "name LIKE '%h%'",*/);
+                    products = adapter.GetSelectReader("oc_currency");
                 }
                 else
                 {
@@ -302,7 +296,74 @@ namespace Selenium_OpenCart
             return list;
         }
 
+        /// <summary>
+        /// Get list of address from database
+        /// </summary>
+        /// <param name="whereString">sql string contain 'where' params. Ex: "name LIKE '%name%'"</param>
+        /// <returns>List of Address objects</returns>
+        public List<IAdress> GetAddress(string whereString = "")
+        {
 
+            List<IAdress> list = new List<IAdress>();
+            DBAdapter adapter = new DBAdapter();
+            MySqlDataReader products;
+            try
+            {
+
+                adapter.OpenConnection();
+                if (whereString == "")
+                {
+                    products = adapter.GetSelectReader("oc_address", 
+                        columns: "oc_customer.firstname,oc_customer.lastname,company,address_1,address_2,city,postcode,oc_country.name as country,oc_zone.name as zone ", 
+                        join:
+                        String.Concat(
+                            GetJoinedTableString("oc_customer","LEFT","customer_id"),
+                            GetJoinedTableString("oc_country", "LEFT", "country_id"),
+                            GetJoinedTableString("oc_zone", "LEFT", "zone_id")
+                            )
+                        );
+                }
+                else
+                {
+                    products = adapter.GetSelectReader("oc_address",
+                        columns: "oc_customer.firstname,oc_customer.lastname,company,address_1,address_2,city,postcode,oc_country.name as country,oc_zone.name as zone ",
+                        where: whereString,
+                        join:
+                        String.Concat(
+                            GetJoinedTableString("oc_customer", "LEFT", "customer_id"),
+                            GetJoinedTableString("oc_country", "LEFT", "country_id"),
+                            GetJoinedTableString("oc_zone", "LEFT", "zone_id")
+                            )
+                        );
+                }
+                while (products.Read())
+                {
+
+                    list.Add(Adress.Get()
+                        .SetFirstName(products["firstname"].ToString())
+                        .SetLastName(products["lastname"].ToString())
+                        .SetAddress1(products["address_1"].ToString())
+                        .SetCity(products["city"].ToString())
+                        .SetPostCode(products["postcode"].ToString())
+                        .SetCountry(products["country"].ToString())
+                        .SetRegion(products["zone"].ToString())
+                        .SetAddress2(products["address_2"].ToString())
+                        .SetCompany(products["company"].ToString())
+                        .Build()
+                        );
+                }
+
+            }
+            catch
+            {
+                throw new Exception();
+            }
+            finally
+            {
+                adapter.CloseConnection();
+            }
+            return list;
+        }
     }
 
 }

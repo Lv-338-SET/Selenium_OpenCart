@@ -35,7 +35,7 @@ namespace Selenium_OpenCart.Tests
         [TestCase("iPhone", "Success: You have added iPhone to your product comparison!\r\n×")]
         public void ProductComparison_AddProductFromSearchPage_SuccessfulMessageDisplayed(string product, string conparisonMessage)
         {
-            SearchPage searchPage = new SearchMethods(Application.Get().Browser.Driver).Search(product)
+            SearchPage searchPage = new SearchMethods().Search(product)
                 .AddAppropriateProductToComparison(product);
 
             Assert.AreEqual(conparisonMessage, searchPage.successAlertMessageText(), 
@@ -46,7 +46,7 @@ namespace Selenium_OpenCart.Tests
         [TestCase("iPhone", "Success: You have added iPhone to your product comparison!\r\n×")]
         public void ProductComparison_AddProductFromProductPage_SuccessfulMessageDisplayed(string product, string conparisonMessage)
         {
-            SearchPage searchPage = new SearchMethods(Application.Get().Browser.Driver).Search(product);
+            SearchPage searchPage = new SearchMethods().Search(product);
             SuccessfullyAddedProductForComparisonPage productPage = searchPage
                 .OpenAppropriateProductPage(product)
                 .ClickOnCompareProductButton();
@@ -59,7 +59,7 @@ namespace Selenium_OpenCart.Tests
         [TestCase("iPhone")]
         public void ProductComparison_ClickingTwoTimesCompareButton_OneProductAdded(string product)
         {
-            SearchPage searchPage = new SearchMethods(Application.Get().Browser.Driver).Search(product);
+            SearchPage searchPage = new SearchMethods().Search(product);
             ProductComparisonPage comparePage = searchPage
                 .AddAppropriateProductToComparison(product)
                 .OpenAppropriateProductPage(product)
@@ -75,7 +75,7 @@ namespace Selenium_OpenCart.Tests
         public void ProductComparison_TwoDifferentProducts_AddedToComparisonTable
             (string Desktop, string FirstDesktop, string SecondDesktop)
         {
-            SearchPage searchPage = new SearchMethods(Application.Get().Browser.Driver).Search(Desktop);
+            SearchPage searchPage = new SearchMethods().Search(Desktop);
             ProductComparisonPage comparePage = searchPage
                 .AddAppropriateProductToComparison(FirstDesktop)
                 .AddAppropriateProductToComparison(SecondDesktop)
@@ -91,7 +91,7 @@ namespace Selenium_OpenCart.Tests
         public void ProductComparison_AddTwoDifferemntProducts_SuccessfulRemoveMessageDisplayed
             (string Desktop, string FirstDesktop, string SecondDesktop, string conparisonRemoveMessage)
         {
-            SearchPage searchPage = new SearchMethods(Application.Get().Browser.Driver).Search(Desktop);
+            SearchPage searchPage = new SearchMethods().Search(Desktop);
             ProductComparisonPageWithMessage comparePage = searchPage
                 .AddAppropriateProductToComparison(FirstDesktop)
                 .AddAppropriateProductToComparison(SecondDesktop)
@@ -108,7 +108,7 @@ namespace Selenium_OpenCart.Tests
         [TestCase("iPhone", "Your shopping cart is empty!")]
         public void ProductComparison_AddedPreviouslyProduct_RemovedFromComparison(string product, string conparisonNoProductsMessage)
         {
-            SearchPage searchPage = new SearchMethods(Application.Get().Browser.Driver).Search(product);
+            SearchPage searchPage = new SearchMethods().Search(product);
             EmptyProductComparisonPageWithMessage comparePage = searchPage
                 .AddAppropriateProductToComparison(product)
                 .OpenAppropriateProductPage(product)
@@ -124,10 +124,10 @@ namespace Selenium_OpenCart.Tests
         //TODO додавання 5-ти товарів
         //N
         //Jira Test Case: 
-        [TestCase("ip")]
+        //[TestCase("ip")]
         public void ProductComparison_AddFiveProductsFromSearch_FourProductsAddedToComparison(string searchText)
         {
-            List<ProductItem> search = new SearchMethods(Application.Get().Browser.Driver).Search(searchText).GetListProduct();
+            List<ProductItem> search = new SearchMethods().Search(searchText).GetListProduct();
             foreach (var current in search)
             {
                 current.ClickCompareButton();

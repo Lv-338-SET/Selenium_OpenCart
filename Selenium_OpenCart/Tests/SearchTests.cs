@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using Selenium_OpenCart.Pages.Body.SearchPage;
-using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Logic;
+using Selenium_OpenCart.Data.Search;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Tests
 {
@@ -14,70 +11,92 @@ namespace Selenium_OpenCart.Tests
     public class SearchTests
     {
         SearchMethods logicSearch;
+        DBDataReader reader;
 
-        IWebDriver driver;
-        const string URL = "http://atqc-shop.epizy.com/";
+        ISearch InputData
+            = new XMLDataParser().GetSearchInputData();
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            logicSearch = new SearchMethods(driver);
+            logicSearch = new SearchMethods();
+            reader = new DBDataReader();
         }
 
-        [TestCase("Apple", 7)]
-        public void SearchingResultItemsCount(string search, int count)
+        [TearDown]
+        public void closeBrowser()
         {
-            driver.Navigate().GoToUrl(URL);
+            Application.Remove();
+        }
+
+        [Test]
+        public void SearchingResultItemsCount()
+        {
+            Application.Get().Browser.OpenUrl(
+                ApplicationSourceRepository
+                .ChromeNew()
+                .HomePageUrl);
 
             int actual = logicSearch
-                .Search(search)
+                .Search(InputData
+                    .GetName())
                 .GetListProduct()
                 .Count;
 
-       
+            int expected =
+                reader.GetProducts(String.Format("name LIKE '%{0}%'", InputData
+                    .GetName()))
+                .Count;
 
-
-            Assert.AreEqual(actual, count);
+            Assert.AreEqual(expected, actual);
         }
 
-        [TestCase("Apple")]
-        public void TestCategoryDropDown(string search)
+        [Test]
+        public void TestCategoryDropDown()
         {
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.OpenUrl(
+                ApplicationSourceRepository
+                .ChromeNew()
+                .HomePageUrl);
+
+            logicSearch.Search(InputData.GetName());
 
             Assert.IsTrue(logicSearch
-                .TestCategoriesValue(GlobalVariables.inputListCategories)
+                .TestCategoriesValue(
+                    logicSearch
+                        .ConvertToListStringCategory(reader.GetCategories())
+                )
             );
         }
 
-        [TestCase("Apple", "Tablets", 4)]
-        public void TestCategoryResult(string search, string category, int count)
+        [Test]
+        public void TestCategoryResult()
         {
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.OpenUrl(
+                ApplicationSourceRepository
+                .ChromeNew()
+                .HomePageUrl);
 
             int actual = logicSearch
-                .SearchByCategory(search, category);
-            Assert.AreEqual(actual, count);
+                .SearchByCategory(InputData.GetName(), InputData.GetCategory());
+
+            Assert.AreEqual(actual, InputData.GetCount());
         }
 
-        [TestCase("Apple")]
-        public void TestLabelSearch(string search)
+        [Test]
+        public void TestLabelSearch()
         {
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.OpenUrl(
+                 ApplicationSourceRepository
+                 .ChromeNew()
+                 .HomePageUrl);
 
             string actual = logicSearch
-                .GetSearchHeader(search);
-            string expected = "Search - " + search;
+                .GetSearchHeader(InputData.GetName());
 
-            Assert.AreEqual(actual, expected);
-        }
+            string expected = "Search - " + InputData.GetName();
 
-        [OneTimeTearDown]
-        public void closeBrowser()
-        {
-            driver.Quit();
+            Assert.AreEqual(expected, actual);
         }
 
     }
