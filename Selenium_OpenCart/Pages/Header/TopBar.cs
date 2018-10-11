@@ -73,7 +73,7 @@ namespace Selenium_OpenCart.Pages.Header
         {
             return WishListButtonContent.Text; 
         }
-
+      
         public ShopingCartPage ShoppingCartButtonClick()
         {
             ShopingCardButton.Click();
