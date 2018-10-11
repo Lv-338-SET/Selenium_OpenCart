@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.ChangePasswordPage;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +34,7 @@ namespace Selenium_OpenCart.Logic
             LoginPageMethods login = new LoginPageMethods(driver);
             login.ValidLogin(Email, loginpassword);
             MyAccountPage account = new MyAccountPage(driver);
-            account.ClickChangePassword();
+            account.ClickLinkChangePassword();
             return new ChangePasswordPage(driver);
         }
 
@@ -43,7 +43,7 @@ namespace Selenium_OpenCart.Logic
             LoginPageMethods login = new LoginPageMethods(driver);
             login.ValidLogin(Email, loginpassword);
             MyAccountPage account = new MyAccountPage(driver);
-            account.ClickChangePassword();
+            account.ClickLinkChangePassword();
             FillingNewPasswords(password, passwordConfirm);
             return new MyAccountPage(driver);
         }

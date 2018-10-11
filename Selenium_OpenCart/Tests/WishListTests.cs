@@ -22,7 +22,7 @@ namespace Selenium_OpenCart.Tests
         [Order(0)]
         public void WishListWorks_AddingIphone_IsAdded(string product)
         {
-            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
+            TopBar topBar = new TopBar();
             bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
             SearchMethods search = new SearchMethods(Application.Get().Browser.Driver);
             search.Search(product).AddAppropriateItemToWishList(product);
@@ -45,11 +45,11 @@ namespace Selenium_OpenCart.Tests
         public void AddToCartFromWishList_AddIphone_IsAdded()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-            TopBar topbar = new TopBar(Application.Get().Browser.Driver);
+            TopBar topbar = new TopBar();
             string productNameFromWishList = topbar.WishListButtonClick()
                 .GetProduct().ClickAddToCartButton()
                 .GetProduct().GetProductName();
-            string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductName();
+            string productNameFromCart = topbar.ShoppingCartButtonClick().GetProduct().GetProductName();
             Assert.AreEqual(productNameFromWishList, productNameFromCart, "Element is not added to cart from wishlist");
         }
 
@@ -60,7 +60,7 @@ namespace Selenium_OpenCart.Tests
         public void RemoveFromWishList_RemoveIphone_IsRemoved()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
+            TopBar topBar = new TopBar();
             bool result = topBar.WishListButtonClick().GetProduct().ClickRemoveFromWishListButton().SuccessMessageIsDisplayed();
             Assert.IsTrue(result, "Product still exists");
         }
@@ -68,8 +68,8 @@ namespace Selenium_OpenCart.Tests
         [OneTimeTearDown]
         public void AfterClass()
         {
-            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
-            topBar.ShopingCartButtonClick().GetProduct().ClickRemoveButton();
+            TopBar topBar = new TopBar();
+            topBar.ShoppingCartButtonClick().GetProduct().ClickRemoveButton();
             Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
             Application.Remove();
         }
@@ -77,7 +77,7 @@ namespace Selenium_OpenCart.Tests
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            Application.Get().Browser.OpenUrl("http://40.118.125.245/");
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
 
             //Login page opening
             Application.Get().Search.ElementByClassName("caret").Click();

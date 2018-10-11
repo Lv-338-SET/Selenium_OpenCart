@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    class EditAddressPage
+    public class EditAddressPage
     {
         private IWebDriver driver;
         IJavaScriptExecutor js;

@@ -228,6 +228,12 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             return new SearchPage(driver);
         }
 
+        public SearchPage AddAppropriateItemToShopingCart(string product)
+        {
+            FindAppropriateProduct(product).ClickCartButton();
+            return new SearchPage(driver);
+        }
+
         public SearchPage AddAppropriateProductToComparison(string product)
         {
             FindAppropriateProduct(product).ClickCompareButton();
@@ -237,7 +243,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public ProductPage.ProductPage OpenAppropriateProductPage(string product)
         {
             FindAppropriateProduct(product).ClickProductName();
-            return new ProductPage.ProductPage(driver);
+            return new ProductPage.ProductPage();
         }
 
         public string successAlertMessageText()

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using System.Threading;
 
 using Selenium_OpenCart.Logic.ProductPageLogic;
 
@@ -76,6 +76,16 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public string GetTextFromProductExTax()
         {
             return this.productExTax.Text;
+        }
+
+        public IWebElement GetProductCartButton()
+        {
+            return this.productIconCart;
+        }
+
+        public IWebElement GetProductWishListButton()
+        {
+            return this.productIconFavourite;
         }
 
         //Buttons

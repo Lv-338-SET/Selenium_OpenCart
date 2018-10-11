@@ -8,9 +8,9 @@ using Selenium_OpenCart.Data.Currency;
 using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Data.User;
 using MySql.Data.MySqlClient;
+using Selenium_OpenCart.Data.ProductReview.Rating;
 using Selenium_OpenCart.Data.Category;
 using Selenium_OpenCart.Data.Cart;
-using Selenium_OpenCart.Data.ProductReview.Rating;
 
 namespace Selenium_OpenCart
 {
