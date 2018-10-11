@@ -10,6 +10,8 @@ using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Pages.Body.AddressBookPage;
 using Selenium_OpenCart.Tools;
+using System.Threading;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Tests
 {
@@ -38,25 +40,21 @@ namespace Selenium_OpenCart.Tests
         const string EDIT_SHORT_ADDRESS = "Victor Zinko\r\nSoftServe\r\nGrinchenko, 7\r\nNaukova, 5\r\nLviv 11000\r\nL'vivs'ka Oblast'\r\nUkraine";
 
         [SetUp]
-        public void BeforeAllTests()
-        {
+        public void BeforeEachTests()
+        {            
             //ChromeOptions chromeOptions = new ChromeOptions();
             //chromeOptions.AddArguments("--start-maximized");
             //driver = new ChromeDriver(chromeOptions);
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
-            Application.Get().Browser.OpenUrl(URL);
+            Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.ChromeNew()).ApplicationSource.HomePageUrl);
             //LogIn to the site
             //My Acount link
-            IWebDriver temp_driver = Application.Get().Browser.Driver;
-
-
+            IWebDriver temp_driver = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver;
             temp_driver.FindElement(By.CssSelector("#top-links a.dropdown-toggle")).Click();
-
             //Login link
             temp_driver.FindElement(By.CssSelector("#top-links a[href$='/login']")).Click();
-
             temp_driver.FindElement(By.Id("input-email")).Clear();
             temp_driver.FindElement(By.Id("input-email")).SendKeys(EMAIL);//Type Login
             temp_driver.FindElement(By.Id("input-password")).Clear();
@@ -68,9 +66,14 @@ namespace Selenium_OpenCart.Tests
         }        
 
         [TearDown]
-        public void AfterAllTests()
+        public void AfterEachTests()
         {
            Application.Get().Browser.OpenUrl(LOGOUT);
+        }
+        [TearDown]
+        public void AfterAllTests()
+        {
+            Application.Get().Browser.OpenUrl(LOGOUT);
         }
 
         [TestCase(FIRST_NAME, LAST_NAME, ADDRESS1, CITY, POST_CODE, COUNTRY, 
@@ -97,9 +100,10 @@ namespace Selenium_OpenCart.Tests
         {
             //Arrange
             AddressBookPage addressBook = new AddressBookPage();
-            EditAddressPage editAddress = addressBook.EditAddress(oldAddress);
+            EditAddressPage editAddress = addressBook.EditAddress(oldAddress);                        
             addressBook = editAddress.FillAllNotRequareField(company, address2, postCode).Continue();
-            
+            Console.WriteLine(editAddress.AddressForm.IsFirstNameInputErrorMessage());
+
             //Act
             bool actual = addressBook.IsAddressInTableByShortAddress(expected);
 
@@ -113,12 +117,30 @@ namespace Selenium_OpenCart.Tests
             //Arrange
             AddressBookPage addressBook = new AddressBookPage();            
             addressBook.GetAddressByShortAddress(expected).DeleteButton.Click();
+
             
             //Act
             bool actual = addressBook.IsAddressInTableByShortAddress(expected);
             
             //Assert
             Assert.IsFalse(actual);
+        }
+
+        [TestCase("", "", "1", "a", "222", " --- Please Select --- ", " --- Please Select --- ")]
+        public void Test4FailCreateNewAddressTest(string firstName, string lastName, string address1,
+                string city, string postCode, string country, string region)
+        {
+            //Arrange
+            AddressBookPage addressBook = new AddressBookPage();
+            AddNewAddressPage newAddressPage = addressBook.GoToNewAddressPage();
+            newAddressPage.FillAllRequareField(firstName, lastName, address1,
+                        city, postCode, country, region).Continue();
+            
+            //Act
+            bool actual = newAddressPage.AddressForm.IsEmptyInputErrorMessage();          
+
+            //Assert
+            Assert.IsTrue(actual);
         }
     }
 }

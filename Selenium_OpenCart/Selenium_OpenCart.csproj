@@ -117,6 +117,7 @@
     <Compile Include="Pages\Body\AddressBookPage\AddressBookPage.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddressBookException.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddressFormComponent.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressFormErrorMessages.cs" />
     <Compile Include="Pages\Body\AddressBookPage\EditAddressPage.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCartTableItem.cs" />

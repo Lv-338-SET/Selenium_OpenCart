@@ -4,17 +4,17 @@ using System.Text;
 using OpenQA.Selenium;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
     class AddNewAddressPage
-    {
-        //private IWebDriver driver;
+    {        
         protected ISearch Search
         {
             get
             {
-                return Application.Get().Search;
+                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
             }
         }
         
@@ -29,10 +29,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 
         public AddNewAddressPage()
         {
-            //this.driver = driver;
-
             PageName = Search.ElementByCssSelector("#content h2");
-
             AddressForm = new AddressFormComponent();
         }
 
@@ -40,7 +37,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         public AddNewAddressPage FillAllRequareField(string firstName, string lastName, string Address1,
                 string city, string postCode, string country, string regionState)
         {
-            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
+            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
 
             AddressForm.TypeInFirstName(firstName);
             AddressForm.TypeInLastNameInput(lastName);

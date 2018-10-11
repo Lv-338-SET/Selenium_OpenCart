@@ -5,24 +5,25 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    class AddressFormComponent
+    class AddressFormComponent:AddressFormErrorMessages
     {
         //private IWebDriver driver;
         protected ISearch Search
         {
             get
             {
-                return Application.Get().Search;
+                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
             }
         }
 
         //Searching elements in the form 
         #region
-        private IWebElement AddressFormTag
-            { get {return Search.ElementByCssSelector("form[action*='account/address']");} } //TODO
+        protected IWebElement AddressFormTag
+            { get {return Search.ElementByCssSelector("#content form");} }
         public IWebElement FirstNameInput
             { get { return Search.ElementByName("firstname"); } }
         public IWebElement LastNameInput
@@ -235,7 +236,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 
         //DefaultAddressYesInputRadio methods
         #region
-        public string GetDefaultAddressYesInputRadio()
+        public string GetDefaultAddressYesInputRadioText()
         {
             return DefaultAddressYesInputRadio.Text;
         }
@@ -255,7 +256,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 
         //DefaultAddressNoInputRadio methods
         #region
-        public string GetDefaultAddressNoInputRadio()
+        public string GetDefaultAddressNoInputRadioText()
         {
            return DefaultAddressNoInputRadio.Text;
         }

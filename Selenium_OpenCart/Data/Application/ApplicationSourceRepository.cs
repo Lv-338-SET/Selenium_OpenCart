@@ -13,6 +13,10 @@
             return ChromeTAQC();
         }
 
+        public static ApplicationSource myStart(ApplicationSource returnNew)
+        {
+            return returnNew;
+        }
         public static ApplicationSource ChromeTAQC()
         {
             var option = new[] { "--no-proxy-server", "--ignore-certificate-errors" 
