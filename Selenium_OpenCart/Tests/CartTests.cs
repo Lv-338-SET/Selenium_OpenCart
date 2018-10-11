@@ -64,7 +64,7 @@ namespace Selenium_OpenCart.Tests
             addToCartMetods.RemoveFromCart(productName);
         }
 
-        [TestCase("iPhone", "soryv@gmail.com", "settest")]
+        [TestCase("iPhone", "test@gmail.com", "testtest")]
         public void AddProductByNameUseSearchWithLofinedUser(string productName, string email, string password)
         {
             AddToCartMetods addToCartMetods = new AddToCartMetods();
