@@ -11,6 +11,7 @@ using Selenium_OpenCart.Data.User;
 using Selenium_OpenCart.Data.Category;
 using Selenium_OpenCart.Data.Cart;
 using Selenium_OpenCart.Data.Search;
+using Selenium_OpenCart.Data.Address;
 using System.Xml;
 using EasyEncryption;
 
@@ -19,6 +20,7 @@ namespace Selenium_OpenCart.Tools
 {
     public class XMLDataParser
     {
+        #region ConstantsFileName
         const string XML_PATH = "Selenium_OpenCart/XML/";
         const string PRODUCT_FILE_NAME = "product.xml";
         const string CART_FILE_NAME = "cart.xml";
@@ -28,7 +30,14 @@ namespace Selenium_OpenCart.Tools
         const string RATING_FILE_NAME = "rating.xml";
         const string USER_FILE_NAME = "user.xml";
         const string SEARCH_FILE_NAME = "search.xml";
+        const string ADDRESS_FILE_NAME = "address.xml";
+        const string INVALID_ADDRESS_FILE_NAME = "address.xml";
+        #endregion
 
+        /// <summary>
+        /// Read file with search input data
+        /// </summary>
+        /// <returns>Object ISearch class</returns>
         public ISearch GetSearchInputData() {
 
             XmlDocument doc = new XmlDocument();
@@ -41,6 +50,10 @@ namespace Selenium_OpenCart.Tools
                     .Build();
         }
 
+        /// <summary>
+        /// Read file with user input data
+        /// </summary>
+        /// <returns>Object IUser class</returns>
         public IUser GetUserInputData()
         {
 
@@ -54,14 +67,37 @@ namespace Selenium_OpenCart.Tools
                     .Build();
         }
 
+        /// <summary>
+        /// Read file with address input data
+        /// </summary>
+        /// <returns>Object IAddress class</returns>
+        public IAdress GetInputAddress() {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(XML_PATH + ADDRESS_FILE_NAME);
+            XmlElement node = doc.DocumentElement;
 
+            return Adress.Get()
+                        .SetFirstName(node.GetElementsByTagName("firstname")[0].InnerText)
+                        .SetLastName(node.GetElementsByTagName("lastname")[0].InnerText)
+                        .SetAddress1(node.GetElementsByTagName("address1")[0].InnerText)
+                        .SetCity(node.GetElementsByTagName("city")[0].InnerText)
+                        .SetPostCode(node.GetElementsByTagName("postcode")[0].InnerText)
+                        .SetCountry(node.GetElementsByTagName("country")[0].InnerText)
+                        .SetRegion(node.GetElementsByTagName("region")[0].InnerText)
+                        .SetAddress2(node.GetElementsByTagName("address2")[0].InnerText)
+                        .SetCompany(node.GetElementsByTagName("company")[0].InnerText)
+                        .Build();
+        }
+
+        /// <summary>
+        /// Read file with product input data
+        /// </summary>
+        /// <returns>Object IProduct class</returns>
         public IProduct GetInputProduct() {
 
             XmlDocument doc = new XmlDocument();
             doc.Load(XML_PATH + PRODUCT_FILE_NAME);
             XmlElement node = doc.DocumentElement;
-
-            string str = node.GetElementsByTagName("name")[0].InnerText;
 
             return Product.Get()
                 .SetName(node.GetElementsByTagName("name")[0].InnerText)
@@ -75,6 +111,7 @@ namespace Selenium_OpenCart.Tools
         }
 
 
+        #region CreateConstXML
         public void CreateProductXML(string name, string description, double price, int quantity, string image = "") {
             XmlDocument doc = new XmlDocument();
             XmlElement el = (XmlElement)doc.AppendChild(doc.CreateElement("product"));
@@ -149,13 +186,19 @@ namespace Selenium_OpenCart.Tools
             doc.Save("user.xml");
 
         }
-
         public void CreateSearchXML() { }
+        #endregion
 
-        public string HashPassword(string password, string sault) {
+        /// <summary>
+        /// Hash password into DB format
+        /// </summary>
+        /// <param name="password">string password</param>
+        /// <param name="sault">string salt</param>
+        /// <returns>Hashed password string</returns>
+        public string HashPassword(string password, string salt) {
 
-            return SHA.ComputeSHA1Hash(String.Concat(sault, SHA.ComputeSHA1Hash(
-                String.Concat(sault, SHA.ComputeSHA1Hash(password))
+            return SHA.ComputeSHA1Hash(String.Concat(salt, SHA.ComputeSHA1Hash(
+                String.Concat(salt, SHA.ComputeSHA1Hash(password))
                 )));
         }
 

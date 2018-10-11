@@ -34,7 +34,7 @@ namespace Selenium_OpenCart.Pages.Body.MainPage
 
             foreach (var current in elements)
             {
-                list.Add(new ProductItem(driver, current));
+                list.Add(new ProductItem(current));
             }
             return list;
         }

@@ -24,25 +24,26 @@ namespace Selenium_OpenCart.Tests
         ISearch InputData
             = new XMLDataParser().GetSearchInputData();
 
-        IWebDriver driver;
-
         const string URL = "http://40.118.125.245";
-        const string SEARCH_STRING = "Apple";
 
-        [OneTimeSetUp]
+        [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
-
-            logicSearch = new SearchMethods(driver);
+            Application.Get();
+            logicSearch = new SearchMethods();
             reader = new DBDataReader();
+        }
+
+        [TearDown]
+        public void closeBrowser()
+        {
+            Application.Remove();
         }
 
         [Test]
         public void SearchingResultItemsCount()
         {
-            driver.Navigate().GoToUrl(URL);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Application.Get().Browser.OpenUrl(URL);
 
             int actual = logicSearch
                 .Search(InputData
@@ -61,8 +62,7 @@ namespace Selenium_OpenCart.Tests
         [Test]
         public void TestCategoryDropDown()
         {
-            driver.Navigate().GoToUrl(URL);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Application.Get().Browser.OpenUrl(URL);
 
             logicSearch.Search(InputData.GetName());
 
@@ -77,8 +77,7 @@ namespace Selenium_OpenCart.Tests
         [Test]
         public void TestCategoryResult()
         {
-            driver.Navigate().GoToUrl(URL);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Application.Get().Browser.OpenUrl(URL);
 
             int actual = logicSearch
                 .SearchByCategory(InputData.GetName(), InputData.GetCategory());
@@ -89,8 +88,7 @@ namespace Selenium_OpenCart.Tests
         [Test]
         public void TestLabelSearch()
         {
-            driver.Navigate().GoToUrl(URL);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Application.Get().Browser.OpenUrl(URL);
 
             string actual = logicSearch
                 .GetSearchHeader(InputData.GetName());
@@ -98,12 +96,6 @@ namespace Selenium_OpenCart.Tests
             string expected = "Search - " + InputData.GetName();
 
             Assert.AreEqual(expected, actual);
-        }
-
-        [OneTimeTearDown]
-        public void closeBrowser()
-        {
-            driver.Quit();
         }
 
     }
