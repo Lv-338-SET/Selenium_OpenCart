@@ -4,9 +4,9 @@ using Selenium_OpenCart.Pages.Body.EditAccount;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
 
-namespace Selenium_OpenCart.Pages.Body.MyAccount
+namespace Selenium_OpenCart.Pages.Body.MyAccountPage
 {
-    class MyAccountPage
+    public class MyAccountPage
     {
         //private IWebDriver driver;
         private ISearch Search;
@@ -75,16 +75,16 @@ namespace Selenium_OpenCart.Pages.Body.MyAccount
             ChangePassword.Click();
             return new ChangePasswordPage.ChangePasswordPage();
         }
-        public AddressBookPage.AddressBookPage ClickLinkAddressBook()
-        {
-            AddressBook.Click();
-            return new AddressBookPage.AddressBookPage();
-        }
+        //public AddressBookPage ClickLinkAddressBook()
+        //{            
+        //    AddressBook.Click();
+        //    return new AddressBookPage();
+        //}
 
-        public LogoutPage.LogoutPage ClickLinkLogout()
-        {
-            Logout.Click();
-            return new LogoutPage.LogoutPage();
-        }
+        //public LogoutPage.LogoutPage ClickLinkLogout()
+        //{
+        //    Logout.Click();
+        //    return new LogoutPage.LogoutPage();
+        //}
     }
 }

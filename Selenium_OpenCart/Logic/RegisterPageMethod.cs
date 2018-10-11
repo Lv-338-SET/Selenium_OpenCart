@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Data.Application;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Tools;

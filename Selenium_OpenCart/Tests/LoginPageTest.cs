@@ -5,7 +5,7 @@ using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.ChangePasswordPage;
 using Selenium_OpenCart.Pages.Body.EditAccount;
 using Selenium_OpenCart.Pages.Body.LoginPage;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Tools;
 using System;
@@ -65,7 +65,7 @@ namespace Selenium_OpenCart.Tests
             Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser());          
         }
         [Test, Order(2)]
-        [TestCase("soryv@gmail.com", "settest", "settest", "settest", "sedmer@gmail.com", "0678765234")]
+        [TestCase("soryv@gmail.com", "settest", "settest", "settest", "seedmer@gmail.com", "0678765234")]
         public void EditUserAccountTest(string Email, string password, string NewFirstName
             , string NewLastName, string NewEmail, string NewTelephone)
         {
@@ -76,7 +76,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         [Test, Order(3)]
-        [TestCase("sedter@gmail.com", "settest", "settest", "settest")]
+        [TestCase("seedter@gmail.com", "settest", "settest", "settest")]
         public void ChangePasswordTest(string email, string password
             , string Newpassword, string NewpasswordConfirm)
         {

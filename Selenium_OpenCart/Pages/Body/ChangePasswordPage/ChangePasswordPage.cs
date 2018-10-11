@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Data.Application;

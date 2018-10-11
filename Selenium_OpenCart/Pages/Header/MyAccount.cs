@@ -2,7 +2,7 @@
 using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.LogoutPage;
 using Selenium_OpenCart.Pages.Body.MyAccountPage;
-using TestSite.Pages.RegisterPage;
+using Selenium_OpenCart.Pages.Body.RegisterPage;
 
 namespace Selenium_OpenCart.Pages.Header
 {
@@ -56,13 +56,13 @@ namespace Selenium_OpenCart.Pages.Header
         public RegisterPage RegisterButtonClick()
         {
             RegisterButton.Click();
-            return new RegisterPage(driver);
+            return new RegisterPage();
         }
 
         public LoginPage LoginButtomClick()
         {
             LoginButton.Click();
-            return new LoginPage(driver);
+            return new LoginPage();
         }
     }
 
@@ -89,7 +89,7 @@ namespace Selenium_OpenCart.Pages.Header
         public MyAccountPage MyAccountClick()
         {
             MyAccount.Click();
-            return new MyAccountPage(driver);
+            return new MyAccountPage();
         }
 
         public LogoutPage LogoutClick()

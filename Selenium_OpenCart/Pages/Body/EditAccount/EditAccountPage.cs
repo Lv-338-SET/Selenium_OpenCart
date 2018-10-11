@@ -8,13 +8,13 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Data.Application;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.EditAccount
 {
-     class EditAccountPage
+     public class EditAccountPage
     {
         protected ISearch Search { get; private set; }
 
@@ -154,10 +154,10 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
             EditFax.SendKeys(NewFax);
         }
 
-        public MyAccountPage ClickEditButtonContinue()
+        public MyAccountPage.MyAccountPage ClickEditButtonContinue()
         {
             EditButtonContinue.Click();
-            return new MyAccountPage();
+            return new MyAccountPage.MyAccountPage();
         }
 
         public void ClickEditButtonContinueHome()

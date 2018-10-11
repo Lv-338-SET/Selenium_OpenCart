@@ -3,14 +3,14 @@ using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Data.Application;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
 
 namespace Selenium_OpenCart.Logic
 {
     class LoginPageMethods
     {
         protected ISearch Search { get; private set; }
-
+        
 
         public LoginPageMethods()
         {

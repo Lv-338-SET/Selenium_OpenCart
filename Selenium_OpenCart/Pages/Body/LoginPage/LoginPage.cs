@@ -5,7 +5,7 @@ using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.LoginPage
 {
-    public class LoginPage
+    public class LoginPage //: Header
     {
         protected ISearch Search { get; private set; }
 
