@@ -20,12 +20,12 @@ namespace Selenium_OpenCart.Pages.Body.MainPage
             this.driver = driver;
 
         }
-        private void Initialize()
+        private bool Initialize()
         {
             IWebElement element = UpHorizontalCarousel;
             element = DownHorizontalCarousel;
-
             var listP = ListProductFromMainPage;
+            return true;
         }
 
         public List<ProductItemFromHomePage> InitializeListProductFromMainPage(IReadOnlyCollection<IWebElement> elements)
