@@ -15,16 +15,48 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
     {
         protected IWebElement Label { get { return Application.Get().Search.ElementByCssSelector(".col-sm-9 h2"); }}
         protected IWebElement ContinueButton { get { return Application.Get().Search.ElementByLinkText("Continue"); }}
+        protected IWebElement Table { get { return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']"); } }
+        protected IWebElement TableRow { get { return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']//tbody"); } }
+        protected WishListTableItem product { get { return GetProductElement(GetTableRow()); } }
+        protected IWebElement SuccessMessage { get { return Application.Get().Search.ElementByCssSelector(".alert.alert-success"); } }
+
+        #region Initialization
+        public WishListTableItem GetProductElement(IWebElement element)
+        {
+            return new WishListTableItem(element);
+        }
+        public IWebElement GetTableRow()
+        {
+            return this.TableRow;
+        }
+        #endregion
+
+        #region Atomic Operations
+        public IWebElement GetTable()
+        {
+            return this.Table;
+        }
         
+        public WishListTableItem GetProduct()
+        {
+            return this.product;
+        }
+        public bool SuccessMessageIsDisplayed()
+        {
+            return SuccessMessage.Displayed;
+        }
         public string GetLabel()
         {
             return this.Label.Text;
         }
-       
+
         public void ClickContinueButton()
         {
             ContinueButton.Click();
         }
+
+        #endregion
+        #region Business Logic
         public bool IsEmpty()
         {
             IWebElement element;
@@ -43,6 +75,7 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
             }
             else return false;
         }
-        
-        }
+        #endregion
+
     }
+}

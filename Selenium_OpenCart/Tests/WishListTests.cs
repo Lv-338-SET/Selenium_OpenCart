@@ -22,7 +22,7 @@ namespace Selenium_OpenCart.Tests
         [Order(0)]
         public void WishListWorks_AddingIphone_IsAdded(string product)
         {
-            TopBar topBar = new TopBar();
+            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
             bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
             SearchMethods search = new SearchMethods(Application.Get().Browser.Driver);
             search.Search(product).AddAppropriateItemToWishList(product);
@@ -30,6 +30,7 @@ namespace Selenium_OpenCart.Tests
             Assert.AreNotEqual(IsEmptyBeforeAdding,IsEmptyAfterAdding,"Expected element is not added to wishlist");
             addedToWishList = true;
         }
+
         [TestCase("iPhone")]
         [Order(1)]
         public void SuccessAlertMessageIsDisplayedAfterAdding(string product)
@@ -39,20 +40,16 @@ namespace Selenium_OpenCart.Tests
             Assert.IsTrue(result, "Success message is not displayed");
         }
 
-
         [TestCase]
         [Order(2)]
-
         public void AddToCartFromWishList_AddIphone_IsAdded()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-            TopBar topbar = new TopBar();
-           
-            topbar.WishListButtonClick();
-            WishListWithProducts wishlist = new WishListWithProducts(Application.Get().Browser.Driver);
-            string productNameFromWishList = wishlist.GetProduct().GetProductName();
-            wishlist.GetProduct().ClickAddToCartButton();
-            string productNameFromCart = topbar.ShoppingCartButtonClick().GetProduct().GetProductName();
+            TopBar topbar = new TopBar(Application.Get().Browser.Driver);
+            string productNameFromWishList = topbar.WishListButtonClick()
+                .GetProduct().ClickAddToCartButton()
+                .GetProduct().GetProductName();
+            string productNameFromCart = topbar.ShopingCartButtonClick().GetProduct().GetProductName();
             Assert.AreEqual(productNameFromWishList, productNameFromCart, "Element is not added to cart from wishlist");
         }
 
@@ -63,19 +60,16 @@ namespace Selenium_OpenCart.Tests
         public void RemoveFromWishList_RemoveIphone_IsRemoved()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-            TopBar topBar = new TopBar();
-            topBar.WishListButtonClick();
-            WishListWithProducts wishList = new WishListWithProducts(Application.Get().Browser.Driver);
-            wishList.GetProduct().ClickRemoveFromWishListButton();
-            bool result = wishList.SuccessMessageIsDisplayed();
+            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
+            bool result = topBar.WishListButtonClick().GetProduct().ClickRemoveFromWishListButton().SuccessMessageIsDisplayed();
             Assert.IsTrue(result, "Product still exists");
         }
 
         [OneTimeTearDown]
         public void AfterClass()
         {
-            TopBar topBar = new TopBar();
-            topBar.ShoppingCartButtonClick().GetProduct().ClickRemoveButton();
+            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
+            topBar.ShopingCartButtonClick().GetProduct().ClickRemoveButton();
             Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
             Application.Remove();
         }

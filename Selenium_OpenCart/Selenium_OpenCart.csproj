@@ -151,7 +151,6 @@
     <Compile Include="Pages\Body\SearchPage\SearchPage.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListPage.cs" />
     <Compile Include="Pages\Body\WishListPage\WishListTableItem.cs" />
-    <Compile Include="Pages\Body\WishListPage\WishListWithProducts.cs" />
     <Compile Include="Pages\Header\CartBox.cs" />
     <Compile Include="Pages\Header\Currency.cs" />
     <Compile Include="Pages\Header\Header.cs" />
