@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.CartPage;
+using Selenium_OpenCart.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
 {
-    public class ProductComparisonPageWhithMessage : ProductComparisonPage
+    public class ProductComparisonPageWithMessage : ProductComparisonPage
     {
         #region Constants
         private const string SUCCESS_MESSAGE = ".alert.alert-success.alert-dismissible"; //CSS
@@ -20,7 +21,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.CssSelector(SUCCESS_MESSAGE));
+                return Search.ElementByCssSelector(SUCCESS_MESSAGE);
             }
         }
 
@@ -28,15 +29,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.LinkText(SUCCESS_ADD_TO_CART_MESSAGE_LINK));
+                return Search.ElementByCssSelector(SUCCESS_ADD_TO_CART_MESSAGE_LINK);
             }
         }
         #endregion
 
         #region Initialization & Verifycation
-        public ProductComparisonPageWhithMessage(IWebDriver driver) : base(driver)
+        public ProductComparisonPageWithMessage()
         {
-            this.driver = driver;
             VerifyWebElements();
         }
 
