@@ -2,20 +2,20 @@
 using System.Linq;
 using OpenQA.Selenium;
 
+using Selenium_OpenCart.AdminLogic;
 using Selenium_OpenCart.Data.AdminPageExeptions;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
 {
-    public class Header
+    public class Header : AdminPageLogic
     {
-        protected IWebDriver driver;
-
         #region Properties
         protected IWebElement CurnetPageLabel
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@id='content']//div[@class='page-header']//div[@class='container-fluid']//h1"));
+                return Search.ElementByXPath(".//div[@id='content']//div[@class='page-header']//div[@class='container-fluid']//h1");
             }
         }
 
@@ -23,18 +23,18 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
         {
             get
             {
-                return driver.FindElements(By.XPath(".//div[@id='content']//div[@class='page-header']//div[@class='container-fluid']//ul[@class='breadcrumb']//a")).ToList();
+                return Search.ElementsByXPath(".//div[@id='content']//div[@class='page-header']//div[@class='container-fluid']//ul[@class='breadcrumb']//a").ToList();
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public Header(IWebDriver driver)
+        public Header()
         {
-            this.driver = driver;
+
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = CurnetPageLabel;
             List<IWebElement> tmp2 = SiteMap;
@@ -42,31 +42,45 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
             {
                 throw new BadSiteMap("Last element in site must be " + tmp.Text + " bu is " + tmp2.LastOrDefault().Text);
             }
+            return true;
         }
         #endregion
 
         #region Atomic operations
-        #region Atomic operations for CurnetPageLable
-        public string GetTextFromCurnetPageLink()
+        public bool IsHeader()
         {
-            return this.CurnetPageLabel.Text;
+            return VerifyPage();
+        }
+
+        #region Atomic operations for CurnetPageLable
+        /// <summary>
+        /// Gets curnet page name from header. Equals with last link from SiteMat
+        /// </summary>
+        /// <returns>Curnet page name from header</returns>
+        public string GetTextFromCurnetPageLable()
+        {
+            return CurnetPageLabel.Text;
         }
         #endregion
 
         #region Atomic operations SiteMap
         public string GetTextFromFirstPageLink()
         {
-            return this.SiteMap.FirstOrDefault().Text;
+            return SiteMap.FirstOrDefault().Text;
         }
 
         public string GetTextFromLastPageLink()
         {
-            return this.SiteMap.LastOrDefault().Text;
+            return SiteMap.LastOrDefault().Text;
         }
 
+        /// <summary>
+        /// Gets all links from header site map
+        /// </summary>
+        /// <returns>List<IWebElement> with all page links from header</returns>
         public List<IWebElement> GetSiteMapList()
         {
-            return this.SiteMap;
+            return SiteMap;
         }
         #endregion
         #endregion

@@ -45,13 +45,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         public AddressBookPage(IWebDriver driver)
         {
             this.driver = driver;
-
-            PageName = driver.FindElement(By.CssSelector("#content h2"));
-
-            if (!PageName.Text.Contains(PAGE_NAME))
-            {
-                throw new AddressBookException("The 'Address Book' page cannot be found");
-            }         
+            PageName = driver.FindElement(By.CssSelector("#content h2"));                   
         }
                 
         /// <summary>

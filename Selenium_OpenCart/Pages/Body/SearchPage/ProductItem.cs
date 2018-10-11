@@ -47,14 +47,14 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public ProductPageLogic ClickProductImage()
         {
             productImage.Click();
-            return new ProductPageLogic(Application.Get().Browser.Driver);
+            return new ProductPageLogic();
         }
         
         //ProductName
         public ProductPageLogic ClickProductName()
         {
             productName.Click();
-            return new ProductPageLogic(Application.Get().Browser.Driver);
+            return new ProductPageLogic();
         }
 
         //GetTextFromLabel
@@ -81,7 +81,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             productIconCart.Click();
             return new SearchPage();
         }
-        public SearchPage ClickCartfavourite()
+        public SearchPage ClickCartFavourite()
         {
             productIconFavourite.Click();
             return new SearchPage();

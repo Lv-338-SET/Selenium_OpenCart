@@ -41,12 +41,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 
         public AddressFormComponent(IWebDriver driver)
         {
-            this.driver = driver;
-
-            if (!AddressFormTag.Enabled)
-            {
-                throw new AddressBookException("The 'Address' form cannot be found");
-            }            
+            this.driver = driver;                      
         }
 
         //FirstNameInput methods

@@ -9,28 +9,32 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
         {
             get
             {
-                return driver.FindElement(By.Id("tab-description"));
+                return Search.ElementById("tab-description");
             }
         }
         #endregion
 
         #region Initialization And Verifycation
-        public ProductPageDescription(IWebDriver driver) : base(driver)
+        public ProductPageDescription()
         {
-            this.driver = driver;
-
             VerifyPage();
         }
 
-        private void VerifyPage()
+        private bool VerifyPage()
         {
             IWebElement tmp = DescriptionText;
+            return true;
         }
         #endregion
 
         #region Atomic operations
+        public bool IsDescriptionPage()
+        {
+            return VerifyPage();
+        }
+
         #region Atomic operations for DescriptionText
-        public string GetDescriptionText()
+        public string GetTextFromDescription()
         {
             return this.DescriptionText.Text;
         }

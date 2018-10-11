@@ -39,12 +39,23 @@ namespace Selenium_OpenCart.Data.ProductReview
             .Build();
         }
 
-        public IProductReview ValidMac()
+        public IProductReview InvalidOnLeftEndgeOfBVClass()
         {
             return ProductReview.Get()
-            .SetProductName("MacBook")
-            .SetReviewerName("Volodymyr Matsko")
-            .SetReviewText("Some review to smoke test of reviews")
+            .SetProductName("HP LP3065")
+            .SetReviewerName("Vo")
+            .SetReviewText("Some review to smoke te")
+            .SetRating(1.ToRating())
+            .SetDate(DateTime.Now.ToString(@"dd\/MM\/yyyy"))
+            .Build();
+        }
+
+        public IProductReview InvalidOnRightEndgeOfBVClass()
+        {
+            return ProductReview.Get()
+            .SetProductName("HP LP3065")
+            .SetReviewerName("Ostap-Suleyman-Berta-Maria-Bender-Bey")
+            .SetReviewText("sasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfsasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfsasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfsasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfsasdasdasddasfdasgdasgafhdaishbfdascjhfohdasofjdsofjdsofhdasofheswofjeswoifjewofiewjfofjewoifasaskfjdaoifsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfasdqlfsaqpqwofdiskfsknxkvnzxjvdosfdaspfkdapsfjdasofjcjxzklcpqfjpdsfjdklsfghdsofjdasofjdpasfjasrffdgfasdql")
             .SetRating(1.ToRating())
             .SetDate(DateTime.Now.ToString(@"dd\/MM\/yyyy"))
             .Build();

@@ -7,6 +7,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Header;
+using Selenium_OpenCart.Pages.Body.ProductPage;
 using System.Threading;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
@@ -44,6 +45,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             { get { return Search.ElementByClassName("text-right"); } }
         protected IWebElement successAlertMessage
         { get { return Search.ElementByXPath("//div[@class='alert alert-success']"); } }
+
 
         protected SelectElement selectCategory
             { get { return new SelectElement(Search.ElementByName("category_id")); } }
@@ -218,6 +220,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         {
             return this.selectShow.SelectedOption.Text;
         }
+
         public ProductItem FindAppropriateProduct(string product)
         {
             foreach (var item in listProduct)
@@ -232,9 +235,22 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
 
         public SearchPage AddAppropriateItemToWishList(string product)
         {
-            FindAppropriateProduct(product).ClickCartfavourite();
+            FindAppropriateProduct(product).ClickCartFavourite();
             return new SearchPage();
         }
+
+        public SearchPage AddAppropriateProductToComparison(string product)
+        {
+            FindAppropriateProduct(product).ClickCompareButton();
+            return new SearchPage();
+        }
+
+        public ProductPage.ProductPage OpenAppropriateProductPage(string product)
+        {
+            FindAppropriateProduct(product).ClickProductName();
+            return new ProductPage.ProductPage();
+        }
+
         public string successAlertMessageText()
         {
             return successAlertMessage.Text;

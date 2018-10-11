@@ -16,20 +16,50 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
         protected IWebDriver driver;
 
         public IWebElement LabelReturningCustomer
-        { get { return driver.FindElement(By.XPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2")); } }
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2"));
+            }
+        }
         public IWebElement LoginEmailFile
-        { get { return driver.FindElement(By.Id("input-email")); } }
+        {
+            get
+            {
+                return driver.FindElement(By.Id("input-email"));
+            }
+        }
         public IWebElement LoginPasswordFile
-        { get { return driver.FindElement(By.Id("input-password")); } }
+        {
+            get
+            {
+                return driver.FindElement(By.Id("input-password"));
+            }
+        }
         public IWebElement LoginButton
-        { get { return driver.FindElement(By.CssSelector("input.btn.btn-primary")); } }
+        {
+            get
+            {
+                return driver.FindElement(By.CssSelector("input.btn.btn-primary"));
+            }
+        }
 
         public LoginPage(IWebDriver driver)
         {
             this.driver = driver;
         }
+        
+        public string LoginLable()
+        {
+            return LabelReturningCustomer.Text;
+        }
 
-        public void ClrearLoginEmail()
+        public void ClickLabel()
+        {
+            LabelReturningCustomer.Click();
+        }
+
+        public void ClearLoginEmail()
         {
             LoginEmailFile.Clear();
         }
@@ -43,13 +73,14 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
         {
             LoginEmailFile.SendKeys(Email);
         }
+       
 
         public void ClearLoginPassword()
         {
             LoginPasswordFile.Clear();
         }
 
-        public void ClikLoginPassword()
+        public void ClickLoginPassword()
         {
             LoginPasswordFile.Click();
         }
@@ -58,5 +89,56 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
         {
             LoginPasswordFile.SendKeys(password);
         }
+
+        ///Email
+        public void ClickClearInputLoginEmail(string Email)
+        {
+            LoginEmailFile.Clear();
+            LoginEmailFile.Click();
+            LoginEmailFile.SendKeys(Email);
+
+        }
+        //Functional Password
+        public void ClickClearInputLoginPassword(string password)
+        {
+            LoginPasswordFile.Clear();
+            LoginPasswordFile.Click();
+            LoginPasswordFile.SendKeys(password);
+        }
+
+        public string GetLoginButtonText()
+        {
+            return LoginButton.Text;
+        }
+        public void ClickLoginButton()
+        {
+            LoginButton.Click();
+        }
+
+        public static bool VerifyLoginPage(IWebDriver driver)
+        {
+
+            try
+            {
+                driver.FindElement(By.XPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2"));
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+        public static LoginPage UserLoginPage(IWebDriver driver)
+        {
+            if (VerifyLoginPage(driver))
+            {
+                return new LoginPage(driver);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
+
