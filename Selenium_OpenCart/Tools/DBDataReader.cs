@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Selenium_OpenCart.Data.Product;
 using Selenium_OpenCart.Data.Currency;
 using Selenium_OpenCart.Data.ProductReview;
@@ -11,7 +8,6 @@ using MySql.Data.MySqlClient;
 using Selenium_OpenCart.Data.ProductReview.Rating;
 using Selenium_OpenCart.Data.Category;
 using Selenium_OpenCart.Data.Cart;
-using Selenium_OpenCart.Data.ProductReview.Rating;
 using Selenium_OpenCart.Data.Address;
 
 namespace Selenium_OpenCart
