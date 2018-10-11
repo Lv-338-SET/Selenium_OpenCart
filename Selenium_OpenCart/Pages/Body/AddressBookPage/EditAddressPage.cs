@@ -2,12 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
+using Selenium_OpenCart.Tools.SearchWebElements;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
     class EditAddressPage
     {
-        private IWebDriver driver;
+        //private IWebDriver driver;
+        protected ISearch Search
+        {
+            get
+            {
+                return Application.Get().Search;
+            }
+        }
+
         IJavaScriptExecutor js;
 
         private const string PAGE_NAME = "Edit Address";
@@ -15,15 +25,12 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         protected IWebElement PageName { get; private set; }
         public AddressFormComponent AddressForm { get; private set; }
         public IWebElement ContinueButton
-        { get { return driver.FindElement(By.CssSelector("input[type ='submit']")); } }
+        { get { return Search.ElementByCssSelector("input[type ='submit']"); } }
 
-        public EditAddressPage(IWebDriver driver)
-        {
-            this.driver = driver;
-
-            PageName = driver.FindElement(By.CssSelector("#content  h2"));          
-
-            AddressForm = new AddressFormComponent(driver);
+        public EditAddressPage()
+        {            
+            PageName = Search.ElementByCssSelector("#content  h2");
+            AddressForm = new AddressFormComponent();
         }
 
         public EditAddressPage EditFirstName(string firstName)
@@ -70,7 +77,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
                 string Address1, string Address2, string city, string postCode, string country,
                 string regionState)
         {
-            js = driver as IJavaScriptExecutor;
+            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
 
             AddressForm.TypeInFirstName(firstName);
             AddressForm.TypeInLastNameInput(lastName);
@@ -94,7 +101,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 
         public EditAddressPage FillAllNotRequareField(string company, string address2, string postCode)
         {
-            js = driver as IJavaScriptExecutor;
+            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
 
             EditCompany(company);
             EditAddress2(address2);
@@ -109,7 +116,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         public AddressBookPage Continue()
         {
             ContinueButton.Click();
-            return new AddressBookPage(driver);
+            return new AddressBookPage();
         }
     }
 }

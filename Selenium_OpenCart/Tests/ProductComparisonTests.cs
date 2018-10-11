@@ -42,12 +42,12 @@ namespace Selenium_OpenCart.Tests
             SearchMethods addedToComparisonProduct = new SearchMethods(driver);
             ProductComparisonPage columns = new ProductComparisonPage(driver);
             //Act
-            addedToComparisonProduct.Search(product)
-                .AddAppropriateProductToComparison(product)
-                .OpenAppropriateProductPage(product)
-                .ClickOnCompareProductButton()
-                .ClickOnCompareProductsPageLink()
-                .GetFirstProductNameText();
+            //addedToComparisonProduct.Search(product)
+            //    .AddAppropriateProductToComparison(product)
+            //    .OpenAppropriateProductPage(product)
+            //    .ClickOnCompareProductButton()
+            //    .ClickOnCompareProductsPageLink()
+            //    .GetFirstProductNameText();
             //Assert
             Assert.AreEqual(product, addedToComparisonProduct, "The selected product was not added to the comparison table.");            
             Assert.True(columns.CountColumns() == 1, "One product is added to the comparison table several times.");

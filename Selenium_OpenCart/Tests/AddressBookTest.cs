@@ -6,15 +6,19 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
+using Selenium_OpenCart.Pages.Header;
+using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Pages.Body.AddressBookPage;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
     class AddressBookTest
     {
-        IWebDriver driver;
-        const string URL = "http://demo.opencart.com/";
+        //IWebDriver driver;
+        const string URL = "http://40.118.125.245/";
+        const string LOGOUT = "http://40.118.125.245/index.php?route=common/home";
         const string EMAIL = "zinko@mail.com";
         const string PASSWORD = "querty";
 
@@ -33,36 +37,40 @@ namespace Selenium_OpenCart.Tests
         const string EDIT_POST_CODE = "11000";
         const string EDIT_SHORT_ADDRESS = "Victor Zinko\r\nSoftServe\r\nGrinchenko, 7\r\nNaukova, 5\r\nLviv 11000\r\nL'vivs'ka Oblast'\r\nUkraine";
 
-        [OneTimeSetUp]
+        [SetUp]
         public void BeforeAllTests()
         {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.AddArguments("--start-maximized");
-            driver = new ChromeDriver(chromeOptions);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //ChromeOptions chromeOptions = new ChromeOptions();
+            //chromeOptions.AddArguments("--start-maximized");
+            //driver = new ChromeDriver(chromeOptions);
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
-            driver.Navigate().GoToUrl(URL);
+            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get().Browser.OpenUrl(URL);
             //LogIn to the site
             //My Acount link
-            driver.FindElement(By.CssSelector("#top-links a.dropdown-toggle")).Click();
+            IWebDriver temp_driver = Application.Get().Browser.Driver;
+
+
+            temp_driver.FindElement(By.CssSelector("#top-links a.dropdown-toggle")).Click();
 
             //Login link
-            driver.FindElement(By.CssSelector("#top-links a[href$='/login']")).Click();
+            temp_driver.FindElement(By.CssSelector("#top-links a[href$='/login']")).Click();
 
-            driver.FindElement(By.Id("input-email")).Clear();
-            driver.FindElement(By.Id("input-email")).SendKeys(EMAIL);//Type Login
-            driver.FindElement(By.Id("input-password")).Clear();
-            driver.FindElement(By.Id("input-password")).SendKeys(PASSWORD);//Type Password
-            driver.FindElement(By.CssSelector("form input[type ='submit']")).Click();//Login button
+            temp_driver.FindElement(By.Id("input-email")).Clear();
+            temp_driver.FindElement(By.Id("input-email")).SendKeys(EMAIL);//Type Login
+            temp_driver.FindElement(By.Id("input-password")).Clear();
+            temp_driver.FindElement(By.Id("input-password")).SendKeys(PASSWORD);//Type Password
+            temp_driver.FindElement(By.CssSelector("form input[type ='submit']")).Click();//Login button
 
             //Click on "Address Book" link
-            driver.FindElement(By.CssSelector("#column-right a[href$='/address']")).Click();
+            temp_driver.FindElement(By.CssSelector("#column-right a[href$='/address']")).Click();
         }        
 
-        [OneTimeTearDown]
+        [TearDown]
         public void AfterAllTests()
         {
-            driver.Quit();
+           Application.Get().Browser.OpenUrl(LOGOUT);
         }
 
         [TestCase(FIRST_NAME, LAST_NAME, ADDRESS1, CITY, POST_CODE, COUNTRY, 
@@ -71,8 +79,8 @@ namespace Selenium_OpenCart.Tests
                 string city, string postCode, string country, string region, string expected)        
         {
             //Arrange
-            AddressBookPage addressBook = new AddressBookPage(driver);                
-            AddNewAddressPage newAddressPage = addressBook.getNewAddress();
+            AddressBookPage addressBook = new AddressBookPage();                
+            AddNewAddressPage newAddressPage = addressBook.GoToNewAddressPage();
             addressBook = newAddressPage.FillAllRequareField(firstName, lastName, address1, 
                         city, postCode, country, region).Continue();
             
@@ -88,7 +96,7 @@ namespace Selenium_OpenCart.Tests
                 string oldAddress, string expected)
         {
             //Arrange
-            AddressBookPage addressBook = new AddressBookPage(driver);
+            AddressBookPage addressBook = new AddressBookPage();
             EditAddressPage editAddress = addressBook.EditAddress(oldAddress);
             addressBook = editAddress.FillAllNotRequareField(company, address2, postCode).Continue();
             
@@ -103,7 +111,7 @@ namespace Selenium_OpenCart.Tests
         public void Test3DeleteAddressTest(string expected)
         {
             //Arrange
-            AddressBookPage addressBook = new AddressBookPage(driver);            
+            AddressBookPage addressBook = new AddressBookPage();            
             addressBook.GetAddressByShortAddress(expected).DeleteButton.Click();
             
             //Act

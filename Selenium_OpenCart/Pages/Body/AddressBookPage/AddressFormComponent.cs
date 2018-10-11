@@ -3,45 +3,54 @@ using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart.Tools.SearchWebElements;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
     class AddressFormComponent
     {
-        private IWebDriver driver;
+        //private IWebDriver driver;
+        protected ISearch Search
+        {
+            get
+            {
+                return Application.Get().Search;
+            }
+        }
 
         //Searching elements in the form 
         #region
         private IWebElement AddressFormTag
-            { get {return driver.FindElement(By.CssSelector("form[action*='account/address']"));} }
+            { get {return Search.ElementByCssSelector("form[action*='account/address']");} } //TODO
         public IWebElement FirstNameInput
-            { get { return driver.FindElement(By.Name("firstname")); } }
+            { get { return Search.ElementByName("firstname"); } }
         public IWebElement LastNameInput
-            { get {return driver.FindElement(By.Name("lastname")); } }
+            { get {return Search.ElementByName("lastname"); } }
         public IWebElement CompanyInput
-            { get { return driver.FindElement(By.Name("company")); } }
+            { get { return Search.ElementByName("company"); } }
         public IWebElement Address1Input
-            { get { return driver.FindElement(By.Name("address_1")); } }
+            { get { return Search.ElementByName("address_1"); } }
         public IWebElement Address2Input
-            { get { return driver.FindElement(By.Name("address_2")); } }
+            { get { return Search.ElementByName("address_2"); } }
         public IWebElement CityInput
-            { get { return driver.FindElement(By.Name("city")); } }
+            { get { return Search.ElementByName("city"); } }
         public IWebElement PostCodeInput
-            { get { return driver.FindElement(By.Name("postcode")); } }
+            { get { return Search.ElementByName("postcode"); } }
         public IWebElement CountryInput
-            { get { return driver.FindElement(By.Name("country_id")); } }
+            { get { return Search.ElementByName("country_id"); } }
         public IWebElement RegionStateInput
-            { get { return driver.FindElement(By.Name("zone_id")); } }
+            { get { return Search.ElementByName("zone_id"); } }
         public IWebElement DefaultAddressYesInputRadio
-        { get { return driver.FindElement(By.CssSelector("input[name='default'][value='1']")); } }
+            { get { return Search.ElementByCssSelector("input[name='default'][value='1']"); } }
         public IWebElement DefaultAddressNoInputRadio
-        { get { return driver.FindElement(By.CssSelector("input[name='default'][value='0']")); } }
+            { get { return Search.ElementByCssSelector("input[name='default'][value='0']"); } }
         
         #endregion
 
-        public AddressFormComponent(IWebDriver driver)
+        public AddressFormComponent()
         {
-            this.driver = driver;                      
+                                  
         }
 
         //FirstNameInput methods
@@ -237,7 +246,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             return this;
         }
 
-        public bool isCheckedDefaultAddressYesInputRadio()
+        public bool IsCheckedDefaultAddressYesInputRadio()
         {
             return DefaultAddressYesInputRadio.Selected;
 
@@ -257,7 +266,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             return this;
         }
 
-        public bool isCheckedDefaultAddressNoInputRadio()
+        public bool IsCheckedDefaultAddressNoInputRadio()
         {
            return DefaultAddressNoInputRadio.Selected;
         }
