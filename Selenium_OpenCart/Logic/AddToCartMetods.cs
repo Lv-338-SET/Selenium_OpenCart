@@ -63,7 +63,7 @@ namespace Selenium_OpenCart.Logic
         public string AddProductByNameUseSearchWithLofinedUser(string nameProduck, string email, string password)
         {
             LoginPageMethods login = new LoginPageMethods();
-            login.ValidLogin(email, password);
+            login.LogIntoAccount(email, password);
             ShopingCartPage shopingCartPage = new ShopingCartPage();
             SearchMethods search = new SearchMethods();
             TopBar topBar = new TopBar();
