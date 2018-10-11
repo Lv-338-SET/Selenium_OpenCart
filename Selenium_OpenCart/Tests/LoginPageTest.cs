@@ -55,7 +55,7 @@ namespace Selenium_OpenCart.Tests
         public void LoginedUserTest(string email, string password)
         {
             LoginPageMethods login = new LoginPageMethods();
-            login.ValidLogin(email, password);
+            login.LogIntoAccount(email, password);
             Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser());          
         }
         [Test, Order(2)]

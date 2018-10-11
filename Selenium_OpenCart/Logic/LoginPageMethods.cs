@@ -44,7 +44,7 @@ namespace Selenium_OpenCart.Logic
             return new LoginPage();            
         }
 
-        public MyAccountPage ValidLogin(string username, string password)
+        public MyAccountPage LogIntoAccount(string username, string password)
         {
             GoToLoginPage();
             FillingUserNamePassword(username, password);            

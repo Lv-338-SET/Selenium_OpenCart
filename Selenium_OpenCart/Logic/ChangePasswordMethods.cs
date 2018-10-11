@@ -23,7 +23,7 @@ namespace Selenium_OpenCart.Logic
        public ChangePasswordPage GoToChangePasswordPage(string Email, string loginpassword)
         {
             LoginPageMethods login = new LoginPageMethods();
-            login.ValidLogin(Email, loginpassword);
+            login.LogIntoAccount(Email, loginpassword);
             MyAccountPage account = new MyAccountPage();
             account.ClickLinkChangePassword();
             return new ChangePasswordPage();
@@ -32,7 +32,7 @@ namespace Selenium_OpenCart.Logic
         public MyAccountPage ValidChangePassword(string password, string passwordConfirm,string Email, string loginpassword)
         {
             LoginPageMethods login = new LoginPageMethods();
-            login.ValidLogin(Email, loginpassword);
+            login.LogIntoAccount(Email, loginpassword);
             MyAccountPage account = new MyAccountPage();
             account.ClickLinkChangePassword();
             FillingNewPasswords(password, passwordConfirm);

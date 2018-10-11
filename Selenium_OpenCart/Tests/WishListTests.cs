@@ -9,39 +9,43 @@ using Selenium_OpenCart.Data.Application;
 using System.Threading;
 using Selenium_OpenCart.Tools;
 using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart.Data.Product;
+using Selenium_OpenCart.Data.User;
 
 namespace Selenium_OpenCart.Tests
 {
-
+    
     [TestFixture]
     [SingleThreaded]
     public class WishListTests
     {
+        IProduct inputProduct = new XMLDataParser().GetInputProduct();
+        IUser user = new XMLDataParser().GetUserInputData();
         bool addedToWishList = false;
 
-        [TestCase("iPhone")]
+        [Test]
         [Order(0)]
-        public void WishListWorks_AddingIphone_IsAdded(string product)
+        public void WishListWorks_AddingIphone_IsAdded()
         {
             TopBar topBar = new TopBar();
             bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
             SearchMethods search = new SearchMethods();
-            search.Search(product).AddAppropriateItemToWishList(product);
+            search.Search(inputProduct.GetName()).AddAppropriateItemToWishList(inputProduct.GetName());
             bool IsEmptyAfterAdding = topBar.WishListButtonClick().IsEmpty();
             Assert.AreNotEqual(IsEmptyBeforeAdding,IsEmptyAfterAdding,"Expected element is not added to wishlist");
             addedToWishList = true;
         }
 
-        [TestCase("iPhone")]
+        [Test]
         [Order(1)]
-        public void SuccessAlertMessageIsDisplayedAfterAdding(string product)
+        public void SuccessAlertMessageIsDisplayedAfterAdding()
         {
             SearchMethods search = new SearchMethods();
-            bool result = search.Search(product).AddAppropriateItemToWishList(product).isSuccessMessageDisplayed();
+            bool result = search.Search(inputProduct.GetName()).AddAppropriateItemToWishList(inputProduct.GetName()).isSuccessMessageDisplayed();
             Assert.IsTrue(result, "Success message is not displayed");
         }
 
-        [TestCase]
+        [Test]
         [Order(2)]
         public void AddToCartFromWishList_AddIphone_IsAdded()
         {
@@ -54,7 +58,7 @@ namespace Selenium_OpenCart.Tests
             Assert.AreEqual(productNameFromWishList, productNameFromCart, "Element is not added to cart from wishlist");
         }
 
-        [TestCase]
+        [Test]
         [Order(3)]
 
         public void RemoveFromWishList_RemoveIphone_IsRemoved()
@@ -77,16 +81,11 @@ namespace Selenium_OpenCart.Tests
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            Application.Get().Browser.OpenUrl("http://40.118.125.245/");
-
-            //Login page opening
-            Application.Get().Search.ElementByClassName("caret").Click();
-            Application.Get().Search.ElementByLinkText("Login").Click();
-
-            //LOGGING IN
-            Application.Get().Search.ElementById("input-email").SendKeys("test@gmail.com");
-            Application.Get().Search.ElementById("input-password").SendKeys("testtest");
-            Application.Get().Search.ElementByXPath("//input[@type='submit' and @value='Login']").Click();
+            Application.Get().Browser.OpenUrl(ApplicationSourceRepository.ChromeNew().HomePageUrl);
+            
+            //Logging in
+            LoginPageMethods login = new LoginPageMethods();
+            login.LogIntoAccount(user.GetUsername(),user.GetPassword());
         }
     }
 }
