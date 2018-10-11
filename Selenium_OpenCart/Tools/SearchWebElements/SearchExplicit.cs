@@ -42,6 +42,28 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
                     .Until(StalenessOf(IWebElement));
         }
 
+        //Check Disappearance of web element on page
+        public override bool WebElementDisappearance(By by)
+        {
+            return new WebDriverWait(Application.Get().Browser.Driver,
+                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
+                    .Until(InvisibilityOfElementLocated(by));
+        }
+
+        public override IWebElement GetWebElement(By by)
+        {
+            return new WebDriverWait(Application.Get().Browser.Driver,
+                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
+                    .Until(driver => driver.FindElement(by));
+        }
+
+        public override IReadOnlyCollection<IWebElement> GetWebElements(By by)
+        {
+            return new WebDriverWait(Application.Get().Browser.Driver,
+                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
+                    .Until(VisibilityOfAllElementsLocatedBy(by));
+        }
+
         //Check if the element is invisible.
         public static Func<IWebDriver, bool> InvisibilityOfElementLocated(By locator)
         {
@@ -63,21 +85,6 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
             };
         }
 
-        //Check Disappearance of web element on page
-        public override bool WebElementDisappearance(By by)
-        {
-            return new WebDriverWait(Application.Get().Browser.Driver,
-                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
-                    .Until(InvisibilityOfElementLocated(by));
-        }
-
-        public override IWebElement GetWebElement(By by)
-        {
-            return new WebDriverWait(Application.Get().Browser.Driver,
-                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
-                    .Until(driver => driver.FindElement(by));
-        }
-
         public static Func<IWebDriver, IReadOnlyCollection<IWebElement>> VisibilityOfAllElementsLocatedBy(By by)
         {
             return (driver) =>
@@ -97,13 +104,6 @@ namespace Selenium_OpenCart.Tools.SearchWebElements
                     return null;
                 }
             };
-        }
-
-        public override IReadOnlyCollection<IWebElement> GetWebElements(By by)
-        {
-            return new WebDriverWait(Application.Get().Browser.Driver,
-                    TimeSpan.FromSeconds(Application.Get().ApplicationSource.ExplicitTimeOut))
-                    .Until(VisibilityOfAllElementsLocatedBy(by));
         }
     }
 }
