@@ -11,7 +11,7 @@ using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 {
-    class ChangePasswordPage
+    public class ChangePasswordPage
     {
         protected ISearch Search { get; private set; }
 

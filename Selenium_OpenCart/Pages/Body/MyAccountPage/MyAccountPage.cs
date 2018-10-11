@@ -75,16 +75,16 @@ namespace Selenium_OpenCart.Pages.Body.MyAccountPage
             ChangePassword.Click();
             return new ChangePasswordPage.ChangePasswordPage();
         }
-        //public AddressBookPage ClickLinkAddressBook()
-        //{            
-        //    AddressBook.Click();
-        //    return new AddressBookPage();
-        //}
+        public AddressBookPage.AddressBookPage ClickLinkAddressBook()
+        {
+            AddressBook.Click();
+            return new AddressBookPage.AddressBookPage();
+        }
 
-        //public LogoutPage.LogoutPage ClickLinkLogout()
-        //{
-        //    Logout.Click();
-        //    return new LogoutPage.LogoutPage();
-        //}
+        public LogoutPage.LogoutPage ClickLinkLogout()
+        {
+            Logout.Click();
+            return new LogoutPage.LogoutPage();
+        }
     }
 }

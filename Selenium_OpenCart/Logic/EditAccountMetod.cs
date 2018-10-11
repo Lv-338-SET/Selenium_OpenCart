@@ -1,6 +1,6 @@
 ﻿using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.EditAccount;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
 
