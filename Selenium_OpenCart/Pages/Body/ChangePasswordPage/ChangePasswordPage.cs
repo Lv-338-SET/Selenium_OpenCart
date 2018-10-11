@@ -8,7 +8,7 @@ using Selenium_OpenCart.Pages.Body.MyAccount;
 
 namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 {
-    class ChangePasswordPage
+    public class ChangePasswordPage
     {
         protected IWebDriver driver;
 

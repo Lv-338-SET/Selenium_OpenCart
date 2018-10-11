@@ -2,7 +2,9 @@
 using OpenQA.Selenium.Interactions;
 using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.CartPage;
+using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.MainPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Pages.Header;
@@ -30,21 +32,31 @@ namespace Selenium_OpenCart.Logic
             this.Browser = Application.Get(ApplicationSourceRepository.Default()).Browser;
         }
 
-        public void CurencyMetho()
+        public HomePage GoToHomePage()
         {
-            this.search = Application.Get(ApplicationSourceRepository.Default()).Search;
-            search.PresenceOfWebElement(search.ElementByXPath("some xapatrh or anothe"));//присутність елемента на сторінці
-            IWebElement asd = search.ElementByXPath("some xapatrh or anothe");
+            Browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.HomePageUrl);
+            return new HomePage(driver);
         }
 
-        public void Login(string userName, string Userpassword)
+        public LoginPage GoToLoginPage()
         {
-            //loged in
+            TopBar item = new TopBar();
+            NotLoginedUserAcountElements accountMenu = (NotLoginedUserAcountElements)item.MyAccountButtonClick();
+            return accountMenu.LoginButtomClick();
         }
 
-        public void Loginasd()
+        public MyAccountPage LoggedIn(string userName, string Userpassword)
         {
-            TopBar topBar = new TopBar(driver);
+            LoginPage items = GoToLoginPage();
+            items.ClickClearInputLoginEmail(userName);
+            items.ClickClearInputLoginPassword(Userpassword);
+            items.ClickLoginButton();
+            return new MyAccountPage(driver);
+        }
+
+        public void ClickedCurrency()
+        {
+            TopBar topBar = new TopBar();
             Currency currencyMenu = topBar.ReturnCurrencyList();
             Thread.Sleep(10000);
             currencyMenu.ClickButtonEuro();
@@ -54,6 +66,13 @@ namespace Selenium_OpenCart.Logic
             currencyMenu.ClickButtonUSDolar();
         }
 
+        public void CurencyMetho()
+        {
+            this.search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            search.PresenceOfWebElement(search.ElementByXPath("some xapatrh or anothe"));//присутність елемента на сторінці
+            IWebElement asd = search.ElementByXPath("some xapatrh or anothe");
+        }
+
         public void GotoElement(IWebElement element)
         {
             //IWebDriver driver = Application.Get(ApplicationSourceRepository.Default()).Browser.Driver;
@@ -61,11 +80,6 @@ namespace Selenium_OpenCart.Logic
             action.MoveToElement(element, 1, 1).Click().Perform();
         }
 
-        public HomePage GoToHomePage()
-        {
-            Browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.HomePageUrl);
-            return new HomePage(driver);
-        }
 
         public SearchPage SearchProducts(string searchItemName)
         {
@@ -119,13 +133,13 @@ namespace Selenium_OpenCart.Logic
 
         public ShopingCartPage GoToCart()
         {
-            TopBar topBar = new TopBar(driver);
+            TopBar topBar = new TopBar();
             return topBar.ShoppingCartButtonClick();
         }
 
         public WishListPage GoToWishList()
         {
-            TopBar topBar = new TopBar(driver);
+            TopBar topBar = new TopBar();
             return topBar.WishListButtonClick();
         }
 

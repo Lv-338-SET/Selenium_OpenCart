@@ -11,8 +11,8 @@ namespace Selenium_OpenCart.Pages.Header
 {
      class TopBar
     {
-        private IWebDriver driver;
-        private ISearch search;
+        protected ISearch search;
+        protected IWebDriver driver;
 
         //Properties
         private IWebElement CurrencyButton
@@ -38,7 +38,7 @@ namespace Selenium_OpenCart.Pages.Header
         { get { return search.ElementByXPath("//li/a/i[contains(@class, 'fa fa-share')]"); } }
 
         //Constructor
-        public TopBar(IWebDriver driver)
+        public TopBar()
         {
             search = Application.Get().Search;
             //this.driver = driver;
@@ -86,7 +86,7 @@ namespace Selenium_OpenCart.Pages.Header
         public CheckoutPage CheckoutButtonClick()
         {
             CheckoutButton.Click();
-            return new CheckoutPage(driver);
+            return new CheckoutPage();
         }
     }
 }

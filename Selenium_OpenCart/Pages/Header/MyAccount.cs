@@ -1,7 +1,9 @@
 ﻿using OpenQA.Selenium;
+using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.LogoutPage;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Tools;
 using TestSite.Pages.RegisterPage;
 
 namespace Selenium_OpenCart.Pages.Header
@@ -15,21 +17,22 @@ namespace Selenium_OpenCart.Pages.Header
         {
             if (IsLogedIn(driver))
             {
-                Account = new LoginAcountElements(driver);
+                Account = new NotLoginedUserAcountElements(driver);
             }
             else
             {
-                Account = new NotLoginetAcountElements(driver);
+                Account = new LoginedUSerAcountElements(driver);
             }
             return Account;
         }
 
-        private static bool IsLogedIn(IWebDriver driver)
+        public static bool IsLogedIn(IWebDriver driver)
         {
             try
-            { 
-                driver.FindElement(By.XPath("//a[text()='Register']"));
-                return true;
+            {
+                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                IWebElement registerButton = search.ElementByXPath("//a[text()='Register']");
+                return registerButton != null || registerButton.Enabled || registerButton.Displayed;
             }
             catch (NoSuchElementException)
             {
@@ -38,7 +41,7 @@ namespace Selenium_OpenCart.Pages.Header
         }
     }
 
-    public class LoginAcountElements: MyAccount
+    public class NotLoginedUserAcountElements: MyAccount
     {
         private IWebDriver driver;
 
@@ -48,7 +51,7 @@ namespace Selenium_OpenCart.Pages.Header
         private IWebElement LoginButton
         { get { return driver.FindElement(By.XPath("//a[text()='Login']")); } }
 
-        public LoginAcountElements(IWebDriver driver)
+        public NotLoginedUserAcountElements(IWebDriver driver)
         {
             this.driver = driver;
         }
@@ -66,7 +69,7 @@ namespace Selenium_OpenCart.Pages.Header
         }
     }
 
-    public class NotLoginetAcountElements: MyAccount
+    public class LoginedUSerAcountElements: MyAccount
     {
         private IWebDriver driver;
 
@@ -81,7 +84,7 @@ namespace Selenium_OpenCart.Pages.Header
         private IWebElement Logout
         { get { return driver.FindElement(By.XPath("//a[text()='Logout']")); } }
 
-        public NotLoginetAcountElements(IWebDriver driver)
+        public LoginedUSerAcountElements(IWebDriver driver)
         {
             this.driver = driver;
         }

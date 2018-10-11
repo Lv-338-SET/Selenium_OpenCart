@@ -26,7 +26,7 @@ namespace Selenium_OpenCart.Logic
         public void FindElementProduct(string nameProduck)
         {
             HomePage homePage = new HomePage(WebDriver);
-            TopBar topBar = new TopBar(WebDriver);
+            TopBar topBar = new TopBar();
             homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
             topBar.ShoppingCartButtonClick();
         }
@@ -35,7 +35,7 @@ namespace Selenium_OpenCart.Logic
         {
             ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
             HomePage homePage = new HomePage(WebDriver);
-            TopBar topBar = new TopBar(WebDriver);
+            TopBar topBar = new TopBar();
             homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
             topBar.ShoppingCartButtonClick();
             shopingCartPage.GetProduct().ClickRemoveButton();
@@ -46,14 +46,14 @@ namespace Selenium_OpenCart.Logic
         {
             HomePage homePage = new HomePage(WebDriver);
             ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
-            TopBar topBar = new TopBar(WebDriver);
+            TopBar topBar = new TopBar();
             topBar.ShoppingCartButtonClick();
             shopingCartPage.GoToMainPageIfCartIsEmpty();
             return new HomePage(WebDriver);
         }
         public void VerifyIsCartEmpty()
         {
-            TopBar topBar = new TopBar(WebDriver);
+            TopBar topBar = new TopBar();
             ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
             topBar.ShoppingCartButtonClick();
             shopingCartPage.GetEmptyCartMessage();

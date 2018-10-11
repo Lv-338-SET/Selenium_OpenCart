@@ -22,7 +22,7 @@ namespace Selenium_OpenCart.Tests
         [Order(0)]
         public void WishListWorks_AddingIphone_IsAdded(string product)
         {
-            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
+            TopBar topBar = new TopBar();
             bool IsEmptyBeforeAdding = topBar.WishListButtonClick().IsEmpty();
             SearchMethods search = new SearchMethods(Application.Get().Browser.Driver);
             search.Search(product).AddAppropriateItemToWishList(product);
@@ -46,7 +46,7 @@ namespace Selenium_OpenCart.Tests
         public void AddToCartFromWishList_AddIphone_IsAdded()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-            TopBar topbar = new TopBar(Application.Get().Browser.Driver);
+            TopBar topbar = new TopBar();
            
             topbar.WishListButtonClick();
             WishListWithProducts wishlist = new WishListWithProducts(Application.Get().Browser.Driver);
@@ -63,7 +63,7 @@ namespace Selenium_OpenCart.Tests
         public void RemoveFromWishList_RemoveIphone_IsRemoved()
         {
             Assert.IsTrue(addedToWishList, "Blocked : precondition failed");
-            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
+            TopBar topBar = new TopBar();
             topBar.WishListButtonClick();
             WishListWithProducts wishList = new WishListWithProducts(Application.Get().Browser.Driver);
             wishList.GetProduct().ClickRemoveFromWishListButton();
@@ -74,7 +74,7 @@ namespace Selenium_OpenCart.Tests
         [OneTimeTearDown]
         public void AfterClass()
         {
-            TopBar topBar = new TopBar(Application.Get().Browser.Driver);
+            TopBar topBar = new TopBar();
             topBar.ShoppingCartButtonClick().GetProduct().ClickRemoveButton();
             Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
             Application.Remove();

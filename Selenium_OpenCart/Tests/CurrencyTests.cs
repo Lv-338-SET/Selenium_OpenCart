@@ -47,12 +47,13 @@ namespace Selenium_OpenCart.Tests
         [Test]
         public void CheckChangeProductPriceCurrency()
         {
-            //cm.SearchProducts("Samsung");
+            cm.GoToHomePage();
+            cm.LoggedIn("testa@testa.com", "testa");
             ProductItem product = cm.ChooseAppropriateProduct("Samsung SyncMaster");
             //cm.GotoElement(product.GetProductCartButton());
             //cm.ScrollToView(product.GetProductCartButton());
             //cm.AddProductToCart(product);
-            cm.Loginasd();
+            cm.ClickedCurrency();
             //cm.ScroolToElementCartButton(product);
             cm.GoToCart();
             Thread.Sleep(50000);

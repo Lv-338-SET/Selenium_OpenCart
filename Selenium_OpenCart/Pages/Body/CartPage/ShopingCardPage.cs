@@ -6,13 +6,18 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart;
+using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
     public class ShopingCartPage : Header.Header
     {
+        //protected ISearch search;
+
         protected IWebElement TableRow
         { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tbody")); } }
         protected IWebElement ButtonContinue
@@ -24,8 +29,11 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
 
 
 
-        public ShopingCartPage(IWebDriver driver) : base(driver)
-        { }
+        public ShopingCartPage(IWebDriver driver): base(driver)
+        {
+            //this.driver = Application.Get(ApplicationSourceRepository.Default()).Browser.Driver;
+            //this.search = Application.Get(ApplicationSourceRepository.Default()).Search;
+        }
 
         public HomePage GoToMainPageIfCartIsEmpty()
         {

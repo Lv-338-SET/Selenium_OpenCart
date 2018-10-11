@@ -10,10 +10,10 @@ using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.MyAccount
 {
-    class MyAccountPage
+    public class MyAccountPage
     {
         private IWebDriver driver;
-        private ISearch Search;
+        //private ISearch Search;
 
         public MyAccountPage(IWebDriver driver)
         {
