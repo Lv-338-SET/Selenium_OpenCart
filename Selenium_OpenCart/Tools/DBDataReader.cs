@@ -11,7 +11,6 @@ using MySql.Data.MySqlClient;
 using Selenium_OpenCart.Data.ProductReview.Rating;
 using Selenium_OpenCart.Data.Category;
 using Selenium_OpenCart.Data.Cart;
-using Selenium_OpenCart.Data.ProductReview.Rating;
 using Selenium_OpenCart.Data.Address;
 
 namespace Selenium_OpenCart

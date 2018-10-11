@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
-using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Data.Constants;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
@@ -114,10 +113,10 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// Returning to My Account Page
         /// </summary>
         /// <returns>MyAccountPage.MyAccountPage</returns>
-        public MyAccountPage ClickToBackButton ()
+        public MyAccountPage.MyAccountPage ClickToBackButton ()
         {
             BackButton.Click();
-            return new MyAccountPage(driver);
+            return new MyAccountPage.MyAccountPage();
         }
 
         /// <summary>
