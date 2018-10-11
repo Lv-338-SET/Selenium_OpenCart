@@ -13,12 +13,12 @@ using Selenium_OpenCart.AdminPages.HeaderAndNavigation;
 using Selenium_OpenCart.AdminPages.Body.ReviewsPage;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Tests.FeedbackTests
 {
     [TestFixture]
-    [SingleThreaded]
-    public class FeedbackTestsSingleThreaded
+    public class FeedbackTestsSingleRelted
     {
         const string URL = "http://40.118.125.245/";
         const string ADMIN_URL = "http://40.118.125.245/admin";
@@ -30,20 +30,21 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         bool TestCase649 = false;
         bool TestCase670 = false;
 
-        [TearDown]
-        public void AfterEachTest()
+        [SetUp]
+        public void BeforeEachTest()
         {
-            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get(ApplicationSourceRepository.ChromeNew());
         }
 
-        [OneTimeTearDown]
-        public void AfterAllTest()
+
+        [TearDown]
+        public void AfterEachTest()
         {
             Application.Remove();
         }
 
         private static readonly object[] ValidProductReview =
-{
+        {
             new object[] { ProductReviewRepository.Get().ValidHP() }
         };
 

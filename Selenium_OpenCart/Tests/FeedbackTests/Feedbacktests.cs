@@ -9,6 +9,7 @@ using Selenium_OpenCart.Logic.ProductPageLogic;
 using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Tests.FeedbackTests
 {
@@ -21,7 +22,11 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         const string INVALID_REVIEW_TEXT_ALERT_TEXT = "Warning: Review Text must be between 25 and 1000 characters!";
         const string INVALID_REVIEWER_NAME_ALERT_TEXT = "Warning: Review Name must be between 3 and 25 characters!";
 
-        const int IMPLISIT_WAIT = 5;
+        [SetUp]
+        public void BeforeEachTest()
+        {
+            Application.Get(ApplicationSourceRepository.ChromeNew());
+        }
 
         [TearDown]
         public void AfterEachTest()
