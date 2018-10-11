@@ -5,6 +5,8 @@ using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.MyAccountPage;
 
+
+
 namespace Selenium_OpenCart.Logic
 {
     class LoginPageMethods
@@ -30,7 +32,11 @@ namespace Selenium_OpenCart.Logic
         {
             TopBar item = new TopBar();
             item.MyAccountButtonClick();
+<<<<<<< HEAD
             LoginAcountElements login = new LoginAcountElements();
+=======
+            NotLoginedUserAcountElements login = new NotLoginedUserAcountElements(driver);
+>>>>>>> 6a5eada33258a5b5f24ae8e625e633a2ef549d8d
             login.LoginButtomClick();
             return new LoginPage();           
         }

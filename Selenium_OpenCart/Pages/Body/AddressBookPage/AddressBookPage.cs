@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Data.Constants;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 	      
 {
-    class AddressBookPage
+    public class AddressBookPage
     {
         IWebDriver driver;
 
@@ -114,10 +114,14 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// Returning to My Account Page
         /// </summary>
         /// <returns>MyAccountPage.MyAccountPage</returns>
-        public MyAccountPage.MyAccountPage ClickToBackButton ()
+        public MyAccountPage ClickToBackButton ()
         {
             BackButton.Click();
+<<<<<<< HEAD
             return new MyAccountPage.MyAccountPage();
+=======
+            return new MyAccountPage(driver);
+>>>>>>> 6a5eada33258a5b5f24ae8e625e633a2ef549d8d
         }
 
         /// <summary>

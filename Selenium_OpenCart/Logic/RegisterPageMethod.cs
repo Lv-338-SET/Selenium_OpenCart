@@ -23,7 +23,9 @@ namespace Selenium_OpenCart.Logic
         {
             TopBar item = new TopBar();
             item.MyAccountButtonClick();
+
             LoginAcountElements register = new LoginAcountElements();
+
             register.RegisterButtonClick();            
             return new RegisterPage();
         }

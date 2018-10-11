@@ -48,7 +48,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver); },
                 "Step 1 Failed: Not home page");
 
-            List<ProductItem> searchPage = new SearchMethods(Application.Get().Browser.Driver)
+            List<ProductItem> searchPage = new SearchMethods()
                 .Search(validReview.GetProductName())
                 .GetListProduct();
             Assert.True(searchPage.Any(),
@@ -78,7 +78,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver); },
                 "Step 1 Failed: Not home page");
 
-            List<ProductItem> searchPage = new SearchMethods(Application.Get().Browser.Driver)
+            List<ProductItem> searchPage = new SearchMethods()
                 .Search(validReview.GetProductName())
                 .GetListProduct();
             Assert.True(searchPage.Any(),
@@ -108,7 +108,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver); },
                 "Step 1 Failed: Not home page");
 
-            List<ProductItem> searchPage = new SearchMethods(Application.Get().Browser.Driver)
+            List<ProductItem> searchPage = new SearchMethods()
                 .Search(validReview.GetProductName())
                 .GetListProduct();
             Assert.True(searchPage.Any(),

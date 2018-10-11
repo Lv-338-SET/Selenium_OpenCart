@@ -5,7 +5,7 @@ using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.ChangePasswordPage;
 using Selenium_OpenCart.Pages.Body.EditAccount;
 using Selenium_OpenCart.Pages.Body.LoginPage;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Tools;
 using System;

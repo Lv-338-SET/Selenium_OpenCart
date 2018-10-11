@@ -8,9 +8,9 @@ namespace Selenium_OpenCart.Pages.Body.MyAccountPage
 {
     public class MyAccountPage
     {
+
         //private IWebDriver driver;
         private ISearch Search;
-
         public MyAccountPage()
         {
             Search = Application.Get(ApplicationSourceRepository.Default()).Search;

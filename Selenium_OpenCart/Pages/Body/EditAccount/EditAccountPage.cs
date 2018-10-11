@@ -1,4 +1,4 @@
-﻿using System;
+﻿susing System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -154,12 +154,13 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
             EditFax.SendKeys(NewFax);
         }
 
-        public MyAccountPage.MyAccountPage ClickEditButtonContinue()
+        public MyAccountPage ClickEditButtonContinue()
         {
             EditButtonContinue.Click();
-            return new MyAccountPage.MyAccountPage();
-        }
 
+            return new MyAccountPage.MyAccountPage();
+
+        }
         public void ClickEditButtonContinueHome()
         {
             EditButtonContinueHome.Click();

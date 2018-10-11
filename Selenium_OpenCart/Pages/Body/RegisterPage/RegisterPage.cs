@@ -16,7 +16,9 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
         //    }
         //}
 
+
         protected ISearch Search { get; private set; }
+
 
 
         public IWebElement FirstNameField
@@ -119,7 +121,9 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
                 return Search.ElementById("input-confirm");
             }
         }
+
         public bool NewsletterSubscribe { get; private set; } = false;
+
         public IWebElement PrivacyPolicy
         {
             get
@@ -253,7 +257,7 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
         {
             PasswordField.SendKeys(password);
         }
-        
+
         public void ClickPasswordConfirm()
         {
             PasswordConfirmField.Click();
@@ -321,7 +325,9 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
             try
             {
                 var search = Application.Get(ApplicationSourceRepository.Default()).Search;
-                search.ElementByXPath("//div[contains(@id, 'content') and contains(//h1, 'Register Account')]"); return true;
+                search.ElementByXPath("//div[contains(@id, 'content') and contains(//h1, 'Register Account')]");
+                return true;
+
             }
             catch (NoSuchElementException)
             {
@@ -340,7 +346,6 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
                 return null;
             }
         }
-    }    
-
+    }
 }
 

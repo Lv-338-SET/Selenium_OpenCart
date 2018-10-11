@@ -43,7 +43,6 @@ namespace Selenium_OpenCart.Logic
             Thread.Sleep(1500);
             topBar.ShopingCartButtonClick();
             shopingCartPage.GetProduct().ClickRemoveButton();
-
         }
 
         public HomePage IsCartIsEmpty()
@@ -55,6 +54,7 @@ namespace Selenium_OpenCart.Logic
             shopingCartPage.GoToMainPageIfCartIsEmpty();
             return new HomePage(WebDriver);
         }
+
         public void VerifyIsCartEmpty()
         {
             TopBar topBar = new TopBar(WebDriver);
