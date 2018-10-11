@@ -2,10 +2,11 @@
 using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.LogoutPage;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
-using TestSite.Pages.RegisterPage;
+
 
 namespace Selenium_OpenCart.Pages.Header
 {
@@ -66,7 +67,7 @@ namespace Selenium_OpenCart.Pages.Header
         public LoginPage LoginButtomClick()
         {
             LoginButton.Click();
-            return new LoginPage(Application.Get(ApplicationSourceRepository.Default()).Browser.Driver);
+            return new LoginPage();
         }
     }
 
@@ -93,7 +94,7 @@ namespace Selenium_OpenCart.Pages.Header
         public MyAccountPage MyAccountClick()
         {
             MyAccount.Click();
-            return new MyAccountPage(Application.Get(ApplicationSourceRepository.Default()).Browser.Driver);
+            return new MyAccountPage();
         }
 
         public LogoutPage LogoutClick()

@@ -84,7 +84,7 @@ namespace Selenium_OpenCart.Tests
             Application.Get().Browser.OpenUrl(ApplicationSourceRepository.ChromeNew().HomePageUrl);
             
             //Logging in
-            LoginPageMethods login = new LoginPageMethods(Application.Get().Browser.Driver  );
+            LoginPageMethods login = new LoginPageMethods();
             login.LogIntoAccount(user.GetUsername(),user.GetPassword());
         }
     }
