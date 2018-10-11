@@ -8,7 +8,7 @@ using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    class EditAddressPage
+    public class EditAddressPage
     {
         //private IWebDriver driver;
         protected ISearch Search

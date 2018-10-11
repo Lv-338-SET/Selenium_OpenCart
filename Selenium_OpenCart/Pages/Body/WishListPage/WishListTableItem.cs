@@ -57,14 +57,15 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         {
             return this.UnitPrice.Text;
         }
-        public void ClickAddToCartButton()
+        public WishListPage ClickAddToCartButton()
         {
-            Thread.Sleep(1500);
             AddToCartButton.Click();
+            return new WishListPage();
         }
-        public void ClickRemoveFromWishListButton()
+        public WishListPage ClickRemoveFromWishListButton()
         {
             RemoveFromWishlistButton.Click();
+            return new WishListPage();
         }
 
         #endregion 

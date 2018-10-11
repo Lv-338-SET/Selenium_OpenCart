@@ -4,16 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.ContactPage
 {
     public class ContactPage
     {
-        private IWebDriver driver;
+        private ISearch search;
 
-        public ContactPage(IWebDriver driver)
+        public ContactPage()
         {
-            this.driver = driver;
+            search = Application.Get(ApplicationSourceRepository.Default()).Search;
         }
     }
 }

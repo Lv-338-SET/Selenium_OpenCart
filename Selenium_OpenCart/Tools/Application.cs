@@ -60,17 +60,12 @@ namespace Selenium_OpenCart.Tools
         {
             if (instance == null)
             {
-                lock (lockingObject)
+                if (applicationSource == null)
                 {
-                    if (instance == null)
-                    {
-                        if (applicationSource == null)
-                        {
-                            applicationSource = ApplicationSourceRepository.Default();
-                        }
-                        instance = new Application(applicationSource);
-                    }
+                    applicationSource = ApplicationSourceRepository.Default();
                 }
+                instance = new Application(applicationSource);
+                Thread.Sleep(500);
             }
             return instance;
         }
@@ -96,12 +91,6 @@ namespace Selenium_OpenCart.Tools
         {
             this.Search = new SearchElement();
         }
-
-        //public HomePage LoadLoginPage()
-        //{
-        //    Browser.OpenUrl(ApplicationSource.HomePageUrl);//////////!!!!!
-        //    return new HomePage(driver);
-        //}
 
         //public HomePage LogoutAction()
         //{

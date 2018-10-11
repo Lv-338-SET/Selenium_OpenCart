@@ -72,7 +72,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         public HomePage ClickContinueButton()
         {
             ContinueButton.Click();
-            return new HomePage(driver);
+            return new HomePage();
         }
         #endregion
     }

@@ -63,7 +63,7 @@ namespace Selenium_OpenCart.Pages.Header
         public SearchPage ClickSearchButton()
         {
             this.searchButton.Click();
-            return new SearchPage(driver);
+            return new SearchPage();
         }
         public CartBox ClickCartBox()
         {

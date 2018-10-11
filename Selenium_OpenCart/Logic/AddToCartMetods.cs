@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Pages.Header;
@@ -6,13 +7,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Logic
 {
     class AddToCartMetods
     {
+
         IWebDriver WebDriver;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -25,37 +30,38 @@ namespace Selenium_OpenCart.Logic
 
         public void FindElementProduct(string nameProduck)
         {
-            HomePage homePage = new HomePage(WebDriver);
-            TopBar topBar = new TopBar(WebDriver);
+            HomePage homePage = new HomePage();
+            TopBar topBar = new TopBar();
             homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
-            topBar.ShopingCartButtonClick();
         }
 
         public void FindNameProduckt(string nameProduck)
         {
-            ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
-            HomePage homePage = new HomePage(WebDriver);
-            TopBar topBar = new TopBar(WebDriver);
+            ShopingCartPage shopingCartPage = new ShopingCartPage();
+            HomePage homePage = new HomePage();
+            TopBar topBar = new TopBar();
             homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
-            topBar.ShopingCartButtonClick();
+            Thread.Sleep(1500);
+            topBar.ShoppingCartButtonClick();
             shopingCartPage.GetProduct().ClickRemoveButton();
-
         }
 
         public HomePage IsCartIsEmpty()
         {
-            HomePage homePage = new HomePage(WebDriver);
-            ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
-            TopBar topBar = new TopBar(WebDriver);
-            topBar.ShopingCartButtonClick();
+            ShopingCartPage shopingCartPage = new ShopingCartPage();
+            TopBar topBar = new TopBar();
+            Thread.Sleep(1500);
+            topBar.ShoppingCartButtonClick();
             shopingCartPage.GoToMainPageIfCartIsEmpty();
-            return new HomePage(WebDriver);
+            return new HomePage();
         }
+
         public void VerifyIsCartEmpty()
         {
-            TopBar topBar = new TopBar(WebDriver);
-            ShopingCartPage shopingCartPage = new ShopingCartPage(WebDriver);
-            topBar.ShopingCartButtonClick();
+            TopBar topBar = new TopBar();
+            ShopingCartPage shopingCartPage = new ShopingCartPage();
+            topBar.ShoppingCartButtonClick();
+            Thread.Sleep(1500);
             shopingCartPage.GetEmptyCartMessage();
         }
     }

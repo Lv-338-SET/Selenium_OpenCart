@@ -8,7 +8,7 @@ using Selenium_OpenCart.Pages.Body.ProductPage;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    class ShopingCartTableItem
+    public class ShopingCartTableItem
     {
         protected IWebDriver driver;
         public IWebElement Image { get; private set; }
@@ -28,7 +28,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         private void Initialize(IWebElement element)
         {
             Image = element.FindElement(By.XPath("//td[1]"));
-            ProductName = element.FindElement(By.CssSelector("tr > td:nth-child(2) > a"));
+            ProductName = element.FindElement(By.CssSelector(".text-left>a"));
             Model = element.FindElement(By.XPath("//td[3]"));
             CountsTextBox = element.FindElement(By.XPath("//td[4]/div/input[@class='form-control']"));
             UpdateButton = element.FindElement(By.XPath("//td[4]/div//i[@class='fa fa-refresh']"));
