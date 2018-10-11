@@ -2,36 +2,43 @@
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
-//using OpenQA.Selenium.Chrome;
+using Selenium_OpenCart.Tools.SearchWebElements;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    public class AddNewAddressPage
-    {
-        private IWebDriver driver;
-        IJavaScriptExecutor js;
 
+        class AddNewAddressPage
+        {        
+          protected ISearch Search
+          {
+            get
+            {
+                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
+            }
+        }
+        
+        IJavaScriptExecutor js;
+        
         private const string PAGE_NAME = "Add Address";
 
         public IWebElement PageName { get; private set; }
         public AddressFormComponent AddressForm { get; private set; }
         public IWebElement ContinueButton
-        { get { return driver.FindElement(By.CssSelector("input[type ='submit']")); } }
+        { get { return Search.ElementByCssSelector("input[type ='submit']"); } } //TO DO
 
-        public AddNewAddressPage(IWebDriver driver)
+        public AddNewAddressPage()
         {
-            this.driver = driver;
-
-            PageName = driver.FindElement(By.CssSelector("#content h2"));
-
-            AddressForm = new AddressFormComponent(driver);
+            PageName = Search.ElementByCssSelector("#content h2");
+            AddressForm = new AddressFormComponent();
         }
 
 
         public AddNewAddressPage FillAllRequareField(string firstName, string lastName, string Address1,
                 string city, string postCode, string country, string regionState)
         {
-            js = driver as IJavaScriptExecutor;
+            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
 
             AddressForm.TypeInFirstName(firstName);
             AddressForm.TypeInLastNameInput(lastName);
@@ -51,7 +58,12 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         public AddressBookPage Continue()
         {
             ContinueButton.Click();
-            return new AddressBookPage(driver);
+            return new AddressBookPage();
         }
+        public void ClickContinueButton()
+        {
+            ContinueButton.Click();
+        }
+
     }
 }

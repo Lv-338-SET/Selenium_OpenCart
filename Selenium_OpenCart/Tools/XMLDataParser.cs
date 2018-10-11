@@ -53,8 +53,7 @@ namespace Selenium_OpenCart.Tools
             XmlElement node = doc.DocumentElement;
             return User.Get()
                     .SetUsername(node.GetElementsByTagName("username")[0].InnerText)
-                    .SetPassword(HashPassword(node.GetElementsByTagName("password")[0].InnerText,
-                                 node.GetElementsByTagName("sault")[0].InnerText))
+                    .SetPassword(node.GetElementsByTagName("password")[0].InnerText)
                     .Build();
         }
 
