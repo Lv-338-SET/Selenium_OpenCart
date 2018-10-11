@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using System.Linq;
-using OpenQA.Selenium.Support.UI;
 
 using Selenium_OpenCart.Data.ProductReview;
 using Selenium_OpenCart.Data.User;
@@ -152,7 +148,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         }
 
         [Test, TestCaseSource("ValidProductReviewAndAdminUser"), Order(4)]
-        public void TestCase_DeleteReview (IProductReview review, IUser user)
+        public void TestCase712DeleteReview (IProductReview review, IUser user)
         {
             Assert.IsTrue(TestCase649,
                 "Blocked. Preconditions fail: add review test failed");
