@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+﻿using OpenQA.Selenium;
+using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.EditAccount
 {
     public class EditAccountPage
     {
-        protected IWebDriver driver;
+        protected ISearch Search { get; private set; }
+
         public IWebElement EditFirstName
         {
             get
             {
-                return driver.FindElement(By.Id("input-firstname"));
+                return Search.ElementById("input-firstname");
             }
 
         }
@@ -26,47 +21,47 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         {
             get
             {
-                return driver.FindElement(By.Id("input-firstname"));
+                return Search.ElementById("input-firstname");
             }
         }
         public IWebElement EditEmail
         {
             get
             {
-                return driver.FindElement(By.Id("input-email"));
+                return Search.ElementById("input-email");
             }
         }
         public IWebElement EditTelephone
         {
             get
             {
-                return driver.FindElement(By.Id("input-telephone"));
+                return Search.ElementById("input-telephone");
             }
         }
         public IWebElement EditFax
         {
             get
             {
-                return driver.FindElement(By.Id("input-fax"));
+                return Search.ElementById("input-fax");
             }
         }
         public IWebElement EditButtonContinue
         {
             get
             {
-                return driver.FindElement(By.CssSelector("input.btn.btn-primary"));
+                return Search.ElementByCssSelector("input.btn.btn-primary");
             }
         }
         public IWebElement EditButtonContinueHome
         {
             get
             {
-                return driver.FindElement(By.CssSelector("a.btn.btn-primary"));
+                return Search.ElementByCssSelector("a.btn.btn-primary");
             }
         }
-        public EditAccountPage(IWebDriver driver)
+        public EditAccountPage()
         {
-            this.driver = driver;
+            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
         }
         public void ClearEditFirstNane()
         {
@@ -116,7 +111,7 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         {
             EditFax.SendKeys(NewFax);
         }
-       
+
 
         public void ClearClickInputEditFirstName(string NewFirstName)
         {
@@ -150,23 +145,23 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
             EditFax.SendKeys(NewFax);
         }
 
-        public MyAccountPage ClickEditButtonContinue()
+        public MyAccountPage.MyAccountPage ClickEditButtonContinue()
         {
             EditButtonContinue.Click();
-            return new MyAccountPage(driver);
+            return new MyAccountPage.MyAccountPage();
         }
-
         public void ClickEditButtonContinueHome()
         {
             EditButtonContinueHome.Click();
         }
 
-        public static bool VerifyEditAccountPage(IWebDriver driver)
+        public static bool VerifyEditAccountPage()
         {
 
             try
             {
-                driver.FindElement(By.LinkText("Your Personal Details"));
+                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                search.ElementByLinkText("Your Personal Details");
                 return true;
             }
             catch (NoSuchElementException)
@@ -174,11 +169,11 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
                 return false;
             }
         }
-        public static EditAccountPage UserEditPage(IWebDriver driver)
+        public static EditAccountPage UserEditPage()
         {
-            if (VerifyEditAccountPage(driver))
+            if (VerifyEditAccountPage())
             {
-                return new EditAccountPage(driver);
+                return new EditAccountPage();
             }
             else
             {

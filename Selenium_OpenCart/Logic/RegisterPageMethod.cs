@@ -1,24 +1,26 @@
 ﻿using OpenQA.Selenium;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Data.Search;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Pages.Header;
+using Selenium_OpenCart.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestSite.Pages.RegisterPage;
+
 
 namespace Selenium_OpenCart.Logic
 {
 
     class RegisterPageMethod
     {
-        IWebDriver driver;
 
 
-        public RegisterPageMethod(IWebDriver driver)
+        public RegisterPageMethod()
         {
-            this.driver = driver;
+            
         }
 
         public RegisterPage GoToRegisterPage()
@@ -43,14 +45,14 @@ namespace Selenium_OpenCart.Logic
             filling.ClickPrivacyPolicy();
             filling.ClickButtonContinue();
             filling.ClickButtonsuccess();
-            return new MyAccountPage(driver);
+            return new MyAccountPage();
         }
         public MyAccountPage ValidRegister(string firstName, string lastName, string email,
             string telephone, string password, string passwordConfirm)
         {
             GoToRegisterPage();
             FillingFieldsRegister(firstName, lastName, email, telephone, password, passwordConfirm);
-            return new MyAccountPage(driver);
+            return new MyAccountPage();
         }
     }
 }
