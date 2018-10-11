@@ -233,6 +233,11 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             return null;
         }
 
+        public SearchPage AddAppropriateItemToCart(string product)
+        {
+            FindAppropriateProduct(product).ClickCartButton();
+            return new SearchPage();
+        }
         public SearchPage AddAppropriateItemToWishList(string product)
         {
             FindAppropriateProduct(product).ClickCartFavourite();

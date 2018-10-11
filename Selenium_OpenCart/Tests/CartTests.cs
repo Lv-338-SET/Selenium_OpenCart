@@ -11,57 +11,72 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Selenium_OpenCart.Data.ProductReview;
+using Selenium_OpenCart.Data.User;
+using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
+using Selenium_OpenCart.Logic.ProductPageLogic;
+using Selenium_OpenCart.Pages.Body.SearchPage;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
     class CartTests
     {
-        IWebDriver driver;
+        const string URL = "http://40.118.125.245/";
 
         [SetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("http://atqc-shop.epizy.com/");
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.Manage().Window.Maximize();
+            Application.Get().Browser.OpenUrl(URL);
         }
 
         [TestCase]
-        public void Verify()
+        public void VerifyIsCartEmpty()
         {
-            AddToCartMetods addToCartMetods = new AddToCartMetods(driver);
-            addToCartMetods.VerifyIsCartEmpty();
+            AddToCartMetods addToCartMetods = new AddToCartMetods();
+            addToCartMetods.IsCartEmpty();
+        }
 
+        [TestCase("iPhone")]
+        public void AddingProductToCartFromMainPage(string product)
+        {
+            AddToCartMetods addToCartMetods = new AddToCartMetods();
+            string actual = addToCartMetods.AddProductByName(product);
+
+            Assert.AreEqual(product, actual);
         }
 
         [TestCase("MacBook")]
-        public void CartButtonFromMainPageWorks_AddingMacBook_IsAdded(string product)
+        public void AddProductByNameUseSearch(string productName)
         {
-            HomePage homePage = new HomePage();
-            TopBar topBar = new TopBar();
-            ShopingCartPage shopingCartPage = new ShopingCartPage();
-            homePage.FindAppropriateProduct(product).ClickCartButton();
-            topBar.ShoppingCartButtonClick();
-            shopingCartPage.GetProduct().ClickRemoveButton();
+            AddToCartMetods addToCartMetods = new AddToCartMetods();
+            string actual = addToCartMetods.AddProductByNameUseSearch(productName);
+
+            Assert.AreEqual(productName, actual);
 
         }
 
         [TestCase("iPhone")]
-        public void RemoveFromCart(string product)
+        public void RemoveFromCart(string productName)
         {
-            TopBar topBar = new TopBar();
-            ShopingCartPage shopingCartPage = new ShopingCartPage();
-            topBar.ShoppingCartButtonClick();
-            shopingCartPage.GetEmptyCartMessage();
+            AddToCartMetods addToCartMetods = new AddToCartMetods();
+            addToCartMetods.RemoveFromCart(productName);
+        }
 
+        [TestCase("iPhone", "test@gmail.com", "testtest")]
+        public void AddProductByNameUseSearchWithLofinedUser(string productName, string email, string password)
+        {
+            AddToCartMetods addToCartMetods = new AddToCartMetods();
+            string actual = addToCartMetods.AddProductByNameUseSearchWithLofinedUser(productName, email, password);
+
+            Assert.AreEqual(productName, actual);
         }
 
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
+            Application.Remove();
         }
     }
 }
