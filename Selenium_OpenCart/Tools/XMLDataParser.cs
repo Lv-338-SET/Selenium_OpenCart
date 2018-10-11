@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Selenium_OpenCart.Data.Product;
-using Selenium_OpenCart.Data.Currency;
-using Selenium_OpenCart.Data.ProductReview;
-
 using Selenium_OpenCart.Data.User;
-using Selenium_OpenCart.Data.Category;
-using Selenium_OpenCart.Data.Cart;
 using Selenium_OpenCart.Data.Search;
 using Selenium_OpenCart.Data.Address;
 using System.Xml;
@@ -62,8 +53,7 @@ namespace Selenium_OpenCart.Tools
             XmlElement node = doc.DocumentElement;
             return User.Get()
                     .SetUsername(node.GetElementsByTagName("username")[0].InnerText)
-                    .SetPassword(HashPassword(node.GetElementsByTagName("password")[0].InnerText,
-                                 node.GetElementsByTagName("sault")[0].InnerText))
+                    .SetPassword(node.GetElementsByTagName("password")[0].InnerText)
                     .Build();
         }
 
