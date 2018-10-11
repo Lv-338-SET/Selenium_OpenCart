@@ -4,29 +4,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Tools.SearchWebElements;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 {
     public class ChangePasswordPage
     {
-        protected IWebDriver driver;
+        protected ISearch Search { get; private set; }
 
         public IWebElement ChangePassword
-        { get { return driver.FindElement(By.Id("input-password")); } }
+        { get { return Search.ElementById("input-password"); } }
 
         public IWebElement ChangePasswordConfirm
-        { get { return driver.FindElement(By.Id("input-confirm")); } }
+        { get { return Search.ElementById("input-confirm"); } }
 
         public IWebElement ChangeButton
-        { get { return driver.FindElement(By.CssSelector("input.btn.btn-primary")); } }
+        { get { return Search.ElementByCssSelector("input.btn.btn-primary"); } }
 
         public IWebElement CheckButton
-        { get { return driver.FindElement(By.CssSelector("a.btn.btn-default")); } }
-        public ChangePasswordPage(IWebDriver driver)
+        { get { return Search.ElementByCssSelector("a.btn.btn-default"); } }
+
+        public ChangePasswordPage()
         {
-            this.driver = driver;
-            
+            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+
         }
 
         public void CleraClickInputNewPassword(string password)
@@ -47,12 +51,13 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
             ChangeButton.Click();            
         }
 
-        static bool VerifyChangePasswordPage(IWebDriver driver)
+        static bool VerifyChangePasswordPage()
         {
 
             try
             {
-                driver.FindElement(By.CssSelector("a.btn.btn-default"));
+                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                search.ElementByCssSelector("a.btn.btn-default");
                 return true;
             }
             catch (NoSuchElementException)
@@ -61,11 +66,11 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
             }
 
         }
-        public static ChangePasswordPage UserRVerifyChangePasswordPage(IWebDriver driver)
+        public static ChangePasswordPage UserRVerifyChangePasswordPage()
         {
-            if (VerifyChangePasswordPage(driver))
+            if (VerifyChangePasswordPage())
             {
-                return new ChangePasswordPage(driver);
+                return new ChangePasswordPage();
             }
             else
             {

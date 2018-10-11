@@ -1,52 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-
+﻿using OpenQA.Selenium;
+using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.LoginPage
 {
-    public class LoginPage
+    public class LoginPage //: Header
     {
-        protected IWebDriver driver;
+        protected ISearch Search { get; private set; }
 
         public IWebElement LabelReturningCustomer
         {
             get
             {
-                return driver.FindElement(By.XPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2"));
+                return Search.ElementByXPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2");
             }
         }
         public IWebElement LoginEmailFile
         {
             get
             {
-                return driver.FindElement(By.Id("input-email"));
+                return Search.ElementById("input-email");
             }
         }
         public IWebElement LoginPasswordFile
         {
             get
             {
-                return driver.FindElement(By.Id("input-password"));
+                return Search.ElementById("input-password");
             }
         }
         public IWebElement LoginButton
         {
             get
             {
-                return driver.FindElement(By.CssSelector("input.btn.btn-primary"));
+                return Search.ElementById("input.btn.btn-primary");
             }
         }
 
-        public LoginPage(IWebDriver driver)
+        public LoginPage()
         {
-            this.driver = driver;
+            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
         }
         
         public string LoginLable()
@@ -116,12 +110,13 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
             LoginButton.Click();
         }
 
-        public static bool VerifyLoginPage(IWebDriver driver)
+        public static bool VerifyLoginPage()
         {
 
             try
             {
-                driver.FindElement(By.XPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2"));
+                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                search.ElementByXPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2");
                 return true;
             }
             catch (NoSuchElementException)
@@ -129,11 +124,11 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
                 return false;
             }
         }
-        public static LoginPage UserLoginPage(IWebDriver driver)
+        public static LoginPage UserLoginPage()
         {
-            if (VerifyLoginPage(driver))
+            if (VerifyLoginPage())
             {
-                return new LoginPage(driver);
+                return new LoginPage();
             }
             else
             {
