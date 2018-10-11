@@ -125,6 +125,7 @@
     <Compile Include="Pages\Body\AddressBookPage\AddressBookPage.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddressBookException.cs" />
     <Compile Include="Pages\Body\AddressBookPage\AddressFormComponent.cs" />
+    <Compile Include="Pages\Body\AddressBookPage\AddressFormErrorMessages.cs" />
     <Compile Include="Pages\Body\AddressBookPage\EditAddressPage.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCardPage.cs" />
     <Compile Include="Pages\Body\CartPage\ShopingCartTableItem.cs" />
@@ -167,7 +168,7 @@
     <Compile Include="Tests\AddressBookTest.cs" />
     <Compile Include="Tests\CurrencyTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTests.cs" />
-    <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleThreaded.cs" />
+    <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleRelted.cs" />
     <Compile Include="Tests\CartTests.cs" />
     <Compile Include="Tests\LoginPageTest.cs" />
     <Compile Include="Tests\ProductComparisonTests.cs" />

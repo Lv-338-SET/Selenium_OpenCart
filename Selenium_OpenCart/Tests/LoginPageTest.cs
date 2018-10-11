@@ -53,7 +53,7 @@ namespace Selenium_OpenCart.Tests
         public void LoginedUserTest(string email, string password)
         {
             LoginPageMethods login = new LoginPageMethods(driver);
-            login.ValidLogin(email, password);
+            login.LogIntoAccount(email, password);
             Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser(driver));          
         }
         [Test, Order(2)]

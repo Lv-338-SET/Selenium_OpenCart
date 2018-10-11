@@ -82,7 +82,7 @@ namespace Selenium_OpenCart.Pages.Body.MyAccount
         public AddressBookPage.AddressBookPage ClickLinkAddressBook()
         {
             AddressBook.Click();
-            return new AddressBookPage.AddressBookPage(driver);
+            return new AddressBookPage.AddressBookPage();
         }
 
         public LogoutPage.LogoutPage ClickLinkLogout()
