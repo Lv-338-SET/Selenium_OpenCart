@@ -10,16 +10,8 @@ using Selenium_OpenCart.Data.Application;
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
 
-    class AddressFormComponent:AddressFormErrorMessages
+    public class AddressFormComponent : AddressFormErrorMessages
     {
-        //private IWebDriver driver;
-        protected ISearch Search
-        {
-            get
-            {
-                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
-            }
-        }
 
         //Searching elements in the form 
         #region
