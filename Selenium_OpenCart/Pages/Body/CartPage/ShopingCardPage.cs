@@ -56,10 +56,29 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
             return this.ShopingCartProduct;
         }
 
-
         public bool GetEmptyCartMessage()
         {
             return EmptyCartMessage.Displayed;
         }
+
+        public bool IsEmpty()
+        {
+            IWebElement element;
+            try
+            {
+                element = Application.Get().Search.ElementByCssSelector("#content p");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            if (element.Enabled)
+            {
+                return true;
+            }
+            else return false;
+        }
+
     }
 }

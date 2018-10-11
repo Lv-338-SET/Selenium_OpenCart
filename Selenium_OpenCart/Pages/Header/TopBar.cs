@@ -6,13 +6,13 @@ using Selenium_OpenCart.Pages.Body.CheckoutPage;
 using Selenium_OpenCart.Pages.Body.ContactPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Tools.SearchWebElements;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Header
 {
      class TopBar
     {
         protected ISearch search;
-        protected IWebDriver driver;
 
         //Properties
         private IWebElement CurrencyButton
@@ -40,9 +40,7 @@ namespace Selenium_OpenCart.Pages.Header
         //Constructor
         public TopBar()
         {
-            search = Application.Get().Search;
-            //this.driver = driver;
-            this.driver = Application.Get().Browser.Driver;
+            search = Application.Get(ApplicationSourceRepository.Default()).Search;
         }
 
         //Methods
@@ -61,7 +59,7 @@ namespace Selenium_OpenCart.Pages.Header
         public MyAccount MyAccountButtonClick()
         {
             MyAccountButton.Click();
-            return MyAccount.MyAccountMenu(driver);
+            return MyAccount.MyAccountMenu();
         }
 
         public WishListPage WishListButtonClick()
@@ -79,8 +77,8 @@ namespace Selenium_OpenCart.Pages.Header
         public ShopingCartPage ShoppingCartButtonClick()
         {
             ShopingCardButton.Click();
-            Thread.Sleep(2000);
-            return new ShopingCartPage(driver);
+            Thread.Sleep(1500);
+            return new ShopingCartPage(Application.Get().Browser.Driver);
         }
 
         public CheckoutPage CheckoutButtonClick()

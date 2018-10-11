@@ -18,7 +18,7 @@ namespace Selenium_OpenCart.Tools
         {
             ChromeOptions options = new ChromeOptions();
             options.AddArguments(applicationSource.optionsParams);
-            return new ChromeDriver();
+            return new ChromeDriver(options);
         }
     }
 
@@ -28,7 +28,7 @@ namespace Selenium_OpenCart.Tools
         {
             FirefoxOptions options = new FirefoxOptions();
             options.AddArguments(applicationSource.optionsParams);
-            return new FirefoxDriver();
+            return new FirefoxDriver(options);
         }
     }
 

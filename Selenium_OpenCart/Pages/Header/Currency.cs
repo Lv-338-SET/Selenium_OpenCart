@@ -10,11 +10,13 @@ namespace Selenium_OpenCart.Pages.Header
         private ISearch search;
 
         public IWebElement Euro
-        { get { return search.ElementByXPath("//*[@name='EUR']"); } }
+        { get { return search.ElementByXPath("//li/button[@name='EUR']"); } }
         public IWebElement PoundSterling
-        { get { return search.ElementByXPath("//*[@name='GBP']"); } }
+        { get { return search.ElementByXPath("//li/button[@name='GBP']"); } }
         public IWebElement USDolar 
-        { get { return search.ElementByXPath("//*[@name='USD']"); } }
+        { get { return search.ElementByXPath("//li/button[@name='GBP']"); } }
+        public IWebElement CurrencyTextLabel
+        { get { return search.ElementByXPath("//div[@class='btn-group']/button/strong"); } }
 
         public Currency()
         {
@@ -34,6 +36,11 @@ namespace Selenium_OpenCart.Pages.Header
         public void ClickButtonUSDolar()
         {
             USDolar.Click();
+        }
+
+        public string GetCurrencyFromMenu()
+        {
+            return CurrencyTextLabel.Text;
         }
     }
 }

@@ -21,27 +21,26 @@ namespace Selenium_OpenCart.Logic
 {
     public class CurencyMethods
     {
-        protected IWebDriver driver;
-        protected ISearch search;
-        protected AllBrowsers Browser;
+        private ISearch search;
+        private AllBrowsers browser;
+        private TopBar topBar;
 
         public CurencyMethods()
         {
-            this.driver = Application.Get(ApplicationSourceRepository.Default()).Browser.Driver;
+            topBar = new TopBar();
             this.search = Application.Get(ApplicationSourceRepository.Default()).Search;
-            this.Browser = Application.Get(ApplicationSourceRepository.Default()).Browser;
+            this.browser = Application.Get(ApplicationSourceRepository.Default()).Browser;
         }
 
         public HomePage GoToHomePage()
         {
-            Browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.HomePageUrl);
-            return new HomePage(driver);
+            browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.HomePageUrl);
+            return new HomePage(browser.Driver);
         }
 
         public LoginPage GoToLoginPage()
         {
-            TopBar item = new TopBar();
-            NotLoginedUserAcountElements accountMenu = (NotLoginedUserAcountElements)item.MyAccountButtonClick();
+            NotLoginedUserAcountElements accountMenu = (NotLoginedUserAcountElements)topBar.MyAccountButtonClick();
             return accountMenu.LoginButtomClick();
         }
 
@@ -51,106 +50,114 @@ namespace Selenium_OpenCart.Logic
             items.ClickClearInputLoginEmail(userName);
             items.ClickClearInputLoginPassword(Userpassword);
             items.ClickLoginButton();
-            return new MyAccountPage(driver);
+            return new MyAccountPage(browser.Driver);
         }
 
-        public void ClickedCurrency()
+        public bool IsWishListEmpty()
         {
-            TopBar topBar = new TopBar();
-            Currency currencyMenu = topBar.ReturnCurrencyList();
-            Thread.Sleep(10000);
-            currencyMenu.ClickButtonEuro();
-            Thread.Sleep(10000);
-            currencyMenu.ClickButtonPoundSterling();
-            Thread.Sleep(10000);
-            currencyMenu.ClickButtonUSDolar();
+            return topBar.WishListButtonClick().IsEmpty();
         }
 
-        public void CurencyMetho()
-        {
-            this.search = Application.Get(ApplicationSourceRepository.Default()).Search;
-            search.PresenceOfWebElement(search.ElementByXPath("some xapatrh or anothe"));//присутність елемента на сторінці
-            IWebElement asd = search.ElementByXPath("some xapatrh or anothe");
-        }
-
-        public void GotoElement(IWebElement element)
-        {
-            //IWebDriver driver = Application.Get(ApplicationSourceRepository.Default()).Browser.Driver;
-            Actions action = new Actions(driver);
-            action.MoveToElement(element, 1, 1).Click().Perform();
-        }
-
-
-        public SearchPage SearchProducts(string searchItemName)
-        {
-            SearchMethods searchMethods = new SearchMethods(driver);
-            return searchMethods.Search(searchItemName);
-        }
-
-        public ProductItem ChooseAppropriateProduct(string productName)
+        public void AddProductToWishList(string productName)
         {
             SearchPage search = SearchProducts(productName);
-            return search.FindAppropriateProduct(productName);
+            search.AddAppropriateItemToWishList(productName);
         }
 
-        public void AddProductToCart(ProductItem product)
+        public bool IsShoppingCartEmpty()
         {
-            product.ClickCartButton();
+            return topBar.ShoppingCartButtonClick().IsEmpty();
         }
 
-        public void AddProductToWishList(ProductItem product)
+        public void AddProductToCart(string productName)
         {
-            product.ClickCartFavourite();
+            SearchPage search = SearchProducts(productName);
+            search.AddAppropriateItemToShopingCart(productName);
         }
 
-        public void ScroolToElementWishList(ProductItem product)
+        public ShopingCartPage GoToShoppingCart()
         {
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(product.GetProductCartButton());
-            //actions.Perform();
-        }
-
-        public void ScrollTo(int xPosition = 0, int yPosition = 0)
-        {
-            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-            string title = (string)js.ExecuteScript("window.scrollTo({0}, {1})", xPosition, yPosition);
-        }
-
-        public void ScrollToView(IWebElement element)
-        {
-            if (element.Location.Y > 200)
-            {
-                ScrollTo(0, element.Location.Y - 100);
-            }
-        }
-
-        public void ScroolToElementCartButton(ProductItem product)
-        {
-            Actions actions = new Actions(driver);
-            actions.MoveToElement(product.GetProductCartButton());
-            //actions.Perform();
-        }
-
-        public ShopingCartPage GoToCart()
-        {
-            TopBar topBar = new TopBar();
             return topBar.ShoppingCartButtonClick();
         }
 
         public WishListPage GoToWishList()
         {
-            TopBar topBar = new TopBar();
             return topBar.WishListButtonClick();
         }
 
-        public void GoToWishList(ProductItem product)
+        public void ClearWishList()
         {
-            //TopBar topBar = new TopBar(Driver);
-            //bool isWishListEmpty = topBar.WishListButtonClick().IsEmpty();
-            ////Clear WishList
-            //SearchMethods search = new SearchMethods(Driver);
-            //search.Search(productName).FindAppropriateProduct(productName).ClickCartfavourite();
-            product.ClickCartButton();
+            WishListPage wishList = topBar.WishListButtonClick();
+            while (!wishList.IsEmpty())
+            {
+               wishList.GetProduct().ClickRemoveFromWishListButton();
+            }
+        }
+
+        public void ClearShoppingCart()
+        {
+            while (!topBar.ShoppingCartButtonClick().IsEmpty())
+            {
+            }
+        }
+
+        public void ChooseUSD()
+        {
+            Currency currencyMenu = topBar.ReturnCurrencyList();
+            Thread.Sleep(10000);
+            currencyMenu.ClickButtonUSDolar();
+        }
+
+        public void ChooseEuro()
+        {
+            Currency currencyMenu = topBar.ReturnCurrencyList();
+            Thread.Sleep(10000);
+            currencyMenu.ClickButtonEuro();
+        }
+
+        public void ChoosePoundSterling()
+        {
+            Currency currencyMenu = topBar.ReturnCurrencyList();
+            Thread.Sleep(10000);
+            currencyMenu.ClickButtonPoundSterling();
+        }
+
+        public string GetCurrencyFromMainPage()
+        {
+            Currency currencyMenu = topBar.ReturnCurrencyList();
+            Thread.Sleep(10000);
+            string shopCurrency = currencyMenu.GetCurrencyFromMenu();
+            return shopCurrency[0].ToString();
+        }
+
+        public string GetCurrencyFromWishList(WishListPage wishListPage)
+        {
+            WishListTableItem product = wishListPage.GetProduct();
+            string productPrice = product.GetProductPrice();
+            string cleanProductPrice = productPrice.Replace(" ", "");
+            if (GetCurrencyFromMainPage() == "€")
+            {
+                return cleanProductPrice[cleanProductPrice.Length - 1].ToString();
+            }
+            else
+            {
+                return cleanProductPrice[0].ToString();
+            }
+        }
+
+        public string GetCurrencyFromShopingCart(ShopingCartPage shopingCartPage)
+        {
+            ShopingCartTableItem product = shopingCartPage.GetProduct();
+            string productPrice = product.GetProductPrice();
+            string cleanProductPrice = productPrice.Replace(" ", "");
+            if (GetCurrencyFromMainPage() == "€")
+            {
+                return cleanProductPrice[cleanProductPrice.Length - 1].ToString();
+            }
+            else
+            {
+                return cleanProductPrice[0].ToString();
+            }
         }
     }
 }

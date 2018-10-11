@@ -184,8 +184,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\Body\CurrencyPage\" />
-    <Folder Include="Pages\Body\MenuPage\" />
     <Folder Include="Pages\Body\OtherPages\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

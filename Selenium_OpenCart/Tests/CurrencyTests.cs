@@ -25,12 +25,31 @@ namespace Selenium_OpenCart.Tests
         {
             Application.Get(ApplicationSourceRepository.Default());
             cm = new CurencyMethods();
+            if (!cm.IsWishListEmpty())
+            {
+                cm.ClearWishList();
+            }
+
+            if (!cm.IsShoppingCartEmpty())
+            {
+                cm.ClearShoppingCart();
+            }
         }
 
         [OneTimeTearDown]
         public void AfterAllMethods()
         {
+            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
             Application.Remove();
+            if (!cm.IsWishListEmpty())
+            {
+                cm.ClearWishList();
+            }
+
+            if (!cm.IsShoppingCartEmpty())
+            {
+                cm.ClearShoppingCart();
+            }
         }
 
         [SetUp]
@@ -44,29 +63,54 @@ namespace Selenium_OpenCart.Tests
         {
         }
 
-        [Test]
-        public void CheckChangeProductPriceCurrency()
+        [TestCase("Samsyng SyncMaster")]
+        public void CheckChangeProductPriceCurrency(string productName)
         {
-            cm.GoToHomePage();
             cm.LoggedIn("testa@testa.com", "testa");
-            ProductItem product = cm.ChooseAppropriateProduct("Samsung SyncMaster");
-            //cm.GotoElement(product.GetProductCartButton());
-            //cm.ScrollToView(product.GetProductCartButton());
-            //cm.AddProductToCart(product);
-            cm.ClickedCurrency();
-            //cm.ScroolToElementCartButton(product);
-            cm.GoToCart();
+            cm.AddProductToWishList(productName);
+            cm.GoToWishList();
             Thread.Sleep(50000);
         }
 
-        //[Test]
-        //public void CheckChangeProductPriceCurrencyInWishList()
-        //{
-        //}
 
-        //[Test]
-        //public void CheckChangeProductPriceCurrencyInShopingCart()
-        //{
-        //}
+        [TestCase("Samsyng SyncMaster")]
+        public void CheckChangeProductPriceCurrencyInWishList(string productName)
+        {
+            //Act
+            cm.GoToHomePage();
+            Thread.Sleep(2000);
+            cm.LoggedIn("testa@testa.com", "testa");
+            Thread.Sleep(2000);
+            cm.AddProductToWishList(productName);
+            Thread.Sleep(2000);
+            WishListPage wishList = cm.GoToWishList();
+            Thread.Sleep(5000);
+            cm.ChooseEuro();
+            string expectedResult = cm.GetCurrencyFromMainPage();
+            string actualResult = cm.GetCurrencyFromWishList(wishList);
+
+            //Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
+        [TestCase("Samsyng SyncMaster")]
+        public void CheckChangeProductPriceCurrencyInShopingCart(string productName)
+        {
+            //Act
+            cm.GoToHomePage();
+            Thread.Sleep(2000);
+            cm.LoggedIn("testa@testa.com", "testa");
+            Thread.Sleep(2000);
+            cm.AddProductToCart(productName);
+            Thread.Sleep(2000);
+            cm.GoToShoppingCart();
+            Thread.Sleep(5000);
+            cm.ChooseEuro();
+            string expectedResult = cm.GetCurrencyFromMainPage();
+            string actualResult = cm.get();
+
+            //Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
 }
