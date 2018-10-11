@@ -41,7 +41,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             }
         }
 
-        public ProductPageInfo ProductPageInfo
+        public ProductPageInfo ProductInfo
         {
             get
             {

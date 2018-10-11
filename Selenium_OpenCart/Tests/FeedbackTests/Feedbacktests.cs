@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 using System.Linq;
 
 using Selenium_OpenCart.Data.ProductReview;
-using Selenium_OpenCart.Data.User;
 using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
 using Selenium_OpenCart.Logic.ProductPageLogic;
