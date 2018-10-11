@@ -11,8 +11,9 @@ using Selenium_OpenCart.Pages.Body.WishListPage;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    class ShopingCartPage : Header.Header
+    public class ShopingCartPage : Header.Header
     {
+
         protected IWebElement TableRow
         { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tbody")); } }
         protected IWebElement ButtonContinue
@@ -23,9 +24,10 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         { get { return GetProductElement(GetTableRow()); } }
 
 
-
         public ShopingCartPage(IWebDriver driver) : base(driver)
         { }
+
+
 
         public HomePage GoToMainPageIfCartIsEmpty()
         {
