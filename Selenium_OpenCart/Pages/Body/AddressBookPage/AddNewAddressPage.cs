@@ -8,10 +8,18 @@ using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
+<<<<<<< HEAD
     public class AddNewAddressPage
     {        
         protected ISearch Search
         {
+=======
+
+        public class AddNewAddressPage
+        {        
+          protected ISearch Search
+          {
+>>>>>>> develop
             get
             {
                 return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;

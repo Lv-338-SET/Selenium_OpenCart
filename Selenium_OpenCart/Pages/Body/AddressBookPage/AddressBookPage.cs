@@ -123,12 +123,19 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// Returning to My Account Page
         /// </summary>
         /// <returns>MyAccountPage.MyAccountPage</returns>
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
         public MyAccountPage ClickToBackButton ()
         {
             BackButton.Click();
             return new MyAccountPage(Application.Get().Browser.Driver);
         }
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
 
         /// <summary>
         /// Redirects to "add new Address" page  

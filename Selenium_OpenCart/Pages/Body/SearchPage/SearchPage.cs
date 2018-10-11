@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -250,7 +250,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             FindAppropriateProduct(product).ClickCompareButton();
             return new SearchPage();
         }
-
         public ProductPage.ProductPage OpenAppropriateProductPage(string product)
         {
             FindAppropriateProduct(product).ClickProductName();
