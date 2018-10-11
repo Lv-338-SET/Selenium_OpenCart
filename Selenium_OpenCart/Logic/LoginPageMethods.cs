@@ -9,7 +9,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Pages.Body.LoginPage;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 
 namespace Selenium_OpenCart.Logic
 {
@@ -34,9 +34,9 @@ namespace Selenium_OpenCart.Logic
 
         public LoginPage GoToLoginPage()
         {
-            TopBar item = new TopBar(driver);
+            TopBar item = new TopBar();
             item.MyAccountButtonClick();
-            LoginAcountElements login = new LoginAcountElements(driver);
+            NotLoginedUserAcountElements login = new NotLoginedUserAcountElements();
             login.LoginButtomClick();
             return new LoginPage(driver);            
         }

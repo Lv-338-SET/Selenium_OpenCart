@@ -1,28 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
+using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Header
 {
     public class Currency
     {
-        private IWebDriver driver;
+        private ISearch search;
 
         public IWebElement Euro
-        { get { return driver.FindElement(By.XPath("//a[text()='Register']")); } }
+        { get { return search.ElementByXPath("//li/button[@name='EUR']"); } }
         public IWebElement PoundSterling
-        { get { return driver.FindElement(By.XPath("//a[text()='Register']")); } }
-        public IWebElement USDolar
-        { get { return driver.FindElement(By.XPath("//a[text()='Register']")); } }
+        { get { return search.ElementByXPath("//li/button[@name='GBP']"); } }
+        public IWebElement USDolar 
+        { get { return search.ElementByXPath("//li/button[@name='GBP']"); } }
+        public IWebElement CurrencyTextLabel
+        { get { return search.ElementByXPath("//div[@class='btn-group']/button/strong"); } }
 
-        public Currency(IWebDriver driver)
+        public Currency()
         {
-            this.driver = driver;
+            search = Application.Get(ApplicationSourceRepository.Default()).Search;
+        }
+
+        public void ClickButtonEuro()
+        {
+            Euro.Click();
+        }
+
+        public void ClickButtonPoundSterling()
+        {
+            PoundSterling.Click();
+        }
+
+        public void ClickButtonUSDolar()
+        {
+            USDolar.Click();
+        }
+
+        public string GetCurrencyFromMenu()
+        {
+            return CurrencyTextLabel.Text;
         }
     }
 }

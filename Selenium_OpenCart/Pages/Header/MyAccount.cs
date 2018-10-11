@@ -1,7 +1,10 @@
 ﻿using OpenQA.Selenium;
+using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.LogoutPage;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 using TestSite.Pages.RegisterPage;
 
 namespace Selenium_OpenCart.Pages.Header
@@ -11,25 +14,26 @@ namespace Selenium_OpenCart.Pages.Header
         private static MyAccount Account = null;
         //private MyAccount() { }
 
-        public static MyAccount MyAccountMenu(IWebDriver driver)
+        public static MyAccount MyAccountMenu()
         {
-            if (IsLogedIn(driver))
+            if (IsLogedIn())
             {
-                Account = new LoginAcountElements(driver);
+                Account = new NotLoginedUserAcountElements();
             }
             else
             {
-                Account = new NotLoginetAcountElements(driver);
+                Account = new LoginedUSerAcountElements();
             }
             return Account;
         }
 
-        private static bool IsLogedIn(IWebDriver driver)
+        public static bool IsLogedIn()
         {
             try
-            { 
-                driver.FindElement(By.XPath("//a[text()='Register']"));
-                return true;
+            {
+                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                IWebElement registerButton = search.ElementByXPath("//a[text()='Register']");
+                return registerButton != null || registerButton.Enabled || registerButton.Displayed;
             }
             catch (NoSuchElementException)
             {
@@ -38,64 +42,64 @@ namespace Selenium_OpenCart.Pages.Header
         }
     }
 
-    public class LoginAcountElements: MyAccount
+    public class NotLoginedUserAcountElements: MyAccount
     {
-        private IWebDriver driver;
+        protected ISearch search;
 
         private IWebElement RegisterButton
-        { get { return driver.FindElement(By.XPath("//a[text()='Register']")); } }
+        { get { return search.ElementByXPath("//a[text()='Register']"); } }
 
         private IWebElement LoginButton
-        { get { return driver.FindElement(By.XPath("//a[text()='Login']")); } }
+        { get { return search.ElementByXPath("//a[text()='Login']"); } }
 
-        public LoginAcountElements(IWebDriver driver)
+        public NotLoginedUserAcountElements()
         {
-            this.driver = driver;
+            search = Application.Get(ApplicationSourceRepository.Default()).Search;
         }
 
         public RegisterPage RegisterButtonClick()
         {
             RegisterButton.Click();
-            return new RegisterPage(driver);
+            return new RegisterPage();
         }
 
         public LoginPage LoginButtomClick()
         {
             LoginButton.Click();
-            return new LoginPage(driver);
+            return new LoginPage(Application.Get(ApplicationSourceRepository.Default()).Browser.Driver);
         }
     }
 
-    public class NotLoginetAcountElements: MyAccount
+    public class LoginedUSerAcountElements: MyAccount
     {
-        private IWebDriver driver;
+        protected ISearch search;
 
         private IWebElement MyAccount
-        { get { return driver.FindElement(By.XPath("//a[text()='My Account']")); } }
+        { get { return search.ElementByXPath("//a[text()='My Account']"); } }
         private IWebElement OrderHistory
-        { get { return driver.FindElement(By.XPath("//a[text()='Order History']")); } }
+        { get { return search.ElementByXPath("//a[text()='Order History']"); } }
         private IWebElement Transaction
-        { get { return driver.FindElement(By.XPath("//a[text()='Transactions']")); } }
+        { get { return search.ElementByXPath("//a[text()='Transactions']"); } }
         private IWebElement Downloads
-        { get { return driver.FindElement(By.XPath("//a[text()='Downloads']")); } }
+        { get { return search.ElementByXPath("//a[text()='Downloads']"); } }
         private IWebElement Logout
-        { get { return driver.FindElement(By.XPath("//a[text()='Logout']")); } }
+        { get { return search.ElementByXPath("//a[text()='Logout']"); } }
 
-        public NotLoginetAcountElements(IWebDriver driver)
+        public LoginedUSerAcountElements()
         {
-            this.driver = driver;
+            search = Application.Get(ApplicationSourceRepository.Default()).Search;
         }
 
         public MyAccountPage MyAccountClick()
         {
             MyAccount.Click();
-            return new MyAccountPage(driver);
+            return new MyAccountPage(Application.Get(ApplicationSourceRepository.Default()).Browser.Driver);
         }
 
         public LogoutPage LogoutClick()
         {
             Logout.Click();
-            return new LogoutPage(driver);
+            return new LogoutPage();
         }
     }
 }

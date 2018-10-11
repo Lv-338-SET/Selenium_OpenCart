@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Pages.Header;
 using System;
 using System.Collections.Generic;
@@ -23,16 +23,16 @@ namespace Selenium_OpenCart.Logic
 
         public RegisterPage GoToRegisterPage()
         {
-            TopBar item = new TopBar(driver);
+            TopBar item = new TopBar();
             item.MyAccountButtonClick();
-            LoginAcountElements register = new LoginAcountElements(driver);
+            NotLoginedUserAcountElements register = new NotLoginedUserAcountElements();
             register.RegisterButtonClick();            
-            return new RegisterPage(driver);
+            return new RegisterPage();
         }
         public MyAccountPage FillingFieldsRegister(string firstName, string lastName, string email, 
             string telephone, string password, string passwordConfirm)
         {
-            RegisterPage filling = new RegisterPage(driver);
+            RegisterPage filling = new RegisterPage();
             filling.ClickInputFirstNameField(firstName);
             filling.ClickInputLastNameField(lastName);
             filling.ClickInputEMailField(email);

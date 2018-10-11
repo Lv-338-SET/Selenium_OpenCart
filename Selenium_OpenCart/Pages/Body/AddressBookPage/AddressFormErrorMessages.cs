@@ -10,7 +10,7 @@ using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    abstract class AddressFormErrorMessages
+    public abstract class AddressFormErrorMessages
     {
         protected ISearch Search
         {

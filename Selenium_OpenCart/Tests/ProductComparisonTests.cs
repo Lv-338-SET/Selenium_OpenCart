@@ -39,7 +39,7 @@ namespace Selenium_OpenCart.Tests
         public void ProductComparison_ClickingTwoTimesCompareButton_OneProductAdded(string product)
         {
             //Arrange
-            SearchMethods addedToComparisonProduct = new SearchMethods(driver);
+            SearchMethods addedToComparisonProduct = new SearchMethods();
             ProductComparisonPage columns = new ProductComparisonPage(driver);
             //Act
             //addedToComparisonProduct.Search(product)

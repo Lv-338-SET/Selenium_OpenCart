@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Data.Constants;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using Selenium_OpenCart.Tools;
@@ -11,7 +11,7 @@ using Selenium_OpenCart.Data.Application;
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 	      
 {
-    class AddressBookPage
+    public class AddressBookPage
     {
         //IWebDriver driver;
         protected ISearch Search
@@ -123,11 +123,12 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// Returning to My Account Page
         /// </summary>
         /// <returns>MyAccountPage.MyAccountPage</returns>
-        //public MyAccountPage ClickToBackButton ()
-        //{
-        //    BackButton.Click();
-        //    return new MyAccountPage();
-        //}
+        public MyAccountPage ClickToBackButton ()
+        {
+            BackButton.Click();
+            return new MyAccountPage(Application.Get().Browser.Driver);
+        }
+
 
         /// <summary>
         /// Redirects to "add new Address" page  
