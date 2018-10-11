@@ -5,48 +5,44 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.SearchPage;
+using Selenium_OpenCart.Pages.Body.MainPage;
 
+using Selenium_OpenCart.Tools;
 namespace Selenium_OpenCart.Pages.Body.MainPage
 {
     public class HomePage
     {
-        private IWebDriver driver;
-        protected IWebElement UpHorizontalCarousel { get { return driver.FindElement(By.Id("slideshow0")); } }
-        protected IWebElement DownHorizontalCarousel { get { return driver.FindElement(By.Id("carousel0")); } }
-        protected List<ProductItem> ListProduct { get { return InitializeListProductFromMainPage(driver.FindElements(By.ClassName("product-layout"))); } }
+        protected IWebElement UpHorizontalCarousel { get { return Application.Get().Search.ElementById("slideshow0"); } }
+        protected IWebElement DownHorizontalCarousel { get { return Application.Get().Search.ElementById("carousel0"); } }
+        protected List<ProductItemFromHomePage> ListProductFromMainPage => InitializeListProductFromMainPage(Application.Get().Search.ElementsByClassName("product-layout"));
 
-        public HomePage(IWebDriver driver)
-        {
-            this.driver = driver;
-
-        }
-        private void Initialize()
+        private bool Initialize()
         {
             IWebElement element = UpHorizontalCarousel;
             element = DownHorizontalCarousel;
-
-            var listP = ListProduct;
+            var listP = ListProductFromMainPage;
+            return true;
         }
 
-        public List<ProductItem> InitializeListProductFromMainPage(IReadOnlyCollection<IWebElement> elements)
+        public List<ProductItemFromHomePage> InitializeListProductFromMainPage(IReadOnlyCollection<IWebElement> elements)
         {
-            List<ProductItem> list = new List<ProductItem>();
+            List<ProductItemFromHomePage> list = new List<ProductItemFromHomePage>();
 
             foreach (var current in elements)
             {
-                list.Add(new ProductItem(driver, current));
+                list.Add(new ProductItemFromHomePage(Application.Get().Browser.Driver,current));
             }
             return list;
         }
 
-        public List<ProductItem> GetListProduct()
+        public List<ProductItemFromHomePage> GetListProduct()
         {
-            return ListProduct;
+            return ListProductFromMainPage;
         }
 
-        public ProductItem FindAppropriateProduct(string product)
+        public ProductItemFromHomePage FindAppropriateProduct(string product)
         {
-            foreach (var item in ListProduct)
+            foreach (var item in ListProductFromMainPage)
             {
                 if (item.IsAppropriate(product))
                 {

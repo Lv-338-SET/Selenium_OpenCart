@@ -7,10 +7,11 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 
 namespace Selenium_OpenCart.Pages.Body.EditAccount
 {
-     class EditAccountPage
+    public class EditAccountPage
     {
         protected IWebDriver driver;
         public IWebElement EditFirstName
@@ -149,10 +150,10 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
             EditFax.SendKeys(NewFax);
         }
 
-        public MyAccountPage.MyAccountPage ClickEditButtonContinue()
+        public MyAccountPage ClickEditButtonContinue()
         {
             EditButtonContinue.Click();
-            return new MyAccountPage.MyAccountPage(driver);
+            return new MyAccountPage(driver);
         }
 
         public void ClickEditButtonContinueHome()

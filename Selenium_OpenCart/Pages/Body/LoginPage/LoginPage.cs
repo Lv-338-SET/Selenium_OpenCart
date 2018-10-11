@@ -59,7 +59,7 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
             LabelReturningCustomer.Click();
         }
 
-        public void ClrearLoginEmail()
+        public void ClearLoginEmail()
         {
             LoginEmailFile.Clear();
         }
@@ -110,6 +110,7 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
         {
             return LoginButton.Text;
         }
+       
         public void ClickLoginButton()
         {
             LoginButton.Click();

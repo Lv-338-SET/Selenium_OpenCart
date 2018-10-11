@@ -8,29 +8,32 @@ using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart;
 using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Pages.Body.CartPage
 {
-    class ShopingCartPage : Header.Header
+    public class ShopingCartPage
     {
+
         protected IWebElement TableRow
-        { get { return driver.FindElement(By.XPath("//div[@class='table-responsive']//tr")); } }
+        { get { return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']//tbody"); } }
         protected IWebElement ButtonContinue
-        { get { return driver.FindElement(By.XPath("//a[text() = 'Continue']")); } }
+        { get { return Application.Get().Search.ElementByXPath("//a[text() = 'Continue']"); } }
         protected IWebElement EmptyCartMessage
-        { get { return driver.FindElement(By.XPath("//p[contains(text(),'Your shopping cart is empty!')]")); } }
+        { get { return Application.Get().Search.ElementByXPath("//p[contains(text(),'Your shopping cart is empty!')]"); } }
         protected ShopingCartTableItem ShopingCartProduct
         { get { return GetProductElement(GetTableRow()); } }
 
 
-
-        public ShopingCartPage(IWebDriver driver) : base(driver)
+        public ShopingCartPage()
         { }
+
+
 
         public HomePage GoToMainPageIfCartIsEmpty()
         {
             ButtonContinue.Click();
-            return new HomePage(driver);
+            return new HomePage();
         }
 
         public ShopingCartTableItem GetProductElement(IWebElement webElement)

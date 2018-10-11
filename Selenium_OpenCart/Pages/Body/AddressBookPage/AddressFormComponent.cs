@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    class AddressFormComponent
+    public class AddressFormComponent
     {
         private IWebDriver driver;
 
@@ -41,12 +41,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 
         public AddressFormComponent(IWebDriver driver)
         {
-            this.driver = driver;
-
-            if (!AddressFormTag.Enabled)
-            {
-                throw new AddressBookException("The 'Address' form cannot be found");
-            }            
+            this.driver = driver;                      
         }
 
         //FirstNameInput methods

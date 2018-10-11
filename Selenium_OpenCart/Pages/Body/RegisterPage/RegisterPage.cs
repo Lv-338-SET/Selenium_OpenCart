@@ -7,41 +7,51 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace TestSite.Pages.RegisterPage
 {
     public class RegisterPage
     {
-        protected IWebDriver driver;
+        //protected ISearch Search
+        //{
+        //    get
+        //    {
+        //        return Application.Get().Search;
+        //    }
+        //}
 
+        protected ISearch Search;
 
 
         public IWebElement FirstNameField
         {
             get
             {
-                return driver.FindElement(By.Id("input-firstname"));
+                return Search.ElementById("input-firstname");
             }
         }
         public IWebElement LastNameField
         {
             get
             {
-                return driver.FindElement(By.Id("input-lastname"));
+                return Search.ElementById("input-lastname");
             }
         }
         public IWebElement EMailField
         {
             get
             {
-                return driver.FindElement(By.Id("input-email"));
+                return Search.ElementById("input-email");
             }
         }
         public IWebElement TelephoneField
         {
             get
             {
-                return driver.FindElement(By.Id("input-telephone"));
+                return Search.ElementById("input-telephone");
             }
         }
         #region
@@ -106,42 +116,44 @@ namespace TestSite.Pages.RegisterPage
         {
             get
             {
-                return driver.FindElement(By.Id("input-password"));
+                return Search.ElementById("input-password");
             }
         }
         public IWebElement PasswordConfirmField
         {
             get
             {
-                return driver.FindElement(By.Id("input-confirm"));
+                return Search.ElementById("input-confirm");
             }
         }
+
         public bool NewsletterSubscribe { get; private set; } = false;
+
         public IWebElement PrivacyPolicy
         {
             get
             {
-                return driver.FindElement(By.XPath(".//div[@class='pull-right']//input[@type='checkbox' and @name='agree']"));
+                return Search.ElementByXPath(".//div[@class='pull-right']//input[@type='checkbox' and @name='agree']");
             }
         }
         public IWebElement ButtonContinue
         {
             get
             {
-                return driver.FindElement(By.CssSelector("input.btn.btn-primary"));
+                return Search.ElementByCssSelector("input.btn.btn-primary");
             }
         }
         public IWebElement Buttonsuccess
         {
             get
             {
-                return driver.FindElement(By.CssSelector("a.btn.btn-primary"));
+                return Search.ElementByCssSelector("a.btn.btn-primary");
             }
         }
 
-        public RegisterPage(IWebDriver driver)
+        public RegisterPage()
         {
-            this.driver = driver;
+            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
         }
 
         public void ClickFirstName()
@@ -250,7 +262,7 @@ namespace TestSite.Pages.RegisterPage
         {
             PasswordField.SendKeys(password);
         }
-        
+
         public void ClickPasswordConfirm()
         {
             PasswordConfirmField.Click();
@@ -261,8 +273,10 @@ namespace TestSite.Pages.RegisterPage
         }
         public void CheckNewsletterSubscribe()
         {
+            IWebElement element = Search.ElementByClassName("radio-inline");
+            IWebDriver driver = Application.Get(ApplicationSourceRepository.Default()).Browser.Driver;
             Actions action = new Actions(driver);
-            action.MoveToElement(driver.FindElement(By.ClassName("radio-inline")), 1, 1).Click().Perform();
+            action.MoveToElement(element, 1, 1).Click().Perform();
             NewsletterSubscribe = true;
         }
         public void ClickPrivacyPolicy()
@@ -310,12 +324,13 @@ namespace TestSite.Pages.RegisterPage
             Buttonsuccess.Click();
         }
 
-        static bool VerifyRegistrationPage(IWebDriver driver)
+        static bool VerifyRegistrationPage()
         {
 
             try
             {
-                driver.FindElement(By.XPath("//div[contains(@id, 'content') and contains(//h1, 'Register Account')]"));
+                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                search.ElementByXPath("//div[contains(@id, 'content') and contains(//h1, 'Register Account')]");
                 return true;
             }
             catch (NoSuchElementException)
@@ -324,18 +339,17 @@ namespace TestSite.Pages.RegisterPage
             }
 
         }
-        public static RegisterPage UserRegisterPage(IWebDriver driver)
+        public static RegisterPage UserRegisterPage()
         {
-            if (VerifyRegistrationPage(driver))
+            if (VerifyRegistrationPage())
             {
-                return new RegisterPage(driver);
+                return new RegisterPage();
             }
             else
             {
                 return null;
             }
         }
-    }    
-
+    }
 }
 

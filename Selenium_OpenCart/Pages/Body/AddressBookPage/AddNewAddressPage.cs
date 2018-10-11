@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
-    class AddNewAddressPage
+    public class AddNewAddressPage
     {
         private IWebDriver driver;
         IJavaScriptExecutor js;
@@ -23,11 +23,6 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             this.driver = driver;
 
             PageName = driver.FindElement(By.CssSelector("#content h2"));
-
-            if (!PageName.Text.Contains(PAGE_NAME))
-            {
-                throw new AddressBookException("The 'Add Address' page cannot be found");
-            }
 
             AddressForm = new AddressFormComponent(driver);
         }

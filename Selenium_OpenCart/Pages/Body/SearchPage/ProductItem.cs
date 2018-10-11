@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 using Selenium_OpenCart.Logic.ProductPageLogic;
 
@@ -13,6 +16,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
 {
     public class ProductItem
     {
+        
         protected IWebElement productBox { get; private set; }
         protected IWebElement productImage { get; private set; }
         protected IWebElement productName { get; private set; }
@@ -22,15 +26,10 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         protected IWebElement productIconCart { get; private set; }
         protected IWebElement productIconFavourite { get; private set; }
         protected IWebElement productIconCompare { get; private set; }
-
-
-        private IWebDriver driver;
        
-        public ProductItem(IWebDriver driver, IWebElement current)
+        public ProductItem(IWebElement current)
         {
-            this.driver = driver;
-
-
+            
             this.productBox = current;
             this.productImage = current.FindElement(By.ClassName("image"));
             this.productName = current.FindElement(By.CssSelector(".caption>h4>a"));
@@ -77,21 +76,32 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             return this.productExTax.Text;
         }
 
+        public IWebElement GetProductCartButton()
+        {
+            return this.productIconCart;
+        }
+
+        public IWebElement GetProductWishListButton()
+        {
+            return this.productIconFavourite;
+        }
+
         //Buttons
         public SearchPage ClickCartButton()
         {
             productIconCart.Click();
-            return new SearchPage(driver);
+            return new SearchPage();
         }
-        public SearchPage ClickCartfavourite()
+        public SearchPage ClickCartFavourite()
         {
             productIconFavourite.Click();
-            return new SearchPage(driver);
+            Thread.Sleep(3000);
+            return new SearchPage();
         }
         public SearchPage ClickCompareButton()
         {
             productIconCompare.Click();
-            return new SearchPage(driver);
+            return new SearchPage();
         }
         public bool IsAppropriate(string product)
         {
