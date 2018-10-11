@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
@@ -17,20 +18,33 @@ namespace Selenium_OpenCart.Tests
     [TestFixture]
     public class ProductComparisonTests
     {
-        const string URL = "http://40.118.125.245/";
+        Application application;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void BeforeEachTest()
         {
-            Application.Get().Browser.OpenUrl(URL);
+            application = Application.Get(ApplicationSourceRepository.Default());
+            application.Browser.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(4);
         }
 
-        [TearDown]
+        [SetUp]
+        public void Beforetest()
+        {
+            application.Browser.OpenUrl(application.ApplicationSource.HomePageUrl);
+        }
+
+        [OneTimeTearDown]
         public void AfterEachTest()
         {
             Application.Remove();
         }
-        
+
+        [TearDown]
+        public void EachTest()
+        {
+            application.Browser.Driver.Manage().Cookies.DeleteAllCookies();
+        }
+
         //Jira Test Case:
         [TestCase("iPhone", "Success: You have added iPhone to your product comparison!\r\n×")]
         public void ProductComparison_AddProductFromSearchPage_SuccessfulMessageDisplayed(string product, string conparisonMessage)
@@ -120,21 +134,5 @@ namespace Selenium_OpenCart.Tests
                 "is present on the page after the product is removed.");
             Assert.AreEqual(conparisonNoProductsMessage, comparePage.GetNoProductsToCompareLabelText(), "An invalid comparison message is displayed.");
         }
-
-        //TODO додавання 5-ти товарів
-        //N
-        //Jira Test Case: 
-        //[TestCase("ip")]
-        public void ProductComparison_AddFiveProductsFromSearch_FourProductsAddedToComparison(string searchText)
-        {
-            List<ProductItem> search = new SearchMethods().Search(searchText).GetListProduct();
-            foreach (var current in search)
-            {
-                current.ClickCompareButton();
-            }
-        }
-        //TODO чи відкривається пейджа продукту після натискання імені
-        //чи добавляє в корзину
-        //чи контінуе перенаправляє в головну сторінку
     }    
 }
