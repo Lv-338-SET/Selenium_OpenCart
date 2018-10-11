@@ -42,11 +42,6 @@ namespace Selenium_OpenCart.Tests
         [SetUp]
         public void BeforeEachTests()
         {            
-            //ChromeOptions chromeOptions = new ChromeOptions();
-            //chromeOptions.AddArguments("--start-maximized");
-            //driver = new ChromeDriver(chromeOptions);
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
             Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
             Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.ChromeNew()).ApplicationSource.HomePageUrl);
             //LogIn to the site
@@ -70,10 +65,11 @@ namespace Selenium_OpenCart.Tests
         {
            Application.Get().Browser.OpenUrl(LOGOUT);
         }
-        [TearDown]
+
+        [OneTimeTearDown]
         public void AfterAllTests()
         {
-            Application.Get().Browser.OpenUrl(LOGOUT);
+            Application.Remove();
         }
 
         [TestCase(FIRST_NAME, LAST_NAME, ADDRESS1, CITY, POST_CODE, COUNTRY, 
@@ -127,15 +123,16 @@ namespace Selenium_OpenCart.Tests
         }
 
         [TestCase("", "", "1", "a", "222", " --- Please Select --- ", " --- Please Select --- ")]
-        public void Test4FailCreateNewAddressTest(string firstName, string lastName, string address1,
+        public void CreateFailedNewAddressTest(string firstName, string lastName, string address1,
                 string city, string postCode, string country, string region)
         {
             //Arrange
             AddressBookPage addressBook = new AddressBookPage();
             AddNewAddressPage newAddressPage = addressBook.GoToNewAddressPage();
             newAddressPage.FillAllRequareField(firstName, lastName, address1,
-                        city, postCode, country, region).Continue();
+                        city, postCode, country, region).ClickContinueButton();
             
+
             //Act
             bool actual = newAddressPage.AddressForm.IsEmptyInputErrorMessage();          
 

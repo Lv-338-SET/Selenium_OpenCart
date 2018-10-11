@@ -59,5 +59,10 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
             ContinueButton.Click();
             return new AddressBookPage();
         }
+        public void ClickContinueButton()
+        {
+            ContinueButton.Click();
+        }
+
     }
 }
