@@ -21,12 +21,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         {
             this.driver = driver;
 
-            PageName = driver.FindElement(By.CssSelector("#content  h2"));
-
-            if (!PageName.Text.Contains(PAGE_NAME))
-            {
-                throw new AddressBookException("The 'Edit Address' page cannot be found");
-            }
+            PageName = driver.FindElement(By.CssSelector("#content  h2"));          
 
             AddressForm = new AddressFormComponent(driver);
         }
