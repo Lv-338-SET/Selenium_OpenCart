@@ -234,11 +234,11 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             return new SearchPage(driver);
         }
 
-        //public ProductPage.ProductPage OpenAppropriateProductPage(string product)
-        //{
-        //    FindAppropriateProduct(product).ClickProductName();
-        //    return new ProductPage.ProductPage(driver);
-        //}
+        public ProductPage.ProductPage OpenAppropriateProductPage(string product)
+        {
+            FindAppropriateProduct(product).ClickProductName();
+            return new ProductPage.ProductPage(driver);
+        }
 
         public string successAlertMessageText()
         {

@@ -156,11 +156,11 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             return LastProductName.Text;
         }
 
-        //public ProductPageLogic ClickLastProductName()
-        //{
-        //    LastProductName.Click();
-        //    return new ProductPageLogic(driver);
-        //}
+        public ProductPageLogic ClickLastProductName()
+        {
+            LastProductName.Click();
+            return new ProductPageLogic(driver);
+        }
 
         public ProductComparisonPageWhithMessage ClickAddToCartFirst()
         {
@@ -187,15 +187,15 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             return new EmptyProductComparisonPageWhithMessage(driver);
         }
 
-        //public ProductComparisonPage ColumnsCount()
-        //{
-        //    int i = 0;
-        //    foreach (var item in ListProductColumn)
-        //    {
-        //        i++;
-        //    }
-        //    return null;
-        //}
+        public ProductComparisonPage ColumnsCount()
+        {
+            int i = 0;
+            foreach (var item in ListProductColumn)
+            {
+                i++;
+            }
+            return null;
+        }
 
         public bool IsElementPresent()
         {
