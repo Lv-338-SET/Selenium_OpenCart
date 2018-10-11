@@ -44,7 +44,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         protected IWebElement productPageLabel
             { get { return Search.ElementByClassName("text-right"); } }
         protected IWebElement successAlertMessage
-        { get { return Search.ElementByXPath("//div[@class='alert alert-success']"); } }
+        { get { return Search.ElementByXPath("//div[@class='alert alert-success alert-dismissible']"); } }
 
 
         protected SelectElement selectCategory
@@ -242,7 +242,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public SearchPage AddAppropriateItemToShopingCart(string product)
         {
             FindAppropriateProduct(product).ClickCartButton();
-            return new SearchPage(driver);
+            return new SearchPage();
         }
 
         public SearchPage AddAppropriateProductToComparison(string product)

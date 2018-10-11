@@ -117,11 +117,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         public MyAccountPage ClickToBackButton ()
         {
             BackButton.Click();
-<<<<<<< HEAD
-            return new MyAccountPage.MyAccountPage();
-=======
             return new MyAccountPage(driver);
->>>>>>> 6a5eada33258a5b5f24ae8e625e633a2ef549d8d
         }
 
         /// <summary>

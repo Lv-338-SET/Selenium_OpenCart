@@ -11,7 +11,7 @@ namespace Selenium_OpenCart.Pages.Body.LogoutPage
         protected ISearch search;
 
         private IWebElement LabelLogout
-        { get { return search.ElementByXPath(("//div[contains(@id, 'content') and contains(//h1, 'Account Logout')]"); } }
+        { get { return search.ElementByXPath(("//div[contains(@id, 'content') and contains(//h1, 'Account Logout')]")); } }
 
         private IWebElement ButtonContinue
         { get { return search.ElementByCssSelector("a.btn.btn-primary"); } }
@@ -24,7 +24,7 @@ namespace Selenium_OpenCart.Pages.Body.LogoutPage
         public HomePage ButtonContinueClick()
         {
             ButtonContinue.Click();
-            return new HomePage(Application.Get(ApplicationSourceRepository.Default()).Browser.Driver);
+            return new HomePage();
         }
     }
 }

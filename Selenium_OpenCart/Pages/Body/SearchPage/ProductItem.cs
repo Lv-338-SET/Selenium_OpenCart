@@ -95,6 +95,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         public SearchPage ClickCartFavourite()
         {
             productIconFavourite.Click();
+            Thread.Sleep(3000);
             return new SearchPage();
         }
         public SearchPage ClickCompareButton()

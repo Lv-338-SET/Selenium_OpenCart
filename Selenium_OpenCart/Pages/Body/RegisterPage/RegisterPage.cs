@@ -1,10 +1,17 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
 
-namespace Selenium_OpenCart.Pages.Body.RegisterPage
+namespace TestSite.Pages.RegisterPage
 {
     public class RegisterPage
     {
@@ -16,9 +23,7 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
         //    }
         //}
 
-
-        protected ISearch Search { get; private set; }
-
+        protected ISearch Search;
 
 
         public IWebElement FirstNameField
@@ -327,7 +332,6 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
                 var search = Application.Get(ApplicationSourceRepository.Default()).Search;
                 search.ElementByXPath("//div[contains(@id, 'content') and contains(//h1, 'Register Account')]");
                 return true;
-
             }
             catch (NoSuchElementException)
             {

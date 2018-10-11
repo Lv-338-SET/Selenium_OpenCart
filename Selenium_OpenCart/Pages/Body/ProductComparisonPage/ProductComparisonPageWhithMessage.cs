@@ -55,7 +55,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         public ShopingCartPage ClickSuccessAddToCartMessageLink()
         {
             SuccessAddToCartMessageLink.Click();
-            return new ShopingCartPage(driver);
+            return new ShopingCartPage();
         }
         #endregion
     }

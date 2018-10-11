@@ -14,6 +14,7 @@ namespace Selenium_OpenCart.Tests
 {
 
     [TestFixture]
+    [SingleThreaded]
     public class WishListTests
     {
         bool addedToWishList = false;
@@ -53,7 +54,6 @@ namespace Selenium_OpenCart.Tests
             Assert.AreEqual(productNameFromWishList, productNameFromCart, "Element is not added to cart from wishlist");
         }
 
-
         [TestCase]
         [Order(3)]
 
@@ -77,7 +77,7 @@ namespace Selenium_OpenCart.Tests
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
+            Application.Get().Browser.OpenUrl("http://40.118.125.245/");
 
             //Login page opening
             Application.Get().Search.ElementByClassName("caret").Click();
@@ -88,7 +88,5 @@ namespace Selenium_OpenCart.Tests
             Application.Get().Search.ElementById("input-password").SendKeys("testtest");
             Application.Get().Search.ElementByXPath("//input[@type='submit' and @value='Login']").Click();
         }
-        
-
     }
 }

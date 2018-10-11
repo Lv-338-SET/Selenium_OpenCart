@@ -66,17 +66,17 @@ namespace Selenium_OpenCart.Pages.Body.MainPage
         public HomePage ClickCartButton()
         {
             productIconCart.Click();
-            return new HomePage(driver);
+            return new HomePage();
         }
         public HomePage ClickCartfavourite()
         {
             productIconFavourite.Click();
-            return new HomePage(driver);
+            return new HomePage();
         }
         public HomePage ClickCompareButton()
         {
             productIconCompare.Click();
-            return new HomePage(driver);
+            return new HomePage();
         }
         public bool IsAppropriate(string product)
         {

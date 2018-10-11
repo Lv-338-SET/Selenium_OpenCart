@@ -35,7 +35,7 @@ namespace Selenium_OpenCart.Logic
         public HomePage GoToHomePage()
         {
             browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.HomePageUrl);
-            return new HomePage(browser.Driver);
+            return new HomePage();
         }
 
         public LoginPage GoToLoginPage()
@@ -60,19 +60,20 @@ namespace Selenium_OpenCart.Logic
 
         public void AddProductToWishList(string productName)
         {
-            SearchPage search = SearchProducts(productName);
-            search.AddAppropriateItemToWishList(productName);
+            //SearchPage search = SearchProducts(productName);
+            //search.AddAppropriateItemToWishList(productName);
         }
 
         public bool IsShoppingCartEmpty()
         {
-            return topBar.ShoppingCartButtonClick().IsEmpty();
+            //return topBar.ShoppingCartButtonClick().IsEmpty();
+            return true;
         }
 
         public void AddProductToCart(string productName)
         {
-            SearchPage search = SearchProducts(productName);
-            search.AddAppropriateItemToShopingCart(productName);
+        //    SearchPage search = SearchProducts(productName);
+        //    search.AddAppropriateItemToShopingCart(productName);
         }
 
         public ShopingCartPage GoToShoppingCart()
@@ -96,7 +97,7 @@ namespace Selenium_OpenCart.Logic
 
         public void ClearShoppingCart()
         {
-            while (!topBar.ShoppingCartButtonClick().IsEmpty())
+//            while (!topBar.ShoppingCartButtonClick().IsEmpty())
             {
             }
         }

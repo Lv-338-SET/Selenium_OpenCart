@@ -34,7 +34,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_product",/*where: "name LIKE '%h%'",*/ join: adapter.GetJoinedTableString("oc_product_description", "LEFT", "product_id"));
+                    products = adapter.GetSelectReader("oc_product", join: adapter.GetJoinedTableString("oc_product_description", "LEFT", "product_id"));
                 }
                 else
                 {
@@ -49,9 +49,7 @@ namespace Selenium_OpenCart
                         .SetID(Int32.Parse(products["product_id"].ToString()))
                         .SetImage(products["image"].ToString())
                         .SetPrice(Convert.ToDouble(products["price"].ToString()))
-                        //.SetPriceExTax()
                         .SetQuantity(Int32.Parse(products["quantity"].ToString()))
-                        //.SetCurrency(CurrencyList[products[""]])
                         .Build()
                         );
                 }
@@ -84,7 +82,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_review",/*where: "name LIKE '%h%'",*/ join: adapter.GetJoinedTableString("oc_product_description", "LEFT", "product_id"));
+                    products = adapter.GetSelectReader("oc_review",join: adapter.GetJoinedTableString("oc_product_description", "LEFT", "product_id"));
                 }
                 else
                 {
@@ -99,7 +97,6 @@ namespace Selenium_OpenCart
                         .SetRating((Int32.Parse(products["raiting"].ToString())).ToRating())
                         .SetDate(products["date_added"].ToString())
                         .Build());
-                    //"name,author,text,raiting,date_added"                        
                 }
 
             }
@@ -130,7 +127,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_customer"/*where: "name LIKE '%h%'",*/);
+                    products = adapter.GetSelectReader("oc_customer");
                 }
                 else
                 {
@@ -151,7 +148,6 @@ namespace Selenium_OpenCart
                         .SetTelephone(products["telephone"].ToString())
                         .Build()
                         );
-                    //email,firstname,lastname,newsletter,telephone,,
                 }
 
             }
@@ -182,7 +178,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_category",/*where: "name LIKE '%h%'",*/ join: adapter.GetJoinedTableString("oc_category_description", "LEFT", "category_id"));
+                    products = adapter.GetSelectReader("oc_category", join: adapter.GetJoinedTableString("oc_category_description", "LEFT", "category_id"));
                 }
                 else
                 {
@@ -228,7 +224,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_cart"/*where: "name LIKE '%h%'",*/);
+                    products = adapter.GetSelectReader("oc_cart");
                 }
                 else
                 {
@@ -274,7 +270,7 @@ namespace Selenium_OpenCart
                 adapter.OpenConnection();
                 if (whereString == "")
                 {
-                    products = adapter.GetSelectReader("oc_currency"/*where: "name LIKE '%h%'",*/);
+                    products = adapter.GetSelectReader("oc_currency");
                 }
                 else
                 {
@@ -317,20 +313,7 @@ namespace Selenium_OpenCart
             MySqlDataReader products;
             try
             {
-                /*
-                 SELECT 
-                 oc_customer.firstname,
-                 oc_customer.lastname,
-                 company,address_1,
-                 address_2,city,
-                 postcode,
-                 oc_country.name,
-                 oc_zone.name 
-                 FROM oc_address 
-                 LEFT JOIN oc_customer USING(customer_id) 
-                 LEFT JOIN oc_country USING(country_id) 
-                 LEFT JOIN oc_zone USING(zone_id)
-                 */
+
                 adapter.OpenConnection();
                 if (whereString == "")
                 {

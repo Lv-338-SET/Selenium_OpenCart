@@ -115,7 +115,6 @@
     <Compile Include="Logic\ChangePasswordMethods.cs" />
     <Compile Include="Logic\CurencyMethods.cs" />
     <Compile Include="Logic\EditAccountMetod.cs" />
-    <Compile Include="Logic\GlobalVariables.cs" />
     <Compile Include="Logic\LoginPageMethods.cs" />
     <Compile Include="Logic\ProductPageLogic\ProductPageLogic.cs" />
     <Compile Include="Logic\ProductPageLogic\ProductPageReviewLogic.cs" />
@@ -140,8 +139,7 @@
     <Compile Include="Pages\Body\LogoutPage\LogoutPage.cs" />
     <Compile Include="Pages\Body\MainPage\HomePage.cs" />
     <Compile Include="Pages\Body\MainPage\ProductItemFromHomePage.cs" />
-    <Compile Include="Pages\Body\MyAccountPage\MyAccountPage.cs" />
-
+    <Compile Include="Pages\Body\MyAccount\MyAccountPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPageWhithMessage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPage.cs" />
@@ -194,6 +192,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\Body\OtherPages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="XML\address.xml" />
+    <Content Include="XML\invalidAddress.xml" />
+    <Content Include="XML\product.xml" />
+    <Content Include="XML\search.xml" />
+    <Content Include="XML\user.xml" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

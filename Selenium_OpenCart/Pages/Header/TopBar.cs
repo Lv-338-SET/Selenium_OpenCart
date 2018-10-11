@@ -78,7 +78,7 @@ namespace Selenium_OpenCart.Pages.Header
         {
             ShopingCardButton.Click();
             Thread.Sleep(1500);
-            return new ShopingCartPage(Application.Get().Browser.Driver);
+            return new ShopingCartPage();
         }
 
         public CheckoutPage CheckoutButtonClick()

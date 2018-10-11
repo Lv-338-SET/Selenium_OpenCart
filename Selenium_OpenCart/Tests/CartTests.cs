@@ -39,11 +39,11 @@ namespace Selenium_OpenCart.Tests
         [TestCase("MacBook")]
         public void CartButtonFromMainPageWorks_AddingMacBook_IsAdded(string product)
         {
-            HomePage homePage = new HomePage(driver);
-            TopBar topBar = new TopBar(driver);
-            ShopingCartPage shopingCartPage = new ShopingCartPage(driver);
+            HomePage homePage = new HomePage();
+            TopBar topBar = new TopBar();
+            ShopingCartPage shopingCartPage = new ShopingCartPage();
             homePage.FindAppropriateProduct(product).ClickCartButton();
-            topBar.ShopingCartButtonClick();
+            topBar.ShoppingCartButtonClick();
             shopingCartPage.GetProduct().ClickRemoveButton();
 
         }
@@ -51,9 +51,9 @@ namespace Selenium_OpenCart.Tests
         [TestCase("iPhone")]
         public void RemoveFromCart(string product)
         {
-            TopBar topBar = new TopBar(driver);
-            ShopingCartPage shopingCartPage = new ShopingCartPage(driver);
-            topBar.ShopingCartButtonClick();
+            TopBar topBar = new TopBar();
+            ShopingCartPage shopingCartPage = new ShopingCartPage();
+            topBar.ShoppingCartButtonClick();
             shopingCartPage.GetEmptyCartMessage();
 
         }

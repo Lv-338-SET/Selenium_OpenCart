@@ -1,58 +1,51 @@
-﻿using Selenium_OpenCart.Data.Application;
+﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.ChangePasswordPage;
-<<<<<<< HEAD
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
-using Selenium_OpenCart.Tools;
-using Selenium_OpenCart.Tools.SearchWebElements;
-=======
 using Selenium_OpenCart.Pages.Body.MyAccount;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
->>>>>>> 6a5eada33258a5b5f24ae8e625e633a2ef549d8d
 
 namespace Selenium_OpenCart.Logic
 {
     class ChangePasswordMethods
     {
-        protected ISearch Search { get; private set; }
+        protected IWebDriver driver;
 
 
-        public ChangePasswordMethods()
+        public ChangePasswordMethods(IWebDriver driver)
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            this.driver = driver;
         }
 
 
         public MyAccountPage FillingNewPasswords(string password, string passwordConfirm)
         {
-            ChangePasswordPage items = new ChangePasswordPage();
+            ChangePasswordPage items = new ChangePasswordPage(driver);
             items.CleraClickInputNewPassword(password);
             items.CleraClickInputNewPasswordConfirm(passwordConfirm);
             items.ClickChangeButton();
-            return new MyAccountPage();
+            return new MyAccountPage(driver);
         }
 
        public ChangePasswordPage GoToChangePasswordPage(string Email, string loginpassword)
         {
-            LoginPageMethods login = new LoginPageMethods();
+            LoginPageMethods login = new LoginPageMethods(driver);
             login.ValidLogin(Email, loginpassword);
-            MyAccountPage account = new MyAccountPage();
+            MyAccountPage account = new MyAccountPage(driver);
             account.ClickLinkChangePassword();
-            return new ChangePasswordPage();
-
+            return new ChangePasswordPage(driver);
         }
 
         public MyAccountPage ValidChangePassword(string password, string passwordConfirm,string Email, string loginpassword)
         {
-            LoginPageMethods login = new LoginPageMethods();
+            LoginPageMethods login = new LoginPageMethods(driver);
             login.ValidLogin(Email, loginpassword);
-            MyAccountPage account = new MyAccountPage();
+            MyAccountPage account = new MyAccountPage(driver);
             account.ClickLinkChangePassword();
             FillingNewPasswords(password, passwordConfirm);
-            return new MyAccountPage();
+            return new MyAccountPage(driver);
         }
     }
 }

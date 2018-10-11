@@ -62,7 +62,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Application.Get().Browser.OpenUrl(URL);
 
             HomePage homePage;
-            Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver);  },
+            Assert.DoesNotThrow(() => { homePage = new HomePage();  },
                 "Step 1 Failed: Not home page");
 
             List<ProductItem> searchPage = new SearchMethods()
@@ -127,7 +127,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Application.Get().Browser.OpenUrl(URL);
 
             HomePage homePage;
-            Assert.DoesNotThrow(() => { homePage = new HomePage(Application.Get().Browser.Driver); },
+            Assert.DoesNotThrow(() => { homePage = new HomePage(); },
                 "Step 1 Failed: Not home page");
 
             List<ProductItem> searchPage = new SearchMethods()

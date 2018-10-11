@@ -1,31 +1,31 @@
 ﻿using OpenQA.Selenium;
-using Selenium_OpenCart.Data.Application;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
-using Selenium_OpenCart.Pages.Body.RegisterPage;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Pages.Header;
-using Selenium_OpenCart.Tools;
-using Selenium_OpenCart.Tools.SearchWebElements;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using TestSite.Pages.RegisterPage;
 
 namespace Selenium_OpenCart.Logic
 {
 
     class RegisterPageMethod
     {
-        protected ISearch Search { get; private set; }
+        IWebDriver driver;
 
 
-        public RegisterPageMethod()
+        public RegisterPageMethod(IWebDriver driver)
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            this.driver = driver;
         }
 
         public RegisterPage GoToRegisterPage()
         {
             TopBar item = new TopBar();
             item.MyAccountButtonClick();
-
-            LoginAcountElements register = new LoginAcountElements();
-
+            NotLoginedUserAcountElements register = new NotLoginedUserAcountElements();
             register.RegisterButtonClick();            
             return new RegisterPage();
         }
@@ -43,14 +43,14 @@ namespace Selenium_OpenCart.Logic
             filling.ClickPrivacyPolicy();
             filling.ClickButtonContinue();
             filling.ClickButtonsuccess();
-            return new MyAccountPage();
+            return new MyAccountPage(driver);
         }
         public MyAccountPage ValidRegister(string firstName, string lastName, string email,
             string telephone, string password, string passwordConfirm)
         {
             GoToRegisterPage();
             FillingFieldsRegister(firstName, lastName, email, telephone, password, passwordConfirm);
-            return new MyAccountPage();
+            return new MyAccountPage(driver);
         }
     }
 }

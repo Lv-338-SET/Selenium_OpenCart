@@ -1,4 +1,4 @@
-﻿susing System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,22 +7,18 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using Selenium_OpenCart.Data.Application;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
-using Selenium_OpenCart.Tools;
-using Selenium_OpenCart.Tools.SearchWebElements;
+using Selenium_OpenCart.Pages.Body.MyAccount;
 
 namespace Selenium_OpenCart.Pages.Body.EditAccount
 {
-     public class EditAccountPage
+    public class EditAccountPage
     {
-        protected ISearch Search { get; private set; }
-
+        protected IWebDriver driver;
         public IWebElement EditFirstName
         {
             get
             {
-                return Search.ElementById("input-firstname");
+                return driver.FindElement(By.Id("input-firstname"));
             }
 
         }
@@ -30,47 +26,47 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         {
             get
             {
-                return Search.ElementById("input-firstname");
+                return driver.FindElement(By.Id("input-firstname"));
             }
         }
         public IWebElement EditEmail
         {
             get
             {
-                return Search.ElementById("input-email");
+                return driver.FindElement(By.Id("input-email"));
             }
         }
         public IWebElement EditTelephone
         {
             get
             {
-                return Search.ElementById("input-telephone");
+                return driver.FindElement(By.Id("input-telephone"));
             }
         }
         public IWebElement EditFax
         {
             get
             {
-                return Search.ElementById("input-fax");
+                return driver.FindElement(By.Id("input-fax"));
             }
         }
         public IWebElement EditButtonContinue
         {
             get
             {
-                return Search.ElementByCssSelector("input.btn.btn-primary");
+                return driver.FindElement(By.CssSelector("input.btn.btn-primary"));
             }
         }
         public IWebElement EditButtonContinueHome
         {
             get
             {
-                return Search.ElementByCssSelector("a.btn.btn-primary");
+                return driver.FindElement(By.CssSelector("a.btn.btn-primary"));
             }
         }
-        public EditAccountPage()
+        public EditAccountPage(IWebDriver driver)
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            this.driver = driver;
         }
         public void ClearEditFirstNane()
         {
@@ -157,22 +153,20 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         public MyAccountPage ClickEditButtonContinue()
         {
             EditButtonContinue.Click();
-
-            return new MyAccountPage.MyAccountPage();
-
+            return new MyAccountPage(driver);
         }
+
         public void ClickEditButtonContinueHome()
         {
             EditButtonContinueHome.Click();
         }
 
-        public static bool VerifyEditAccountPage()
+        public static bool VerifyEditAccountPage(IWebDriver driver)
         {
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
-                search.ElementByLinkText("Your Personal Details");
+                driver.FindElement(By.LinkText("Your Personal Details"));
                 return true;
             }
             catch (NoSuchElementException)
@@ -180,11 +174,11 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
                 return false;
             }
         }
-        public static EditAccountPage UserEditPage()
+        public static EditAccountPage UserEditPage(IWebDriver driver)
         {
-            if (VerifyEditAccountPage())
+            if (VerifyEditAccountPage(driver))
             {
-                return new EditAccountPage();
+                return new EditAccountPage(driver);
             }
             else
             {
