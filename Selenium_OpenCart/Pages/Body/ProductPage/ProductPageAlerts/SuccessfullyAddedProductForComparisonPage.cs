@@ -31,6 +31,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
                 return Search.ElementByXPath(".//div[@class='alert alert-success alert-dismissible']//a[contains(@href,'route=product/compare')]");
             }
         }
+
+        private IWebElement CompareProductsPageMessage
+        {
+            get
+            {
+                return Search.ElementByCssSelector(".alert.alert-success.alert-dismissible");
+            }
+        }
         #endregion
 
         #region Initialization And Verifycation
@@ -77,6 +85,13 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         {
             CompareProductsPageLink.Click();
             return new ProductComparisonPage.ProductComparisonPage();
+        }
+        #endregion
+
+        #region Atomic operations for CompareProductsPageMessage
+        public string GetTextFromCompareProductsPageMessage()
+        {
+            return CompareProductsPageMessage.Text;
         }
         #endregion
         #endregion

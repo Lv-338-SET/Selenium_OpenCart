@@ -128,7 +128,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             return new ProductPageLogic();
         }
 
-        public string LastProductNameText()
+        public string GetLastProductNameText()
         {
             return LastProductName.Text;
         }
@@ -139,30 +139,32 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             return new ProductPageLogic();
         }
 
-        public ProductComparisonPageWhithMessage ClickAddToCartFirst()
+        public ProductComparisonPageWithMessage ClickAddToCartFirst()
         {
             AddToCartFirst.Click();
-            return new ProductComparisonPageWhithMessage();
+            return new ProductComparisonPageWithMessage();
         }
 
-        public ProductComparisonPageWhithMessage ClickAddToCartLast()
+        public ProductComparisonPageWithMessage ClickAddToCartLast()
         {
             AddToCartLast.Click();
-            return new ProductComparisonPageWhithMessage();
+            return new ProductComparisonPageWithMessage();
         }
 
-        public  EmptyProductComparisonPageWhithMessage ClickRemoveFirstProduct()
+        public  EmptyProductComparisonPageWithMessage ClickRemoveFirstProduct()
         {
             RemoveFirstProduct.Click();
-            return new EmptyProductComparisonPageWhithMessage();
+            return new EmptyProductComparisonPageWithMessage();
         }
 
-        public ProductComparisonPageWhithMessage ClickRemoveLastProduct()
+        public ProductComparisonPageWithMessage ClickRemoveLastProduct()
         {
             RemoveLastProduct.Click();
-            return new ProductComparisonPageWhithMessage();
+            return new ProductComparisonPageWithMessage();
         }
+        #endregion
 
+        #region Business logic
         public bool IsElementPresent()
         {
             try
@@ -179,7 +181,8 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         public int CountColumns()
         {
             return Search.ElementsByXPath(REMOVE_FIRST).Count;
-        }
+        } 
         #endregion
+
     }
 }

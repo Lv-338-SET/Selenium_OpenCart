@@ -34,6 +34,8 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             { get { return driver.FindElement(By.ClassName("text-right")); } }
         protected IWebElement successAlertMessage
         { get { return driver.FindElement(By.XPath("//div[@class='alert alert-success alert-dismissible']")); } }
+        protected IWebElement successAlertMessageLink
+        { get { return driver.FindElement(By.LinkText("product comparison")); } }
 
         protected SelectElement selectCategory
             { get { return new SelectElement(driver.FindElement(By.Name("category_id"))); } }
@@ -238,6 +240,13 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
         {
             FindAppropriateProduct(product).ClickProductName();
             return new ProductPage.ProductPage();
+        }
+
+        //successAlertMessageLink
+        public ProductComparisonPage.ProductComparisonPage ClickSuccessAlertMessageLink()
+        {
+            successAlertMessageLink.Click();
+            return new ProductComparisonPage.ProductComparisonPage();
         }
 
         public string successAlertMessageText()

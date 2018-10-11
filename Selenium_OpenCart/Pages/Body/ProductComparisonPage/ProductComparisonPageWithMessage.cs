@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
 {
-    public class ProductComparisonPageWhithMessage : ProductComparisonPage
+    public class ProductComparisonPageWithMessage : ProductComparisonPage
     {
         #region Constants
         private const string SUCCESS_MESSAGE = ".alert.alert-success.alert-dismissible"; //CSS
@@ -35,7 +35,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         #endregion
 
         #region Initialization & Verifycation
-        public ProductComparisonPageWhithMessage()
+        public ProductComparisonPageWithMessage()
         {
             VerifyWebElements();
         }
