@@ -24,7 +24,6 @@ namespace Selenium_OpenCart.Tests
         public void BeforeEachTest()
         {
             application = Application.Get(ApplicationSourceRepository.Default());
-            application.Browser.Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(4);
         }
 
         [SetUp]

@@ -32,12 +32,8 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             
             this.productBox = current;
             this.productImage = current.FindElement(By.ClassName("image"));
-            Application.Get().Search.SetExplicitStrategy();
-            OpenQA.Selenium.Support.UI.WebDriverWait wait = new OpenQA.Selenium.Support.UI.WebDriverWait(Application.Get().Browser.Driver, System.TimeSpan.FromSeconds(1));
-            wait.Until(d => current.FindElement(By.CssSelector(".caption>h4>a")).Displayed);
-            IWebElement tmp = current.FindElement(By.CssSelector(".caption>h4>a"));
-            Application.Get().Search.SetImplicitStrategy();
-            this.productName = tmp;
+            Thread.Sleep(1500);
+            this.productName = current.FindElement(By.CssSelector(".caption>h4>a"));
             this.productDescription = current.FindElements(By.CssSelector(".caption p"))[0];
             this.productPrice = current.FindElement(By.CssSelector(".caption .price"));
             this.productExTax = current.FindElement(By.CssSelector(".caption .price .price-tax"));
