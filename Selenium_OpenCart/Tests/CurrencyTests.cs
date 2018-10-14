@@ -2,6 +2,7 @@
 using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
+using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Tools; 
 
 namespace Selenium_OpenCart.Tests
@@ -56,11 +57,14 @@ namespace Selenium_OpenCart.Tests
         public void CheckChangeProductPriceCurrency(string productName)
         {
             //Act
-            string expectedResult = "€";
-            string actualResult = "€";
+            SearchMethods searchmethods = new SearchMethods();
+            SearchPage search = searchmethods.Search(productName);
+            cm.ChooseEuro();
+            string actualResult = cm.GetCurrencyFromProductItem(search);
+            string expectedResult = cm.CurrentCurrencyFromMain;
 
             //Assert
-            Assert.IsTrue(cm.Verify());
+            Assert.AreEqual(expectedResult, actualResult);
         }
 
         [TestCase(TESTED_PRODUCT_NAME)]
@@ -70,8 +74,8 @@ namespace Selenium_OpenCart.Tests
             cm.AddProductToWishList(productName);
             WishListPage wishList = cm.GoToWishList();
             cm.ChooseEuro();
-            string expectedResult = "€";
-            string actualResult = "€";
+            string actualResult = cm.GetCurrencyFromWishList(wishList);
+            string expectedResult = cm.CurrentCurrencyFromMain;
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);
@@ -84,8 +88,8 @@ namespace Selenium_OpenCart.Tests
             cm.AddProductToCart(productName);
             ShopingCartPage shopingCart = cm.GoToShoppingCart();
             cm.ChooseEuro();
-            string expectedResult = "€";
-            string actualResult = "€";
+            string actualResult = cm.GetCurrencyFromShopingCart(shopingCart);
+            string expectedResult = cm.CurrentCurrencyFromMain;
 
             //Assert
             Assert.AreEqual(expectedResult, actualResult);

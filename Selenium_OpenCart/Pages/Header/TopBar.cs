@@ -91,7 +91,7 @@ namespace Selenium_OpenCart.Pages.Header
             try
             {
                 var search = Application.Get().Search;
-                search.ElementByXPath("//strong[text()='$']");
+                search.ElementByXPath("//form[@id='form-currency']/div/button");
                 return true;
             }
             catch (NoSuchElementException)

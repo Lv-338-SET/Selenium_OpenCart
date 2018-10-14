@@ -22,7 +22,7 @@ namespace Selenium_OpenCart.Logic
     public class CurencyMethods
     {
         private AllBrowsers browser;
-
+        public string CurrentCurrencyFromMain;
         public CurencyMethods()
         {
         }
@@ -60,6 +60,13 @@ namespace Selenium_OpenCart.Logic
             TopBar navBar = new TopBar();
             return navBar.WishListButtonClick().IsEmpty();
         }
+
+        public SearchPage SearchProduct(string productName)
+        {
+            SearchMethods searchmethods = new SearchMethods();
+            return searchmethods.Search(productName);
+        }
+
 
         public void AddProductToWishList(string productName)
         {
@@ -117,8 +124,8 @@ namespace Selenium_OpenCart.Logic
         {
             TopBar navBar = new TopBar();
             Currency currencyMenu = navBar.ReturnCurrencyList();
-            Thread.Sleep(500);
             currencyMenu.ClickButtonUSDolar();
+            CurrentCurrencyFromMain = currencyMenu.GetCurrencyFromMenu();
         }
 
         public bool Verify()
@@ -127,13 +134,12 @@ namespace Selenium_OpenCart.Logic
             return TopBar.Verify();
         }
 
-        
-
         public void ChooseEuro()
         {
             TopBar navBar = new TopBar();
             Currency currencyMenu = navBar.ReturnCurrencyList();
             currencyMenu.ClickButtonEuro();
+            CurrentCurrencyFromMain = currencyMenu.GetCurrencyFromMenu();
         }
 
         public void ChoosePoundSterling()
@@ -141,6 +147,7 @@ namespace Selenium_OpenCart.Logic
             TopBar navBar = new TopBar();
             Currency currencyMenu = navBar.ReturnCurrencyList();
             currencyMenu.ClickButtonPoundSterling();
+            CurrentCurrencyFromMain = currencyMenu.GetCurrencyFromMenu();
         }
 
         public string GetCurrencyFromMainPage()
@@ -157,7 +164,7 @@ namespace Selenium_OpenCart.Logic
             string cleanProductPrice = productPrice.Trim();
             string[] productPrises = cleanProductPrice.Split(':');
             string price = productPrises[1];
-            if (GetCurrencyFromMainPage() == "€")
+            if (CurrentCurrencyFromMain == "€")
             {
                 return price[price.Length - 1].ToString();
             }
@@ -172,7 +179,7 @@ namespace Selenium_OpenCart.Logic
             WishListTableItem product = wishListPage.GetProduct();
             string productPrice = product.GetProductPrice();
             string cleanProductPrice = productPrice.Trim();
-            if (GetCurrencyFromMainPage() == "€")
+            if (CurrentCurrencyFromMain == "€")
             {
                 return cleanProductPrice[cleanProductPrice.Length - 1].ToString();
             }
@@ -187,7 +194,7 @@ namespace Selenium_OpenCart.Logic
             ShopingCartTableItem product = shopingCartPage.GetProduct();
             string productPrice = product.GetProductPrice();
             string cleanProductPrice = productPrice.Trim();
-            if (GetCurrencyFromMainPage() == "€")
+            if (CurrentCurrencyFromMain == "€")
             {
                 return cleanProductPrice[cleanProductPrice.Length - 1].ToString();
             }

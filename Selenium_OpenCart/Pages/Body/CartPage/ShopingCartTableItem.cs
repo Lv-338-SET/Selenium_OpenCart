@@ -33,7 +33,8 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
             CountsTextBox = element.FindElement(By.XPath("//td[4]/div/input[@class='form-control']"));
             UpdateButton = element.FindElement(By.XPath("//td[4]/div//i[@class='fa fa-refresh']"));
             RemoveButton = element.FindElement(By.XPath("//td[4]/div//i[@class='fa fa-times-circle']"));
-            UnitPrice = element.FindElement(By.XPath("//td[5]"));
+            UnitPrice = element.FindElement(By.XPath("//*[@id='content']/form/div/table/tbody/tr/td[5]"));
+
             TotalPrice = element.FindElement(By.XPath("//td[6]"));
         }
 
