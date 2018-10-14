@@ -18,7 +18,7 @@ namespace Selenium_OpenCart.Pages.Body.LogoutPage
 
         public LogoutPage()
         {
-            search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            search = Application.Get().Search;
         }
 
         public HomePage ButtonContinueClick()

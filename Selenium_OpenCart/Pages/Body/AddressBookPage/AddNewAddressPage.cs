@@ -15,7 +15,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
           {
             get
             {
-                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
+                return Application.Get().Search;
             }
         }
         
@@ -38,7 +38,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         public AddNewAddressPage FillAllRequareField(string firstName, string lastName, string Address1,
                 string city, string postCode, string country, string regionState)
         {
-            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
+            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
 
             AddressForm.TypeInFirstName(firstName);
             AddressForm.TypeInLastNameInput(lastName);

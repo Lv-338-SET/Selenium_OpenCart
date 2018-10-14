@@ -33,7 +33,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [SetUp]
         public void BeforeEachTest()
         {
-            Application.Get(ApplicationSourceRepository.ChromeNew());
+            Application.Get();
         }
 
 

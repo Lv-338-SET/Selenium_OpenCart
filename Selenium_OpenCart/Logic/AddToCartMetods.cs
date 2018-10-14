@@ -22,7 +22,10 @@ namespace Selenium_OpenCart.Logic
             ShopingCartPage shopingCartPage = new ShopingCartPage();
             HomePage homePage = new HomePage();
             TopBar topBar = new TopBar();
-            homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
+            var product = homePage.FindAppropriateProduct(nameProduck);
+            Thread.Sleep(500);
+            product.ClickCartButton();
+            Thread.Sleep(500);
             topBar.ShoppingCartButtonClick();
             return shopingCartPage.GetProduct().GetProductName();
 
@@ -33,8 +36,10 @@ namespace Selenium_OpenCart.Logic
             ShopingCartPage shopingCartPage = new ShopingCartPage();
             SearchMethods search = new SearchMethods();
             TopBar topBar = new TopBar();
-            search.Search(nameProduck).AddAppropriateItemToCart(nameProduck);
-            Thread.Sleep(3000);
+            var searchResult = search.Search(nameProduck);
+            Thread.Sleep(500);
+            searchResult.AddAppropriateItemToCart(nameProduck);
+            Thread.Sleep(500);
             topBar.ShoppingCartButtonClick();
             return shopingCartPage.GetProduct().GetProductName();
         }
@@ -53,7 +58,10 @@ namespace Selenium_OpenCart.Logic
             ShopingCartPage shopingCartPage = new ShopingCartPage();
             HomePage homePage = new HomePage();
             TopBar topBar = new TopBar();
-            homePage.FindAppropriateProduct(nameProduck).ClickCartButton();
+            var product = homePage.FindAppropriateProduct(nameProduck);
+            Thread.Sleep(500);
+            product.ClickCartButton();
+            Thread.Sleep(500);
             topBar.ShoppingCartButtonClick();
             shopingCartPage.GetProduct().GetProductName();
             shopingCartPage.GetProduct().ClickRemoveButton();
@@ -67,8 +75,9 @@ namespace Selenium_OpenCart.Logic
             ShopingCartPage shopingCartPage = new ShopingCartPage();
             SearchMethods search = new SearchMethods();
             TopBar topBar = new TopBar();
-            search.Search(nameProduck).AddAppropriateItemToCart(nameProduck);
-            Thread.Sleep(3000);
+            var product = search.Search(nameProduck);
+            product.AddAppropriateItemToCart(nameProduck);
+            //Thread.Sleep(1000);
             topBar.ShoppingCartButtonClick();
             return shopingCartPage.GetProduct().GetProductName();
         }

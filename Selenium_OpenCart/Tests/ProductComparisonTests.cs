@@ -23,7 +23,7 @@ namespace Selenium_OpenCart.Tests
         [OneTimeSetUp]
         public void BeforeEachTest()
         {
-            application = Application.Get(ApplicationSourceRepository.Default());
+            application = Application.Get();
         }
 
         [SetUp]

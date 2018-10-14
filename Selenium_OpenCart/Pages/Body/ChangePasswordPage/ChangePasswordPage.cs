@@ -29,7 +29,7 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 
         public ChangePasswordPage()
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            Search = Application.Get().Search;
 
         }
 
@@ -56,7 +56,7 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByCssSelector("a.btn.btn-default");
                 return true;
             }

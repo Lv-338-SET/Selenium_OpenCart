@@ -15,7 +15,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         {
             get
             {
-                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
+                return Application.Get().Search;
             }
         }
 
@@ -78,7 +78,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
                 string Address1, string Address2, string city, string postCode, string country,
                 string regionState)
         {
-            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
+            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
 
             AddressForm.TypeInFirstName(firstName);
             AddressForm.TypeInLastNameInput(lastName);
@@ -102,7 +102,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 
         public EditAddressPage FillAllNotRequareField(string company, string address2, string postCode)
         {
-            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
+            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
 
             EditCompany(company);
             EditAddress2(address2);

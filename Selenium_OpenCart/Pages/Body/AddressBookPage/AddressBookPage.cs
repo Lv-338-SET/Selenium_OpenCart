@@ -17,7 +17,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         {
             get
             {
-                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
+                return Application.Get().Search;
             }
         }
 
@@ -134,7 +134,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// <returns>AddNewAddressPage</returns>
         public AddNewAddressPage GoToNewAddressPage()
         {
-            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
+            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
             js.ExecuteScript("window.scrollBy(0,100)"); //Moving scrollbar down
 
             NewAddressButton.Click();
@@ -146,7 +146,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// <returns>EditAddressPage</returns>
         public EditAddressPage EditAddress(string shortAddress)
         {
-            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
+            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
             js.ExecuteScript("window.scrollBy(0,100)"); //Moving scrollbar down
             GetAddressByShortAddress(shortAddress).EditButton.Click();
             return new EditAddressPage();
