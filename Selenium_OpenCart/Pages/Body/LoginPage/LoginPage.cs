@@ -41,6 +41,15 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
         public LoginPage()
         {
             Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            VeryfyLoginWebElements();
+        }
+        private bool VeryfyLoginWebElements()
+        {
+            IWebElement temp = LabelReturningCustomer;
+            temp = LoginEmailFile;
+            temp = LoginPasswordFile;
+            temp = LoginButton;
+            return true;
         }
 
         public string LoginLable()

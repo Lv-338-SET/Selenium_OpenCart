@@ -30,7 +30,16 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
         public ChangePasswordPage()
         {
             Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            VeryfyChangePasswordWebElements();
+        }
 
+        private bool VeryfyChangePasswordWebElements()
+        {
+            IWebElement temp = ChangePassword;
+            temp = ChangePasswordConfirm;
+            temp = ChangeButton;
+            temp = CheckButton;
+            return true;
         }
 
         public void CleraClickInputNewPassword(string password)

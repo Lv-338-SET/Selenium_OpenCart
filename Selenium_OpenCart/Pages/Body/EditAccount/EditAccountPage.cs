@@ -62,7 +62,20 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         public EditAccountPage()
         {
             Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            VeryfyEditAccountWebElements();
         }
+
+        private void VeryfyEditAccountWebElements()
+        {
+            IWebElement temp = EditFirstName;
+            temp = EditLastName;
+            temp = EditEmail;
+            temp = EditTelephone;
+            temp = EditFax;
+            temp = EditButtonContinue;
+            temp = EditButtonContinueHome;
+        }
+
         public void ClearEditFirstNane()
         {
             EditFirstName.Clear();

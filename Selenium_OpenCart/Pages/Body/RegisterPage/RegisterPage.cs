@@ -8,18 +8,8 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
 {
     public class RegisterPage
     {
-        //protected ISearch Search
-        //{
-        //    get
-        //    {
-        //        return Application.Get().Search;
-        //    }
-        //}
-
 
         protected ISearch Search { get; private set; }
-
-
 
         public IWebElement FirstNameField
         {
@@ -149,6 +139,21 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
         public RegisterPage()
         {
             Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            VeryfyRegisterWebElements();
+        }
+
+        private void VeryfyRegisterWebElements()
+        {
+            IWebElement temp;
+            temp = FirstNameField;
+            temp = LastNameField;
+            temp = EMailField;
+            temp = TelephoneField;
+            temp = PasswordField;
+            temp = PasswordConfirmField;
+            temp = PrivacyPolicy;
+            temp = ButtonContinue;
+            temp = Buttonsuccess;            
         }
 
         public void ClickFirstName()
