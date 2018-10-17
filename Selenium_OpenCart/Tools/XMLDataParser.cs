@@ -61,9 +61,9 @@ namespace Selenium_OpenCart.Tools
         /// Read file with address input data
         /// </summary>
         /// <returns>Object IAddress class</returns>
-        public IAdress GetInputAddress() {
+        public IAdress GetInputAddress(string addressFileName = ADDRESS_FILE_NAME) {
             XmlDocument doc = new XmlDocument();
-            doc.Load(XML_PATH + ADDRESS_FILE_NAME);
+            doc.Load(XML_PATH + addressFileName);
             XmlElement node = doc.DocumentElement;
 
             return Adress.Get()
