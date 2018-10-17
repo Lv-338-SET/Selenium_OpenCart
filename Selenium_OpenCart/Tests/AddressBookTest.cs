@@ -12,12 +12,14 @@ using Selenium_OpenCart.Pages.Body.AddressBookPage;
 using Selenium_OpenCart.Tools;
 using System.Threading;
 using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Data.Address;
 
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
     class AddressBookTest
     {
+        IAdress adressInput = new XMLDataParser().GetInputAddress();
         //IWebDriver driver;
         const string URL = "http://40.118.125.245/";
         const string LOGOUT = "http://40.118.125.245/index.php?route=common/home";
@@ -72,16 +74,16 @@ namespace Selenium_OpenCart.Tests
             Application.Remove();
         }
 
-        [TestCase(FIRST_NAME, LAST_NAME, ADDRESS1, CITY, POST_CODE, COUNTRY, 
-                REGION_STATE, NEW_SHORT_ADDRESS)]
-        public void Test1CreateNewAddressTest(string firstName, string lastName, string address1,
-                string city, string postCode, string country, string region, string expected)        
+        [TestCase(NEW_SHORT_ADDRESS)]
+        public void Test1CreateNewAddressTest(string expected)        
         {
             //Arrange
             AddressBookPage addressBook = new AddressBookPage();                
             AddNewAddressPage newAddressPage = addressBook.GoToNewAddressPage();
-            addressBook = newAddressPage.FillAllRequareField(firstName, lastName, address1, 
-                        city, postCode, country, region).Continue();
+            addressBook = newAddressPage.FillAllRequareField(adressInput.GetFirstName(), 
+                    adressInput.GetLastName(), adressInput.GetAddress1(), adressInput.GetCity(),
+                         adressInput.GetPostCode(), adressInput.GetCountry(), adressInput.GetZone())
+            .Continue();
             
             //Act
             bool actual = addressBook.IsAddressInTableByShortAddress(expected);
@@ -90,15 +92,14 @@ namespace Selenium_OpenCart.Tests
             Assert.IsTrue(actual);
         }
 
-        [TestCase(COMPANY, ADDRESS2, EDIT_POST_CODE, NEW_SHORT_ADDRESS, EDIT_SHORT_ADDRESS)]
-        public void Test2EditAddressTest(string company, string address2, string postCode,
-                string oldAddress, string expected)
+        [TestCase(NEW_SHORT_ADDRESS, EDIT_SHORT_ADDRESS)]
+        public void Test2EditAddressTest(string oldAddress, string expected)
         {
             //Arrange
             AddressBookPage addressBook = new AddressBookPage();
             EditAddressPage editAddress = addressBook.EditAddress(oldAddress);                        
-            addressBook = editAddress.FillAllNotRequareField(company, address2, postCode).Continue();
-            Console.WriteLine(editAddress.AddressForm.IsFirstNameInputErrorMessage());
+            addressBook = editAddress.FillAllNotRequareField(adressInput.GetCompany(), 
+                adressInput.GetAddress2(), adressInput.GetPostCode()).Continue();            
 
             //Act
             bool actual = addressBook.IsAddressInTableByShortAddress(expected);

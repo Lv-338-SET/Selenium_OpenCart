@@ -1,5 +1,4 @@
-﻿using OpenQA.Selenium;
-
+﻿using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Pages.Body.ProductPage;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;

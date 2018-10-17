@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-
+using System.Threading;
 using Selenium_OpenCart.Logic.ProductPageLogic;
 using Selenium_OpenCart.Tools;
 
@@ -29,6 +29,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
             get
             {
                 return Search.ElementByXPath(".//div[@class='alert alert-success alert-dismissible']//a[contains(@href,'route=product/compare')]");
+            }
+        }
+
+        private IWebElement CompareProductsPageMessage
+        {
+            get
+            {
+                return Search.ElementByCssSelector(".alert.alert-success.alert-dismissible");
             }
         }
         #endregion
@@ -76,7 +84,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts
         public ProductComparisonPage.ProductComparisonPage ClickOnCompareProductsPageLink()
         {
             CompareProductsPageLink.Click();
-            return new ProductComparisonPage.ProductComparisonPage(Application.Get().Browser.Driver);
+            return new ProductComparisonPage.ProductComparisonPage();
+        }
+        #endregion
+
+        #region Atomic operations for CompareProductsPageMessage
+        public string GetTextFromCompareProductsPageMessage()
+        {
+            return CompareProductsPageMessage.Text;
         }
         #endregion
         #endregion

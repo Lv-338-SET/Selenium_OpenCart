@@ -41,6 +41,13 @@ namespace Selenium_OpenCart.Pages.Body.ProductPage
             }
         }
 
+        public ProductPageInfo ProductInfo
+        {
+            get
+            {
+                return new ProductPageInfo();
+            }
+        }
         #endregion
 
         #region Initialization And Verifycation

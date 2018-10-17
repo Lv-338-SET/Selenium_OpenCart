@@ -142,9 +142,10 @@
     <Compile Include="Pages\Body\MainPage\ProductItemFromHomePage.cs" />
     <Compile Include="Pages\Body\MyAccount\MyAccountPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPage.cs" />
-    <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPageWhithMessage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPageWithMessage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\MainComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPage.cs" />
-    <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPageWhithMessage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPageWithMessage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\UnsuccessfullyAddedReviewPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageDescription.cs" />
@@ -168,7 +169,7 @@
     <Compile Include="Tests\AddressBookTest.cs" />
     <Compile Include="Tests\CurrencyTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTests.cs" />
-    <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleThreaded.cs" />
+    <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleRelted.cs" />
     <Compile Include="Tests\CartTests.cs" />
     <Compile Include="Tests\LoginPageTest.cs" />
     <Compile Include="Tests\ProductComparisonTests.cs" />
@@ -207,6 +208,7 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit.3.10.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.0\build\NUnit.props'))" />
     <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props'))" />

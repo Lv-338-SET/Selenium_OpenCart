@@ -4,7 +4,7 @@ using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.MainPage;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Pages.Header;
@@ -50,7 +50,7 @@ namespace Selenium_OpenCart.Logic
             items.ClickClearInputLoginEmail(userName);
             items.ClickClearInputLoginPassword(Userpassword);
             items.ClickLoginButton();
-            return new MyAccountPage(browser.Driver);
+            return new MyAccountPage();
         }
 
         public bool IsWishListEmpty()
