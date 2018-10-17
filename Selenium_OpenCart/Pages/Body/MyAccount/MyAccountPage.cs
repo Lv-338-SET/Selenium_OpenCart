@@ -13,7 +13,7 @@ namespace Selenium_OpenCart.Pages.Body.MyAccountPage
         private ISearch Search;
         public MyAccountPage()
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            Search = Application.Get().Search;
         }
         public IWebElement MyAccount
         {

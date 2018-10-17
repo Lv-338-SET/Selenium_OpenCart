@@ -3,14 +3,14 @@ using OpenQA.Selenium.Interactions;
 using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.LoginPage;
+using Selenium_OpenCart.Pages.Body.LogoutPage;
 using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
+using Selenium_OpenCart.Tools.SearchWebElements;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Tools;
-using Selenium_OpenCart.Tools.SearchWebElements;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,26 +21,28 @@ namespace Selenium_OpenCart.Logic
 {
     public class CurencyMethods
     {
-        private ISearch search;
         private AllBrowsers browser;
-        private TopBar topBar;
-
+        public string CurrentCurrencyFromMain;
         public CurencyMethods()
         {
-            topBar = new TopBar();
-            this.search = Application.Get(ApplicationSourceRepository.Default()).Search;
-            this.browser = Application.Get(ApplicationSourceRepository.Default()).Browser;
         }
 
         public HomePage GoToHomePage()
         {
-            browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.HomePageUrl);
+            browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
             return new HomePage();
+        }
+
+        internal LogoutPage LogOut()
+        {
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.LogoutPageUrl);
+            return new LogoutPage();
         }
 
         public LoginPage GoToLoginPage()
         {
-            NotLoginedUserAcountElements accountMenu = (NotLoginedUserAcountElements)topBar.MyAccountButtonClick();
+            TopBar navBar = new TopBar();
+            NotLoginedUserAcountElements accountMenu = (NotLoginedUserAcountElements)navBar.MyAccountButtonClick();
             return accountMenu.LoginButtomClick();
         }
 
@@ -55,40 +57,53 @@ namespace Selenium_OpenCart.Logic
 
         public bool IsWishListEmpty()
         {
-            return topBar.WishListButtonClick().IsEmpty();
+            TopBar navBar = new TopBar();
+            return navBar.WishListButtonClick().IsEmpty();
         }
+
+        public SearchPage SearchProduct(string productName)
+        {
+            SearchMethods searchmethods = new SearchMethods();
+            return searchmethods.Search(productName);
+        }
+
 
         public void AddProductToWishList(string productName)
         {
-            //SearchPage search = SearchProducts(productName);
-            //search.AddAppropriateItemToWishList(productName);
+            SearchMethods searchmethods = new SearchMethods();
+            SearchPage search = searchmethods.Search(productName);
+            search.AddAppropriateItemToWishList(productName);
         }
 
         public bool IsShoppingCartEmpty()
         {
-            //return topBar.ShoppingCartButtonClick().IsEmpty();
-            return true;
+            TopBar navBar = new TopBar();
+            return navBar.ShoppingCartButtonClick().IsEmpty();
         }
 
         public void AddProductToCart(string productName)
         {
-        //    SearchPage search = SearchProducts(productName);
-        //    search.AddAppropriateItemToShopingCart(productName);
+            SearchMethods searchmethods = new SearchMethods();
+            SearchPage search = searchmethods.Search(productName);
+            search.AddAppropriateItemToShopingCart(productName);
         }
 
         public ShopingCartPage GoToShoppingCart()
         {
-            return topBar.ShoppingCartButtonClick();
+            TopBar navBar = new TopBar();
+            return navBar.ShoppingCartButtonClick();
         }
 
         public WishListPage GoToWishList()
         {
-            return topBar.WishListButtonClick();
+            TopBar navBar = new TopBar();
+            return navBar.WishListButtonClick();
         }
 
         public void ClearWishList()
         {
-            WishListPage wishList = topBar.WishListButtonClick();
+            TopBar navBar = new TopBar();
+            WishListPage wishList = navBar.WishListButtonClick();
             while (!wishList.IsEmpty())
             {
                wishList.GetProduct().ClickRemoveFromWishListButton();
@@ -97,46 +112,74 @@ namespace Selenium_OpenCart.Logic
 
         public void ClearShoppingCart()
         {
-//            while (!topBar.ShoppingCartButtonClick().IsEmpty())
+            TopBar navBar = new TopBar();
+            ShopingCartPage shopingCart = navBar.ShoppingCartButtonClick();
+            while (!shopingCart.IsEmpty())
             {
+                shopingCart.GetProduct().ClickRemoveButton();
             }
         }
 
         public void ChooseUSD()
         {
-            Currency currencyMenu = topBar.ReturnCurrencyList();
-            Thread.Sleep(10000);
+            TopBar navBar = new TopBar();
+            Currency currencyMenu = navBar.ReturnCurrencyList();
             currencyMenu.ClickButtonUSDolar();
+            CurrentCurrencyFromMain = currencyMenu.GetCurrencyFromMenu();
+        }
+
+        public bool Verify()
+        {
+            TopBar navBar = new TopBar();
+            return TopBar.Verify();
         }
 
         public void ChooseEuro()
         {
-            Currency currencyMenu = topBar.ReturnCurrencyList();
-            Thread.Sleep(10000);
+            TopBar navBar = new TopBar();
+            Currency currencyMenu = navBar.ReturnCurrencyList();
             currencyMenu.ClickButtonEuro();
+            CurrentCurrencyFromMain = currencyMenu.GetCurrencyFromMenu();
         }
 
         public void ChoosePoundSterling()
         {
-            Currency currencyMenu = topBar.ReturnCurrencyList();
-            Thread.Sleep(10000);
+            TopBar navBar = new TopBar();
+            Currency currencyMenu = navBar.ReturnCurrencyList();
             currencyMenu.ClickButtonPoundSterling();
+            CurrentCurrencyFromMain = currencyMenu.GetCurrencyFromMenu();
         }
 
         public string GetCurrencyFromMainPage()
         {
-            Currency currencyMenu = topBar.ReturnCurrencyList();
-            Thread.Sleep(10000);
-            string shopCurrency = currencyMenu.GetCurrencyFromMenu();
-            return shopCurrency[0].ToString();
+            TopBar navBar = new TopBar();
+            Currency currencyMenu = navBar.ReturnCurrencyList();
+            return currencyMenu.GetCurrencyFromMenu();
+        }
+
+        public string GetCurrencyFromProductItem(SearchPage searchPage)
+        {
+            List<ProductItem> products = searchPage.GetListProduct();
+            string productPrice = products[0].GetTextFromProductPrice(); ;
+            string cleanProductPrice = productPrice.Trim();
+            string[] productPrises = cleanProductPrice.Split(':');
+            string price = productPrises[1];
+            if (CurrentCurrencyFromMain == "€")
+            {
+                return price[price.Length - 1].ToString();
+            }
+            else
+            {
+                return price[0].ToString();
+            }
         }
 
         public string GetCurrencyFromWishList(WishListPage wishListPage)
         {
             WishListTableItem product = wishListPage.GetProduct();
             string productPrice = product.GetProductPrice();
-            string cleanProductPrice = productPrice.Replace(" ", "");
-            if (GetCurrencyFromMainPage() == "€")
+            string cleanProductPrice = productPrice.Trim();
+            if (CurrentCurrencyFromMain == "€")
             {
                 return cleanProductPrice[cleanProductPrice.Length - 1].ToString();
             }
@@ -150,8 +193,8 @@ namespace Selenium_OpenCart.Logic
         {
             ShopingCartTableItem product = shopingCartPage.GetProduct();
             string productPrice = product.GetProductPrice();
-            string cleanProductPrice = productPrice.Replace(" ", "");
-            if (GetCurrencyFromMainPage() == "€")
+            string cleanProductPrice = productPrice.Trim();
+            if (CurrentCurrencyFromMain == "€")
             {
                 return cleanProductPrice[cleanProductPrice.Length - 1].ToString();
             }

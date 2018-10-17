@@ -23,15 +23,15 @@ namespace Selenium_OpenCart.Tests
         [OneTimeSetUp]
         public void SetUp()
         {
-            Application.Get(ApplicationSourceRepository.Default());
-            Application.Get(ApplicationSourceRepository.Default()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.HomePageUrl);
+            Application.Get();
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
         }
 
         [TearDown]
         public void DeleteCookies()
         {
-            Application.Get(ApplicationSourceRepository.Default()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
-            Application.Get(ApplicationSourceRepository.Default()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.LogoutPageUrl);
+            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.LogoutPageUrl);
         }
 
         [OneTimeTearDown]

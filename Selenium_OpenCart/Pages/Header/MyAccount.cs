@@ -1,12 +1,11 @@
 ﻿using OpenQA.Selenium;
-using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.LogoutPage;
 using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
-
+using System.Threading;
 
 namespace Selenium_OpenCart.Pages.Header
 {
@@ -17,6 +16,7 @@ namespace Selenium_OpenCart.Pages.Header
 
         public static MyAccount MyAccountMenu()
         {
+            Thread.Sleep(1000);
             if (IsLogedIn())
             {
                 Account = new NotLoginedUserAcountElements();
@@ -32,7 +32,7 @@ namespace Selenium_OpenCart.Pages.Header
         {
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 IWebElement registerButton = search.ElementByXPath("//a[text()='Register']");
                 return registerButton != null || registerButton.Enabled || registerButton.Displayed;
             }
@@ -55,7 +55,7 @@ namespace Selenium_OpenCart.Pages.Header
 
         public NotLoginedUserAcountElements()
         {
-            search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            search = Application.Get().Search;
         }
 
         public RegisterPage RegisterButtonClick()
@@ -84,11 +84,11 @@ namespace Selenium_OpenCart.Pages.Header
         private IWebElement Downloads
         { get { return search.ElementByXPath("//a[text()='Downloads']"); } }
         private IWebElement Logout
-        { get { return search.ElementByXPath("//a[text()='Logout']"); } }
+        { get { return search.ElementByXPath("//li/a[text()='Logout']"); } }
 
         public LoginedUSerAcountElements()
         {
-            search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            search = Application.Get().Search;
         }
 
         public MyAccountPage MyAccountClick()
@@ -99,6 +99,7 @@ namespace Selenium_OpenCart.Pages.Header
 
         public LogoutPage LogoutClick()
         {
+            Thread.Sleep(500);
             Logout.Click();
             return new LogoutPage();
         }

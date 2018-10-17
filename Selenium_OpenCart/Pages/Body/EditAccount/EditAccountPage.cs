@@ -61,7 +61,7 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         }
         public EditAccountPage()
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            Search = Application.Get().Search;
         }
         public void ClearEditFirstNane()
         {
@@ -160,7 +160,7 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByLinkText("Your Personal Details");
                 return true;
             }

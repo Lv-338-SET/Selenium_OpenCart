@@ -19,7 +19,7 @@ namespace Selenium_OpenCart.Logic
 
         public EditAccountMetod()
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            Search = Application.Get().Search;
         }
 
         public EditAccountPage GoToEditAccountPage(string Email, string password)

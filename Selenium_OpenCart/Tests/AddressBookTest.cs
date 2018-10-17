@@ -28,7 +28,8 @@ namespace Selenium_OpenCart.Tests
 
         [SetUp]
         public void BeforeEachTests()
-        {            
+        {           
+
             Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
             Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.ChromeNew()).ApplicationSource.HomePageUrl);
             

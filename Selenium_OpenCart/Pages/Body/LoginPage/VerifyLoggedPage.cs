@@ -16,7 +16,7 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByXPath("//a[contains(@href,'/logout')]");
                 return true;
             }

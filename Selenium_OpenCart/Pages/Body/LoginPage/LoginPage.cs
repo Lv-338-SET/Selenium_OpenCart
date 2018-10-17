@@ -40,7 +40,7 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
 
         public LoginPage()
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            Search = Application.Get().Search;
         }
 
         public string LoginLable()
@@ -115,7 +115,7 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByXPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2");
                 return true;
             }

@@ -33,8 +33,8 @@ namespace Selenium_OpenCart.Tests
         public void SearchingResultItemsCount()
         {
             Application.Get().Browser.OpenUrl(
-                ApplicationSourceRepository
-                .ChromeNew()
+                Application.Get()
+                .ApplicationSource
                 .HomePageUrl);
 
             int actual = logicSearch
@@ -55,8 +55,8 @@ namespace Selenium_OpenCart.Tests
         public void TestCategoryDropDown()
         {
             Application.Get().Browser.OpenUrl(
-                ApplicationSourceRepository
-                .ChromeNew()
+                Application.Get()
+                .ApplicationSource
                 .HomePageUrl);
 
             logicSearch.Search(InputData.GetName());
@@ -73,8 +73,8 @@ namespace Selenium_OpenCart.Tests
         public void TestCategoryResult()
         {
             Application.Get().Browser.OpenUrl(
-                ApplicationSourceRepository
-                .ChromeNew()
+                Application.Get()
+                .ApplicationSource
                 .HomePageUrl);
 
             int actual = logicSearch
@@ -87,9 +87,9 @@ namespace Selenium_OpenCart.Tests
         public void TestLabelSearch()
         {
             Application.Get().Browser.OpenUrl(
-                 ApplicationSourceRepository
-                 .ChromeNew()
-                 .HomePageUrl);
+                Application.Get()
+                .ApplicationSource
+                .HomePageUrl);
 
             string actual = logicSearch
                 .GetSearchHeader(InputData.GetName());
