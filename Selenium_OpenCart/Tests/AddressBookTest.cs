@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
-using Selenium_OpenCart.Pages.Header;
-using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Pages.Body.AddressBookPage;
 using Selenium_OpenCart.Tools;
-using System.Threading;
 using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Data.Address;
 using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Logic;
+using NLog;
 
 
 namespace Selenium_OpenCart.Tests
@@ -22,6 +14,9 @@ namespace Selenium_OpenCart.Tests
     [TestFixture]
     class AddressBookTest
     {
+        //Logger
+        public static Logger log = LogManager.GetCurrentClassLogger();
+
         //Test data       
         const string LOGOUT = "http://40.118.125.245/index.php?route=common/home";
         const string EMAIL = "zinko@mail.com";
@@ -53,6 +48,7 @@ namespace Selenium_OpenCart.Tests
         public void AfterAllTests()
         {
             Application.Remove();
+            log.Info("Test finished!");
         }
 
         [TestCase(NEW_SHORT_ADDRESS)]
@@ -71,6 +67,7 @@ namespace Selenium_OpenCart.Tests
 
             //Assert
             Assert.IsTrue(actual);
+            log.Info("\"Create New Address Test\" pass");
         }
 
         [TestCase(NEW_SHORT_ADDRESS, EDIT_SHORT_ADDRESS)]
@@ -87,6 +84,7 @@ namespace Selenium_OpenCart.Tests
 
             //Assert
             Assert.True(actual);
+            log.Info("\"Edit Address Test\" pass");
         }
 
         [TestCase(EDIT_SHORT_ADDRESS)]
@@ -105,6 +103,7 @@ namespace Selenium_OpenCart.Tests
             
             //Assert
             Assert.IsFalse(actual);
+            log.Info("\"Delete Address Test\" pass");            
         }
 
         [Test]
@@ -122,6 +121,7 @@ namespace Selenium_OpenCart.Tests
 
             //Assert
             Assert.IsTrue(actual);
+            log.Info("\"Create Failed New Address Test\" pass");
         }
     }
 }
