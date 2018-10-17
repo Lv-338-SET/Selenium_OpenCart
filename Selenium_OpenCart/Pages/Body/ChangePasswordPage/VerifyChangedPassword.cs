@@ -11,7 +11,7 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByCssSelector("div.alert.alert-success");
                 return true;
             }

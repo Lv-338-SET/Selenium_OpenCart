@@ -148,7 +148,7 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
 
         public RegisterPage()
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            Search = Application.Get().Search;
         }
 
         public void ClickFirstName()
@@ -269,7 +269,7 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
         public void CheckNewsletterSubscribe()
         {
             IWebElement element = Search.ElementByClassName("radio-inline");
-            IWebDriver driver = Application.Get(ApplicationSourceRepository.Default()).Browser.Driver;
+            IWebDriver driver = Application.Get().Browser.Driver;
             Actions action = new Actions(driver);
             action.MoveToElement(element, 1, 1).Click().Perform();
             NewsletterSubscribe = true;
@@ -324,7 +324,7 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByXPath("//div[contains(@id, 'content') and contains(//h1, 'Register Account')]");
                 return true;
 

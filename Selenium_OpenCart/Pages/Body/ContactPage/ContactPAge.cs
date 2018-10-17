@@ -16,7 +16,7 @@ namespace Selenium_OpenCart.Pages.Body.ContactPage
 
         public ContactPage()
         {
-            search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            search = Application.Get().Search;
         }
     }
 }

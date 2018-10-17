@@ -11,7 +11,7 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByCssSelector(".alert.alert-success.alert-dismissible");
                 return true;
             }
