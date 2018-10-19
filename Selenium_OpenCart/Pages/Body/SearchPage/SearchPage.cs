@@ -256,8 +256,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             FindAppropriateProduct(product).ClickCompareButton();
             return new SearchPage();
         }
-
-
         public ProductPage.ProductPage OpenAppropriateProductPage(string product)
         {
             FindAppropriateProduct(product).ClickProductName();
@@ -270,7 +268,6 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             successAlertMessageLink.Click();
             return new ProductComparisonPage.ProductComparisonPage();
         }
-
 
         public string successAlertMessageText()
         {
