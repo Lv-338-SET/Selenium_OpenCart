@@ -6,6 +6,7 @@ using Selenium_OpenCart.Data.Constants;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 	      
@@ -17,7 +18,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         {
             get
             {
-                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
+                return Application.Get().Search;
             }
         }
 
@@ -122,10 +123,10 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// Returning to My Account Page
         /// </summary>
         /// <returns>MyAccountPage.MyAccountPage</returns>
-        public MyAccountPage.MyAccountPage ClickToBackButton ()
+        public MyAccountPage ClickToBackButton ()
         {
             BackButton.Click();
-            return new MyAccountPage.MyAccountPage();
+            return new MyAccountPage();
         }
 
         /// <summary>
@@ -134,7 +135,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// <returns>AddNewAddressPage</returns>
         public AddNewAddressPage GoToNewAddressPage()
         {
-            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
+            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
             js.ExecuteScript("window.scrollBy(0,100)"); //Moving scrollbar down
 
             NewAddressButton.Click();
@@ -146,7 +147,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// <returns>EditAddressPage</returns>
         public EditAddressPage EditAddress(string shortAddress)
         {
-            js = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver as IJavaScriptExecutor;
+            js = Application.Get().Browser.Driver as IJavaScriptExecutor;
             js.ExecuteScript("window.scrollBy(0,100)"); //Moving scrollbar down
             GetAddressByShortAddress(shortAddress).EditButton.Click();
             return new EditAddressPage();

@@ -42,11 +42,11 @@ namespace Selenium_OpenCart.Tests
         [SetUp]
         public void BeforeEachTests()
         {            
-            Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
-            Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.ChromeNew()).ApplicationSource.HomePageUrl);
+            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
             //LogIn to the site
             //My Acount link
-            IWebDriver temp_driver = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver;
+            IWebDriver temp_driver = Application.Get().Browser.Driver;
             temp_driver.FindElement(By.CssSelector("#top-links a.dropdown-toggle")).Click();
             //Login link
             temp_driver.FindElement(By.CssSelector("#top-links a[href$='/login']")).Click();

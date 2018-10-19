@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Data.Application;
@@ -29,9 +29,11 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 
         public ChangePasswordPage()
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+
+            Search = Application.Get().Search;
             VeryfyChangePasswordWebElements();
         }
+
 
         private bool VeryfyChangePasswordWebElements()
         {
@@ -65,7 +67,7 @@ namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByCssSelector("a.btn.btn-default");
                 return true;
             }

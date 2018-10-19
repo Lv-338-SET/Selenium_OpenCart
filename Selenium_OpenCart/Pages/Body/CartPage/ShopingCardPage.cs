@@ -23,17 +23,25 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         { get { return Application.Get().Search.ElementByXPath("//p[contains(text(),'Your shopping cart is empty!')]"); } }
         protected ShopingCartTableItem ShopingCartProduct
         { get { return GetProductElement(GetTableRow()); } }
-
+        protected IWebElement CheckoutButton
+        { get { return Application.Get().Search.ElementByXPath(" //a[@class='btn btn-primary']"); } }
+     
 
         public ShopingCartPage()
         { }
 
 
 
-        public HomePage GoToMainPageIfCartIsEmpty()
+        public HomePage ClickButtonContinue()
         {
             ButtonContinue.Click();
             return new HomePage();
+        }
+
+        public CheckoutPage.CheckoutPage ClickCheckoutButton()
+        {
+            CheckoutButton.Click();
+            return new CheckoutPage.CheckoutPage();
         }
 
         public ShopingCartTableItem GetProductElement(IWebElement webElement)
@@ -55,6 +63,25 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         public bool GetEmptyCartMessage()
         {
             return EmptyCartMessage.Displayed;
+        }
+
+        public bool IsEmpty()
+        {
+            IWebElement element;
+            try
+            {
+                element = Application.Get().Search.ElementByXPath("//div[@id='content']/p[text()='Your shopping cart is empty!']");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            if (element.Enabled)
+            {
+                return true;
+            }
+            else return false;
         }
     }
 }

@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 
 namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
 {
-    public class EmptyProductComparisonPageWhithMessage : EmptyProductComparisonPage
+    public class EmptyProductComparisonPageWithMessage : EmptyProductComparisonPage
     {
         #region Constants
         private const string SUCCESS_REMOVE_MESSAGE = ".alert.alert-success.alert-dismissible"; //CSS
+        private const string REMOVE_LINK = "//tbody[last()]/descendant::a"; //XPath
+        private const string COMPARISON_TABLE = ".table.table-bordered"; //CSS
         #endregion
 
         #region Properties
@@ -18,15 +20,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.CssSelector(SUCCESS_REMOVE_MESSAGE));
+                return Search.ElementByCssSelector(SUCCESS_REMOVE_MESSAGE);
             }
         }
         #endregion
 
         #region Initialization & Verifycation
-        public EmptyProductComparisonPageWhithMessage(IWebDriver driver) : base(driver)
+        public EmptyProductComparisonPageWithMessage()
         {
-            this.driver = driver;
             VerifyWebElements();
         }
 
@@ -40,6 +41,27 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         public string GetSuccessRemoveMessageText()
         {
             return SuccessRemoveMessage.Text;
+        }
+        #endregion
+
+
+        #region Business logic
+        public bool IsElementPresent()
+        {
+            try
+            {
+                Search.ElementsByCssSelector(COMPARISON_TABLE);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
+        public int CountColumns()
+        {
+            return Search.ElementsByXPath(REMOVE_LINK).Count;
         }
         #endregion
     }

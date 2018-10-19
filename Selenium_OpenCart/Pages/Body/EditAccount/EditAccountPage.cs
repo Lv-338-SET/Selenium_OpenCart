@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
 
@@ -21,7 +22,7 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         {
             get
             {
-                return Search.ElementById("input-firstname");
+                return Search.ElementById("input-lastname");
             }
         }
         public IWebElement EditEmail
@@ -38,13 +39,6 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
                 return Search.ElementById("input-telephone");
             }
         }
-        public IWebElement EditFax
-        {
-            get
-            {
-                return Search.ElementById("input-fax");
-            }
-        }
         public IWebElement EditButtonContinue
         {
             get
@@ -52,16 +46,11 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
                 return Search.ElementByCssSelector("input.btn.btn-primary");
             }
         }
-        public IWebElement EditButtonContinueHome
-        {
-            get
-            {
-                return Search.ElementByCssSelector("a.btn.btn-primary");
-            }
-        }
+       
         public EditAccountPage()
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+
+            Search = Application.Get().Search;
             VeryfyEditAccountWebElements();
         }
 
@@ -70,10 +59,8 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
             IWebElement temp = EditFirstName;
             temp = EditLastName;
             temp = EditEmail;
-            temp = EditTelephone;
-            temp = EditFax;
+            temp = EditTelephone;      
             temp = EditButtonContinue;
-            temp = EditButtonContinueHome;
         }
 
         public void ClearEditFirstNane()
@@ -112,18 +99,7 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         {
             EditEmail.SendKeys(NewEmail);
         }
-        public void ClickEditFax()
-        {
-            EditFax.Click();
-        }
-        public void ClearEditFax()
-        {
-            EditFax.Clear();
-        }
-        public void InputEditFax(string NewFax)
-        {
-            EditFax.SendKeys(NewFax);
-        }
+       
 
 
         public void ClearClickInputEditFirstName(string NewFirstName)
@@ -151,22 +127,14 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
             EditTelephone.Click();
             EditTelephone.SendKeys(NewTelephone);
         }
-        public void ClearClickInputEditFax(string NewFax)
-        {
-            EditFax.Clear();
-            EditFax.Click();
-            EditFax.SendKeys(NewFax);
-        }
+       
 
-        public MyAccountPage.MyAccountPage ClickEditButtonContinue()
+        public MyAccountPage ClickEditButtonContinue()
         {
             EditButtonContinue.Click();
-            return new MyAccountPage.MyAccountPage();
+            return new MyAccountPage();
         }
-        public void ClickEditButtonContinueHome()
-        {
-            EditButtonContinueHome.Click();
-        }
+        
 
         public static bool VerifyEditAccountPage()
         {

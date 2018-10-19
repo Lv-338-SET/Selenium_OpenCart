@@ -7,40 +7,43 @@ namespace Selenium_OpenCart.Pages.Header
 {
     public class Currency
     {
-        private ISearch search;
+        protected ISearch search;
+
+        private string CurrentCurrency{ get; set; }
 
         public IWebElement Euro
-        { get { return search.ElementByXPath("//li/button[@name='EUR']"); } }
+        { get { return search.ElementByName("EUR"); } }
         public IWebElement PoundSterling
-        { get { return search.ElementByXPath("//li/button[@name='GBP']"); } }
+        { get { return search.ElementByName("GBP"); } }
         public IWebElement USDolar 
-        { get { return search.ElementByXPath("//li/button[@name='GBP']"); } }
-        public IWebElement CurrencyTextLabel
-        { get { return search.ElementByXPath("//div[@class='btn-group']/button/strong"); } }
+        { get { return search.ElementByName("USD"); } }
 
         public Currency()
         {
-            search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            search = Application.Get().Search;
         }
 
         public void ClickButtonEuro()
         {
+            CurrentCurrency = Euro.Text;
             Euro.Click();
         }
 
         public void ClickButtonPoundSterling()
         {
+            CurrentCurrency = PoundSterling.Text;
             PoundSterling.Click();
         }
 
         public void ClickButtonUSDolar()
         {
+            CurrentCurrency = USDolar.Text;
             USDolar.Click();
         }
 
         public string GetCurrencyFromMenu()
         {
-            return CurrencyTextLabel.Text;
+            return CurrentCurrency[0].ToString();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         {
             get
             {
-                return Application.Get(ApplicationSourceRepository.ChromeNew()).Search;
+                return Application.Get().Search;
             }
         }
        
