@@ -6,7 +6,7 @@ using Selenium_OpenCart.Data.Constants;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Data.Application;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 	      
@@ -124,10 +124,10 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// </summary>
         /// <returns>MyAccountPage.MyAccountPage</returns>
 
-        public MyAccountPage.MyAccountPage ClickToBackButton ()
+        public MyAccountPage ClickToBackButton ()
         {
             BackButton.Click();
-            return new MyAccountPage.MyAccountPage();
+            return new MyAccountPage();
         }
 
         /// <summary>

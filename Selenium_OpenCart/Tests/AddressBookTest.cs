@@ -4,7 +4,7 @@ using Selenium_OpenCart.Pages.Body.AddressBookPage;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Data.Address;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 using Selenium_OpenCart.Logic;
 using NLog;
 

@@ -4,15 +4,15 @@ using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 {
-    class VerifyChangedPassword
+    public class VerifyChangedPassword
     {
-        static bool VerifyChangedPasswordUser()
+        public static bool VerifyChangedPasswordUser()
         {
 
             try
             {
-                var search = Application.Get().Search;
-                search.ElementByCssSelector("div.alert.alert-success");
+                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                search.ElementByCssSelector("div.alert.alert-success.alert-dismissible");
                 return true;
             }
             catch (NoSuchElementException)

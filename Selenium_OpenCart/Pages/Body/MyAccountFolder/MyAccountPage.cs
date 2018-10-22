@@ -4,61 +4,33 @@ using Selenium_OpenCart.Pages.Body.EditAccount;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
 
-namespace Selenium_OpenCart.Pages.Body.MyAccountPage
+namespace Selenium_OpenCart.Pages.Body.MyAccountFolder
 {
     public class MyAccountPage
     {
-
-        //private IWebDriver driver;
+      
         private ISearch Search;
         public MyAccountPage()
         {
             Search = Application.Get().Search;
         }
         public IWebElement MyAccount
-        {
-            get
-            {
-
-                return Search.ElementByXPath("//a[contains(@href,'/account')]");
-            }
-
-        }
+        { get { return Search.ElementByXPath("//a[contains(@href,'/account')]"); } }
+        
         public IWebElement EditAccount
-        {
-            get
-            {
-                return Search.ElementByXPath("//a[contains(@href,'/edit')]");
-            }
-        }
+        { get { return Search.ElementByXPath("//a[contains(@href,'/edit')]"); } }
+
         public IWebElement ChangePassword
-        {
-            get
-            {
-                return Search.ElementByXPath("//a[contains(@href,'/password')]");
-            }
-        }
+        { get { return Search.ElementByXPath("//a[contains(@href,'/password')]"); } }
+
         public IWebElement AddressBook
-        {
-            get
-            {
-                return Search.ElementByXPath("//a[contains(@href,'/address')]");
-            }
-        }
+        { get { return Search.ElementByXPath("//a[contains(@href,'/address')]"); } }
+
         public IWebElement WishList
-        {
-            get
-            {
-                return Search.ElementByXPath("//a[contains(@href,'/wishlist')]");
-            }
-        }
+        { get { return Search.ElementByXPath("//a[contains(@href,'/wishlist')]"); } }
+
         public IWebElement Logout
-        {
-            get
-            {
-                return Search.ElementByXPath("//a[contains(@href,'/logout')]");
-            }
-        }
+        { get { return Search.ElementByXPath("//a[contains(@href,'/logout')]"); } }
 
         public MyAccountPage ClikLinkMyAccount()
         {

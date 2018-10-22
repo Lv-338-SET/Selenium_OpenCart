@@ -1,14 +1,7 @@
-﻿using OpenQA.Selenium;
-using Selenium_OpenCart.Pages.Body.EditAccount;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+﻿using Selenium_OpenCart.Pages.Body.EditAccount;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;
-using System;
-using Selenium_OpenCart.Data.Application;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 
 namespace Selenium_OpenCart.Logic
 {
@@ -19,7 +12,7 @@ namespace Selenium_OpenCart.Logic
 
         public EditAccountMetod()
         {
-            Search = Application.Get().Search;
+            
         }
 
         public EditAccountPage GoToEditAccountPage(string Email, string password)

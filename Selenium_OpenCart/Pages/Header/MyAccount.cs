@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.LogoutPage;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Tools;
 using Selenium_OpenCart.Tools.SearchWebElements;

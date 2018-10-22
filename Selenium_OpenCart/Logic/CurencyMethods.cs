@@ -5,7 +5,6 @@ using Selenium_OpenCart.Pages.Body.CartPage;
 using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.LogoutPage;
 using Selenium_OpenCart.Pages.Body.MainPage;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Pages.Body.WishListPage;
 using Selenium_OpenCart.Tools.SearchWebElements;
@@ -16,12 +15,12 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 
 namespace Selenium_OpenCart.Logic
 {
     public class CurencyMethods
     {
-        private AllBrowsers browser;
         public string CurrentCurrencyFromMain;
         public CurencyMethods()
         {
@@ -29,7 +28,6 @@ namespace Selenium_OpenCart.Logic
 
         public HomePage GoToHomePage()
         {
-            browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
             return new HomePage();
         }
 
