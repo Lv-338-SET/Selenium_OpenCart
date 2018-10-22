@@ -51,14 +51,12 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             return SuccessMessage.Text;
         }
-
-
+        
         public ShopingCartPage ClickSuccessAddToCartMessageLink()
         {
             SuccessAddToCartMessageLink.Click();
             return new ShopingCartPage();
         }
-
         #endregion
     }
 }

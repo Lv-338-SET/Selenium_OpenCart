@@ -9,10 +9,10 @@ using Selenium_OpenCart.Data.Application;
 namespace Selenium_OpenCart.Pages.Body.AddressBookPage
 {
 
-        public class AddNewAddressPage
-        {        
-          protected ISearch Search
-          {
+    public class AddNewAddressPage
+    {        
+        protected ISearch Search
+        {
             get
             {
                 return Application.Get().Search;

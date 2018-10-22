@@ -123,6 +123,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         /// Returning to My Account Page
         /// </summary>
         /// <returns>MyAccountPage.MyAccountPage</returns>
+
         public MyAccountPage ClickToBackButton ()
         {
             BackButton.Click();
