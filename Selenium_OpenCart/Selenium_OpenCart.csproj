@@ -178,7 +178,7 @@
     <Compile Include="Tests\AddressBookTest.cs" />
     <Compile Include="Tests\CurrencyTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTests.cs" />
-    <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleRelted.cs" />
+    <Compile Include="Tests\FeedbackTests\FeedbackTestsRelated.cs" />
     <Compile Include="Tests\CartTests.cs" />
     <Compile Include="Tests\LoginPageTest.cs" />
     <Compile Include="Tests\ProductComparisonTests.cs" />

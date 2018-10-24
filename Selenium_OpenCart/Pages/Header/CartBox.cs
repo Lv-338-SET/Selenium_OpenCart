@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using System.Threading;
 
 namespace Selenium_OpenCart.Pages.Header
 {
-    public class CartBox:Header
+    public class CartBox : Header
     {
-        protected IWebElement Image { get { return driver.FindElement(By.XPath("//td[@class='text-center']//img")); } }
-        protected IWebElement ProductName { get { return driver.FindElement(By.CssSelector(".text-left >a")); } }
-        protected IWebElement Quantity { get { return driver.FindElement(By.XPath("//td[@class='text-right' and string-length(text()) > 0]")); } }
-        protected IWebElement ProductPrice { get { return driver.FindElement(By.XPath("//td[@class='text-right' and not(contains(text(),'"+GetProductPrice()+"'))]")); } }
-        public CartBox(IWebDriver driver) : base(driver)
+        protected IWebElement Image { get { return Search.ElementByXPath("//td[@class='text-center']//img"); } }
+        protected IWebElement ProductName { get { return Search.ElementByCssSelector(".text-left >a"); } }
+        protected IWebElement Quantity { get { return Search.ElementByXPath("//td[@class='text-right' and string-length(text()) > 0]"); } }
+        protected IWebElement ProductPrice { get { return Search.ElementByXPath("//td[@class='text-right' and not(contains(text(),'"+GetProductPrice()+"'))]"); } }
+        public CartBox()
         {
 
         }

@@ -13,12 +13,12 @@ using Selenium_OpenCart.AdminPages.HeaderAndNavigation;
 using Selenium_OpenCart.AdminPages.Body.ReviewsPage;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Tools;
-using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Tests.FeedbackTests
 {
     [TestFixture]
-    public class FeedbackTestsSingleRelted
+    [NonParallelizable]
+    public class FeedbackTestsRelated
     {
         const string URL = "http://40.118.125.245/";
         const string ADMIN_URL = "http://40.118.125.245/admin";
@@ -53,6 +53,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             new object[] { ProductReviewRepository.Get().ValidHP(), UserRepository.Get().Admin() }           
         };
 
+        /// <summary>
+        /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-649
+        /// </summary>
         [Test, TestCaseSource("ValidProductReview"), Order(1)]
         public void TestCase649AddReviewTest(IProductReview review)
         {
@@ -84,6 +87,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             TestCase649 = true;
         }
 
+        /// <summary>
+        /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-670
+        /// </summary>
         [Test, TestCaseSource("ValidProductReviewAndAdminUser"), Order(2)]
         public void TestCase670AproveReviewTest(IProductReview review, IUser user)
         {
@@ -115,6 +121,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             TestCase670 = true;
         }
 
+        /// <summary>
+        /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-672
+        /// </summary>
         [Test, TestCaseSource("ValidProductReview"), Order(3)]
         public void TestCase672CheckReviewTest(IProductReview review)
         {
@@ -148,6 +157,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
                 "Step 6 Failed: Review not exist");
         }
 
+        /// <summary>
+        /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-712
+        /// </summary>
         [Test, TestCaseSource("ValidProductReviewAndAdminUser"), Order(4)]
         public void TestCase712DeleteReview (IProductReview review, IUser user)
         {
