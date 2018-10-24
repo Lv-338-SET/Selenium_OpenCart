@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,6 +52,9 @@
     <Reference Include="MySql.Data, Version=8.0.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.10\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework, Version=3.10.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.10.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
@@ -66,7 +70,10 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="WebDriver, Version=3.14.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -140,11 +147,12 @@
     <Compile Include="Pages\Body\LogoutPage\LogoutPage.cs" />
     <Compile Include="Pages\Body\MainPage\HomePage.cs" />
     <Compile Include="Pages\Body\MainPage\ProductItemFromHomePage.cs" />
-    <Compile Include="Pages\Body\MyAccount\MyAccountPage.cs" />
+    <Compile Include="Pages\Body\MyAccountFolder\MyAccountPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPage.cs" />
-    <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPageWhithMessage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\EmptyProductComparisonPageWithMessage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\MainComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPage.cs" />
-    <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPageWhithMessage.cs" />
+    <Compile Include="Pages\Body\ProductComparisonPage\ProductComparisonPageWithMessage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\UnsuccessfullyAddedReviewPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageDescription.cs" />
@@ -153,7 +161,9 @@
     <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\SuccessfullyAddedProductForComparisonPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ProductPageAlerts\SuccessfullyAddedReviewPage.cs" />
     <Compile Include="Pages\Body\ProductPage\ReviewItem.cs" />
+    <Compile Include="Pages\Body\RegisterPage\IRegisterPage.cs" />
     <Compile Include="Pages\Body\RegisterPage\RegisterPage.cs" />
+    <Compile Include="Pages\Body\RegisterPage\RegisterSuccessPage.cs" />
     <Compile Include="Pages\Body\RegisterPage\VerifyRegisteredPage.cs" />
     <Compile Include="Pages\Body\SearchPage\ProductItem.cs" />
     <Compile Include="Pages\Body\SearchPage\SearchPage.cs" />
@@ -168,7 +178,7 @@
     <Compile Include="Tests\AddressBookTest.cs" />
     <Compile Include="Tests\CurrencyTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTests.cs" />
-    <Compile Include="Tests\FeedbackTests\FeedbackTestsSingleRelted.cs" />
+    <Compile Include="Tests\FeedbackTests\FeedbackTestsRelated.cs" />
     <Compile Include="Tests\CartTests.cs" />
     <Compile Include="Tests\LoginPageTest.cs" />
     <Compile Include="Tests\ProductComparisonTests.cs" />
@@ -189,6 +199,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -208,8 +225,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets'))" />
-    <Error Condition="!Exists('..\packages\NUnit.3.10.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.0\build\NUnit.props'))" />
     <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\NUnit.3.10.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.10.0\build\NUnit.props'))" />
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.10.0\build\net35\NUnit3TestAdapter.props'))" />
   </Target>
   <Import Project="..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.42\build\Selenium.Chrome.WebDriver.targets')" />

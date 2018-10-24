@@ -11,9 +11,8 @@ namespace Selenium_OpenCart.Pages.Body.RegisterPage
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByXPath("//a[contains(@href,'/logout')]");
-                //driver.FindElement(By.XPath("//div[contains(@id, 'content') and contains(//h1, 'Your Account Has Been Created!')]"));
                 return true;
             }
             catch (NoSuchElementException)

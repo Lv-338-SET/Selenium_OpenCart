@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Data.Search;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Pages.Header;
 using Selenium_OpenCart.Tools;
@@ -31,7 +31,8 @@ namespace Selenium_OpenCart.Logic
             register.RegisterButtonClick();            
             return new RegisterPage();
         }
-        public MyAccountPage FillingFieldsRegister(string firstName, string lastName, string email, 
+
+        public RegisterPage FillingFieldsRegister(string firstName, string lastName, string email, 
             string telephone, string password, string passwordConfirm)
         {
             RegisterPage filling = new RegisterPage();
@@ -43,16 +44,28 @@ namespace Selenium_OpenCart.Logic
             filling.ClickInputPasswordConfirmField(passwordConfirm);
             filling.CheckNewsletterSubscribe();
             filling.ClickPrivacyPolicy();
-            filling.ClickButtonContinue();
-            filling.ClickButtonsuccess();
-            return new MyAccountPage();
+            //filling.ClickButtonContinue();
+            return filling;
+            
         }
         public MyAccountPage ValidRegister(string firstName, string lastName, string email,
             string telephone, string password, string passwordConfirm)
         {
             GoToRegisterPage();
-            FillingFieldsRegister(firstName, lastName, email, telephone, password, passwordConfirm);
+
+            RegisteredUser(FillingFieldsRegister(firstName, lastName, email, telephone, password, passwordConfirm));
             return new MyAccountPage();
         }
+
+        public RegisterSuccessPage RegisteredUser(RegisterPage regPage)
+        {
+            return (RegisterSuccessPage)regPage.ClickButtonContinue();
+        }
+
+        public MyAccountPage RegisteredUser(RegisterSuccessPage regPage)
+        {
+            return regPage.ClickButtonsuccess();
+        }
+
     }
 }

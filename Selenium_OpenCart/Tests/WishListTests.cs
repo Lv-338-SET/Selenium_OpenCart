@@ -81,7 +81,7 @@ namespace Selenium_OpenCart.Tests
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            Application.Get().Browser.OpenUrl(ApplicationSourceRepository.ChromeNew().HomePageUrl);
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
             
             //Logging in
             LoginPageMethods login = new LoginPageMethods();

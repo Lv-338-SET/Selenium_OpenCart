@@ -29,7 +29,7 @@ namespace Selenium_OpenCart.Logic
         /// <returns>Search page object</returns>
         public SearchPage Search(string textSearch)
         {
-            Header item = new Header(Application.Get().Browser.Driver);
+            Header item = new Header();
             item.ClickSearchTextBox();
             item.ClearSearchTextBox();
             item.SetTextInSearchTextBox(textSearch);

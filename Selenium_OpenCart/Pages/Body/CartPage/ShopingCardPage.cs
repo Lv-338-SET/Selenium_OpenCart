@@ -70,7 +70,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
             IWebElement element;
             try
             {
-                element = Application.Get().Search.ElementByCssSelector("#content p");
+                element = Application.Get().Search.ElementByXPath("//div[@id='content']/p[text()='Your shopping cart is empty!']");
             }
             catch (Exception)
             {

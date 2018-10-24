@@ -5,14 +5,14 @@ using Selenium_OpenCart.Data.Search;
 using Selenium_OpenCart.Data.Address;
 using System.Xml;
 using EasyEncryption;
-
+using System.IO;
 
 namespace Selenium_OpenCart.Tools
 {
     public class XMLDataParser
     {
         #region ConstantsFileName
-        const string XML_PATH = "Selenium_OpenCart/XML/";
+        static string XML_PATH = FullPathPathToXMLFromBin();
         const string PRODUCT_FILE_NAME = "product.xml";
         const string CART_FILE_NAME = "cart.xml";
         const string CATEGORY_FILE_NAME = "category.xml";
@@ -25,14 +25,25 @@ namespace Selenium_OpenCart.Tools
         const string INVALID_ADDRESS_FILE_NAME = "address.xml";
         #endregion
 
+        private static string FullPathPathToXMLFromBin()
+        {
+            var pathToAssembly = Path.GetDirectoryName(System.Reflection.Assembly
+                .GetExecutingAssembly().GetName().CodeBase);
+            string localPath = new Uri(pathToAssembly).LocalPath;
+            string path = Directory.GetParent(Directory.GetParent(Directory.GetParent(localPath).ToString()).ToString()).ToString();
+            return $"{path}\\Selenium_OpenCart\\XML\\";
+        }
+
         /// <summary>
         /// Read file with search input data
         /// </summary>
         /// <returns>Object ISearch class</returns>
-        public ISearch GetSearchInputData() {
-
+        public ISearch GetSearchInputData()
+        {
+            string PathToXML = FullPathPathToXMLFromBin();
+            //string PathToXML = XML_PATH;
             XmlDocument doc = new XmlDocument();
-            doc.Load(XML_PATH + SEARCH_FILE_NAME);
+            doc.Load(PathToXML + SEARCH_FILE_NAME);
             XmlElement node = doc.DocumentElement;
             return Search.Get()
                     .SetName(node.GetElementsByTagName("search")[0].InnerText)
@@ -61,9 +72,9 @@ namespace Selenium_OpenCart.Tools
         /// Read file with address input data
         /// </summary>
         /// <returns>Object IAddress class</returns>
-        public IAdress GetInputAddress() {
+        public IAdress GetInputAddress(string addressFileName = ADDRESS_FILE_NAME) {
             XmlDocument doc = new XmlDocument();
-            doc.Load(XML_PATH + ADDRESS_FILE_NAME);
+            doc.Load(XML_PATH + addressFileName);
             XmlElement node = doc.DocumentElement;
 
             return Adress.Get()

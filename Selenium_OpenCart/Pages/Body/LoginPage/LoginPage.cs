@@ -5,42 +5,33 @@ using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.LoginPage
 {
-    public class LoginPage //: Header
+    public class LoginPage 
     {
         protected ISearch Search { get; private set; }
 
         public IWebElement LabelReturningCustomer
-        {
-            get
-            {
-                return Search.ElementByXPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2");
-            }
-        }
+        { get { return Search.ElementByXPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2"); } }
+
         public IWebElement LoginEmailFile
-        {
-            get
-            {
-                return Search.ElementById("input-email");
-            }
-        }
+        { get { return Search.ElementById("input-email"); } }
+        
         public IWebElement LoginPasswordFile
-        {
-            get
-            {
-                return Search.ElementById("input-password");
-            }
-        }
+        { get { return Search.ElementById("input-password"); } }
+        
         public IWebElement LoginButton
-        {
-            get
-            {
-                return Search.ElementByCssSelector("input.btn.btn-primary");
-            }
-        }
+        { get { return Search.ElementByCssSelector("input.btn.btn-primary"); } }
 
         public LoginPage()
         {
-            Search = Application.Get(ApplicationSourceRepository.Default()).Search;
+            Search = Application.Get().Search;
+            VeryfyLoginWebElements();
+        }
+        private void VeryfyLoginWebElements()
+        {
+            IWebElement temp = LabelReturningCustomer;
+            temp = LoginEmailFile;
+            temp = LoginPasswordFile;
+            temp = LoginButton;            
         }
 
         public string LoginLable()
@@ -115,7 +106,7 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
 
             try
             {
-                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                var search = Application.Get().Search;
                 search.ElementByXPath("//form[contains(@method,'post')]/../../div[@class = 'well']/h2");
                 return true;
             }

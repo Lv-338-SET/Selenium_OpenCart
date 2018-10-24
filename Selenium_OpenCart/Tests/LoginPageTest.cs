@@ -23,15 +23,15 @@ namespace Selenium_OpenCart.Tests
         [OneTimeSetUp]
         public void SetUp()
         {
-            Application.Get(ApplicationSourceRepository.Default());
-            Application.Get(ApplicationSourceRepository.Default()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.HomePageUrl);
+            Application.Get();
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
         }
 
         [TearDown]
         public void DeleteCookies()
         {
-            Application.Get(ApplicationSourceRepository.Default()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
-            Application.Get(ApplicationSourceRepository.Default()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.Default()).ApplicationSource.LogoutPageUrl);
+            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.LogoutPageUrl);
         }
 
         [OneTimeTearDown]
@@ -54,10 +54,14 @@ namespace Selenium_OpenCart.Tests
         [TestCase("Orest777Test1@gmail.com", "settest")]
         public void LoginedUserTest(string email, string password)
         {
-            LoginPageMethods login = new LoginPageMethods();
-            login.LogIntoAccount(email, password);
-            Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser());          
+            //LoginPageMethods login = new LoginPageMethods();
+            //login.LogIntoAccount(email, password);
+            //Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser());
+            new LoginPageMethods()
+                .LogIntoAccount(email, password);
+            Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser());
         }
+
         [Test, Order(2)]
         [TestCase("Orest777Test1@gmail.com", "settest", "settest", "settest", "Clll7y@gmail.com", "0678765234")]
         public void EditUserAccountTest(string Email, string password, string NewFirstName
@@ -77,6 +81,7 @@ namespace Selenium_OpenCart.Tests
             ChangePasswordMethods changePassword = new ChangePasswordMethods();
             changePassword.GoToChangePasswordPage(email, password);
             changePassword.FillingNewPasswords(Newpassword, NewpasswordConfirm);
+            Assert.IsTrue(VerifyChangedPassword.VerifyChangedPasswordUser());
         }
 
        

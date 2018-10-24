@@ -9,11 +9,11 @@ using Selenium_OpenCart.Logic.ProductPageLogic;
 using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Tools;
-using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Tests.FeedbackTests
 {
     [TestFixture]
+    [Parallelizable]
     public class FeedbackTests
     {
         const string URL = "http://40.118.125.245/";
@@ -25,7 +25,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [SetUp]
         public void BeforeEachTest()
         {
-            Application.Get(ApplicationSourceRepository.ChromeNew());
+            Application.Get();
         }
 
         [TearDown]
@@ -40,6 +40,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             new object[] { ProductReviewRepository.Get().ValidHP(), ProductReviewRepository.Get().InvalidOnRightEndgeOfBVClass() }
         };
 
+        /// <summary>
+        /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-703
+        /// </summary>
         [Test, TestCaseSource("ValidProductReview")]
         public void TestCase703VerifyNotSelectedRatingMessage(IProductReview validReview, IProductReview invalidReview)
         {
@@ -70,6 +73,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
                 "Step 7 Failed: " + NOT_SELECTED_RATING_ALERT_TEXT + " message not appeared");
         }
 
+        /// <summary>
+        /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-704
+        /// </summary>
         [Test, TestCaseSource("ValidProductReview")]
         public void TestCase704VerifyInvalidTextMessage(IProductReview validReview, IProductReview invalidReview)
         {
@@ -100,6 +106,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
                 "Step 7 Failed: " + INVALID_REVIEW_TEXT_ALERT_TEXT + " message not appeared");
         }
 
+        /// <summary>
+        /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-705
+        /// </summary>
         [Test, TestCaseSource("ValidProductReview")]
         public void TestCase705VerifyInvalidRevierNameMessage(IProductReview validReview, IProductReview invalidReview)
         {

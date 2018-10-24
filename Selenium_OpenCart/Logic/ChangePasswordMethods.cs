@@ -1,5 +1,5 @@
 ﻿using Selenium_OpenCart.Pages.Body.ChangePasswordPage;
-using Selenium_OpenCart.Pages.Body.MyAccountPage;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 
 namespace Selenium_OpenCart.Logic
 {

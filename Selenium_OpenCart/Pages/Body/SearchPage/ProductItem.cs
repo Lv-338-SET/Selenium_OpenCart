@@ -32,6 +32,7 @@ namespace Selenium_OpenCart.Pages.Body.SearchPage
             
             this.productBox = current;
             this.productImage = current.FindElement(By.ClassName("image"));
+            Thread.Sleep(1500);
             this.productName = current.FindElement(By.CssSelector(".caption>h4>a"));
             this.productDescription = current.FindElements(By.CssSelector(".caption p"))[0];
             this.productPrice = current.FindElement(By.CssSelector(".caption .price"));
