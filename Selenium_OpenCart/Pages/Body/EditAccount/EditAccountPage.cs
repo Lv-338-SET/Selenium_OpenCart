@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
-using OpenQA.Selenium.Support.UI;
-using Selenium_OpenCart.Pages.Body.MyAccount;
+﻿using OpenQA.Selenium;
+using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.EditAccount
 {
     public class EditAccountPage
     {
-        protected IWebDriver driver;
+        protected ISearch Search { get; private set; }
+
         public IWebElement EditFirstName
         {
             get
             {
-                return driver.FindElement(By.Id("input-firstname"));
+                return Search.ElementById("input-firstname");
             }
 
         }
@@ -26,48 +22,47 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         {
             get
             {
-                return driver.FindElement(By.Id("input-firstname"));
+                return Search.ElementById("input-lastname");
             }
         }
         public IWebElement EditEmail
         {
             get
             {
-                return driver.FindElement(By.Id("input-email"));
+                return Search.ElementById("input-email");
             }
         }
         public IWebElement EditTelephone
         {
             get
             {
-                return driver.FindElement(By.Id("input-telephone"));
-            }
-        }
-        public IWebElement EditFax
-        {
-            get
-            {
-                return driver.FindElement(By.Id("input-fax"));
+                return Search.ElementById("input-telephone");
             }
         }
         public IWebElement EditButtonContinue
         {
             get
             {
-                return driver.FindElement(By.CssSelector("input.btn.btn-primary"));
+                return Search.ElementByCssSelector("input.btn.btn-primary");
             }
         }
-        public IWebElement EditButtonContinueHome
+       
+        public EditAccountPage()
         {
-            get
-            {
-                return driver.FindElement(By.CssSelector("a.btn.btn-primary"));
-            }
+
+            Search = Application.Get().Search;
+            VeryfyEditAccountWebElements();
         }
-        public EditAccountPage(IWebDriver driver)
+
+        private void VeryfyEditAccountWebElements()
         {
-            this.driver = driver;
+            IWebElement temp = EditFirstName;
+            temp = EditLastName;
+            temp = EditEmail;
+            temp = EditTelephone;      
+            temp = EditButtonContinue;
         }
+
         public void ClearEditFirstNane()
         {
             EditFirstName.Clear();
@@ -104,19 +99,8 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
         {
             EditEmail.SendKeys(NewEmail);
         }
-        public void ClickEditFax()
-        {
-            EditFax.Click();
-        }
-        public void ClearEditFax()
-        {
-            EditFax.Clear();
-        }
-        public void InputEditFax(string NewFax)
-        {
-            EditFax.SendKeys(NewFax);
-        }
        
+
 
         public void ClearClickInputEditFirstName(string NewFirstName)
         {
@@ -143,30 +127,22 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
             EditTelephone.Click();
             EditTelephone.SendKeys(NewTelephone);
         }
-        public void ClearClickInputEditFax(string NewFax)
-        {
-            EditFax.Clear();
-            EditFax.Click();
-            EditFax.SendKeys(NewFax);
-        }
+       
 
         public MyAccountPage ClickEditButtonContinue()
         {
             EditButtonContinue.Click();
-            return new MyAccountPage(driver);
+            return new MyAccountPage();
         }
+        
 
-        public void ClickEditButtonContinueHome()
-        {
-            EditButtonContinueHome.Click();
-        }
-
-        public static bool VerifyEditAccountPage(IWebDriver driver)
+        public static bool VerifyEditAccountPage()
         {
 
             try
             {
-                driver.FindElement(By.LinkText("Your Personal Details"));
+                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                search.ElementByLinkText("Your Personal Details");
                 return true;
             }
             catch (NoSuchElementException)
@@ -174,11 +150,11 @@ namespace Selenium_OpenCart.Pages.Body.EditAccount
                 return false;
             }
         }
-        public static EditAccountPage UserEditPage(IWebDriver driver)
+        public static EditAccountPage UserEditPage()
         {
-            if (VerifyEditAccountPage(driver))
+            if (VerifyEditAccountPage())
             {
-                return new EditAccountPage(driver);
+                return new EditAccountPage();
             }
             else
             {

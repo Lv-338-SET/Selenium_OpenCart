@@ -10,7 +10,7 @@
 
         public static ApplicationSource Default()
         {
-            return ChromeTAQC();
+            return ChromeNew();
         }
 
         public static ApplicationSource myStart(ApplicationSource returnNew)
@@ -34,6 +34,8 @@
         }
         public static ApplicationSource ChromeDemo()
         {
+            var option = new[] {"--test-type", "--no-proxy-server", "--ignore-certificate-errors"
+                        , "--disable-extensions", "--start-maximized"};
             return new ApplicationSource(CHROME_BROWSER, 10L, 10L,
                 "https://demo.opencart.com/");
         }
@@ -47,7 +49,7 @@
         public static ApplicationSource FirefoxDemo()
         {
             return new ApplicationSource(FIREFOX_BROWSER, 10L, 10L,
-                "http://regres.herokuapp.com/login");
+                "http://atqc-shop.epizy.com/");
         }
     }
 }

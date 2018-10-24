@@ -1,87 +1,89 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.ChangePasswordPage;
 using Selenium_OpenCart.Pages.Body.EditAccount;
 using Selenium_OpenCart.Pages.Body.LoginPage;
-using Selenium_OpenCart.Pages.Body.MyAccount;
 using Selenium_OpenCart.Pages.Body.RegisterPage;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [SingleThreaded]
     class LoginPageTest
-    {
-        protected IWebDriver driver;
+    {        
 
-        const string URL = "http://40.118.125.245/";
-        const string URL_LOGOUT = "http://40.118.125.245/index.php?route=account/logout";
-        //const string URL_HOME = "http://atqc-shop.epizy.com/index.php?route=common/home";
+        //const string URL = "http://40.118.125.245/";
+        //const string URL_LOGOUT = "http://40.118.125.245/index.php?route=account/logout";
+        ////const string URL_HOME = "http://atqc-shop.epizy.com/index.php?route=common/home";
 
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
-            driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(URL);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            Application.Get();
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
+        }
+
+        [TearDown]
+        public void DeleteCookies()
+        {
+            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.LogoutPageUrl);
         }
 
         [OneTimeTearDown]
         public void CloseDriver()
         {
-            driver.Manage().Cookies.DeleteAllCookies();
+            Application.Remove();
         }
 
         [Test, Order(0)]
-        [TestCase("test", "test", "soryv@gmail.com", "067544321", "settest", "settest")]
+        [TestCase("test", "test", "Orest777Test1@gmail.com", "067544321", "settest", "settest")]
         public void  RegisterNewUsersTest(string firstName, string lastName, string email,
             string telephone, string password, string passwordConfirm)
         {
-            RegisterPageMethod register = new RegisterPageMethod(driver);
+            RegisterPageMethod register = new RegisterPageMethod();
             register.ValidRegister(firstName, lastName, email, telephone, password, passwordConfirm);            
-            Assert.IsTrue(VerifyRegisteredUser.VerifyRegisteredPage(driver));      
+            Assert.IsTrue(VerifyRegisteredUser.VerifyRegisteredPage());      
         }
 
         [Test, Order(1)]
-        [TestCase("soryv@gmail.com", "settest")]
+        [TestCase("Orest777Test1@gmail.com", "settest")]
         public void LoginedUserTest(string email, string password)
         {
-            LoginPageMethods login = new LoginPageMethods(driver);
-            login.LogIntoAccount(email, password);
-            Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser(driver));          
+            //LoginPageMethods login = new LoginPageMethods();
+            //login.LogIntoAccount(email, password);
+            //Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser());
+            new LoginPageMethods()
+                .LogIntoAccount(email, password);
+            Assert.IsTrue(VerifyLoggedPage.VerifyLoggedUser());
         }
+
         [Test, Order(2)]
-        [TestCase("soryv@gmail.com", "settest", "settest", "settest", "sedmer@gmail.com", "0678765234")]
+        [TestCase("Orest777Test1@gmail.com", "settest", "settest", "settest", "Clll7y@gmail.com", "0678765234")]
         public void EditUserAccountTest(string Email, string password, string NewFirstName
             , string NewLastName, string NewEmail, string NewTelephone)
         {
-            EditAccountMetod edit = new EditAccountMetod(driver);
+            EditAccountMetod edit = new EditAccountMetod();
             edit.GoToEditAccountPage(Email, password);            
             edit.InputFieldsEditAccount(NewFirstName, NewLastName, NewEmail, NewTelephone);
-            Assert.IsTrue(VerifyEditedAccount.VerifyEditedUser(driver));         
+            Assert.IsTrue(VerifyEditedAccount.VerifyEditedUser());         
         }
 
         [Test, Order(3)]
-        [TestCase("sedter@gmail.com", "settest", "settest", "settest")]
+        [TestCase("Clll7y@gmail.com", "settest", "settest", "settest")]
         public void ChangePasswordTest(string email, string password
             , string Newpassword, string NewpasswordConfirm)
         {
-            ChangePasswordMethods changePassword = new ChangePasswordMethods(driver);
+            ChangePasswordMethods changePassword = new ChangePasswordMethods();
             changePassword.GoToChangePasswordPage(email, password);
             changePassword.FillingNewPasswords(Newpassword, NewpasswordConfirm);
+            Assert.IsTrue(VerifyChangedPassword.VerifyChangedPasswordUser());
         }
 
-        [TearDown]
-        public void Logout()
-        {
-            driver.Quit();
-
-        }
+       
     }
 }

@@ -11,7 +11,7 @@ using Selenium_OpenCart.Pages.Body.SearchPage;
 
 namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
 {
-    public class ProductComparisonPage : EmptyProductComparisonPage
+    public class ProductComparisonPage : MainComparisonPage
     {
         #region Constants
         private const string PRODUCT_DETAILS_LABEL = "//strong[text()='Product Details']"; //XPath
@@ -22,8 +22,6 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         private const string ADD_TO_CART_LAST = "//tbody[last()]/descendant::input[last()]"; //XPath
         private const string REMOVE_FIRST = "//tbody[last()]/descendant::a"; //XPath
         private const string REMOVE_LAST = "//tbody[last()]/tr[last()]/descendant::a[last()]"; //XPath
-        //private const string PRODUCT_COLUMN = "tr .text-center"; //CSS
-
         #endregion
 
         #region Properties
@@ -31,7 +29,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.XPath(PRODUCT_DETAILS_LABEL));
+                return Search.ElementByXPath(PRODUCT_DETAILS_LABEL);
             }
         }
 
@@ -39,7 +37,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.XPath(PRODUCT_LABEL));
+                return Search.ElementByXPath(PRODUCT_LABEL);
             }
         }
 
@@ -47,7 +45,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.XPath(FIRST_PRODUCT_NAME));
+                return Search.ElementByXPath(FIRST_PRODUCT_NAME);
             }
         }
 
@@ -55,7 +53,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.XPath(LAST_PRODUCT_NAME));
+                return Search.ElementByXPath(LAST_PRODUCT_NAME);
             }
         }
 
@@ -63,7 +61,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.XPath(ADD_TO_CART_FIRST));
+                return Search.ElementByXPath(ADD_TO_CART_FIRST);
             }
         }
 
@@ -71,7 +69,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.XPath(ADD_TO_CART_LAST));
+                return Search.ElementByXPath(ADD_TO_CART_LAST);
             }
         }
 
@@ -79,7 +77,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.XPath(REMOVE_FIRST));
+                return Search.ElementByXPath(REMOVE_FIRST);
             }
         }
 
@@ -87,23 +85,14 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
         {
             get
             {
-                return driver.FindElement(By.XPath(REMOVE_LAST));
+                return Search.ElementByXPath(REMOVE_LAST);
             }
         }
-
-        //protected List<ProductComparisonPage> ListProductColumn
-        //{
-        //    get
-        //    {
-        //        return InitializeListProductColumn(driver.FindElements(By.CssSelector(PRODUCT_COLUMN)));
-        //    }
-        //}
         #endregion
 
         #region Initialization & Verifycation
-        public ProductComparisonPage(IWebDriver driver) : base(driver)
+        public ProductComparisonPage()
         {
-            this.driver = driver;
             VerifyWebElements();
         }
 
@@ -114,19 +103,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             temp = FirstProductName;
             temp = AddToCartFirst;
             temp = RemoveFirstProduct;
-
-            //var listProductColumn = ListProductColumn;
         }
-
-        //private List<ProductComparisonPage> InitializeListProductColumn(IReadOnlyCollection<IWebElement> elements)
-        //{
-        //    List<ProductComparisonPage> list = new List<ProductComparisonPage>();
-        //    foreach (var current in elements)
-        //    {
-        //        list.Add(new ProductComparisonPage(driver));
-        //    }
-        //    return list;
-        //}
         #endregion
 
         #region Atomic operations
@@ -151,7 +128,7 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             return new ProductPageLogic();
         }
 
-        public string LastProductNameText()
+        public string GetLastProductNameText()
         {
             return LastProductName.Text;
         }
@@ -162,41 +139,32 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
             return new ProductPageLogic();
         }
 
-        public ProductComparisonPageWhithMessage ClickAddToCartFirst()
+        public ProductComparisonPageWithMessage ClickAddToCartFirst()
         {
             AddToCartFirst.Click();
-            return new ProductComparisonPageWhithMessage(driver);
+            return new ProductComparisonPageWithMessage();
         }
 
-        public ProductComparisonPageWhithMessage ClickAddToCartLast()
+        public ProductComparisonPageWithMessage ClickAddToCartLast()
         {
             AddToCartLast.Click();
-            return new ProductComparisonPageWhithMessage(driver);
+            return new ProductComparisonPageWithMessage();
         }
 
-        //TODO !!!!!!!!!!!! як взнати яку сторінку ретурнити, оскільки після видалення може бути або пуста або ще заповнена
-        public ProductComparisonPageWhithMessage ClickRemoveFirstProduct()
+        public  EmptyProductComparisonPageWithMessage ClickRemoveFirstProduct()
         {
             RemoveFirstProduct.Click();
-            return new ProductComparisonPageWhithMessage(driver);
+            return new EmptyProductComparisonPageWithMessage();
         }
 
-        public EmptyProductComparisonPageWhithMessage ClickRemoveLastProduct()
+        public ProductComparisonPageWithMessage ClickRemoveLastProduct()
         {
             RemoveLastProduct.Click();
-            return new EmptyProductComparisonPageWhithMessage(driver);
+            return new ProductComparisonPageWithMessage();
         }
+        #endregion
 
-        //public ProductComparisonPage ColumnsCount()
-        //{
-        //    int i = 0;
-        //    foreach (var item in ListProductColumn)
-        //    {
-        //        i++;
-        //    }
-        //    return null;
-        //}
-
+        #region Business logic
         public bool IsElementPresent()
         {
             try
@@ -212,8 +180,9 @@ namespace Selenium_OpenCart.Pages.Body.ProductComparisonPage
 
         public int CountColumns()
         {
-            return driver.FindElements(By.XPath("//tbody[last()]/descendant::tr")).Count;//try different locator, then replace to constants
-        }
+            return Search.ElementsByXPath(REMOVE_FIRST).Count;
+        } 
         #endregion
+
     }
 }

@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +11,13 @@ namespace Selenium_OpenCart.Pages.Body.LoginPage
 {
     public class VerifyLoggedPage
     {
-        public static bool VerifyLoggedUser(IWebDriver driver)
+        public static bool VerifyLoggedUser()
         {
 
             try
             {
-                driver.FindElement(By.XPath("//a[contains(@href,'/logout')]"));
+                var search = Application.Get().Search;
+                search.ElementByXPath("//a[contains(@href,'/logout')]");
                 return true;
             }
             catch (NoSuchElementException)

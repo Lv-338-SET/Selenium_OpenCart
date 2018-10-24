@@ -1,63 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
-using Selenium_OpenCart.Pages.Header;
-using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Pages.Body.AddressBookPage;
 using Selenium_OpenCart.Tools;
-using System.Threading;
 using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Data.Address;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
+using Selenium_OpenCart.Logic;
+using NLog;
+
 
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
     class AddressBookTest
     {
-        //IWebDriver driver;
-        const string URL = "http://40.118.125.245/";
+        //Logger
+        public static Logger log = LogManager.GetCurrentClassLogger();
+
+        //Test data       
         const string LOGOUT = "http://40.118.125.245/index.php?route=common/home";
         const string EMAIL = "zinko@mail.com";
         const string PASSWORD = "querty";
-
-        //Test data        
-        const string FIRST_NAME = "Victor";
-        const string LAST_NAME = "Zinko";
-        const string ADDRESS1 = "Grinchenko, 7";
-        const string CITY = "Lviv";
-        const string POST_CODE = "11001";
-        const string COUNTRY = "Ukraine";
-        const string REGION_STATE = "L'vivs'ka Oblast'";
-        const string NEW_SHORT_ADDRESS = "Victor Zinko\r\nGrinchenko, 7\r\nLviv 11001\r\nL\'vivs\'ka Oblast\'\r\nUkraine";
-                
-        const string COMPANY = "SoftServe";        
-        const string ADDRESS2 = "Naukova, 5";
-        const string EDIT_POST_CODE = "11000";
-        const string EDIT_SHORT_ADDRESS = "Victor Zinko\r\nSoftServe\r\nGrinchenko, 7\r\nNaukova, 5\r\nLviv 11000\r\nL'vivs'ka Oblast'\r\nUkraine";
+        const string NEW_SHORT_ADDRESS = "Victor Zinko\r\nGrinchenko, 7\r\nLviv 11001\r\nL\'vivs\'ka Oblast\'\r\nUkraine"; 
+        const string EDIT_SHORT_ADDRESS = "Victor Zinko\r\nSoftServe\r\nGrinchenko, 7\r\nNaukova, 5\r\nLviv 11001\r\nL'vivs'ka Oblast'\r\nUkraine";
+        IAdress adressInput = new XMLDataParser().GetInputAddress();
+        IAdress invalidAdressInput = new XMLDataParser().GetInputAddress("invalidAddress.xml");
 
         [SetUp]
         public void BeforeEachTests()
-        {            
+        {           
+
             Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
             Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.ChromeNew()).ApplicationSource.HomePageUrl);
+            
             //LogIn to the site
-            //My Acount link
-            IWebDriver temp_driver = Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver;
-            temp_driver.FindElement(By.CssSelector("#top-links a.dropdown-toggle")).Click();
-            //Login link
-            temp_driver.FindElement(By.CssSelector("#top-links a[href$='/login']")).Click();
-            temp_driver.FindElement(By.Id("input-email")).Clear();
-            temp_driver.FindElement(By.Id("input-email")).SendKeys(EMAIL);//Type Login
-            temp_driver.FindElement(By.Id("input-password")).Clear();
-            temp_driver.FindElement(By.Id("input-password")).SendKeys(PASSWORD);//Type Password
-            temp_driver.FindElement(By.CssSelector("form input[type ='submit']")).Click();//Login button
-
+            MyAccountPage myAccountPage = new LoginPageMethods().LogIntoAccount(EMAIL, PASSWORD);
             //Click on "Address Book" link
-            temp_driver.FindElement(By.CssSelector("#column-right a[href$='/address']")).Click();
+            myAccountPage.ClickLinkAddressBook();            
         }        
 
         [TearDown]
@@ -70,41 +49,43 @@ namespace Selenium_OpenCart.Tests
         public void AfterAllTests()
         {
             Application.Remove();
+            log.Info("Test finished!");
         }
 
-        [TestCase(FIRST_NAME, LAST_NAME, ADDRESS1, CITY, POST_CODE, COUNTRY, 
-                REGION_STATE, NEW_SHORT_ADDRESS)]
-        public void Test1CreateNewAddressTest(string firstName, string lastName, string address1,
-                string city, string postCode, string country, string region, string expected)        
+        [TestCase(NEW_SHORT_ADDRESS)]
+        public void Test1CreateNewAddressTest(string expected)        
         {
             //Arrange
             AddressBookPage addressBook = new AddressBookPage();                
             AddNewAddressPage newAddressPage = addressBook.GoToNewAddressPage();
-            addressBook = newAddressPage.FillAllRequareField(firstName, lastName, address1, 
-                        city, postCode, country, region).Continue();
+            addressBook = newAddressPage.FillAllRequareField(adressInput.GetFirstName(), 
+                    adressInput.GetLastName(), adressInput.GetAddress1(), adressInput.GetCity(),
+                         adressInput.GetPostCode(), adressInput.GetCountry(), adressInput.GetZone())
+            .Continue();
             
             //Act
             bool actual = addressBook.IsAddressInTableByShortAddress(expected);
 
             //Assert
             Assert.IsTrue(actual);
+            log.Info("\"Create New Address Test\" pass");
         }
 
-        [TestCase(COMPANY, ADDRESS2, EDIT_POST_CODE, NEW_SHORT_ADDRESS, EDIT_SHORT_ADDRESS)]
-        public void Test2EditAddressTest(string company, string address2, string postCode,
-                string oldAddress, string expected)
+        [TestCase(NEW_SHORT_ADDRESS, EDIT_SHORT_ADDRESS)]
+        public void Test2EditAddressTest(string oldAddress, string expected)
         {
             //Arrange
             AddressBookPage addressBook = new AddressBookPage();
             EditAddressPage editAddress = addressBook.EditAddress(oldAddress);                        
-            addressBook = editAddress.FillAllNotRequareField(company, address2, postCode).Continue();
-            Console.WriteLine(editAddress.AddressForm.IsFirstNameInputErrorMessage());
+            addressBook = editAddress.FillAllNotRequareField(adressInput.GetCompany(), 
+                adressInput.GetAddress2(), adressInput.GetPostCode()).Continue();            
 
             //Act
             bool actual = addressBook.IsAddressInTableByShortAddress(expected);
 
             //Assert
             Assert.True(actual);
+            log.Info("\"Edit Address Test\" pass");
         }
 
         [TestCase(EDIT_SHORT_ADDRESS)]
@@ -112,32 +93,36 @@ namespace Selenium_OpenCart.Tests
         {
             //Arrange
             AddressBookPage addressBook = new AddressBookPage();            
-            addressBook.GetAddressByShortAddress(expected).DeleteButton.Click();
-
+                        
+            while (addressBook.IsAddressInTableByShortAddress(expected))
+            {
+                addressBook.GetAddressByShortAddress(expected).DeleteButton.Click();
+            }
             
             //Act
             bool actual = addressBook.IsAddressInTableByShortAddress(expected);
             
             //Assert
             Assert.IsFalse(actual);
+            log.Info("\"Delete Address Test\" pass");            
         }
 
-        [TestCase("", "", "1", "a", "222", " --- Please Select --- ", " --- Please Select --- ")]
-        public void CreateFailedNewAddressTest(string firstName, string lastName, string address1,
-                string city, string postCode, string country, string region)
+        [Test]
+        public void CreateFailedNewAddressTest()
         {
             //Arrange
             AddressBookPage addressBook = new AddressBookPage();
             AddNewAddressPage newAddressPage = addressBook.GoToNewAddressPage();
-            newAddressPage.FillAllRequareField(firstName, lastName, address1,
-                        city, postCode, country, region).ClickContinueButton();
-            
+            newAddressPage.FillAllRequareField(invalidAdressInput.GetFirstName(), invalidAdressInput.GetLastName(),
+                    invalidAdressInput.GetAddress1(), invalidAdressInput.GetCity(), invalidAdressInput.GetPostCode(),
+                        invalidAdressInput.GetCountry(), invalidAdressInput.GetZone()).ClickContinueButton(); 
 
             //Act
             bool actual = newAddressPage.AddressForm.IsEmptyInputErrorMessage();          
 
             //Assert
             Assert.IsTrue(actual);
+            log.Info("\"Create Failed New Address Test\" pass");
         }
     }
 }

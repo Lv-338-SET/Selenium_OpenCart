@@ -58,10 +58,6 @@ namespace Selenium_OpenCart.AdminPages.HeaderAndNavigation
         {
             get
             {
-                //STRATEGY OT WORKING
-                //Application.Get().Search.SetExplicitStrategy();
-                //IWebElement tmp = Search.ElementByXPath(".//ul[@id='collapse1']//li//a[text()='Reviews']");
-                //Application.Get().Search.SetImplicitStrategy();
                 Application.Get().Search.SetExplicitStrategy();
                 OpenQA.Selenium.Support.UI.WebDriverWait wait = new OpenQA.Selenium.Support.UI.WebDriverWait(Application.Get().Browser.Driver, System.TimeSpan.FromSeconds(1));
                 wait.Until(d => Search.ElementByXPath(".//ul[@id='collapse1']//li//a[text()='Reviews']").Displayed);

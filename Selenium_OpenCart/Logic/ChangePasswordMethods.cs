@@ -1,51 +1,42 @@
-﻿using OpenQA.Selenium;
-using Selenium_OpenCart.Pages.Body.ChangePasswordPage;
-using Selenium_OpenCart.Pages.Body.MyAccount;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Selenium_OpenCart.Pages.Body.ChangePasswordPage;
+using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 
 namespace Selenium_OpenCart.Logic
 {
     class ChangePasswordMethods
     {
-        protected IWebDriver driver;
 
-
-        public ChangePasswordMethods(IWebDriver driver)
+        public ChangePasswordMethods()
         {
-            this.driver = driver;
+            
         }
-
 
         public MyAccountPage FillingNewPasswords(string password, string passwordConfirm)
         {
-            ChangePasswordPage items = new ChangePasswordPage(driver);
+            ChangePasswordPage items = new ChangePasswordPage();
             items.CleraClickInputNewPassword(password);
             items.CleraClickInputNewPasswordConfirm(passwordConfirm);
             items.ClickChangeButton();
-            return new MyAccountPage(driver);
+            return new MyAccountPage();
         }
 
        public ChangePasswordPage GoToChangePasswordPage(string Email, string loginpassword)
         {
-            LoginPageMethods login = new LoginPageMethods(driver);
+            LoginPageMethods login = new LoginPageMethods();
             login.LogIntoAccount(Email, loginpassword);
-            MyAccountPage account = new MyAccountPage(driver);
+            MyAccountPage account = new MyAccountPage();
             account.ClickLinkChangePassword();
-            return new ChangePasswordPage(driver);
+            return new ChangePasswordPage();
         }
 
         public MyAccountPage ValidChangePassword(string password, string passwordConfirm,string Email, string loginpassword)
         {
-            LoginPageMethods login = new LoginPageMethods(driver);
+            LoginPageMethods login = new LoginPageMethods();
             login.LogIntoAccount(Email, loginpassword);
-            MyAccountPage account = new MyAccountPage(driver);
+            MyAccountPage account = new MyAccountPage();
             account.ClickLinkChangePassword();
             FillingNewPasswords(password, passwordConfirm);
-            return new MyAccountPage(driver);
+            return new MyAccountPage();
         }
     }
 }

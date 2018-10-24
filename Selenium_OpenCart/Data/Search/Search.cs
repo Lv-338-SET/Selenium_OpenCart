@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
 
 namespace Selenium_OpenCart.Data.Search
 {
@@ -60,6 +61,10 @@ namespace Selenium_OpenCart.Data.Search
             return count;
         }
 
+        public IWebElement ElementByCssSelector(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public interface ISearch
@@ -67,7 +72,7 @@ namespace Selenium_OpenCart.Data.Search
         string GetName();
         string GetCategory();
         int GetCount();
-        
+        IWebElement ElementByCssSelector(string v);
     }
 
     public interface ISearchBuilder

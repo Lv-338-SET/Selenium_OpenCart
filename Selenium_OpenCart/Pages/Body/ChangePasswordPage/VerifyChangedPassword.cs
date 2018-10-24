@@ -1,20 +1,18 @@
 ﻿using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Selenium_OpenCart.Data.Application;
+using Selenium_OpenCart.Tools;
 
 namespace Selenium_OpenCart.Pages.Body.ChangePasswordPage
 {
-    class VerifyChangedPassword
+    public class VerifyChangedPassword
     {
-        static bool VerifyChangedPasswordUser(IWebDriver driver)
+        public static bool VerifyChangedPasswordUser()
         {
 
             try
             {
-                driver.FindElement(By.CssSelector("div.alert.alert-success"));
+                var search = Application.Get(ApplicationSourceRepository.Default()).Search;
+                search.ElementByCssSelector("div.alert.alert-success.alert-dismissible");
                 return true;
             }
             catch (NoSuchElementException)

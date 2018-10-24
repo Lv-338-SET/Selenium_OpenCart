@@ -2,10 +2,10 @@
   <firstname>Victor</firstname>
   <lastname>Zinko</lastname>
   <company>SoftServe</company>
-  <address1>First street, 1</address1>
-  <address2>Second street, 2</address2>
-  <city>Liv</city>
-  <postcode>81000</postcode>
+  <address1>Grinchenko, 7</address1>
+  <address2>Naukova, 5</address2>
+  <city>Lviv</city>
+  <postcode>11001</postcode>
   <country>Ukraine</country>
   <region>L'vivs'ka Oblast'</region>
 </test>
