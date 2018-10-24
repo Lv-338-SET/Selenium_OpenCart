@@ -37,9 +37,9 @@ namespace Selenium_OpenCart.Logic
             SearchMethods search = new SearchMethods();
             TopBar topBar = new TopBar();
             var searchResult = search.Search(nameProduck);
-            Thread.Sleep(500);
+            Thread.Sleep(1500);
             searchResult.AddAppropriateItemToCart(nameProduck);
-            Thread.Sleep(500);
+            Thread.Sleep(15500);
             topBar.ShoppingCartButtonClick();
             return shopingCartPage.GetProduct().GetProductName();
         }
@@ -59,9 +59,9 @@ namespace Selenium_OpenCart.Logic
             HomePage homePage = new HomePage();
             TopBar topBar = new TopBar();
             var product = homePage.FindAppropriateProduct(nameProduck);
-            Thread.Sleep(500);
+            Thread.Sleep(1500);
             product.ClickCartButton();
-            Thread.Sleep(500);
+            Thread.Sleep(1500);
             topBar.ShoppingCartButtonClick();
             shopingCartPage.GetProduct().GetProductName();
             shopingCartPage.GetProduct().ClickRemoveButton();
