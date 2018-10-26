@@ -12,6 +12,7 @@ using Selenium_OpenCart.Tools;
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [NonParallelizable]
     [SingleThreaded]
     class LoginPageTest
     {        

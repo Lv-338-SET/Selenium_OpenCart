@@ -21,6 +21,7 @@ using Selenium_OpenCart.Tools;
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [Parallelizable]
     class CartTests
     {
         const string URL = "http://40.118.125.245/";

@@ -18,6 +18,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
 {
     [TestFixture]
     [NonParallelizable]
+    [SingleThreaded]
     public class FeedbackTestsRelated
     {
         const string URL = "http://40.118.125.245/";

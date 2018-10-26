@@ -8,6 +8,7 @@ using Selenium_OpenCart.Data.Application;
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [Parallelizable]
     public class SearchTests
     {
         SearchMethods logicSearch;
