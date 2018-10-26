@@ -36,8 +36,10 @@ namespace Selenium_OpenCart.Tests
 
         [OneTimeTearDown]
         public void CloseDriver()
-        {
+        {                        
             Application.Remove();
+            DBDataReader name = new DBDataReader();
+            name.DeleteUsers("Clll7y@gmail.com");
         }
 
         [Test, Order(0)]
@@ -81,7 +83,7 @@ namespace Selenium_OpenCart.Tests
             ChangePasswordMethods changePassword = new ChangePasswordMethods();
             changePassword.GoToChangePasswordPage(email, password);
             changePassword.FillingNewPasswords(Newpassword, NewpasswordConfirm);
-            Assert.IsTrue(VerifyChangedPassword.VerifyChangedPasswordUser());
+            Assert.IsTrue(VerifyChangedPassword.VerifyChangedPasswordUser());            
         }
 
        
