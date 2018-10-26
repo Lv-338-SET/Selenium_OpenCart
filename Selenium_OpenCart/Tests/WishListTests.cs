@@ -16,6 +16,7 @@ namespace Selenium_OpenCart.Tests
 {
     
     [TestFixture]
+    [NonParallelizable]
     [SingleThreaded]
     public class WishListTests
     {
