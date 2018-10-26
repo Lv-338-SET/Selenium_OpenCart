@@ -30,8 +30,8 @@ namespace Selenium_OpenCart.Tests
         public void BeforeEachTests()
         {           
 
-            Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
-            Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.ChromeNew()).ApplicationSource.HomePageUrl);
+            Application.Get(ApplicationSourceRepository.RemoteChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get(ApplicationSourceRepository.RemoteChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.RemoteChromeNew()).ApplicationSource.HomePageUrl);
             
             //LogIn to the site
             MyAccountPage myAccountPage = new LoginPageMethods().LogIntoAccount(EMAIL, PASSWORD);

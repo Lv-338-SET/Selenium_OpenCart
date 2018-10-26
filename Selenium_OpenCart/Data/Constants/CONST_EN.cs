@@ -8,6 +8,9 @@ namespace Selenium_OpenCart.Data.Constants
 {
     public static class CONST_EN
     {
+        //WebDriver constantr
+        public const string SELENIUM_HUB_URL = "http://35.195.16.18:4444/wd/hub";
+
         //Test constants
         #region
         public const int TEST_IMPLISIT_WAIT = 5;

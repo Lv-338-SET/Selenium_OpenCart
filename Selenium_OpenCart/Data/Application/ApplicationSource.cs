@@ -6,6 +6,7 @@ namespace Selenium_OpenCart.Data.Application
     {
         //Browser Data
         public string BrowserName { get; private set; }
+        public string RemoteBrowserName { get; private set; }
 
         //Implicit and Implicit Waits
         public long ImplicitWaitTimeOut { get; private set; }
@@ -19,12 +20,13 @@ namespace Selenium_OpenCart.Data.Application
         public string HomePageUrl { get; private set; }
 
         public ApplicationSource(string browserName, long implicitWaitTimeOut,
-                long explicitTimeOut, string homePageUrl, string[] optionsParams = null)
+                long explicitTimeOut, string homePageUrl, string[] optionsParams = null, string remoteBrowserName = null)
         {
             this.BrowserName = browserName;
             this.ImplicitWaitTimeOut = implicitWaitTimeOut;
             this.ExplicitTimeOut = explicitTimeOut;
             this.HomePageUrl = homePageUrl;
+            this.RemoteBrowserName = remoteBrowserName;
             SetOptions(optionsParams);
         }
 
