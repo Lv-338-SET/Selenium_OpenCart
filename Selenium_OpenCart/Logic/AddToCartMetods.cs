@@ -23,9 +23,9 @@ namespace Selenium_OpenCart.Logic
             HomePage homePage = new HomePage();
             TopBar topBar = new TopBar();
             var product = homePage.FindAppropriateProduct(nameProduck);
-            Thread.Sleep(500);
+            Thread.Sleep(1500);
             product.ClickCartButton();
-            Thread.Sleep(500);
+            Thread.Sleep(1500);
             topBar.ShoppingCartButtonClick();
             return shopingCartPage.GetProduct().GetProductName();
 
