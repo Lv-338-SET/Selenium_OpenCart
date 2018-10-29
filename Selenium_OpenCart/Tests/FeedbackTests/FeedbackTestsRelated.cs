@@ -37,7 +37,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [SetUp]
         public void BeforeEachTest()
         {
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew(Grid));
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid));
         }
 
         [TearDown]
@@ -62,7 +62,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview"), Order(1)]
         public void TestCase649AddReviewTest(IProductReview review)
         {
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew(Grid)).Browser.OpenUrl(URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
 
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage();  },
@@ -99,7 +99,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649,
                 "Blocked. Preconditions fail: add review test failed");
 
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew(Grid)).Browser.OpenUrl(ADMIN_URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(ADMIN_URL);
 
             LoginPageLogic loginPage = new LoginPageLogic();
             Assert.True(loginPage.LoginPage.IsLoginPage(), 
@@ -133,7 +133,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649 && TestCase670, 
                 "Blocked. Preconditions fail: add review test failed or approve review test failed");
 
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew(Grid)).Browser.OpenUrl(URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
 
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage(); },
@@ -169,7 +169,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649,
                 "Blocked. Preconditions fail: add review test failed");
 
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew(Grid)).Browser.OpenUrl(ADMIN_URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(ADMIN_URL);
 
             LoginPageLogic loginPage = new LoginPageLogic();
             Assert.True(loginPage.LoginPage.IsLoginPage(),

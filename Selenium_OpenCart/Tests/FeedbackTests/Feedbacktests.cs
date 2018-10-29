@@ -29,7 +29,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [SetUp]
         public void BeforeEachTest()
         {
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew(Grid));
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid));
         }
 
         [TearDown]
@@ -50,7 +50,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview")]
         public void TestCase703VerifyNotSelectedRatingMessage(IProductReview validReview, IProductReview invalidReview)
         {
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew(Grid)).Browser.OpenUrl(URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
 
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage(); },
@@ -83,7 +83,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview")]
         public void TestCase704VerifyInvalidTextMessage(IProductReview validReview, IProductReview invalidReview)
         {
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew(Grid)).Browser.OpenUrl(URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
 
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage(); },
@@ -116,7 +116,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview")]
         public void TestCase705VerifyInvalidRevierNameMessage(IProductReview validReview, IProductReview invalidReview)
         {
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew(Grid)).Browser.OpenUrl(URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
 
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage(); },
