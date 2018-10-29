@@ -18,7 +18,7 @@ namespace Selenium_OpenCart.Tests
 
         [OneTimeSetUp]
         public void BeforeAllMethods()
-        {
+        {            
             Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
             cm = new CurencyMethods();
             cm.LoggedIn(USER_LOGIN, USER_PASSWOR);

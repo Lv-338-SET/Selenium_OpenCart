@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Selenium_OpenCart.Data.Application
 {
@@ -6,6 +7,7 @@ namespace Selenium_OpenCart.Data.Application
     {
         //Browser Data
         public string BrowserName { get; private set; }
+        public string RemoteBrowserName { get; private set; }
 
         //Implicit and Implicit Waits
         public long ImplicitWaitTimeOut { get; private set; }
@@ -14,18 +16,20 @@ namespace Selenium_OpenCart.Data.Application
 
         //Params for brouser. Each Arguments most be preceeded by two dashes ("--")
         public string[] optionsParams = null;
+        public Dictionary<string, object> capabilitiesParams = null;
         public string LoginPagetUrl { get { return $"{HomePageUrl}index.php?route=account/login"; } }
         public string LogoutPageUrl { get { return $"{HomePageUrl}index.php?route=account/logout"; } }
         public string HomePageUrl { get; private set; }
 
         public ApplicationSource(string browserName, long implicitWaitTimeOut,
-                long explicitTimeOut, string homePageUrl, string[] optionsParams = null)
+                long explicitTimeOut, string homePageUrl, string[] optionsParams = null, Dictionary<string, object> capabilities = null)
         {
             this.BrowserName = browserName;
             this.ImplicitWaitTimeOut = implicitWaitTimeOut;
             this.ExplicitTimeOut = explicitTimeOut;
-            this.HomePageUrl = homePageUrl;
+            this.HomePageUrl = homePageUrl;            
             SetOptions(optionsParams);
+            SetCapabilities(capabilities);
         }
 
         private void SetOptions(string[] optionsParams)
@@ -37,6 +41,17 @@ namespace Selenium_OpenCart.Data.Application
             else
             {
                 this.optionsParams = optionsParams;
+            }
+        }
+        private void SetCapabilities(Dictionary<string, object> capabilitiesParams)
+        {
+            if (capabilitiesParams == null)
+            {
+                this.capabilitiesParams = new Dictionary<string, object>(0);
+            }
+            else
+            {
+                this.capabilitiesParams = new Dictionary<string, object>(capabilitiesParams);
             }
         }
     }
