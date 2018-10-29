@@ -7,6 +7,7 @@ using Selenium_OpenCart.Data.Address;
 using Selenium_OpenCart.Pages.Body.MyAccountFolder;
 using Selenium_OpenCart.Logic;
 using NLog;
+using Selenium_OpenCart.Data.Constants;
 
 
 namespace Selenium_OpenCart.Tests
@@ -30,13 +31,14 @@ namespace Selenium_OpenCart.Tests
         public void BeforeEachTests()
         {           
 
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();
-            Application.Get(ApplicationSourceRepository.RemoteChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.RemoteChromeNew()).ApplicationSource.HomePageUrl);
-            
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();            
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew()).ApplicationSource.HomePageUrl);
+
             //LogIn to the site
             MyAccountPage myAccountPage = new LoginPageMethods().LogIntoAccount(EMAIL, PASSWORD);
             //Click on "Address Book" link
-            myAccountPage.ClickLinkAddressBook();            
+            myAccountPage.ClickLinkAddressBook();           
+            
         }        
 
         [TearDown]

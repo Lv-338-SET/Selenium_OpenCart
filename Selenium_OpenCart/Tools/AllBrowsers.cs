@@ -21,7 +21,7 @@ namespace Selenium_OpenCart.Tools
         {   
             Uri uriSelenium = new Uri(CONST_EN.SELENIUM_HUB_URL);
                
-            switch (applicationSource.RemoteBrowserName)
+            switch (applicationSource.capabilitiesParams["browser"])
             {
                 case ApplicationSourceRepository.CHROME_BROWSER:
                     return remoteChromeBrowser();                    
@@ -36,23 +36,55 @@ namespace Selenium_OpenCart.Tools
 
             RemoteWebDriver remoteChromeBrowser()
             {
-                ChromeOptions options = new ChromeOptions();                
-                //options.AddArguments("headless");                
+                ChromeOptions options = new ChromeOptions();                                
+                
+
+                if (applicationSource.capabilitiesParams.Count > 0)
+                {
+                    foreach(var capabilities in applicationSource.capabilitiesParams)
+                    {
+                        options.AddAdditionalCapability(capabilities.Key, capabilities.Value, true);                        
+                    }
+                }
                 options.AddArguments(applicationSource.optionsParams);
-                return new RemoteWebDriver(uriSelenium, options);
+                return new RemoteWebDriver(uriSelenium, options.ToCapabilities());
             }
 
             RemoteWebDriver remoteFirefoxBrowser()
-            {
-                FirefoxOptions options = new FirefoxOptions();
-                //options.AddArguments("headless");
+            {                
+                FirefoxOptions options = new FirefoxOptions();                               
                 options.AddArguments(applicationSource.optionsParams);
-                return new RemoteWebDriver(uriSelenium, options);
+
+                if (applicationSource.capabilitiesParams.Count > 0)
+                {
+                    foreach (var capabilities in applicationSource.capabilitiesParams)
+                    {
+                        options.AddAdditionalCapability(capabilities.Key, capabilities.Value, true);
+                    }
+                }
+
+                return new RemoteWebDriver(uriSelenium, options.ToCapabilities());
             }
 
             RemoteWebDriver remoteIeBrowser()
-            {
-                InternetExplorerOptions options = new InternetExplorerOptions();                
+            {                
+                DesiredCapabilities options = new DesiredCapabilities();
+
+                if (applicationSource.capabilitiesParams.Count > 0)
+                {
+                    foreach (var capabilities in applicationSource.capabilitiesParams)
+                    {
+                        if(capabilities.Key != "browser")
+                        {
+                            options.SetCapability(capabilities.Key, capabilities.Value);
+                        }
+                        else
+                        {
+                            options.SetCapability("browserName", capabilities.Value);
+                        }
+                    }
+                }
+
                 return new RemoteWebDriver(uriSelenium, options);
             }      
         }
@@ -157,6 +189,6 @@ namespace Selenium_OpenCart.Tools
                 Driver.Quit();
                 Driver = null;
             }
-        }
+        }   
     }
 }
