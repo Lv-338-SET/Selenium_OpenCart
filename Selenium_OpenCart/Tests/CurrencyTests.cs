@@ -8,7 +8,6 @@ using Selenium_OpenCart.Tools;
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
-    [Parallelizable]
     class CurrencyTests
     {
         const string TESTED_PRODUCT_NAME = "MacBook Air";
