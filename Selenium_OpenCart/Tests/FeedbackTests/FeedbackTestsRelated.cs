@@ -13,6 +13,8 @@ using Selenium_OpenCart.AdminPages.HeaderAndNavigation;
 using Selenium_OpenCart.AdminPages.Body.ReviewsPage;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
+using System;
 
 namespace Selenium_OpenCart.Tests.FeedbackTests
 {
@@ -27,6 +29,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         const string ADMIN_HOME_PAGE_NAME = "Dashboard";
         const string REVIEWS_PAGE_NAME = "Reviews";
         const string REVIEW_ADDED_ALERT_TEXT = "Thank you for your review. It has been submitted to the webmaster for approval.";
+        readonly Uri Grid = new System.Uri(Data.Constants.CONST_EN.LEMM_SELENIUM_HUB_URL);
 
         bool TestCase649 = false;
         bool TestCase670 = false;
@@ -34,9 +37,8 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [SetUp]
         public void BeforeEachTest()
         {
-            Application.Get();
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid));
         }
-
 
         [TearDown]
         public void AfterEachTest()
@@ -60,7 +62,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview"), Order(1)]
         public void TestCase649AddReviewTest(IProductReview review)
         {
-            Application.Get().Browser.OpenUrl(URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
 
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage();  },
@@ -97,7 +99,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649,
                 "Blocked. Preconditions fail: add review test failed");
 
-            Application.Get().Browser.OpenUrl(ADMIN_URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(ADMIN_URL);
 
             LoginPageLogic loginPage = new LoginPageLogic();
             Assert.True(loginPage.LoginPage.IsLoginPage(), 
@@ -131,7 +133,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649 && TestCase670, 
                 "Blocked. Preconditions fail: add review test failed or approve review test failed");
 
-            Application.Get().Browser.OpenUrl(URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
 
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage(); },
@@ -167,7 +169,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649,
                 "Blocked. Preconditions fail: add review test failed");
 
-            Application.Get().Browser.OpenUrl(ADMIN_URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(ADMIN_URL);
 
             LoginPageLogic loginPage = new LoginPageLogic();
             Assert.True(loginPage.LoginPage.IsLoginPage(),

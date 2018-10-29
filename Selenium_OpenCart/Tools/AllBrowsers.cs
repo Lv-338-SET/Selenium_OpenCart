@@ -18,9 +18,7 @@ namespace Selenium_OpenCart.Tools
     public class RemoteBrowser: IBrowser
     {
         public IWebDriver GetBrowser(ApplicationSource applicationSource)
-        {   
-            Uri uriSelenium = new Uri(CONST_EN.SELENIUM_HUB_URL);
-               
+        {                  
             switch (applicationSource.capabilitiesParams["browser"])
             {
                 case ApplicationSourceRepository.CHROME_BROWSER:
@@ -47,7 +45,7 @@ namespace Selenium_OpenCart.Tools
                     }
                 }
                 options.AddArguments(applicationSource.optionsParams);
-                return new RemoteWebDriver(uriSelenium, options.ToCapabilities());
+                return new RemoteWebDriver(applicationSource.Uri, options.ToCapabilities());
             }
 
             RemoteWebDriver remoteFirefoxBrowser()
@@ -63,7 +61,7 @@ namespace Selenium_OpenCart.Tools
                     }
                 }
 
-                return new RemoteWebDriver(uriSelenium, options.ToCapabilities());
+                return new RemoteWebDriver(applicationSource.Uri, options.ToCapabilities());
             }
 
             RemoteWebDriver remoteIeBrowser()
@@ -85,7 +83,7 @@ namespace Selenium_OpenCart.Tools
                     }
                 }
 
-                return new RemoteWebDriver(uriSelenium, options);
+                return new RemoteWebDriver(applicationSource.Uri, options);
             }      
         }
     }

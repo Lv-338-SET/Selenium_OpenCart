@@ -11,7 +11,9 @@ namespace Selenium_OpenCart.Data.Constants
         //WebDriver constantr
         public const string SELENIUM_HUB_URL = "http://35.195.16.18:4444/wd/hub";
         public const string TEST_SITE_URL = "http://40.118.125.245/";
+        public const string LEMM_SELENIUM_HUB_URL = "http://23.97.238.112:4444/wd/hub";
 
+    
         //Test constants
         #region
         public const int TEST_IMPLISIT_WAIT = 5;

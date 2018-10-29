@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium.Remote;
 using Selenium_OpenCart.Data.Constants;
+using System;
 using System.Collections.Generic;
 
 namespace Selenium_OpenCart.Data.Application
@@ -15,7 +16,7 @@ namespace Selenium_OpenCart.Data.Application
 
         public static ApplicationSource Default()
         {
-            return RemoteChromeNew();
+            return RemoteChromeNew(new Uri(CONST_EN.SELENIUM_HUB_URL));
         }
 
         public static ApplicationSource myStart(ApplicationSource returnNew)
@@ -37,7 +38,7 @@ namespace Selenium_OpenCart.Data.Application
             return new ApplicationSource(CHROME_BROWSER, 10L, 10L,
                 CONST_EN.TEST_SITE_URL, option);
         }
-        public static ApplicationSource RemoteChromeNew()
+        public static ApplicationSource RemoteChromeNew(Uri Uri)
         {            
             var option = new[] { "--no-gpu", "--disable-software-rasterizer", "--headless", "--mute-audio",
                 "--hide-scrollbars" };
@@ -48,10 +49,10 @@ namespace Selenium_OpenCart.Data.Application
             };
 
             return new ApplicationSource(REMOTE_BROWSER, 10L, 10L,
-               CONST_EN.TEST_SITE_URL, option, capabilities);
+               CONST_EN.TEST_SITE_URL, option, capabilities, Uri);
         }
 
-        public static ApplicationSource RemoteLinuxChromeNew()
+        public static ApplicationSource RemoteLinuxChromeNew(Uri Uri)
         {
             var option = new[] {"--no-sandbox","--display=:99.0"}; //Runs tests using virtual desktop 
             Dictionary<string, object> capabilities = new Dictionary<string, object>
@@ -61,7 +62,7 @@ namespace Selenium_OpenCart.Data.Application
             };
 
             return new ApplicationSource(REMOTE_BROWSER, 10L, 10L,
-                CONST_EN.TEST_SITE_URL, option, capabilities);
+                CONST_EN.TEST_SITE_URL, option, capabilities, Uri);
         }
         public static ApplicationSource ChromeDemo()
         {
@@ -76,7 +77,7 @@ namespace Selenium_OpenCart.Data.Application
             return new ApplicationSource(INTERNET_EXPLORER_BROWSER, 10L, 10L,
                 "http://regres.herokuapp.com/login");
         }
-        public static ApplicationSource RemoteInternetExplorerNew()
+        public static ApplicationSource RemoteInternetExplorerNew(Uri Uri)
         {
             Dictionary<string, object> capabilities = new Dictionary<string, object>
             {
@@ -90,7 +91,7 @@ namespace Selenium_OpenCart.Data.Application
             };
 
             return new ApplicationSource(REMOTE_BROWSER, 10L, 10L,
-                CONST_EN.TEST_SITE_URL, null, capabilities);
+                CONST_EN.TEST_SITE_URL, null, capabilities, Uri);
         }
 
         public static ApplicationSource FirefoxDemo()
