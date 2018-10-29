@@ -21,8 +21,10 @@ namespace Selenium_OpenCart.Data.Application
         public string LogoutPageUrl { get { return $"{HomePageUrl}index.php?route=account/logout"; } }
         public string HomePageUrl { get; private set; }
 
+        public Uri Uri { get; private set; }
+
         public ApplicationSource(string browserName, long implicitWaitTimeOut,
-                long explicitTimeOut, string homePageUrl, string[] optionsParams = null, Dictionary<string, object> capabilities = null)
+                long explicitTimeOut, string homePageUrl, string[] optionsParams = null, Dictionary<string, object> capabilities = null, Uri Uri = null)
         {
             this.BrowserName = browserName;
             this.ImplicitWaitTimeOut = implicitWaitTimeOut;
@@ -30,6 +32,7 @@ namespace Selenium_OpenCart.Data.Application
             this.HomePageUrl = homePageUrl;            
             SetOptions(optionsParams);
             SetCapabilities(capabilities);
+            this.Uri = Uri;
         }
 
         private void SetOptions(string[] optionsParams)
