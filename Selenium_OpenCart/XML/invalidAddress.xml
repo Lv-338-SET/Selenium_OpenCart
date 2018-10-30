@@ -1,0 +1,11 @@
+<test>
+  <firstname></firstname>
+  <lastname></lastname>
+  <company></company>
+  <address1>1</address1>
+  <address2></address2>
+  <city>a</city>
+  <postcode>222</postcode>
+  <country> --- Please Select --- </country>
+  <region> --- Please Select --- </region>
+</test>

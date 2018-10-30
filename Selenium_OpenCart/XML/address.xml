@@ -1,0 +1,11 @@
+<test>
+  <firstname>Victor</firstname>
+  <lastname>Zinko</lastname>
+  <company>SoftServe</company>
+  <address1>Grinchenko, 7</address1>
+  <address2>Naukova, 5</address2>
+  <city>Lviv</city>
+  <postcode>11001</postcode>
+  <country>Ukraine</country>
+  <region>L'vivs'ka Oblast'</region>
+</test>
