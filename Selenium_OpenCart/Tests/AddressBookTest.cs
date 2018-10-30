@@ -54,59 +54,63 @@ namespace Selenium_OpenCart.Tests
             log.Info("Test finished!");
         }
 
-        [TestCase(NEW_SHORT_ADDRESS)]
-        public void Test1CreateNewAddressTest(string expected)        
-        {
-            //Arrange
-            AddressBookPage addressBook = new AddressBookPage();                
+        [TestCase(NEW_SHORT_ADDRESS, EDIT_SHORT_ADDRESS)]
+        public void SmokeAddressTest(string newAddress, string editNewAddress)        
+        {            
+            AddressBookPage addressBook = new AddressBookPage();
+            
+            //Add new address test
             AddNewAddressPage newAddressPage = addressBook.GoToNewAddressPage();
             addressBook = newAddressPage.FillAllRequareField(adressInput.GetFirstName(), 
                     adressInput.GetLastName(), adressInput.GetAddress1(), adressInput.GetCity(),
                          adressInput.GetPostCode(), adressInput.GetCountry(), adressInput.GetZone())
             .Continue();
-            
-            //Act
-            bool actual = addressBook.IsAddressInTableByShortAddress(expected);
-
-            //Assert
-            Assert.IsTrue(actual);
-            log.Info("\"Create New Address Test\" pass");
-        }
-
-        [TestCase(NEW_SHORT_ADDRESS, EDIT_SHORT_ADDRESS)]
-        public void Test2EditAddressTest(string oldAddress, string expected)
-        {
-            //Arrange
-            AddressBookPage addressBook = new AddressBookPage();
-            EditAddressPage editAddress = addressBook.EditAddress(oldAddress);                        
-            addressBook = editAddress.FillAllNotRequareField(adressInput.GetCompany(), 
-                adressInput.GetAddress2(), adressInput.GetPostCode()).Continue();            
-
-            //Act
-            bool actual = addressBook.IsAddressInTableByShortAddress(expected);
-
-            //Assert
-            Assert.True(actual);
-            log.Info("\"Edit Address Test\" pass");
-        }
-
-        [TestCase(EDIT_SHORT_ADDRESS)]
-        public void Test3DeleteAddressTest(string expected)
-        {
-            //Arrange
-            AddressBookPage addressBook = new AddressBookPage();            
-                        
-            while (addressBook.IsAddressInTableByShortAddress(expected))
+            try
             {
-                addressBook.GetAddressByShortAddress(expected).DeleteButton.Click();
+                Assert.IsTrue(addressBook.IsAddressInTableByShortAddress(newAddress), "Create new address Test, FAIL");
             }
+            catch(AssertionException)
+            {
+                log.Info("\"Create new address Test\" FAIL");
+                new AddressBookException("Create new address Test, FAIL");                
+            }
+
+            //Edit address test
+            EditAddressPage editAddress = addressBook.EditAddress(newAddress);                        
+            addressBook = editAddress.FillAllNotRequareField(adressInput.GetCompany(), 
+                adressInput.GetAddress2(), adressInput.GetPostCode()).Continue();
+
+            try
+            {
+                Assert.True(addressBook.IsAddressInTableByShortAddress(editNewAddress));
+            }
+            catch (AssertionException)
+            {
+                log.Info("\"Edit Address Test\" FAIL");
+                new AddressBookException("Edit address Test, FAIL");                
+            }            
+            log.Info("\"Edit Address Test\" pass"); 
             
-            //Act
-            bool actual = addressBook.IsAddressInTableByShortAddress(expected);
-            
-            //Assert
-            Assert.IsFalse(actual);
-            log.Info("\"Delete Address Test\" pass");            
+            //Delete address test
+            while (addressBook.IsAddressInTableByShortAddress(editNewAddress))
+            {
+                addressBook.GetAddressByShortAddress(editNewAddress).DeleteButton.Click();
+                if (addressBook.GetAddressesTableLength()==1)
+                {
+                    log.Info("\""+editNewAddress+" - The last address in table \" FAIL");
+                    throw new AddressBookException("Delete address Test, FAIL");                    
+                }
+            }
+            try
+            {
+                Assert.IsFalse(addressBook.IsAddressInTableByShortAddress(editNewAddress));
+            }
+            catch (AssertionException)
+            {
+                log.Info("\"Delete Address Test\" FAIL");
+                new AddressBookException("Delete address Test, FAIL");                
+            }           
+            log.Info("\"All Test\" pass");            
         }
 
         [Test]

@@ -50,7 +50,7 @@ namespace Selenium_OpenCart.Pages.Body.AddressBookPage
         public bool IsNoAddressMessage 
             { get { return Search.ElementByXPath("//p[ . = '"+ NO_ADDRESSES_MESSAGE +"']").Enabled;} }
         public bool IsTable
-            { get { return Search.ElementByCssSelector("#content table").Enabled;} }
+            { get { return Search.ElementByCssSelector("#content table").Enabled;} }        
 
         public AddressBookPage()
         {            

@@ -39,15 +39,15 @@ namespace Selenium_OpenCart.Data.Application
         }
         public static ApplicationSource RemoteChromeNew()
         {            
-            var option = new[] { "--no-gpu", "--disable-software-rasterizer", "--headless", "--mute-audio",
-                "--hide-scrollbars" };
+            var option = new[] {  "--heedless", "--no-proxy-server", "--ignore-certificate-errors"
+                        , "--disable-extensions", "--start-maximized" };
             Dictionary<string, object> capabilities = new Dictionary<string, object>
             {
                 { "browser", CHROME_BROWSER },
                 { CapabilityType.Platform, "Windows" }
             };
 
-            return new ApplicationSource(REMOTE_BROWSER, 10L, 10L,
+            return new ApplicationSource(REMOTE_BROWSER, 20L, 20L,
                CONST_EN.TEST_SITE_URL, option, capabilities);
         }
 
@@ -60,7 +60,7 @@ namespace Selenium_OpenCart.Data.Application
                 { CapabilityType.Platform, "Linux" }
             };
 
-            return new ApplicationSource(REMOTE_BROWSER, 10L, 10L,
+            return new ApplicationSource(REMOTE_BROWSER, 20L, 20L,
                 CONST_EN.TEST_SITE_URL, option, capabilities);
         }
         public static ApplicationSource ChromeDemo()
@@ -100,10 +100,12 @@ namespace Selenium_OpenCart.Data.Application
         }
         public static ApplicationSource RemoteFirefoxNew()
         {
-            var option = new[] { "--headless", "--ignore-certificate-errors", "--acceptInsecureCerts-false" };
+            var option = new[] { "--ignore-certificate-errors" };
             Dictionary<string, object> capabilities = new Dictionary<string, object>
             {
-                { "browser", FIREFOX_BROWSER }                
+                { "browser", FIREFOX_BROWSER },
+                {"acceptInsecureCerts", true }
+                
             };
             return new ApplicationSource(REMOTE_BROWSER, 10L, 10L,
                 CONST_EN.TEST_SITE_URL, option, capabilities);
