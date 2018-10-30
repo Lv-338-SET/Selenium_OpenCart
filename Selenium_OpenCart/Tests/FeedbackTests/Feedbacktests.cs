@@ -25,11 +25,10 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         const string INVALID_REVIEWER_NAME_ALERT_TEXT = "Warning: Review Name must be between 3 and 25 characters!";
         readonly Uri Grid = new System.Uri(Data.Constants.CONST_EN.LEMM_SELENIUM_HUB_URL);
 
-
         [SetUp]
         public void BeforeEachTest()
         {
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid));
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
         }
 
         [TearDown]
@@ -38,7 +37,12 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Application.Remove();
         }
 
-        private static readonly object[] ValidProductReview =
+        private static readonly object[] RatingProductReview =
+{
+            new object[] { ProductReviewRepository.Get().ValidHP(), ProductReviewRepository.Get().InvalidOnLeftEndgeOfBVClass() }
+        };
+
+        private static readonly object[] ProductReview =
         {
             new object[] { ProductReviewRepository.Get().ValidHP(), ProductReviewRepository.Get().InvalidOnLeftEndgeOfBVClass() },
             new object[] { ProductReviewRepository.Get().ValidHP(), ProductReviewRepository.Get().InvalidOnRightEndgeOfBVClass() }
@@ -47,11 +51,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         /// <summary>
         /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-703
         /// </summary>
-        [Test, TestCaseSource("ValidProductReview")]
+        [Test, TestCaseSource("RatingProductReview")]
         public void TestCase703VerifyNotSelectedRatingMessage(IProductReview validReview, IProductReview invalidReview)
         {
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
-
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage(); },
                 "Step 1 Failed: Not home page");
@@ -80,11 +82,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         /// <summary>
         /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-704
         /// </summary>
-        [Test, TestCaseSource("ValidProductReview")]
+        [Test, TestCaseSource("ProductReview")]
         public void TestCase704VerifyInvalidTextMessage(IProductReview validReview, IProductReview invalidReview)
         {
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
-
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage(); },
                 "Step 1 Failed: Not home page");
@@ -113,11 +113,9 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         /// <summary>
         /// http://ssu-jira.softserveinc.com/browse/CCCXXXVIII-705
         /// </summary>
-        [Test, TestCaseSource("ValidProductReview")]
+        [Test, TestCaseSource("ProductReview")]
         public void TestCase705VerifyInvalidRevierNameMessage(IProductReview validReview, IProductReview invalidReview)
         {
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
-
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage(); },
                 "Step 1 Failed: Not home page");
