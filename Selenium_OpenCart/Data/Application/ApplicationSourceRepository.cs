@@ -16,7 +16,7 @@ namespace Selenium_OpenCart.Data.Application
 
         public static ApplicationSource Default()
         {
-            return RemoteChromeNew(new Uri(CONST_EN.SELENIUM_HUB_URL));
+            return ChromeNew();
         }
 
         public static ApplicationSource myStart(ApplicationSource returnNew)
