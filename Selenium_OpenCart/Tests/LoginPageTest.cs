@@ -8,6 +8,7 @@ using Selenium_OpenCart.Pages.Body.EditAccount;
 using Selenium_OpenCart.Pages.Body.LoginPage;
 using Selenium_OpenCart.Pages.Body.RegisterPage;
 using Selenium_OpenCart.Tools;
+using System;
 
 namespace Selenium_OpenCart.Tests
 {
@@ -15,24 +16,25 @@ namespace Selenium_OpenCart.Tests
     [NonParallelizable]
     [SingleThreaded]
     class LoginPageTest
-    {        
+    {
 
         //const string URL = "http://40.118.125.245/";
         //const string URL_LOGOUT = "http://40.118.125.245/index.php?route=account/logout";
         ////const string URL_HOME = "http://atqc-shop.epizy.com/index.php?route=common/home";
+        readonly Uri Grid = new System.Uri(Data.Constants.CONST_EN.OREST_SELENIUM_HUB_URL);
 
         [OneTimeSetUp]
         public void SetUp()
         {
-            Application.Get();
-            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid));
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).ApplicationSource.HomePageUrl);
         }
 
         [TearDown]
         public void DeleteCookies()
         {
-            Application.Get().Browser.Driver.Manage().Cookies.DeleteAllCookies();
-            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.LogoutPageUrl);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.Driver.Manage().Cookies.DeleteAllCookies();
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).ApplicationSource.LogoutPageUrl);
         }
 
         [OneTimeTearDown]
