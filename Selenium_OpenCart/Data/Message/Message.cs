@@ -52,6 +52,8 @@ namespace Selenium_OpenCart.Data.Message
     public interface IMessageBuilder
     {
         IMessageBuilder SetMessage(string message);
+        IMessageBuilder SetStatus(string status);
+
         IMessage Build();
     }
 
