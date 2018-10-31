@@ -364,6 +364,31 @@ namespace Selenium_OpenCart
             }
             return list;
         }
+
+        public List<ICurrency> DeleteUsers(string whereString = "")
+        {
+            List<ICurrency> list = new List<ICurrency>();
+            DBAdapter adapter = new DBAdapter();
+            int deleted;
+            try
+            {
+                adapter.OpenConnection();
+                if (whereString != "")
+                {
+                    deleted = adapter.GetDeleteUser(where: whereString);
+                }                       
+
+            }
+            catch
+            {
+                throw new Exception();
+            }
+            finally
+            {
+                adapter.CloseConnection();
+            }
+            return list;
+        }
     }
 
 }

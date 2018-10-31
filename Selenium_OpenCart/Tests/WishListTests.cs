@@ -16,11 +16,12 @@ namespace Selenium_OpenCart.Tests
 {
     
     [TestFixture]
-    [SingleThreaded]
+    [Parallelizable]
     public class WishListTests
     {
         IProduct inputProduct = new XMLDataParser().GetInputProduct();
         IUser user = new XMLDataParser().GetUserInputData();
+        readonly Uri Grid = new System.Uri("http://40.124.42.236:4444/wd/hub");
         bool addedToWishList = false;
 
         [Test]
@@ -81,7 +82,7 @@ namespace Selenium_OpenCart.Tests
         [OneTimeSetUp]
         public void BeforeClass()
         {
-            Application.Get().Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
             
             //Logging in
             LoginPageMethods login = new LoginPageMethods();

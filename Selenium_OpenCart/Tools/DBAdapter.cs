@@ -131,6 +131,23 @@ namespace Selenium_OpenCart
                 .ExecuteNonQuery();
 
         }
+
+        public int GetDeleteUser(string columns = "oc_customer", string where = "")
+        {
+            string cmd = String.Format("DELETE FROM {0} ", columns);
+
+            if (where != "")
+            {
+                cmd += String.Format(" WHERE email = \"{0}\"", where);
+            }          
+
+            cmd = String.Format(cmd, ";");
+
+            int reader;
+            reader = new MySqlCommand(cmd, this.conn).
+                ExecuteNonQuery();
+            return reader;
+        }
         #endregion
 
     }
