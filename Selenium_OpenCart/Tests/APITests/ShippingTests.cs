@@ -23,8 +23,9 @@ namespace Selenium_OpenCart.Tests.APITests
             APIMethod api = new APIMethod();
             string key = "d5YFz2RyNjnNXpkTqpNaoGAIPHuipKbmKnlRwOP2Jrls05gZJi3hDNbS8Orvbm5XAYJZ1ckrL3SQqikPo1V7FyPPiG7JEfYhWqjLHhjvXb0HED3EyNt2CHSVLzNIlgpzWzjXFh2HiHfCJd2XSubGlCTczDR5uXP2V5rNX1Gjt8uK05Hd1eeRiytEmoIEDjeXW1mw14oL1qxSBATmmv5CZJzmSTayghm2cXWZYw1msbPEhuItfrBzXJcuaV188neq";
             string username = "Default";
-            api_token = (api.ApiGetToken(username, key).Value as ILogin).GetApiToken();
-            api.ApiSetShippingAddress("SomeName", "SomeLastName", "somewhere", "Lviv", "666", "LV", api_token);
+            api_token = (api.ApiGetToken(username, key).Value as ILogin).GetApiToken();api.ApiSetShippingAddress("SomeName", "SomeLastName", "somewhere", "KLD", "RUS", "KGD", api_token);
+
+
             api.ApiShippingMethod("pickup.pickup", api_token);
             api.ApiGetAvaliableShippingMethods(api_token);
         }
@@ -33,7 +34,7 @@ namespace Selenium_OpenCart.Tests.APITests
         public void SetShippingAddress()
         {
             APIMethod api = new APIMethod();
-            var expected = api.ApiSetShippingAddress("SomeName", "SomeLastName", "somewhere", "Lviv", "666", "LV", api_token);
+            var expected = api.ApiSetShippingAddress("SomeName", "SomeLastName", "somewhere", "KLD", "RUS", "KGD", api_token);
             Assert.AreEqual(expected.Key, HttpStatusCode.OK, "Wrong HTTP code returned");
         }
 
