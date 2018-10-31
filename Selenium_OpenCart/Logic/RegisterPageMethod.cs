@@ -43,8 +43,7 @@ namespace Selenium_OpenCart.Logic
             filling.ClickInputPasswordField(password);
             filling.ClickInputPasswordConfirmField(passwordConfirm);
             filling.CheckNewsletterSubscribe();
-            filling.ClickPrivacyPolicy();
-            //filling.ClickButtonContinue();
+            filling.ClickPrivacyPolicy();           
             return filling;
             
         }
