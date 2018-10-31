@@ -190,6 +190,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AddressBookTest.cs" />
     <Compile Include="Tests\APITests\LoginTests.cs" />
+    <Compile Include="Tests\APITests\ShippingTests.cs" />
     <Compile Include="Tests\CurrencyTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTests.cs" />
     <Compile Include="Tests\FeedbackTests\FeedbackTestsRelated.cs" />
