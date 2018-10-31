@@ -28,6 +28,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [SetUp]
         public void BeforeEachTest()
         {
+            //System.Diagnostics.Debugger.Launch();
             Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
         }
 
