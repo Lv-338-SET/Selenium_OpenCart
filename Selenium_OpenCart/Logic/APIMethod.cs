@@ -55,7 +55,14 @@ namespace Selenium_OpenCart.Logic
             }
             catch
             {
-                error = item["error"];
+                try
+                {
+                    error = item["error"];
+                }
+                catch
+                {
+                    error = "";
+                }
             }
             return Message.Get()
                     .SetMessage(error)
@@ -76,7 +83,16 @@ namespace Selenium_OpenCart.Logic
             }
             catch
             {
-                success = item["success"];
+
+                try
+                {
+                    success = item["success"];
+                }
+                catch
+                {
+                    success = "";
+                }
+                
             }
             return Message.Get()
                     .SetMessage(success)
