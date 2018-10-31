@@ -23,7 +23,7 @@ namespace Selenium_OpenCart.Logic
         public string key = "d5YFz2RyNjnNXpkTqpNaoGAIPHuipKbmKnlRwOP2Jrls05gZJi3hDNbS8Orvbm5XAYJZ1ckrL3SQqikPo1V7FyPPiG7JEfYhWqjLHhjvXb0HED3EyNt2CHSVLzNIlgpzWzjXFh2HiHfCJd2XSubGlCTczDR5uXP2V5rNX1Gjt8uK05Hd1eeRiytEmoIEDjeXW1mw14oL1qxSBATmmv5CZJzmSTayghm2cXWZYw1msbPEhuItfrBzXJcuaV188neq";
         public string Username = "Default";
 
-        public KeyValuePair<HttpStatusCode,string> GetResponceContent(string URLEnd, Method method, List<Parameter> parameters = null)
+        public KeyValuePair<HttpStatusCode, string> GetResponceContent(string URLEnd, Method method, List<Parameter> parameters = null)
         {
             string client_string = ApiURL + URLEnd;
 
@@ -39,26 +39,52 @@ namespace Selenium_OpenCart.Logic
             }
 
             IRestResponse responsw = client.Execute(request);
-            
+
             return new KeyValuePair<HttpStatusCode, string>(responsw.StatusCode, responsw.Content);
         }
 
-        public IMessage GetErrorMessage(dynamic item) {
+        public IMessage GetErrorMessage(dynamic item)
+        {
+            string error = "";
+            try
+            {
+                foreach (var current in item["error"])
+                {
+                    error += current.Value;
+                }
+            }
+            catch
+            {
+                error = item["error"];
+            }
             return Message.Get()
-                    .SetMessage(item["error"])
+                    .SetMessage(error)
                     .SetStatus("error")
-                    .Build;
+                    .Build();
         }
 
         public IMessage GetSuccessMessage(dynamic item)
         {
+            string success = "";
+            try
+            {
+
+                foreach (var current in item["success"])
+                {
+                    success += current.Value;
+                }
+            }
+            catch
+            {
+                success = item["success"];
+            }
             return Message.Get()
-                    .SetMessage(item["success"])
+                    .SetMessage(success)
                     .SetStatus("success")
-                    .Build;
+                    .Build();
         }
         //
-        public KeyValuePair<HttpStatusCode,object> ApiGetToken(string username, string key)
+        public KeyValuePair<HttpStatusCode, object> ApiGetToken(string username, string key)
         {
 
             List<Parameter> parameters = new List<Parameter>();
@@ -98,7 +124,7 @@ namespace Selenium_OpenCart.Logic
 
             try
             {
-                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key,GetSuccessMessage(item));
+                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key, GetSuccessMessage(item));
             }
             catch
             {
@@ -119,11 +145,11 @@ namespace Selenium_OpenCart.Logic
 
             try
             {
-                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key,GetSuccessMessage(item));
+                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key, GetSuccessMessage(item));
             }
             catch
             {
-                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key,GetErrorMessage(item));
+                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key, GetErrorMessage(item));
             }
 
         }
@@ -136,7 +162,7 @@ namespace Selenium_OpenCart.Logic
             parameters.Add(new Parameter("api_token", api_token, ParameterType.QueryString));
 
             JavaScriptSerializer serializer = new JavaScriptSerializer();
-            var response =GetResponceContent("cart/edit", Method.POST, parameters);
+            var response = GetResponceContent("cart/edit", Method.POST, parameters);
             dynamic item = serializer.Deserialize<object>(response.Value);
 
             try
@@ -312,7 +338,7 @@ namespace Selenium_OpenCart.Logic
             }
             catch
             {
-                return new KeyValuePair<HttpStatusCode, object>(response.Key, (Dictionary<string, object> ) item["error"]);
+                return new KeyValuePair<HttpStatusCode, object>(response.Key, (Dictionary<string, object>)item["error"]);
             }
 
         }
@@ -328,7 +354,7 @@ namespace Selenium_OpenCart.Logic
 
             try
             {
-                return new KeyValuePair<HttpStatusCode, object>(response.Key,(Dictionary<string, object>)item["shipping_methods"]);
+                return new KeyValuePair<HttpStatusCode, object>(response.Key, (Dictionary<string, object>)item["shipping_methods"]);
             }
             catch
             {
@@ -352,7 +378,7 @@ namespace Selenium_OpenCart.Logic
             }
             catch
             {
-                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key,GetErrorMessage(item));
+                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key, GetErrorMessage(item));
             }
 
         }
@@ -369,14 +395,14 @@ namespace Selenium_OpenCart.Logic
         {
             List<Parameter> parameters = new List<Parameter>();
             parameters.Add(new Parameter("api_token", api_token, ParameterType.QueryString));
-            
+
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             var response = GetResponceContent("reward/maximum", Method.POST, parameters);
             dynamic item = serializer.Deserialize<object>(response.Value);
 
             try
             {
-                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key,Message.Get()
+                return new KeyValuePair<HttpStatusCode, IMessage>(response.Key, Message.Get()
                     .SetMessage(item["maximum"])
                     .SetStatus("maximum")
                     .Build);
@@ -391,7 +417,7 @@ namespace Selenium_OpenCart.Logic
         {
             List<Parameter> parameters = new List<Parameter>();
             parameters.Add(new Parameter("api_token", api_token, ParameterType.QueryString));
-            
+
             return GetResponceContent("reward/avaliable", Method.POST, parameters);
         }
         //
