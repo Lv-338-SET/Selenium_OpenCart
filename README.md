@@ -1,4 +1,4 @@
-<h2>Lv-338.SET</h2>
+<h3>Lv-338.SET</h3>
 
 <h1 align="center">Software Engineering in Test</h1>
 
