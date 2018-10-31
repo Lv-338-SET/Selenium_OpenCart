@@ -34,4 +34,4 @@
 - [Orest Shkhumov](https://github.com/orest77)
 - [Orest Syniavskyi](https://github.com/orestsyn)
 - [Serhiy Ivanochko](https://github.com/serhiyivanochko)
-- [Zinko Viktor](https://github.com/zinkoviktor)
+- [Viktor Zinko](https://github.com/zinkoviktor)
