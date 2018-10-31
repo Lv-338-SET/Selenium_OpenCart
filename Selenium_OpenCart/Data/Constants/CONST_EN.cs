@@ -13,7 +13,7 @@ namespace Selenium_OpenCart.Data.Constants
         public const string TEST_SITE_URL = "http://40.118.125.245/";
         public const string LEMM_SELENIUM_HUB_URL = "http://23.97.238.112:4444/wd/hub";
         public const string OREST_SELENIUM_HUB_URL = "http://18.225.19.120:4444/wd/hub";
-        public const string ANDRII_SELENIUM_HUB_URL = "http://35.196.193.153:4444/wd/hub";
+        public const string ANDRII_SELENIUM_HUB_URL = "http://35.204.216.209:4444/wd/hub";
 
         //Test constants
         #region
