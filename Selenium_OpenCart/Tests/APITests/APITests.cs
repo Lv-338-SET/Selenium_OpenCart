@@ -16,6 +16,7 @@ using System.Net;
 namespace Selenium_OpenCart.Tests.APITests
 {
     [TestFixture]
+    [Parallelizable]
     class APITests
     {
         string username;
@@ -27,8 +28,7 @@ namespace Selenium_OpenCart.Tests.APITests
         {
             api = new APIMethod();
             key = "d5YFz2RyNjnNXpkTqpNaoGAIPHuipKbmKnlRwOP2Jrls05gZJi3hDNbS8Orvbm5XAYJZ1ckrL3SQqikPo1V7FyPPiG7JEfYhWqjLHhjvXb0HED3EyNt2CHSVLzNIlgpzWzjXFh2HiHfCJd2XSubGlCTczDR5uXP2V5rNX1Gjt8uK05Hd1eeRiytEmoIEDjeXW1mw14oL1qxSBATmmv5CZJzmSTayghm2cXWZYw1msbPEhuItfrBzXJcuaV188neq";
-            username = "Default";
-            
+            username = "Default";            
         }
 
         [Test]
@@ -41,6 +41,7 @@ namespace Selenium_OpenCart.Tests.APITests
             Assert.IsNotNull((expected.Value as ILogin).GetApiToken());
             Assert.AreEqual(expected.Key, HttpStatusCode.OK);   
         }
+
         [TestCase ("USD")]
         [TestCase("GBP")]
         public void TestAPICurrency(string code)
@@ -53,6 +54,7 @@ namespace Selenium_OpenCart.Tests.APITests
             Assert.AreEqual(expected.Value.GetStatus(),"success");
             Assert.AreEqual(expected.Key, HttpStatusCode.OK);
         }
+
         [TestCase(28,1)]
         public void TestAPIAddProductToCart(int product_id, int quantity)
         {

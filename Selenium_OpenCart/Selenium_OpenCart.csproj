@@ -192,7 +192,6 @@
     <Compile Include="Tests\APITests\APITests.cs" />
     <Compile Include="Tests\APITests\CartTest.cs" />
     <Compile Include="Tests\APITests\CouponTests.cs" />
-    <Compile Include="Tests\APITests\LoginTests.cs" />
     <Compile Include="Tests\APITests\OrderTests.cs" />
     <Compile Include="Tests\APITests\PaymentTests.cs" />
     <Compile Include="Tests\APITests\ShippingTests.cs" />
