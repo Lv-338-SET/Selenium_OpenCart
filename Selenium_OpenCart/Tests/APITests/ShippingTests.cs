@@ -33,9 +33,6 @@ namespace Selenium_OpenCart.Tests.APITests
         {
             APIMethod api = new APIMethod();
             var expected = api.ApiSetShippingAddress("SomeName", "SomeLastName", "somewhere", "KLD", "RUS", "KGD", api_token);
-
-            string a = expected.Value.ToString();
-
             Assert.AreEqual(expected.Key, HttpStatusCode.OK, "Wrong HTTP code returned");
         }
 
