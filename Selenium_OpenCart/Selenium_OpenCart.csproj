@@ -189,11 +189,8 @@
     <Compile Include="Pages\Header\TopBar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\AddressBookTest.cs" />
-<<<<<<< HEAD
     <Compile Include="Tests\APITests\CartTest.cs" />
-=======
     <Compile Include="Tests\APITests\CouponTests.cs" />
->>>>>>> ee3c7b2037dc354796d7365397c3f8ad04fdec73
     <Compile Include="Tests\APITests\LoginTests.cs" />
     <Compile Include="Tests\APITests\OrderTests.cs" />
     <Compile Include="Tests\APITests\PaymentTests.cs" />
