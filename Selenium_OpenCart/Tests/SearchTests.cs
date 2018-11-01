@@ -8,6 +8,7 @@ using Selenium_OpenCart.Data.Application;
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class SearchTests
     {
         SearchMethods logicSearch;
@@ -15,10 +16,12 @@ namespace Selenium_OpenCart.Tests
 
         ISearch InputData
             = new XMLDataParser().GetSearchInputData();
+        readonly Uri Grid = new System.Uri("http://137.117.227.15:4444/wd/hub");
 
         [SetUp]
         public void SetUp()
         {
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(Application.Get().ApplicationSource.HomePageUrl);
             logicSearch = new SearchMethods();
             reader = new DBDataReader();
         }
@@ -32,11 +35,6 @@ namespace Selenium_OpenCart.Tests
         [Test]
         public void SearchingResultItemsCount()
         {
-            Application.Get().Browser.OpenUrl(
-                Application.Get()
-                .ApplicationSource
-                .HomePageUrl);
-
             int actual = logicSearch
                 .Search(InputData
                     .GetName())
@@ -54,11 +52,6 @@ namespace Selenium_OpenCart.Tests
         [Test]
         public void TestCategoryDropDown()
         {
-            Application.Get().Browser.OpenUrl(
-                Application.Get()
-                .ApplicationSource
-                .HomePageUrl);
-
             logicSearch.Search(InputData.GetName());
 
             Assert.IsTrue(logicSearch
@@ -72,11 +65,6 @@ namespace Selenium_OpenCart.Tests
         [Test]
         public void TestCategoryResult()
         {
-            Application.Get().Browser.OpenUrl(
-                Application.Get()
-                .ApplicationSource
-                .HomePageUrl);
-
             int actual = logicSearch
                 .SearchByCategory(InputData.GetName(), InputData.GetCategory());
 
@@ -86,11 +74,6 @@ namespace Selenium_OpenCart.Tests
         [Test]
         public void TestLabelSearch()
         {
-            Application.Get().Browser.OpenUrl(
-                Application.Get()
-                .ApplicationSource
-                .HomePageUrl);
-
             string actual = logicSearch
                 .GetSearchHeader(InputData.GetName());
 

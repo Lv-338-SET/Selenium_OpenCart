@@ -14,6 +14,7 @@ using System.Net;
 namespace Selenium_OpenCart.Tests.APITests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     class ShippingTests
     {
         string api_token;

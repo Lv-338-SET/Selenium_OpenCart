@@ -54,7 +54,7 @@ namespace Selenium_OpenCart.Data.Application
 
         public static ApplicationSource RemoteLinuxChromeNew(Uri Uri)
         {
-            var option = new[] {"--no-sandbox","--display=:99.0"}; //Runs tests using virtual desktop 
+            var option = new[] {"--no-sandbox","--display=:99.0"};
             Dictionary<string, object> capabilities = new Dictionary<string, object>
             {
                 { "browser", "chrome" },

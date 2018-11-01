@@ -11,6 +11,7 @@ using System;
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class ProductComparisonTests
     {
         readonly Uri Grid = new System.Uri(CONST_EN.ANDRII_SELENIUM_HUB_URL);

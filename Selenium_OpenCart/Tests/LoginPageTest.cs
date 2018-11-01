@@ -13,8 +13,7 @@ using System;
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
-    [NonParallelizable]
-    [SingleThreaded]
+    [Parallelizable]
     class LoginPageTest
     {
 
