@@ -19,8 +19,7 @@ using System;
 namespace Selenium_OpenCart.Tests.FeedbackTests
 {
     [TestFixture]
-    [NonParallelizable]
-    [SingleThreaded]
+    [Parallelizable]
     public class FeedbackTestsRelated
     {
         const string URL = "http://40.118.125.245/";
@@ -62,7 +61,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
         [Test, TestCaseSource("ValidProductReview"), Order(1)]
         public void TestCase649AddReviewTest(IProductReview review)
         {
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
+            Application.Get().Browser.OpenUrl(URL);
 
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage();  },
@@ -99,7 +98,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649,
                 "Blocked. Preconditions fail: add review test failed");
 
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(ADMIN_URL);
+            Application.Get().Browser.OpenUrl(ADMIN_URL);
 
             LoginPageLogic loginPage = new LoginPageLogic();
             Assert.True(loginPage.LoginPage.IsLoginPage(), 
@@ -133,7 +132,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649 && TestCase670, 
                 "Blocked. Preconditions fail: add review test failed or approve review test failed");
 
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(URL);
+            Application.Get().Browser.OpenUrl(URL);
 
             HomePage homePage;
             Assert.DoesNotThrow(() => { homePage = new HomePage(); },
@@ -169,7 +168,7 @@ namespace Selenium_OpenCart.Tests.FeedbackTests
             Assert.IsTrue(TestCase649,
                 "Blocked. Preconditions fail: add review test failed");
 
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid)).Browser.OpenUrl(ADMIN_URL);
+            Application.Get().Browser.OpenUrl(ADMIN_URL);
 
             LoginPageLogic loginPage = new LoginPageLogic();
             Assert.True(loginPage.LoginPage.IsLoginPage(),

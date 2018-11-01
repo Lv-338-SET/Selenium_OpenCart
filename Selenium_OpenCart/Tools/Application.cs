@@ -2,6 +2,7 @@
 using Selenium_OpenCart.Pages.Body.MainPage;
 using Selenium_OpenCart.Tools.SearchWebElements;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace Selenium_OpenCart.Tools
@@ -33,7 +34,8 @@ namespace Selenium_OpenCart.Tools
         public ISearchStrategy Search
         {
             get
-            { if (search == null)
+            {
+                if (search == null)
                 {
                     InitSearch();
                 }
@@ -60,12 +62,17 @@ namespace Selenium_OpenCart.Tools
         {
             if (instance == null)
             {
-                if (applicationSource == null)
+                lock (lockingObject)
                 {
-                    applicationSource = ApplicationSourceRepository.Default();
+                    if (instance == null)
+                    {
+                        if (applicationSource == null)
+                        {
+                            applicationSource = ApplicationSourceRepository.Default();
+                        }
+                        instance = new Application(applicationSource);
+                    }
                 }
-                instance = new Application(applicationSource);
-                Thread.Sleep(500);
             }
             return instance;
         }
@@ -74,11 +81,15 @@ namespace Selenium_OpenCart.Tools
         {
             if (instance != null)
             {
-                foreach (KeyValuePair<int, AllBrowsers> kvp in instance.browser)
+                foreach (KeyValuePair<int, AllBrowsers> kvp in instance.browser.Where(x => x.Key == Thread.CurrentThread.ManagedThreadId))
                 {
                     kvp.Value.Quit();
                 }
-                instance = null;
+                instance.browser.Remove(Thread.CurrentThread.ManagedThreadId);
+                if (!instance.browser.Any())
+                {
+                    instance = null;
+                }
             }
         }
 

@@ -5,27 +5,23 @@ using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Constants;
+using System;
 
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class ProductComparisonTests
     {
-        #region constants
-        const string PHONE = "iPhone";
-        const string SUCCESSFUL_COMPARISON_MESSAGE = "Success: You have added iPhone to your product comparison!\r\n×";
-        const string DESKTOP = "Mac";
-        const string DESKTOP_FIRST = "MacBook";
-        const string DESKTOP_SECOND = "MacBook Air";
-        const string EMPTY_TABLE_COMPARISON_MESSAGE = "Your shopping cart is empty!";
-        const string EDIT_TABLE_COMPARISON_MESSAGE = "Success: You have modified your product comparison!\r\n×";
-        #endregion
+        readonly Uri Grid = new System.Uri(CONST_EN.ANDRII_SELENIUM_HUB_URL);
+
         Application application;
 
         [OneTimeSetUp]
         public void BeforeAllTests()
         {
-            application = Application.Get(ApplicationSourceRepository.Default());
+            application = Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid));
         }
 
         [SetUp]
@@ -47,7 +43,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-722
-        [TestCase(PHONE, SUCCESSFUL_COMPARISON_MESSAGE)]
+        [TestCase(CONST_EN.PHONE, CONST_EN.SUCCESSFUL_COMPARISON_MESSAGE)]
         public void ProductComparison_AddProductFromSearchPage_SuccessfulMessageDisplayed(string product, string conparisonMessage)
         {
             SearchPage searchPage = new SearchMethods().Search(product)
@@ -58,7 +54,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-719
-        [TestCase(PHONE, SUCCESSFUL_COMPARISON_MESSAGE)]
+        [TestCase(CONST_EN.PHONE, CONST_EN.SUCCESSFUL_COMPARISON_MESSAGE)]
         public void ProductComparison_AddProductFromProductPage_SuccessfulMessageDisplayed(string product, string conparisonMessage)
         {
             SearchPage searchPage = new SearchMethods().Search(product);
@@ -71,7 +67,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-660
-        [TestCase(PHONE)]
+        [TestCase(CONST_EN.PHONE)]
         public void ProductComparison_ClickingTwoTimesCompareButton_OneProductAdded(string product)
         {
             SearchPage searchPage = new SearchMethods().Search(product);
@@ -86,7 +82,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-674
-        [TestCase(DESKTOP, DESKTOP_FIRST, DESKTOP_SECOND)]
+        [TestCase(CONST_EN.DESKTOP, CONST_EN.DESKTOP_FIRST, CONST_EN.DESKTOP_SECOND)]
         public void ProductComparison_TwoDifferentProducts_AddedToComparisonTable
             (string Desktop, string FirstDesktop, string SecondDesktop)
         {
@@ -102,7 +98,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-720
-        [TestCase(DESKTOP, DESKTOP_FIRST, DESKTOP_SECOND, EDIT_TABLE_COMPARISON_MESSAGE)]
+        [TestCase(CONST_EN.DESKTOP, CONST_EN.DESKTOP_FIRST, CONST_EN.DESKTOP_SECOND, CONST_EN.EDIT_TABLE_COMPARISON_MESSAGE)]
         public void ProductComparison_AddTwoDifferemntProducts_SuccessfulRemoveMessageDisplayed
             (string Desktop, string FirstDesktop, string SecondDesktop, string conparisonRemoveMessage)
         {
@@ -120,7 +116,7 @@ namespace Selenium_OpenCart.Tests
         }
 
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-673
-        [TestCase(PHONE, EMPTY_TABLE_COMPARISON_MESSAGE)]
+        [TestCase(CONST_EN.PHONE, CONST_EN.EMPTY_TABLE_COMPARISON_MESSAGE)]
         public void ProductComparison_AddedPreviouslyProduct_RemovedFromComparison(string product, string conparisonNoProductsMessage)
         {
             SearchPage searchPage = new SearchMethods().Search(product);

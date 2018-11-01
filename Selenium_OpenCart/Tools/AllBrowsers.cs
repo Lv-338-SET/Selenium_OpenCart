@@ -45,7 +45,7 @@ namespace Selenium_OpenCart.Tools
                     }
                 }
                 options.AddArguments(applicationSource.optionsParams);
-                return new RemoteWebDriver(applicationSource.Uri, options.ToCapabilities());
+                return new RemoteWebDriver(applicationSource.Uri, options.ToCapabilities(), TimeSpan.FromSeconds(180));
             }
 
             RemoteWebDriver remoteFirefoxBrowser()
@@ -61,7 +61,7 @@ namespace Selenium_OpenCart.Tools
                     }
                 }
 
-                return new RemoteWebDriver(applicationSource.Uri, options.ToCapabilities());
+                return new RemoteWebDriver(applicationSource.Uri, options.ToCapabilities(), TimeSpan.FromSeconds(180));
             }
 
             RemoteWebDriver remoteIeBrowser()
@@ -83,7 +83,7 @@ namespace Selenium_OpenCart.Tools
                     }
                 }
 
-                return new RemoteWebDriver(applicationSource.Uri, options);
+                return new RemoteWebDriver(applicationSource.Uri, options, TimeSpan.FromSeconds(180));
             }      
         }
     }

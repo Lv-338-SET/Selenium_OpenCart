@@ -17,18 +17,21 @@ using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
 using Selenium_OpenCart.Logic.ProductPageLogic;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Application;
 
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     class CartTests
     {
         const string URL = "http://40.118.125.245/";
+        Uri uri = new Uri("http://3.16.80.107:4444/wd/hub");
 
         [SetUp]
         public void SetUp()
         {
-            Application.Get().Browser.OpenUrl(URL);
+            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(uri)).Browser.OpenUrl(URL);
         }
 
         [TestCase]
