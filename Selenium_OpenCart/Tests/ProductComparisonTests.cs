@@ -1,62 +1,60 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using Selenium_OpenCart.Data.Application;
 using Selenium_OpenCart.Logic;
 using Selenium_OpenCart.Pages.Body.ProductComparisonPage;
 using Selenium_OpenCart.Pages.Body.ProductPage.ProductPageAlerts;
 using Selenium_OpenCart.Pages.Body.SearchPage;
 using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Data.Constants;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     public class ProductComparisonTests
     {
+        readonly Uri Grid = new System.Uri(CONST_EN.ANDRII_SELENIUM_HUB_URL);
+
         Application application;
 
         [OneTimeSetUp]
-        public void BeforeEachTest()
+        public void BeforeAllTests()
         {
-            application = Application.Get();
+            application = Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew(Grid));
         }
 
         [SetUp]
-        public void Beforetest()
+        public void BeforeEachTest()
         {
             application.Browser.OpenUrl(application.ApplicationSource.HomePageUrl);
         }
 
         [OneTimeTearDown]
-        public void AfterEachTest()
+        public void AfterAllTests()
         {
             Application.Remove();
         }
 
         [TearDown]
-        public void EachTest()
+        public void AfterEachTest()
         {
             application.Browser.Driver.Manage().Cookies.DeleteAllCookies();
         }
 
-        //Jira Test Case:
-        [TestCase("iPhone", "Success: You have added iPhone to your product comparison!\r\n×")]
+        //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-722
+        [TestCase(CONST_EN.PHONE, CONST_EN.SUCCESSFUL_COMPARISON_MESSAGE)]
         public void ProductComparison_AddProductFromSearchPage_SuccessfulMessageDisplayed(string product, string conparisonMessage)
         {
             SearchPage searchPage = new SearchMethods().Search(product)
                 .AddAppropriateProductToComparison(product);
 
-            Assert.AreEqual(conparisonMessage, searchPage.successAlertMessageText(), 
-                "An invalid comparison message on Search page is displayed.");
+            Assert.AreEqual(conparisonMessage, searchPage.successAlertMessageText(),
+                "An invalid comparison message on the Search page is displayed.");
         }
 
-        //Jira Test Case:
-        [TestCase("iPhone", "Success: You have added iPhone to your product comparison!\r\n×")]
+        //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-719
+        [TestCase(CONST_EN.PHONE, CONST_EN.SUCCESSFUL_COMPARISON_MESSAGE)]
         public void ProductComparison_AddProductFromProductPage_SuccessfulMessageDisplayed(string product, string conparisonMessage)
         {
             SearchPage searchPage = new SearchMethods().Search(product);
@@ -65,11 +63,11 @@ namespace Selenium_OpenCart.Tests
                 .ClickOnCompareProductButton();
 
             Assert.AreEqual(conparisonMessage, productPage.GetTextFromCompareProductsPageMessage(),
-                "An invalid comparison message on Product page is displayed.");
+                "An invalid comparison message on the Product page is displayed.");
         }
-        //N
+
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-660
-        [TestCase("iPhone")]
+        [TestCase(CONST_EN.PHONE)]
         public void ProductComparison_ClickingTwoTimesCompareButton_OneProductAdded(string product)
         {
             SearchPage searchPage = new SearchMethods().Search(product);
@@ -79,12 +77,12 @@ namespace Selenium_OpenCart.Tests
                 .ClickOnCompareProductButton()
                 .ClickOnCompareProductsPageLink();
 
-            Assert.AreEqual(product, comparePage.GetLastProductNameText(), "The selected product was not added to the comparison table.");
+            Assert.AreEqual(product, comparePage.GetLastProductNameText(), "The selected product wasn't added to the comparison table.");
             Assert.True(comparePage.CountColumns() == 1, "One product is added to the comparison table several times.");
         }
-        
+
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-674
-        [TestCase("Mac", "MacBook", "MacBook Air")]
+        [TestCase(CONST_EN.DESKTOP, CONST_EN.DESKTOP_FIRST, CONST_EN.DESKTOP_SECOND)]
         public void ProductComparison_TwoDifferentProducts_AddedToComparisonTable
             (string Desktop, string FirstDesktop, string SecondDesktop)
         {
@@ -96,11 +94,11 @@ namespace Selenium_OpenCart.Tests
 
             Assert.AreEqual(FirstDesktop, comparePage.GetFirstProductNameText(), "The selected product was not added to the comparison table.");
             Assert.AreEqual(SecondDesktop, comparePage.GetLastProductNameText(), "The selected product was not added to the comparison table.");
-            Assert.True(comparePage.CountColumns() == 2, "All or one of products isn't added to the comparison table.");
+            Assert.True(comparePage.CountColumns() == 2, "All or one of products aren't added to the comparison table.");
         }
 
-        //Jira Test Case:
-        [TestCase("Mac", "MacBook", "MacBook Air", "Success: You have modified your product comparison!\r\n×")]
+        //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-720
+        [TestCase(CONST_EN.DESKTOP, CONST_EN.DESKTOP_FIRST, CONST_EN.DESKTOP_SECOND, CONST_EN.EDIT_TABLE_COMPARISON_MESSAGE)]
         public void ProductComparison_AddTwoDifferemntProducts_SuccessfulRemoveMessageDisplayed
             (string Desktop, string FirstDesktop, string SecondDesktop, string conparisonRemoveMessage)
         {
@@ -111,14 +109,14 @@ namespace Selenium_OpenCart.Tests
                 .ClickSuccessAlertMessageLink()
                 .ClickRemoveLastProduct();
 
-            Assert.AreEqual(conparisonRemoveMessage, comparePage.GetSuccessMessageText(), 
-                "An invalid comparison message on Product page is displayed.");
+            Assert.AreEqual(conparisonRemoveMessage, comparePage.GetSuccessMessageText(),
+                "An invalid comparison message on the Product page is displayed.");
             Assert.True(comparePage.CountColumns() == 1, "A comparison table with at least two columns " +
-                "is present on the page after second product is removed.");
+                "is present on the page after removing second product.");
         }
-        
+
         //Jira Test Case: https://ssu-jira.softserveinc.com/browse/CCCXXXVIII-673
-        [TestCase("iPhone", "Your shopping cart is empty!")]
+        [TestCase(CONST_EN.PHONE, CONST_EN.EMPTY_TABLE_COMPARISON_MESSAGE)]
         public void ProductComparison_AddedPreviouslyProduct_RemovedFromComparison(string product, string conparisonNoProductsMessage)
         {
             SearchPage searchPage = new SearchMethods().Search(product);
@@ -130,8 +128,8 @@ namespace Selenium_OpenCart.Tests
                 .ClickRemoveFirstProduct();
 
             Assert.True(comparePage.CountColumns() == 0, "A comparison table with at least one column " +
-                "is present on the page after the product is removed.");
+                "is present on the page after removing the product.");
             Assert.AreEqual(conparisonNoProductsMessage, comparePage.GetNoProductsToCompareLabelText(), "An invalid comparison message is displayed.");
         }
-    }    
+    }
 }

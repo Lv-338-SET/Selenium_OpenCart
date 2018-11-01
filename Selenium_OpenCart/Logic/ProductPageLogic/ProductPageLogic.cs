@@ -5,16 +5,8 @@ using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Logic.ProductPageLogic
 {
-    public class ProductPageLogic
+    public class ProductPageLogic : Header
     {
-        protected ISearch Search
-        {
-            get
-            {
-                return Application.Get().Search;
-            }
-        }
-
         public ProductPage ProductPage
         {
             get

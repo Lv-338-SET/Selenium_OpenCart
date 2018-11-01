@@ -13,6 +13,7 @@ using Selenium_OpenCart.Data.Constants;
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [Parallelizable]
     class AddressBookTest
     {
         //Logger
@@ -31,8 +32,8 @@ namespace Selenium_OpenCart.Tests
         public void BeforeEachTests()
         {           
 
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();            
-            Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.RemoteLinuxChromeNew()).ApplicationSource.HomePageUrl);
+            Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.Driver.Manage().Cookies.DeleteAllCookies();            
+            Application.Get(ApplicationSourceRepository.ChromeNew()).Browser.OpenUrl(Application.Get(ApplicationSourceRepository.ChromeNew()).ApplicationSource.HomePageUrl);
 
             //LogIn to the site
             MyAccountPage myAccountPage = new LoginPageMethods().LogIntoAccount(EMAIL, PASSWORD);

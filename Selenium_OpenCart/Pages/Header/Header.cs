@@ -1,31 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
+﻿using OpenQA.Selenium;
 using Selenium_OpenCart.Pages.Body.SearchPage;
+using Selenium_OpenCart.Tools;
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Header
 {
     public class Header
     {
-        protected IWebDriver driver;
+        #region Parameters
+        protected ISearch Search
+        {
+            get
+            {
+                return Application.Get().Search;
+            }
+        }
 
         protected IWebElement searchTextBox
-        { get { return driver.FindElement(By.XPath(".//div[@id='search']/input")); } }
+        { get { System.Threading.Thread.Sleep(50); return Search.ElementByXPath(".//div[@id='search']/input"); } }
         protected IWebElement searchButton
-        { get { return driver.FindElement(By.XPath(".//div[@id='search']/span")); } }
+        { get { return Search.ElementByXPath(".//div[@id='search']/span"); } }
         protected IWebElement CartBox
-        { get { return driver.FindElement(By.Id("cart-total")); } }
+        { get { return Search.ElementById("cart-total"); } }
 
-        public Header(IWebDriver driver)
+        public Header()
         {
-            this.driver = driver;
             Initialize();
         }
+    #endregion
+
         #region Initialization
 
         private void Initialize()
@@ -68,7 +71,7 @@ namespace Selenium_OpenCart.Pages.Header
         public CartBox ClickCartBox()
         {
             CartBox.Click();
-            return new CartBox(driver);
+            return new CartBox();
         }
         public string CartPriceSum()
         {
