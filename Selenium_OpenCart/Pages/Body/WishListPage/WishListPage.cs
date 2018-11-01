@@ -16,8 +16,8 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
         protected IWebElement Label { get { return Application.Get().Search.ElementByCssSelector(".col-sm-9 h2"); }}
         protected IWebElement ContinueButton { get { return Application.Get().Search.ElementByLinkText("Continue"); }}
         protected IWebElement Table { get { return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']"); } }
-        protected IWebElement TableRow { get { System.Threading.Thread.Sleep(50); return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']//tbody"); } }
-        protected WishListTableItem product { get { System.Threading.Thread.Sleep(50); return GetProductElement(GetTableRow()); } }
+        protected IWebElement TableRow { get { System.Threading.Thread.Sleep(150); return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']//tbody"); } }
+        protected WishListTableItem product { get { System.Threading.Thread.Sleep(150); return GetProductElement(GetTableRow()); } }
         protected IWebElement SuccessMessage { get { return Application.Get().Search.ElementByCssSelector(".alert.alert-success"); } }
 
         #region Initialization
