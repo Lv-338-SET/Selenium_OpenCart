@@ -13,6 +13,7 @@ using Selenium_OpenCart.Data.Constants;
 namespace Selenium_OpenCart.Tests
 {
     [TestFixture]
+    [Parallelizable]
     class AddressBookTest
     {
         //Logger

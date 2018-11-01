@@ -6,6 +6,7 @@ using System.Net;
 namespace Selenium_OpenCart.Tests.APITests
 {
     [TestFixture]
+    [Parallelizable(ParallelScope.All)]
     class CouponTests
     {
         string api_token;
