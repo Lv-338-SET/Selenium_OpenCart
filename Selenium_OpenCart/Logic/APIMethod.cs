@@ -354,7 +354,7 @@ namespace Selenium_OpenCart.Logic
             }
             catch
             {
-                return new KeyValuePair<HttpStatusCode, object>(response.Key, (Dictionary<string, object>)item["error"]);
+                return new KeyValuePair<HttpStatusCode, object>(response.Key, "error");
             }
 
         }
