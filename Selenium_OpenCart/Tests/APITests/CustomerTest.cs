@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace Selenium_OpenCart.Tests.APITests
 {
     [TestFixture]
+    [Parallelizable]
     class CustomerTest
     {
         string api_token;
