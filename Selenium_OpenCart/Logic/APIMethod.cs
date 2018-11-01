@@ -14,6 +14,7 @@ using Selenium_OpenCart.Data.Address;
 using Selenium_OpenCart.Data.Order;
 using Selenium_OpenCart.Data.Product;
 using System.Net;
+using System.Globalization;
 
 namespace Selenium_OpenCart.Logic
 {
@@ -55,7 +56,14 @@ namespace Selenium_OpenCart.Logic
             }
             catch
             {
-                error = item["error"];
+                try
+                {
+                    error = item["error"];
+                }
+                catch {
+                    error = "";
+                }
+                
             }
             return Message.Get()
                     .SetMessage(error)
@@ -76,7 +84,14 @@ namespace Selenium_OpenCart.Logic
             }
             catch
             {
-                success = item["success"];
+                try
+                {
+                    success = item["success"];
+                }
+                catch {
+                    throw new Exception();
+                }
+                
             }
             return Message.Get()
                     .SetMessage(success)
@@ -213,7 +228,7 @@ namespace Selenium_OpenCart.Logic
                     result.Add(Product.Get()
                             .SetName(current["name"])
                             .SetID(Int32.Parse(current["product_id"]))
-                            .SetPrice(Convert.ToDouble(current["price"]))
+                            .SetPrice(Double.Parse(current["price"].Substring(1), NumberStyles.AllowCurrencySymbol | NumberStyles.AllowDecimalPoint | NumberStyles.AllowThousands, new CultureInfo("en-US")))
                             .SetQuantity(Int32.Parse(current["quantity"]))
                             .Build());
                 }
