@@ -2,6 +2,7 @@
 using Selenium_OpenCart.Data.Login;
 using Selenium_OpenCart.Logic;
 using System.Net;
+using NLog;
 
 namespace Selenium_OpenCart.Tests.APITests
 {
@@ -9,61 +10,84 @@ namespace Selenium_OpenCart.Tests.APITests
     [Parallelizable(ParallelScope.All)]
     class OrderTests
     {
+        const string key = "d5YFz2RyNjnNXpkTqpNaoGAIPHuipKbmKnlRwOP2Jrls05gZJi3hDNbS8Orvbm5XAYJZ1ckrL3SQqikPo1V7FyPPiG7JEfYhWqjLHhjvXb0HED3EyNt2CHSVLzNIlgpzWzjXFh2HiHfCJd2XSubGlCTczDR5uXP2V5rNX1Gjt8uK05Hd1eeRiytEmoIEDjeXW1mw14oL1qxSBATmmv5CZJzmSTayghm2cXWZYw1msbPEhuItfrBzXJcuaV188neq";
+        const string username = "Default";
         string api_token;
+        APIMethod api_executor;
+
         readonly string order_id = "1";
 
         [OneTimeSetUp]
         public void BeforeAllTests()
         {
-            APIMethod api = new APIMethod();
-            string key = "d5YFz2RyNjnNXpkTqpNaoGAIPHuipKbmKnlRwOP2Jrls05gZJi3hDNbS8Orvbm5XAYJZ1ckrL3SQqikPo1V7FyPPiG7JEfYhWqjLHhjvXb0HED3EyNt2CHSVLzNIlgpzWzjXFh2HiHfCJd2XSubGlCTczDR5uXP2V5rNX1Gjt8uK05Hd1eeRiytEmoIEDjeXW1mw14oL1qxSBATmmv5CZJzmSTayghm2cXWZYw1msbPEhuItfrBzXJcuaV188neq";
-            string username = "Default";
-            api_token = (api.ApiGetToken(username, key).Value as ILogin).GetApiToken();
+            api_executor = new APIMethod();
+            api_token = (api_executor.ApiGetToken(username, key).Value as ILogin).GetApiToken();
         }
+
 
         [Test]
         public void AddOrderHTTPStatusTest()
         {
-            APIMethod api = new APIMethod();
-            var expected = api.ApiOrderAdd(api_token).Key;
-            
-            Assert.AreEqual(expected, HttpStatusCode.OK);
+            //Arrange           
+            var expected = HttpStatusCode.OK;
+
+            //Act
+            var actual = api_executor.ApiOrderAdd(api_token).Key;
+
+            //Assert
+            Assert.AreEqual(expected, actual, "Error Http status code, " + actual);
         }
 
         [Test]
         public void EditOrderHTTPStatusTest()
         {
-            APIMethod api = new APIMethod();
-            var expected = api.ApiOrderEdit(api_token, order_id).Key;
+            //Arrange           
+            var expected = HttpStatusCode.OK;
 
-            Assert.AreEqual(expected, HttpStatusCode.OK);
+            //Act
+            var actual = api_executor.ApiOrderEdit(api_token, order_id).Key;
+
+            //Assert
+            Assert.AreEqual(expected, expected, "Error Http status code, " + actual);
         }
 
         [Test]
         public void DeleteOrderHTTPStatusTest()
         {
-            APIMethod api = new APIMethod();
-            var expected = api.ApiOrderDelete(api_token, order_id).Key;
+            //Arrange           
+            var expected = HttpStatusCode.OK;
 
-            Assert.AreEqual(expected, HttpStatusCode.OK);
+            //Act
+            var actual = api_executor.ApiOrderDelete(api_token, order_id).Key;
+
+            //Assert
+            Assert.AreEqual(expected, actual, "Error Http status code, " + actual);
         }
 
         [Test]
         public void OrderInfoHTTPStatusTest()
         {
-            APIMethod api = new APIMethod();
-            var expected = api.ApiOrderInfo(api_token, order_id).Key;
+            //Arrange           
+            var expected = HttpStatusCode.OK;
 
-            Assert.AreEqual(expected, HttpStatusCode.OK);
+            //Act
+            var actual = api_executor.ApiOrderInfo(api_token, order_id).Key;
+
+            //Assert
+            Assert.AreEqual(expected, actual, "Error Http status code, " + actual);
         }
 
         [Test]
         public void OrderHistoryHTTPStatusTest()
         {
-            APIMethod api = new APIMethod();
-            var expected = api.ApiOrderHistory(api_token, order_id).Key;
+            //Arrange           
+            var expected = HttpStatusCode.OK;
 
-            Assert.AreEqual(expected, HttpStatusCode.OK);
+            //Act
+            var actual = api_executor.ApiOrderHistory(api_token, order_id).Key;
+
+            //Assert
+            Assert.AreEqual(expected, actual, "Error Http status code, " + actual);
         }
     }
 }
