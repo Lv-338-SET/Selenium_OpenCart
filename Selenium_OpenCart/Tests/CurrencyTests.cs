@@ -75,6 +75,7 @@ namespace Selenium_OpenCart.Tests
             cm.AddProductToWishList(productName);
             WishListPage wishList = cm.GoToWishList();
             cm.ChooseEuro();
+            System.Threading.Thread.Sleep(150);
             string actualResult = cm.GetCurrencyFromWishList(wishList);
             string expectedResult = cm.CurrentCurrencyFromMain;
 
