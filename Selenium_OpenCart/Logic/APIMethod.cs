@@ -60,10 +60,10 @@ namespace Selenium_OpenCart.Logic
                 {
                     error = item["error"];
                 }
-                catch {
+                catch
+                {
                     error = "";
                 }
-                
             }
             return Message.Get()
                     .SetMessage(error)
@@ -88,7 +88,8 @@ namespace Selenium_OpenCart.Logic
                 {
                     success = item["success"];
                 }
-                catch {
+                catch 
+                {
                     throw new Exception();
                 }
                 

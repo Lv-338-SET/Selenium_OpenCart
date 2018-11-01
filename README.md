@@ -1,4 +1,4 @@
-<h1 align="center">Software Engineering in Test with .NET.</h1>
+<h1 align="center">Software Engineering in Test</h1>
 
 <p>Software Engineer in Test (SET) is high-qualified engineer, that has profound technical knowledge and is ready to implement it in testing. Tools deficiency is not an issue for him, as SET has expertise and skills, due to which he can create his own tool for testing a program in the best possible way! Indeed, SET is not afraid of difficulties, such as program deployment on a cloud or virtual machines, test environment establishment, testing applications with no traditional interface and checking program behavior under a pressure. Establishment of continuous integration process and the whole system's vulnerability basic check are among SET's duties. So SET is the IT world's "universal soldier", aimed at qualified product output.</p>
 
