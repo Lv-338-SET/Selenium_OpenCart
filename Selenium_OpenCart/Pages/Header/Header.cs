@@ -17,7 +17,7 @@ namespace Selenium_OpenCart.Pages.Header
         }
 
         protected IWebElement searchTextBox
-        { get { System.Threading.Thread.Sleep(50); return Search.ElementByXPath(".//div[@id='search']/input"); } }
+        { get { System.Threading.Thread.Sleep(150); return Search.ElementByXPath(".//div[@id='search']/input"); } }
         protected IWebElement searchButton
         { get { return Search.ElementByXPath(".//div[@id='search']/span"); } }
         protected IWebElement CartBox
