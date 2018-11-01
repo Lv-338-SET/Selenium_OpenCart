@@ -40,7 +40,7 @@ namespace Selenium_OpenCart.Tests.APITests
         public void ApplyCouponTest(string coupon_code)
         {
             //Arrange 
-            string expected = "success";
+            string expected = "error";
 
             //Act
             string actual = api_executor.ApiApplyExistingCoupon(coupon_code, api_token).Value.GetStatus();
