@@ -74,6 +74,7 @@ namespace Selenium_OpenCart.Tools
                     }
                 }
             }
+            System.Threading.Thread.Sleep(200);
             return instance;
         }
 
