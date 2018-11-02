@@ -20,7 +20,7 @@ namespace Selenium_OpenCart.Pages.Body.CartPage
         protected IWebElement ButtonContinue
         { get { return Application.Get().Search.ElementByXPath("//a[text() = 'Continue']"); } }
         protected IWebElement EmptyCartMessage
-        { get { System.Threading.Thread.Sleep(50); return Application.Get().Search.ElementByXPath("//p[contains(text(),'Your shopping cart is empty!')]"); } }
+        { get { System.Threading.Thread.Sleep(250); return Application.Get().Search.ElementByXPath("//p[contains(text(),'Your shopping cart is empty!')]"); } }
         protected ShopingCartTableItem ShopingCartProduct
         { get { return GetProductElement(GetTableRow()); } }
         protected IWebElement CheckoutButton

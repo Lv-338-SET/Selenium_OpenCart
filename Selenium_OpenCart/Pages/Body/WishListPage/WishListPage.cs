@@ -7,18 +7,26 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Selenium_OpenCart;
 using Selenium_OpenCart.Tools;
-
+using Selenium_OpenCart.Tools.SearchWebElements;
 
 namespace Selenium_OpenCart.Pages.Body.WishListPage
 {
     public class WishListPage
     {
-        protected IWebElement Label { get { return Application.Get().Search.ElementByCssSelector(".col-sm-9 h2"); }}
-        protected IWebElement ContinueButton { get { return Application.Get().Search.ElementByLinkText("Continue"); }}
-        protected IWebElement Table { get { return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']"); } }
-        protected IWebElement TableRow { get { System.Threading.Thread.Sleep(50); return Application.Get().Search.ElementByXPath("//div[@class='table-responsive']//tbody"); } }
-        protected WishListTableItem product { get { System.Threading.Thread.Sleep(50); return GetProductElement(GetTableRow()); } }
-        protected IWebElement SuccessMessage { get { return Application.Get().Search.ElementByCssSelector(".alert.alert-success"); } }
+        ISearch Search
+        {
+            get
+            {
+                return Application.Get().Search;
+            }
+        }
+
+        protected IWebElement Label { get { return Search.ElementByCssSelector(".col-sm-9 h2"); }}
+        protected IWebElement ContinueButton { get { return Search.ElementByLinkText("Continue"); }}
+        protected IWebElement Table { get { return Search.ElementByXPath("//div[@class='table-responsive']"); } }
+        protected IWebElement TableRow { get { System.Threading.Thread.Sleep(1500); return Search.ElementByXPath("//div[@class='table-responsive']//tbody"); } }
+        protected WishListTableItem product { get { System.Threading.Thread.Sleep(1500); return GetProductElement(GetTableRow()); } }
+        protected IWebElement SuccessMessage { get { return Search.ElementByCssSelector(".alert.alert-success"); } }
 
         #region Initialization
         public WishListTableItem GetProductElement(IWebElement element)

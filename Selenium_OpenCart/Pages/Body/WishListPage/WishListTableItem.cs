@@ -22,6 +22,7 @@ namespace Selenium_OpenCart.Pages.Body.WishListPage
 
         public WishListTableItem(IWebElement element)
         {
+            System.Threading.Thread.Sleep(150);
             Image = element.FindElement(By.XPath("//td[@class='text-center']//img"));
             ProductName = element.FindElement(By.CssSelector(".text-left >a"));
             Model = element.FindElement(By.XPath("//td[@class='text-left' and string-length(text()) > 0]"));

@@ -177,14 +177,7 @@ namespace Selenium_OpenCart.Logic
             WishListTableItem product = wishListPage.GetProduct();
             string productPrice = product.GetProductPrice();
             string cleanProductPrice = productPrice.Trim();
-            if (CurrentCurrencyFromMain == "€")
-            {
-                return cleanProductPrice[cleanProductPrice.Length - 1].ToString();
-            }
-            else
-            {
-                return cleanProductPrice[0].ToString();
-            }
+            return cleanProductPrice[cleanProductPrice.Length - 1].ToString();
         }
 
         public string GetCurrencyFromShopingCart(ShopingCartPage shopingCartPage)
